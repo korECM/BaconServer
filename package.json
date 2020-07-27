@@ -22,6 +22,7 @@
     "sinon": "^9.0.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/cheerio": "^0.22.21",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.6",
