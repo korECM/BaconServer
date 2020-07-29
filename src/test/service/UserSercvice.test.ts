@@ -1,6 +1,7 @@
-import { UserService, SignUpInterface } from '../../service/UserService';
+import { UserService, SignUpInterface, SignInInterface } from '../../service/UserService';
 import Sinon from 'sinon';
 import faker from 'faker/locale/ko';
+import bcrypt from 'bcrypt';
 import { UserController } from '../../DB/controller/User/UserController';
 import { UserInterface } from '../../DB/models/User';
 import dotenv from 'dotenv';
@@ -138,6 +139,75 @@ describe('UserService', () => {
       let token = userService.generateToken(user);
       // Assert
       expect(typeof token).toBe('string');
+    });
+  });
+
+  describe('signIn', () => {
+    let userController: UserController;
+    let userDBStub: Sinon.SinonStubbedInstance<UserController>;
+    let userService: UserService;
+
+    const validForm = {
+      email: faker.internet.exampleEmail(),
+      password: faker.internet.password(),
+    };
+
+    beforeEach(async () => {
+      userController = new UserController();
+      userDBStub = Sinon.stub(userController);
+      userService = new UserService(userDBStub);
+    });
+    it('email 또는 password가 주어지지 않으면 null 반홤', async () => {
+      // Arrange
+      let invalidForm: SignInInterface[] = [
+        {
+          email: '',
+          password: '',
+        },
+        {
+          email: faker.internet.email(),
+          password: '',
+        },
+        {
+          email: '',
+          password: faker.internet.password(),
+        },
+      ];
+      // Act
+      let result: any[] = [];
+      for (let form of invalidForm) {
+        let response = await userService.signIn(form);
+        result.push(response);
+      }
+      // Assert
+      expect(result.every((user) => user === null)).toBe(true);
+    });
+
+    it('해당 이메일을 가진 유저가 존재하지 않으면 null을 반환', async () => {
+      // Arrange
+      userDBStub.findByEmail.resolves(null);
+      // Act
+      let user = await userService.signIn(validForm);
+      // Assert
+      expect(user).toBeNull();
+    });
+
+    it('해당 이메일을 가진 유저가 존재하지만 비밀번호가 일치하지 않으면 null을 반환', async () => {
+      // Arrange
+      let hashPassword = await bcrypt.hash(validForm.password + '*', 12);
+      userDBStub.findByEmail.resolves({
+        _id: 1,
+        email: 'test@naver.com',
+        name: 'name',
+        password: hashPassword,
+        provider: 'local',
+        registerDate: new Date(),
+        snsId: '',
+      });
+      // Act
+      let user = await userService.signIn(validForm);
+      // Assert
+      expect(user).toBeNull();
     });
   });
 });

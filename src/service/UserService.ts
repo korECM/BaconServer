@@ -1,6 +1,7 @@
 import { IUserController } from '../DB/controller/User/IUserController';
 import { UserController } from '../DB/controller/User/UserController';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import { UserInterface } from '../DB/models/User';
 
 export interface SignUpInterface {
@@ -9,6 +10,11 @@ export interface SignUpInterface {
   password?: string;
   provider: string;
   snsId?: string;
+}
+
+export interface SignInInterface {
+  email: string;
+  password: string;
 }
 
 export class UserService {
@@ -41,6 +47,25 @@ export class UserService {
     } else if (provider === 'kakao') {
       return null;
     } else {
+      return null;
+    }
+  }
+
+  async signIn(form: SignInInterface) {
+    const { email, password } = form;
+    if (this.checkStringValidation(email) === false || this.checkStringValidation(password) === false) return null;
+    try {
+      const user = await this.UserDB.findByEmail(email);
+      // 해당 이메일을 가진 유저가 존재하지 않으면
+      if (user === null) return null;
+
+      if ((await bcrypt.compare(password, user.password)) === false) return null;
+
+      delete user.password;
+
+      return user;
+    } catch (error) {
+      console.error(error);
       return null;
     }
   }
