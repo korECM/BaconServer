@@ -1,12 +1,18 @@
 import mongoose, { Schema, models } from 'mongoose';
 import { KeywordInterface } from './Keyword';
 
+export enum ShopCategory {
+  korean = 'korean',
+  chinese = 'chinese',
+  western = 'western',
+}
+
 export interface ShopInterface {
   name: string;
   contact: string;
   address: string;
   image: string[];
-  category: string[];
+  category: ShopCategory[];
   keyword: KeywordInterface;
   registerDate: Date;
   _id: any;
