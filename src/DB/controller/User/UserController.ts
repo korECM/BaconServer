@@ -9,6 +9,10 @@ export class UserController implements IUserController {
     return await User.findById(id);
   }
 
+  async findByEmail(email: string): Promise<UserInterface | null> {
+    return (await User.findOne({ email })) as UserInterface;
+  }
+
   async checkEmailExist(email: string) {
     return (await User.findOne({ email })) !== null;
   }
