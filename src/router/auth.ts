@@ -13,7 +13,7 @@ router.post('/signUp', async (req, res, next) => {
     email: Joi.string().email(),
     password: Joi.string().optional(),
     snsId: Joi.optional(),
-    provider: Joi.string().allow(...['local', 'kakao']),
+    provider: Joi.string().valid(...['local', 'kakao']),
   });
 
   if (isInvalid(req.body, schema)) {
