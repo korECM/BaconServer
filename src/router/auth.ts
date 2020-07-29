@@ -2,6 +2,7 @@ import express from 'express';
 import Joi from 'joi';
 import { UserService } from '../service/UserService';
 import { isInvalid } from './validate';
+import { generateToken } from '../lib/jwtMiddleware';
 
 const ONE_DAY = 1000 * 60 * 60 * 24;
 
@@ -25,7 +26,7 @@ router.post('/signUp', async (req, res, next) => {
 
   if (!user) return res.status(409).send();
 
-  let token = userService.generateToken(user);
+  let token = generateToken(user);
 
   res.cookie('access_token', token, {
     maxAge: ONE_DAY * 7,
@@ -52,7 +53,7 @@ router.post('/signIn', async (req, res, next) => {
 
   if (!user) return res.status(409).send();
 
-  let token = userService.generateToken(user);
+  let token = generateToken(user);
 
   res.cookie('access_token', token, {
     maxAge: ONE_DAY * 7,
