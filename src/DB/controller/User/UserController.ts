@@ -1,7 +1,8 @@
 import User, { UserInterface } from '../../models/User';
 import bcrypt from 'bcrypt';
+import { IUserController } from './IUserController';
 
-export class UserController {
+export class UserController implements IUserController {
   constructor() {}
 
   async findById(id: string) {
