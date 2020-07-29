@@ -32,7 +32,9 @@ router.post('/signUp', async (req, res, next) => {
     httpOnly: true,
   });
 
-  res.status(201).send(user);
+  res.status(201).send({
+    message: 'success',
+  });
 });
 
 export default router;
