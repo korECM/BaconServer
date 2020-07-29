@@ -63,4 +63,13 @@ router.post('/signIn', async (req, res, next) => {
   res.status(200).send(user);
 });
 
+router.get('/check', async (req, res, next) => {
+  const user = req.user;
+  // 로그인 안했다면
+  if (!user) {
+    return res.status(401).send();
+  }
+  return res.status(200).send(user);
+});
+
 export default router;
