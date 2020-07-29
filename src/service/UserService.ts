@@ -1,5 +1,7 @@
 import { IUserController } from '../DB/controller/User/IUserController';
 import { UserController } from '../DB/controller/User/UserController';
+import jwt from 'jsonwebtoken';
+import { UserInterface } from '../DB/models/User';
 
 export interface SignUpInterface {
   name: string;
@@ -41,5 +43,20 @@ export class UserService {
     } else {
       return null;
     }
+  }
+
+  generateToken(user: UserInterface) {
+    const token = jwt.sign(
+      {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+      process.env.JWT_SECRET!,
+      {
+        expiresIn: '7d',
+      },
+    );
+    return token;
   }
 }

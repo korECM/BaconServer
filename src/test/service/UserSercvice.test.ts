@@ -106,4 +106,38 @@ describe('UserService', () => {
       });
     });
   });
+  describe('generateToken', () => {
+    let userController: UserController;
+    let userDBStub: Sinon.SinonStubbedInstance<UserController>;
+    let userService: UserService;
+
+    const validForm = {
+      name: faker.name.findName(),
+      provider: 'local',
+      email: faker.internet.exampleEmail(),
+      password: faker.internet.password(),
+    };
+
+    beforeEach(async () => {
+      userController = new UserController();
+      userDBStub = Sinon.stub(userController);
+      userService = new UserService(userDBStub);
+    });
+    it('User를 전달하면 token을 반환한다', () => {
+      // Arrange
+      let user: UserInterface = {
+        _id: '1234',
+        email: faker.internet.exampleEmail(),
+        password: faker.internet.password(),
+        name: faker.name.findName(),
+        provider: 'local',
+        registerDate: new Date(),
+        snsId: '',
+      };
+      // Act
+      let token = userService.generateToken(user);
+      // Assert
+      expect(typeof token).toBe('string');
+    });
+  });
 });
