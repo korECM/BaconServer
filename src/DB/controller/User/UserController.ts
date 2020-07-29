@@ -19,17 +19,21 @@ export class UserController implements IUserController {
 
   async createLocalUser(name: string, email: string, password: string) {
     let hashPassword = await bcrypt.hash(password, 12);
-
     let user = new User({
       name,
       email,
       provider: 'local',
-      snsId: '',
+      snsId: 'none',
       password: hashPassword,
     });
 
-    await user.save();
+    try {
+      await user.save();
 
-    return user as UserInterface;
+      return user as UserInterface;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   }
 }
