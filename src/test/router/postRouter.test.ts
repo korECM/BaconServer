@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { app } from '../../index';
-import { SignUpInterface } from '../../service/UserService';
+import { SignUpInterface, SignInInterface } from '../../service/UserService';
 import faker from 'faker/locale/ko';
 describe('POST /auth/signUp', () => {
   it('invalid form이 전달되면 400을 반환한다', async () => {
@@ -47,6 +47,36 @@ describe('POST /auth/signUp', () => {
     let result = [];
     for (let form of invalidForm) {
       let tempResult = await request(app).post('/auth/signUp').send(form);
+      result.push(tempResult.status);
+    }
+
+    // Assert
+    expect(result.every((status) => status === 400)).toBe(true);
+  });
+});
+
+describe('POST /auth/signIn', () => {
+  it('invalid form이 전달되면 400을 반환한다 ', async () => {
+    // Arrange
+    const invalidForm: SignInInterface[] = [
+      {
+        email: '',
+        password: faker.internet.password(),
+      },
+      {
+        email: faker.internet.email(),
+        password: '',
+      },
+      {
+        email: 'It is not email',
+        password: faker.internet.password(),
+      },
+    ];
+
+    //Act
+    let result = [];
+    for (let form of invalidForm) {
+      let tempResult = await request(app).post('/auth/signIn').send(form);
       result.push(tempResult.status);
     }
 

@@ -37,4 +37,29 @@ router.post('/signUp', async (req, res, next) => {
   });
 });
 
+router.post('/signIn', async (req, res, next) => {
+  const schema = Joi.object({
+    email: Joi.string().email(),
+    password: Joi.string(),
+  });
+
+  if (isInvalid(req.body, schema)) {
+    return res.status(400).send();
+  }
+
+  const userService = new UserService();
+  const user = await userService.signIn(req.body);
+
+  if (!user) return res.status(409).send();
+
+  let token = userService.generateToken(user);
+
+  res.cookie('access_token', token, {
+    maxAge: ONE_DAY * 7,
+    httpOnly: true,
+  });
+
+  res.status(200).send(user);
+});
+
 export default router;
