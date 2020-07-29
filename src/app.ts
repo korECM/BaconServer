@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import path from 'path';
 import { MyError } from './types';
+import { jwtMiddleware } from './lib/jwtMiddleware';
 
 class App {
   public app: express.Application;
@@ -47,6 +48,8 @@ class App {
     };
 
     this.app.use(session(sessionOption));
+
+    this.app.use(jwtMiddleware);
   }
   private errorHandler(): void {
     this.app.use((req, res, next) => {
