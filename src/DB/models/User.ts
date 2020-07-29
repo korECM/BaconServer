@@ -7,6 +7,7 @@ export interface UserInterface {
   provider: string;
   snsId: string;
   registerDate: Date;
+  _id: any;
 }
 
 export interface UserSchemaInterface extends UserInterface, mongoose.Document {}

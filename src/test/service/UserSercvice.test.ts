@@ -3,6 +3,8 @@ import Sinon from 'sinon';
 import faker from 'faker/locale/ko';
 import { UserController } from '../../DB/controller/User/UserController';
 import { UserInterface } from '../../DB/models/User';
+import dotenv from 'dotenv';
+dotenv.config();
 
 describe('UserService', () => {
   describe('signUp', () => {
@@ -94,6 +96,7 @@ describe('UserService', () => {
           provider: 'local',
           registerDate: testDate,
           snsId: '',
+          _id: '123456789',
         };
         userDBStub.createLocalUser.resolves(testUser);
         // Act
