@@ -9,6 +9,7 @@ export interface IShopController {
   findById(id: string): Promise<ShopSchemaInterface | null>;
 
   getAllShops(): Promise<ShopInterface[] | null>;
+  getShops(filter: any): Promise<ShopInterface[] | null>;
   createShop(
     name: string,
     contact: string,
