@@ -13,6 +13,9 @@ export class ShopController {
     contact: string,
     address: string,
     image: string[],
+    open: string,
+    closed: string,
+    location: Location,
     keyword: KeywordSchemaInterface,
     category: ShopCategory[],
   ): Promise<ShopInterface | null> {
@@ -23,6 +26,9 @@ export class ShopController {
       image,
       category,
       keyword,
+      open,
+      closed,
+      location,
     });
 
     try {

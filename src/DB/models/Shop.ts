@@ -2,9 +2,18 @@ import mongoose, { Schema, models } from 'mongoose';
 import { KeywordInterface } from './Keyword';
 
 export enum ShopCategory {
-  korean = 'korean',
-  chinese = 'chinese',
-  western = 'western',
+  Korean = 'korean',
+  Japanese = 'japanese',
+  Chinese = 'chinese',
+  Western = 'western',
+  Fusion = 'fusion',
+  School = 'school',
+  other = 'other',
+}
+
+export enum Location {
+  Front = 'front',
+  Back = 'back',
 }
 
 export interface ShopInterface {
@@ -12,6 +21,9 @@ export interface ShopInterface {
   contact: string;
   address: string;
   image: string[];
+  open: string;
+  closed: string;
+  location: Location;
   category: ShopCategory[];
   keyword: KeywordInterface;
   registerDate: Date;
@@ -24,8 +36,11 @@ export let ShopSchema = new Schema({
   name: { type: String, required: true },
   contact: { type: String, required: true },
   address: { type: String, required: true },
+  open: { type: String, required: true },
+  closed: { type: String, required: true },
   image: { type: [String], required: true },
-  category: { type: [String], required: true },
+  location: { type: Location, required: true },
+  category: { type: [ShopCategory], required: true },
   keyword: { type: Schema.Types.ObjectId, ref: 'Keyword' },
   registerDate: {
     type: Date,
