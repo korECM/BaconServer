@@ -7,6 +7,8 @@ import { KeywordSchemaInterface } from '../../models/Keyword';
 
 export interface IShopController {
   findById(id: string): Promise<ShopSchemaInterface | null>;
+
+  getAllShops(): Promise<ShopInterface[] | null>;
   createShop(
     name: string,
     contact: string,

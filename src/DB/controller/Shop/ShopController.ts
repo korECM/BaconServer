@@ -8,6 +8,10 @@ export class ShopController {
     return await Shop.findById(id);
   }
 
+  async getAllShops(): Promise<ShopInterface[] | null> {
+    return await Shop.find({});
+  }
+
   async createShop(
     name: string,
     contact: string,
