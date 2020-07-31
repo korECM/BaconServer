@@ -92,4 +92,27 @@ describe('UserController', () => {
       expect(result).toBeFalsy();
     });
   });
+
+  describe('checkNameExist', () => {
+    it('해당 이름 존재하면 true 반환', async () => {
+      // Arrange
+      let userController = new UserController();
+
+      // Act
+      const result = await userController.checkNameExist(dataUser.name);
+
+      // Assert
+      expect(result).toBeTruthy();
+    });
+    it('해당 이름 없으면 false 반환', async () => {
+      // Arrange
+      let userController = new UserController();
+
+      // Act
+      const result = await userController.checkEmailExist(dataUser.name + '헤');
+
+      // Assert
+      expect(result).toBeFalsy();
+    });
+  });
 });
