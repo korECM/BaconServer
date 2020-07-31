@@ -69,4 +69,27 @@ describe('UserController', () => {
       expect(user).toBeNull();
     });
   });
+
+  describe('checkEmailExist', () => {
+    it('해당 이메일 존재하면 true 반환', async () => {
+      // Arrange
+      let userController = new UserController();
+
+      // Act
+      const result = await userController.checkEmailExist(dataUser.email);
+
+      // Assert
+      expect(result).toBeTruthy();
+    });
+    it('해당 이메일 없으면 false 반환', async () => {
+      // Arrange
+      let userController = new UserController();
+
+      // Act
+      const result = await userController.checkEmailExist(dataUser.email + '!');
+
+      // Assert
+      expect(result).toBeFalsy();
+    });
+  });
 });
