@@ -115,4 +115,27 @@ describe('UserController', () => {
       expect(result).toBeFalsy();
     });
   });
+
+  describe('createLocalUser', () => {
+    it('주어진 데이터로 User 만들고 UserInterface로 반환', async () => {
+      // Arrange
+      let name = faker.name.findName();
+      let email = faker.internet.email();
+      let password = faker.internet.password();
+
+      let userController = new UserController();
+      // Act
+      let user = await userController.createLocalUser(name, email, password);
+
+      // Assert
+      expect(user).not.toBeNull();
+      if (user) {
+        expect(user.name).toBe(name);
+        expect(user.email).toBe(email);
+        expect(user.provider).toBe('local');
+        // 비밀번호 평문 저장하면 안됨
+        expect(user.password).not.toBe(password);
+      }
+    });
+  });
 });
