@@ -4,12 +4,13 @@
  */
 import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory } from '../../models/Shop';
 import { KeywordSchemaInterface } from '../../models/Keyword';
+import { ShopOrder } from '../../../service/ShopService';
 
 export interface IShopController {
   findById(id: string): Promise<ShopSchemaInterface | null>;
 
   getAllShops(): Promise<ShopInterface[] | null>;
-  getShops(filter: any): Promise<ShopInterface[] | null>;
+  getShops(filter: any, order: ShopOrder): Promise<ShopInterface[] | null>;
   createShop(
     name: string,
     contact: string,

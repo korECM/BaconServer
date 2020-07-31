@@ -10,9 +10,9 @@ export enum ShopOrder {
 }
 
 export interface ShopFilterInterface {
-  category: ShopCategory[];
-  location: Location[];
-  order: ShopOrder;
+  category: ShopCategory[] | undefined;
+  location: Location[] | undefined;
+  order: ShopOrder | undefined;
 }
 
 export class ShopService {
@@ -30,9 +30,7 @@ export class ShopService {
     if (category && category.length > 0) where.category = { $in: category };
     if (location && location.length > 0) where.location = { $in: location };
 
-    where.order = order || ShopOrder.Recommended;
-
-    let shops = await this.ShopDB.getShops(where);
+    let shops = await this.ShopDB.getShops(where, order || ShopOrder.Recommended);
     if (shops === null) return [];
     return shops;
   }

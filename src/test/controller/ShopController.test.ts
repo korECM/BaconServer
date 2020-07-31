@@ -4,6 +4,7 @@ import faker from 'faker/locale/ko';
 import Shop, { ShopSchemaInterface, ShopCategory, Location } from '../../DB/models/Shop';
 import { ShopController } from '../../DB/controller/Shop/ShopController';
 import Keyword, { KeywordSchemaInterface } from '../../DB/models/Keyword';
+import { ShopOrder } from '../../service/ShopService';
 
 setupDB('shop');
 
@@ -79,9 +80,12 @@ describe('ShopController', () => {
       let shopController = new ShopController();
 
       // Act
-      const shop = await shopController.getShops({
-        category: { $in: ShopCategory.Korean },
-      });
+      const shop = await shopController.getShops(
+        {
+          category: { $in: ShopCategory.Korean },
+        },
+        ShopOrder.Recommended,
+      );
 
       // Assert
       expect(shop).not.toBeNull();
@@ -96,9 +100,12 @@ describe('ShopController', () => {
       let shopController = new ShopController();
 
       // Act
-      const shop = await shopController.getShops({
-        category: { $in: [ShopCategory.Korean, ShopCategory.Japanese] },
-      });
+      const shop = await shopController.getShops(
+        {
+          category: { $in: [ShopCategory.Korean, ShopCategory.Japanese] },
+        },
+        ShopOrder.Recommended,
+      );
 
       // Assert
       expect(shop).not.toBeNull();
@@ -115,9 +122,12 @@ describe('ShopController', () => {
       let shopController = new ShopController();
 
       // Act
-      const shop = await shopController.getShops({
-        location: { $in: [Location.Front, Location.Back] },
-      });
+      const shop = await shopController.getShops(
+        {
+          location: { $in: [Location.Front, Location.Back] },
+        },
+        ShopOrder.Recommended,
+      );
 
       // Assert
       expect(shop).not.toBeNull();
