@@ -9,6 +9,7 @@ export class ShopController {
   }
 
   async getShops(filter: any): Promise<ShopInterface[] | null> {
+    // TODO: 정렬 방식 추가 필요
     return await Shop.find(filter);
   }
 
