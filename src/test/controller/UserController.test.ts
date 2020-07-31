@@ -7,18 +7,18 @@ import { UserController } from '../../DB/controller/User/UserController';
 setupDB('User');
 
 describe('UserController', () => {
-  describe('findById', () => {
-    let dataUser: UserSchemaInterface;
-    beforeAll(async () => {
-      dataUser = await User.create({
-        email: faker.internet.email(),
-        name: faker.name.findName(),
-        password: faker.internet.password(),
-        provider: 'local',
-        registerDate: new Date(),
-        snsId: 'none',
-      });
+  let dataUser: UserSchemaInterface;
+  beforeAll(async () => {
+    dataUser = await User.create({
+      email: faker.internet.email(),
+      name: faker.name.findName(),
+      password: faker.internet.password(),
+      provider: 'local',
+      registerDate: new Date(),
+      snsId: 'none',
     });
+  });
+  describe('findById', () => {
     it('id가 일치하는 User를 찾아서 있으면 해당 User를 반환한다', async () => {
       // Arrange
       let userController = new UserController();
@@ -43,4 +43,6 @@ describe('UserController', () => {
       expect(user).toBeNull();
     });
   });
+
+
 });
