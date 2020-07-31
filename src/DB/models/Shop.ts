@@ -14,6 +14,8 @@ export enum ShopCategory {
 export enum Location {
   Front = 'front',
   Back = 'back',
+  HsStation = 'hs_station',
+  FrontFar = 'front_far',
 }
 
 export interface ShopInterface {
