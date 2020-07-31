@@ -44,5 +44,29 @@ describe('UserController', () => {
     });
   });
 
+  describe('findByEmail', () => {
+    it('해당 유저 존재하면 해당 유저 반환', async () => {
+      // Arrange
+      let userController = new UserController();
 
+      // Act
+      const user = await userController.findByEmail(dataUser.email);
+
+      // Assert
+      expect(user).not.toBeNull();
+      if (user) {
+        expect(user.email).toBe(dataUser.email);
+      }
+    });
+    it('해당 유저 없으면 null 반환', async () => {
+      // Arrange
+      let userController = new UserController();
+
+      // Act
+      const user = await userController.findByEmail(dataUser.email + '!');
+
+      // Assert
+      expect(user).toBeNull();
+    });
+  });
 });
