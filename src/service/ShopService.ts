@@ -11,7 +11,7 @@ export enum ShopOrder {
 
 export interface ShopFilterInterface {
   category: ShopCategory[];
-  location: Location;
+  location: Location[];
   order: ShopOrder;
 }
 
@@ -28,7 +28,7 @@ export class ShopService {
     let where: any = {};
     const { category, location, order } = filter;
     if (category && category.length > 0) where.category = { $in: category };
-    if (location) where.location = where.location = location;
+    if (location && location.length > 0) where.location = { $in: location };
 
     where.order = order || ShopOrder.Recommended;
 
