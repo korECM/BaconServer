@@ -24,7 +24,9 @@ class App {
   private config() {
     this.app.set('port', process.env.PORT || 8001);
 
-    this.app.use(morgan('dev'));
+    if (process.env.NODE_ENV !== 'test') {
+      this.app.use(morgan('dev'));
+    }
 
     this.app.use(express.static(path.join(__dirname, 'public')));
 
