@@ -24,13 +24,12 @@ export class ShopService {
     return shops;
   }
 
-  async getShops(filter: ShopFilterInterface) {
+  async getShops(filter: ShopFilterInterface, withReview: boolean = false) {
     let where: any = {};
     const { category, location, order } = filter;
     if (category && category.length > 0) where.category = { $in: category };
     if (location && location.length > 0) where.location = { $in: location };
-
-    let shops = await this.ShopDB.getShops(where, order || ShopOrder.Recommended);
+    let shops = await this.ShopDB.getShops(where, order || ShopOrder.Recommended, withReview);
     if (shops === null) return [];
     return shops;
   }

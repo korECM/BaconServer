@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
 
   let shopService = new ShopService();
 
-  let shops = await shopService.getShops({ category: category as any, location: location as any, order: order as any });
+  let shops = await shopService.getShops({ category: category as any, location: location as any, order: order as any }, true);
 
   res.status(200).json(shops);
 });

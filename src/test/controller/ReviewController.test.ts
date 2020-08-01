@@ -1,10 +1,12 @@
 import { setupDB } from '../DBTestUtil';
 import faker from 'faker/locale/ko';
+import mongoose from 'mongoose';
 import { ReviewController } from '../../DB/controller/Review/ReviewController';
 import { UserController } from '../../DB/controller/User/UserController';
 import { UserInterface } from '../../DB/models/User';
 import { ShopController } from '../../DB/controller/Shop/ShopController';
 import { Location, ShopCategory, ShopInterface } from '../../DB/models/Shop';
+import { Mongoose } from 'mongoose';
 
 setupDB('Review');
 
@@ -29,6 +31,15 @@ describe('ReviewController', () => {
       ]);
       // Assert
       expect(result.every((e) => e === null)).toBeTruthy();
+    });
+
+    it('shopId가 존재하지 않는다면 null을 반환', async () => {
+      // Arrange
+      let reviewController = new ReviewController();
+      // Act
+      let result = await reviewController.createReview(3.5, user._id, new mongoose.mongo.ObjectId().toHexString());
+      // Assert
+      expect(result).toBeNull();
     });
 
     it('score가 적절하다면 Review를 생성하고 그 Review를 반환', async () => {
