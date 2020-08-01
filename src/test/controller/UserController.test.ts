@@ -138,4 +138,24 @@ describe('UserController', () => {
       }
     });
   });
+
+  describe('createKakaoUser', () => {
+    it('주어진 데이터로 User를 만들고 UserInterface로 반환', async () => {
+      // Arrange
+      let name = faker.name.findName();
+      let id = faker.internet.password();
+
+      let userController = new UserController();
+      // Act
+      let user = await userController.createKakaoUser(name, id);
+
+      // Assert
+      expect(user).not.toBeNull();
+      if (user) {
+        expect(user.name).toBe(name);
+        expect(user.snsId).toBe(id);
+        expect(user.provider).toBe('kakao');
+      }
+    });
+  });
 });

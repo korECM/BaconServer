@@ -40,4 +40,23 @@ export class UserController implements IUserController {
       return null;
     }
   }
+
+  async createKakaoUser(name: string, id: string) {
+    try {
+      let user = new User({
+        name,
+        email: 'none',
+        provider: 'kakao',
+        snsId: id,
+        password: 'none',
+      });
+
+      await user.save();
+
+      return user as UserInterface;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 }
