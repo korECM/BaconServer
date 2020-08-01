@@ -19,6 +19,6 @@ export interface IShopController {
     open: string,
     closed: string,
     location: Location,
-    category: ShopCategory[],
+    category: ShopCategory,
   ): Promise<ShopInterface | null>;
 }

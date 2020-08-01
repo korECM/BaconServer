@@ -26,7 +26,7 @@ export class ShopController {
     open: string,
     closed: string,
     location: Location,
-    category: ShopCategory[],
+    category: ShopCategory,
   ): Promise<ShopInterface | null> {
     try {
       let keyword = new Keyword({
