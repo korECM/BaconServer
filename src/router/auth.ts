@@ -125,4 +125,9 @@ router.get('/check', async (req, res, next) => {
   return res.status(200).send(user);
 });
 
+router.get('/logout', (req, res, next) => {
+  res.clearCookie('access_token');
+  res.status(204).send();
+});
+
 export default router;
