@@ -1,4 +1,4 @@
-import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory } from '../../models/Shop';
+import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location } from '../../models/Shop';
 import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
 import { ShopOrder } from '../../../service/ShopService';
 
