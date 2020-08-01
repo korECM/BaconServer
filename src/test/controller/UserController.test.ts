@@ -8,6 +8,7 @@ setupDB('User');
 
 describe('UserController', () => {
   let dataUser: UserSchemaInterface;
+  let kakaouser: UserSchemaInterface;
   beforeAll(async () => {
     dataUser = await User.create({
       email: faker.internet.email(),
@@ -16,6 +17,15 @@ describe('UserController', () => {
       provider: 'local',
       registerDate: new Date(),
       snsId: 'none',
+    });
+
+    kakaouser = await User.create({
+      email: 'none',
+      name: faker.name.findName(),
+      password: 'none',
+      provider: 'kakao',
+      registerDate: new Date(),
+      snsId: 'kakaoId',
     });
   });
   describe('findById', () => {
@@ -136,6 +146,31 @@ describe('UserController', () => {
         // 비밀번호 평문 저장하면 안됨
         expect(user.password).not.toBe(password);
       }
+    });
+  });
+
+  describe('checkKakaoUserExist', () => {
+    it('중복되는 snsId가 존재해도 provider가 kakao가 아니면 nul 반환', async () => {
+      // Arrange
+      let userController = new UserController();
+
+      // Act
+      const result = await userController.getKakaoUserExist(dataUser.snsId);
+
+      // Assert
+      expect(result).toBeNull();
+    });
+
+    it('중복되는 snsId 존재하고 provider가 kakao오면 true 반환', async () => {
+      // Arrange
+      let userController = new UserController();
+
+      // Act
+      const result = await userController.getKakaoUserExist(kakaouser.snsId);
+
+      // Assert
+      expect(result).not.toBeNull();
+      expect(result?.snsId).toBe(kakaouser.snsId);
     });
   });
 

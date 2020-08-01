@@ -41,6 +41,10 @@ export class UserController implements IUserController {
     }
   }
 
+  async getKakaoUserExist(id: string): Promise<UserInterface | null> {
+    return await User.findOne({ provider: 'kakao', snsId: id });
+  }
+
   async createKakaoUser(name: string, id: string) {
     try {
       let user = new User({
