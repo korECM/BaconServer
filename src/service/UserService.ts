@@ -20,7 +20,8 @@ export interface SignInInterface {
 export class UserService {
   constructor(private UserDB: IUserController = new UserController()) {}
 
-  private checkStringValidation(data: string | undefined) {
+  private checkStringValidation(data: string | number | undefined) {
+    if (typeof data === 'number') return !!data;
     return !!data && data.length > 0;
   }
 
@@ -45,7 +46,17 @@ export class UserService {
 
       return user;
     } else if (provider === 'kakao') {
-      return null;
+      if (this.checkStringValidation(name) === false || this.checkStringValidation(snsId) === false) return null;
+
+      let exKakaoUser = await this.UserDB.getKakaoUserExist(snsId!);
+
+      if (exKakaoUser) return exKakaoUser;
+
+      // 가입된 카카오 계정이 없다면 생성
+      let userController = new UserController();
+      let createdKakaoUser = await userController.createKakaoUser(name!, snsId!);
+
+      return createdKakaoUser;
     } else {
       return null;
     }
