@@ -9,9 +9,13 @@ export class ShopController {
     return await Shop.findById(id);
   }
 
-  async getShops(filter: any, order: ShopOrder): Promise<ShopInterface[] | null> {
+  async getShops(filter: any, order: ShopOrder, withOrder: boolean): Promise<ShopInterface[] | null> {
     // TODO: 정렬 방식 추가 필요
-    return await Shop.find(filter);
+    if (withOrder) {
+      return await Shop.find(filter).populate('review');
+    } else {
+      return await Shop.find(filter);
+    }
   }
 
   async getAllShops(): Promise<ShopInterface[] | null> {
@@ -47,6 +51,7 @@ export class ShopController {
         image,
         category,
         keyword: keyword._id,
+        reviews: [],
         open,
         closed,
         location,

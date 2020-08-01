@@ -30,6 +30,7 @@ describe('ShopService', () => {
     name: '이름',
     open: '',
     registerDate: new Date(),
+    reviews: [],
   };
   describe('getAllShops', () => {
     it('존재하는 가게가 없다면 빈 배열을 반환한다', async () => {

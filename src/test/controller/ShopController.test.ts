@@ -33,6 +33,7 @@ describe('ShopController', () => {
       open: ' ',
       registerDate: new Date(),
       keyword: keyword._id,
+      reviews : []
     });
 
     await Shop.create({
@@ -46,6 +47,7 @@ describe('ShopController', () => {
       open: ' ',
       registerDate: new Date(),
       keyword: keyword._id,
+      reviews : []
     });
   });
   describe('findById', () => {
@@ -85,6 +87,7 @@ describe('ShopController', () => {
           category: { $in: ShopCategory.Korean },
         },
         ShopOrder.Recommended,
+      false
       );
 
       // Assert
@@ -105,6 +108,7 @@ describe('ShopController', () => {
           category: { $in: [ShopCategory.Korean, ShopCategory.Japanese] },
         },
         ShopOrder.Recommended,
+        false
       );
 
       // Assert
@@ -127,6 +131,7 @@ describe('ShopController', () => {
           location: { $in: [Location.Front, Location.Back] },
         },
         ShopOrder.Recommended,
+        false
       );
 
       // Assert
