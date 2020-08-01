@@ -19,7 +19,6 @@ export interface IShopController {
     open: string,
     closed: string,
     location: Location,
-    keyword: KeywordSchemaInterface,
     category: ShopCategory[],
   ): Promise<ShopInterface | null>;
 }

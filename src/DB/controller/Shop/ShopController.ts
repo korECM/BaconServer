@@ -1,5 +1,5 @@
 import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory } from '../../models/Shop';
-import { KeywordSchemaInterface } from '../../models/Keyword';
+import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
 import { ShopOrder } from '../../../service/ShopService';
 
 export class ShopController {
@@ -26,22 +26,32 @@ export class ShopController {
     open: string,
     closed: string,
     location: Location,
-    keyword: KeywordSchemaInterface,
     category: ShopCategory[],
   ): Promise<ShopInterface | null> {
-    let shop = new Shop({
-      name,
-      contact,
-      address,
-      image,
-      category,
-      keyword,
-      open,
-      closed,
-      location,
-    });
-
     try {
+      let keyword = new Keyword({
+        atmosphere: 0,
+        costRatio: 0,
+        group: 0,
+        individual: 0,
+        riceAppointment: 0,
+        spicy: 0,
+      });
+
+      await keyword.save();
+
+      let shop = new Shop({
+        name,
+        contact,
+        address,
+        image,
+        category,
+        keyword: keyword._id,
+        open,
+        closed,
+        location,
+      });
+
       await shop.save();
 
       return shop as ShopInterface;
