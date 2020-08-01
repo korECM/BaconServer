@@ -5,6 +5,7 @@ import { ShopInterface } from './Shop';
 export interface ReviewInterface {
   user: UserInterface;
   shop: ShopInterface;
+  score: number;
   registerDate: Date;
   _id: any;
 }
