@@ -12,7 +12,7 @@ export class ShopController {
   async getShops(filter: any, order: ShopOrder, withOrder: boolean): Promise<ShopInterface[] | null> {
     // TODO: 정렬 방식 추가 필요
     if (withOrder) {
-      return await Shop.find(filter).populate('review');
+      return await Shop.find(filter).populate('reviews');
     } else {
       return await Shop.find(filter);
     }
