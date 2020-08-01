@@ -12,7 +12,20 @@ export class ShopController {
   async getShops(filter: any, order: ShopOrder, withOrder: boolean): Promise<ShopInterface[] | null> {
     // TODO: 정렬 방식 추가 필요
     if (withOrder) {
-      return await Shop.find(filter).populate('reviews');
+      return await Shop.aggregate([
+        { $match: filter },
+        {
+          $lookup: {
+            from: 'reviews',
+            localField: 'reviews',
+            foreignField: '_id',
+            as: 'reviews',
+          },
+        },
+        {
+          $addFields: { scoreAverage: { $avg: '$reviews.score' } },
+        },
+      ]);
     } else {
       return await Shop.find(filter);
     }
