@@ -11,6 +11,8 @@ export interface IShopController {
 
   getAllShops(): Promise<ShopInterface[] | null>;
   getShops(filter: any, order: ShopOrder, withOrder: boolean): Promise<ShopInterface[] | null>;
+
+  addImage(id: string, imageLink: string[]): Promise<boolean>;
   createShop(
     name: string,
     contact: string,

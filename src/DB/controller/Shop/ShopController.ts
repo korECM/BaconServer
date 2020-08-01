@@ -22,6 +22,22 @@ export class ShopController {
     return await Shop.find({});
   }
 
+  async addImage(id: string, imageLink: string[]) {
+    try {
+      let shop = await this.findById(id);
+      if (shop === null) return false;
+
+      shop.image.push(...imageLink);
+
+      await shop.save();
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async createShop(
     name: string,
     contact: string,

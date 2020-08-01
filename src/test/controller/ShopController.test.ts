@@ -27,13 +27,13 @@ describe('ShopController', () => {
       category: ShopCategory.Korean,
       closed: ' ',
       contact: faker.phone.phoneNumber(),
-      image: [''],
+      image: ['testLink'],
       location: Location.Front,
       name: '식당 이름',
       open: ' ',
       registerDate: new Date(),
       keyword: keyword._id,
-      reviews : []
+      reviews: [],
     });
 
     await Shop.create({
@@ -47,7 +47,7 @@ describe('ShopController', () => {
       open: ' ',
       registerDate: new Date(),
       keyword: keyword._id,
-      reviews : []
+      reviews: [],
     });
   });
   describe('findById', () => {
@@ -76,6 +76,34 @@ describe('ShopController', () => {
     });
   });
 
+  describe('addImage', () => {
+    it('주어진 shop이 없으면 false 반환', async () => {
+      // Arrange
+      let shopController = new ShopController();
+
+      // Act
+      const shop = await shopController.addImage(new mongoose.mongo.ObjectId().toHexString(), []);
+
+      // Assert
+      expect(shop).toBeFalsy();
+    });
+
+    it('주어진 shop이 존재하면 해당 shop image에 링크 추가', async () => {
+      // Arrange
+      let shopController = new ShopController();
+      let link = faker.internet.url();
+      // Act
+      const shop = await shopController.addImage(dataShop.id, [link, link + '1']);
+
+      const modifiedShop = await shopController.findById(dataShop.id);
+
+      // Assert
+      expect(shop).toBeTruthy();
+
+      expect(modifiedShop!.image.join(',')).toBe(['testLink', link, link + '1'].join(','));
+    });
+  });
+
   describe('getShops', () => {
     it('category 한 개 주어졌을 때 일치하는 Shop 반환', async () => {
       // Arrange
@@ -87,7 +115,7 @@ describe('ShopController', () => {
           category: { $in: ShopCategory.Korean },
         },
         ShopOrder.Recommended,
-      false
+        false,
       );
 
       // Assert
@@ -108,7 +136,7 @@ describe('ShopController', () => {
           category: { $in: [ShopCategory.Korean, ShopCategory.Japanese] },
         },
         ShopOrder.Recommended,
-        false
+        false,
       );
 
       // Assert
@@ -131,7 +159,7 @@ describe('ShopController', () => {
           location: { $in: [Location.Front, Location.Back] },
         },
         ShopOrder.Recommended,
-        false
+        false,
       );
 
       // Assert
