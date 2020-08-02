@@ -3,6 +3,8 @@ import { UserController } from '../DB/controller/User/UserController';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { UserInterface } from '../DB/models/User';
+import { IShopController } from '../DB/controller/Shop/IShopController';
+import { ShopController } from '../DB/controller/Shop/ShopController';
 
 export interface SignUpInterface {
   name: string;
@@ -18,7 +20,7 @@ export interface SignInInterface {
 }
 
 export class UserService {
-  constructor(private UserDB: IUserController = new UserController()) {}
+  constructor(private UserDB: IUserController = new UserController(), private ShopDB: IShopController = new ShopController()) {}
 
   private checkStringValidation(data: string | number | undefined) {
     if (typeof data === 'number') return !!data;
@@ -78,6 +80,22 @@ export class UserService {
     } catch (error) {
       console.error(error);
       return null;
+    }
+  }
+
+  async addLikeShop(userId: string, shopId: string) {
+    try {
+      let user = await this.UserDB.findById(userId);
+      if (!user) return false;
+
+      let shop = await this.ShopDB.findById(shopId);
+      if (!shop) return false;
+
+      await this.UserDB.addLikeShop(user, shop._id);
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
   }
 }

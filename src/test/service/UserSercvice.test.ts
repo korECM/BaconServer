@@ -2,20 +2,26 @@ import { UserService, SignUpInterface, SignInInterface } from '../../service/Use
 import Sinon from 'sinon';
 import faker from 'faker/locale/ko';
 import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 import { UserController } from '../../DB/controller/User/UserController';
 import { UserInterface } from '../../DB/models/User';
 import dotenv from 'dotenv';
+import { ShopController } from '../../DB/controller/Shop/ShopController';
 dotenv.config();
 
 describe('UserService', () => {
   let userController: UserController;
+  let shopController: ShopController;
   let userDBStub: Sinon.SinonStubbedInstance<UserController>;
+  let shopDBStub: Sinon.SinonStubbedInstance<ShopController>;
   let userService: UserService;
 
   beforeEach(async () => {
     userController = new UserController();
     userDBStub = Sinon.stub(userController);
-    userService = new UserService(userDBStub);
+    shopController = new ShopController();
+    shopDBStub = Sinon.stub(shopController);
+    userService = new UserService(userDBStub, shopDBStub);
   });
   describe('signUp', () => {
     const validForm = {
@@ -165,6 +171,41 @@ describe('UserService', () => {
       let user = await userService.signIn(validForm);
       // Assert
       expect(user).toBeNull();
+    });
+  });
+
+  describe('addLikeShop', () => {
+    it('해당 유저가 존재하지 않으면 false 반환', async () => {
+      // Arrange
+      userDBStub.findById.resolves(null);
+      // Act
+      let result = await userService.addLikeShop('123', '456');
+      // Assert
+      expect(result).toBeFalsy();
+    });
+
+    it('해당 가게가 존재하지 않으면 false 반환', async () => {
+      // Arrange
+      userDBStub.findById.resolves({} as any);
+      shopDBStub.findById.resolves(null);
+      // Act
+      let result = await userService.addLikeShop('123', '456');
+      // Assert
+      expect(result).toBeFalsy();
+    });
+
+    it('추가 성공하면 true 반환', async () => {
+      // Arrange
+      let testId = new mongoose.Types.ObjectId();
+      let user: any = {};
+      userDBStub.findById.resolves(user);
+      shopDBStub.findById.resolves({ _id: testId } as any);
+      userDBStub.addLikeShop.resolves();
+      // Act
+      let result = await userService.addLikeShop('123', testId.toHexString());
+      // Assert
+      expect(result).toBeTruthy();
+      expect(userDBStub.addLikeShop.calledOnceWith(user, testId));
     });
   });
 });
