@@ -98,4 +98,20 @@ export class UserService {
       return false;
     }
   }
+
+  async unlikeShop(userId: string, shopId: string) {
+    try {
+      let user = await this.UserDB.findById(userId);
+      if (!user) return false;
+
+      let shop = await this.ShopDB.findById(shopId);
+      if (!shop) return false;
+
+      await this.UserDB.unlikeShop(user, shop._id);
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
 }

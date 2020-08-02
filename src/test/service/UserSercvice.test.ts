@@ -208,4 +208,39 @@ describe('UserService', () => {
       expect(userDBStub.addLikeShop.calledOnceWith(user, testId));
     });
   });
+
+  describe('unlikeShop', () => {
+    it('해당 유저가 존재하지 않으면 false 반환', async () => {
+      // Arrange
+      userDBStub.findById.resolves(null);
+      // Act
+      let result = await userService.unlikeShop('123', '456');
+      // Assert
+      expect(result).toBeFalsy();
+    });
+
+    it('해당 가게가 존재하지 않으면 false 반환', async () => {
+      // Arrange
+      userDBStub.findById.resolves({} as any);
+      shopDBStub.findById.resolves(null);
+      // Act
+      let result = await userService.unlikeShop('123', '456');
+      // Assert
+      expect(result).toBeFalsy();
+    });
+
+    it('추가 성공하면 true 반환', async () => {
+      // Arrange
+      let testId = new mongoose.Types.ObjectId();
+      let user: any = {};
+      userDBStub.findById.resolves(user);
+      shopDBStub.findById.resolves({ _id: testId } as any);
+      userDBStub.unlikeShop.resolves();
+      // Act
+      let result = await userService.unlikeShop('123', testId.toHexString());
+      // Assert
+      expect(result).toBeTruthy();
+      expect(userDBStub.addLikeShop.calledOnceWith(user, testId));
+    });
+  });
 });
