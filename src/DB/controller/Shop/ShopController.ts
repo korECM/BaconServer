@@ -18,6 +18,8 @@ export class ShopController {
           orderQuery = {
             $sort: {
               scoreAverage: -1,
+              likerCount: -1,
+              reviewCount: -1,
             },
           };
           break;
@@ -25,6 +27,8 @@ export class ShopController {
           orderQuery = {
             $sort: {
               likerCount: -1,
+              scoreAverage: -1,
+              reviewCount: -1,
             },
           };
           break;
@@ -32,6 +36,8 @@ export class ShopController {
           orderQuery = {
             $sort: {
               reviewCount: -1,
+              scoreAverage: -1,
+              likerCount: -1,
             },
           };
           break;
