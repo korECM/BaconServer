@@ -30,6 +30,13 @@ export class UserController implements IUserController {
     }
   }
 
+  async unlikeShop(user: UserSchemaInterface, shopId: mongoose.Types.ObjectId) {
+    if ((user.likeShop as mongoose.Types.ObjectId[]).includes(shopId) == true) {
+      user.likeShop = (user.likeShop as mongoose.Types.ObjectId[]).filter((shop) => shop.toHexString() !== shopId.toHexString());
+      await user.save();
+    }
+  }
+
   async createLocalUser(name: string, email: string, password: string) {
     let hashPassword = await bcrypt.hash(password, 12);
     let user = new User({

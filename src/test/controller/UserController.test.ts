@@ -157,6 +157,38 @@ describe('UserController', () => {
     });
   });
 
+  describe('unlikeShop', () => {
+    it('user의 likeShop에 해당 가게 id가 없으면 아무런 일 없다', async () => {
+      // Arrange
+      let userController = new UserController();
+      let shopId = new mongoose.Types.ObjectId();
+      let prevLength = dataUser.likeShop.length;
+
+      // Act
+      await userController.unlikeShop(dataUser, shopId);
+
+      // Assert
+      expect(dataUser.likeShop.length).toBe(prevLength);
+      expect((dataUser.likeShop as mongoose.Types.ObjectId[]).includes(shopId)).toBeFalsy();
+    });
+    it('user의 likeShop에 해당 가게 id가 있으면 지운다', async () => {
+      // Arrange
+      let userController = new UserController();
+      let shopId = new mongoose.Types.ObjectId();
+
+      // Act
+      await userController.addLikeShop(dataUser, shopId);
+      let changedUser = await userController.findById(dataUser._id);
+      let prevLength = changedUser!.likeShop.length;
+      await userController.unlikeShop(dataUser, shopId);
+      changedUser = await userController.findById(dataUser._id);
+
+      // Assert
+      expect(changedUser!.likeShop.length).toBe(prevLength - 1);
+      expect((changedUser!.likeShop as mongoose.Types.ObjectId[]).includes(shopId)).toBeFalsy();
+    });
+  });
+
   describe('createLocalUser', () => {
     it('주어진 데이터로 User 만들고 UserInterface로 반환', async () => {
       // Arrange
