@@ -4,9 +4,9 @@ import { ShopCategory, Location } from '../DB/models/Shop';
 
 // TODO: 키워드, 가격 검색 추가 필요
 export enum ShopOrder {
-  Recommended,
-  Rate,
-  Review,
+  Recommended = 'recommended',
+  Rate = 'rate',
+  Review = 'review',
 }
 
 export interface ShopFilterInterface {
