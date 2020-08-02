@@ -24,6 +24,21 @@ router.get('/', async (req, res, next) => {
   res.status(200).json(shops);
 });
 
+router.get('/review/:shopId', async (req, res, next) => {
+  const shopId = req.params.shopId as string;
+  if (!shopId || shopId.length === 0) return res.status(400).send();
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+  let reviewController = new ReviewController();
+  try {
+    let result = await reviewController.getReviewsForShop(shopId);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send();
+  }
+});
+
 router.post('/review/:shopId', async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (!shopId || shopId.length === 0) return res.status(400).send();
