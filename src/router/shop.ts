@@ -57,7 +57,7 @@ router.post('/image/:shopId', upload.array('imgFile', 5), async (req, res, next)
       locations,
     });
   } else {
-    res.send({
+    res.status(504).send({
       error: 'Fail To Upload',
     });
   }
