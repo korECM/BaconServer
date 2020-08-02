@@ -3,8 +3,8 @@ import { UserInterface, UserSchemaInterface } from './User';
 import { ShopInterface } from './Shop';
 
 export interface ReviewInterface {
-  user: UserInterface;
-  shop: ShopInterface;
+  user: UserInterface | string;
+  shop: ShopInterface | string;
   score: number;
   comment: string;
   like: UserSchemaInterface[] | string[];
