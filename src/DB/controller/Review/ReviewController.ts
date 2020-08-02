@@ -5,7 +5,7 @@ import { ShopController } from '../Shop/ShopController';
 export class ReviewController {
   constructor() {}
 
-  async createReview(score: number, user: string, shop: string) {
+  async createReview(score: number, user: string, shop: string, comment: string) {
     if (score <= 0 || score > 4.5) return null;
     try {
       let shopController = new ShopController();
@@ -16,6 +16,7 @@ export class ReviewController {
       let review = new Review({
         user,
         shop,
+        comment,
         score,
       });
 

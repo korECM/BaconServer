@@ -25,9 +25,9 @@ describe('ReviewController', () => {
       let reviewController = new ReviewController();
       // Act
       let result = await Promise.all([
-        reviewController.createReview(0, user._id, shop._id),
-        reviewController.createReview(-2, user._id, shop._id),
-        reviewController.createReview(5, user._id, shop._id),
+        reviewController.createReview(0, user._id, shop._id, ''),
+        reviewController.createReview(-2, user._id, shop._id, ''),
+        reviewController.createReview(5, user._id, shop._id, ''),
       ]);
       // Assert
       expect(result.every((e) => e === null)).toBeTruthy();
@@ -37,7 +37,7 @@ describe('ReviewController', () => {
       // Arrange
       let reviewController = new ReviewController();
       // Act
-      let result = await reviewController.createReview(3.5, user._id, new mongoose.mongo.ObjectId().toHexString());
+      let result = await reviewController.createReview(3.5, user._id, new mongoose.mongo.ObjectId().toHexString(), '');
       // Assert
       expect(result).toBeNull();
     });
@@ -46,13 +46,14 @@ describe('ReviewController', () => {
       // Arrange
       let reviewController = new ReviewController();
       // Act
-      let result = await reviewController.createReview(3.5, user._id, shop._id);
+      let result = await reviewController.createReview(3.5, user._id, shop._id, '내용');
       // Assert
       expect(result).not.toBeNull();
       if (result) {
         expect(result.user).toBe(user._id);
         expect(result.shop).toBe(shop._id);
         expect(result.score).toBe(3.5);
+        expect(result.comment).toBe('내용');
       }
     });
   });

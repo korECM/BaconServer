@@ -6,6 +6,7 @@ export interface ReviewInterface {
   user: UserInterface;
   shop: ShopInterface;
   score: number;
+  comment: string;
   registerDate: Date;
   _id: any;
 }
@@ -16,6 +17,7 @@ export let ReviewSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
   score: { type: Number, required: true },
+  comment: { type: String, required: true },
   registerDate: {
     type: Date,
     default: Date.now,
