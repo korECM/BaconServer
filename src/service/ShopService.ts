@@ -1,6 +1,6 @@
 import { IShopController } from '../DB/controller/Shop/IShopController';
 import { ShopController } from '../DB/controller/Shop/ShopController';
-import { ShopCategory } from '../DB/models/Shop';
+import { ShopCategory, Location } from '../DB/models/Shop';
 
 // TODO: 키워드, 가격 검색 추가 필요
 export enum ShopOrder {
