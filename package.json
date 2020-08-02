@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "start": "tsc && node dist/index.js",
     "dev": "nodemon --exec ./node_modules/.bin/ts-node --files ./src/index.ts",
     "test": "jest --clearCache && NODE_ENV=test jest"
   },
