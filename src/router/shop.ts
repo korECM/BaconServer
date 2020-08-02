@@ -26,8 +26,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/review/:shopId', async (req, res, next) => {
   const shopId = req.params.shopId as string;
-  if (!shopId || shopId.length === 0) return res.status(404).send();
-  if (isValidObjectId(shopId) === false) return res.status(404).send();
+  if (!shopId || shopId.length === 0) return res.status(400).send();
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
   const { score } = req.body;
   if (!score || isNaN(Number(score))) return res.status(400).send();
 
@@ -66,8 +66,8 @@ router.post('/like/:shopId', async (req, res, next) => {
 
 router.post('/image/:shopId', upload.array('imgFile', 5), async (req, res, next) => {
   const shopId = req.params.shopId as string;
-  if (!shopId || shopId.length === 0) return res.status(404).send();
-  if (isValidObjectId(shopId) === false) return res.status(404).send();
+  if (!shopId || shopId.length === 0) return res.status(400).send();
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
 
   let shopController = new ShopController();
 
