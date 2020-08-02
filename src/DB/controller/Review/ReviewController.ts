@@ -24,9 +24,6 @@ export class ReviewController {
 
       await review.save();
 
-      targetShop.reviews.push(review._id);
-      await targetShop.save();
-
       return review as ReviewInterface;
     } catch (error) {
       console.error(error);

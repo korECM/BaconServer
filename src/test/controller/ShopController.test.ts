@@ -33,7 +33,6 @@ describe('ShopController', () => {
       open: ' ',
       registerDate: new Date(),
       keyword: keyword._id,
-      reviews: [],
     });
 
     await Shop.create({
@@ -47,7 +46,6 @@ describe('ShopController', () => {
       open: ' ',
       registerDate: new Date(),
       keyword: keyword._id,
-      reviews: [],
     });
   });
   describe('findById', () => {

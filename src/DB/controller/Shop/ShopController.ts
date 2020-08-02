@@ -44,8 +44,8 @@ export class ShopController {
         {
           $lookup: {
             from: 'reviews',
-            localField: 'reviews',
-            foreignField: '_id',
+            localField: '_id',
+            foreignField: 'shop',
             as: 'reviews',
           },
         },
