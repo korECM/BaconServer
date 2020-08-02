@@ -53,7 +53,7 @@ router.post('/image/:shopId', upload.array('imgFile', 5), async (req, res, next)
   const locations = (req.files as Express.MulterS3.File[]).map((file) => file.location);
 
   if (await shopController.addImage(shopId, locations)) {
-    res.send({
+    res.status(201).send({
       locations,
     });
   } else {
