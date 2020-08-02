@@ -11,8 +11,32 @@ export class ShopController {
   }
 
   async getShops(filter: any, order: ShopOrder, withOrder: boolean): Promise<ShopInterface[] | null> {
-    // TODO: 정렬 방식 추가 필요
     if (withOrder) {
+      let orderQuery: any;
+      switch (order) {
+        case ShopOrder.Rate:
+          orderQuery = {
+            $sort: {
+              scoreAverage: -1,
+            },
+          };
+          break;
+        case ShopOrder.Recommended:
+          orderQuery = {
+            $sort: {
+              likerCount: -1,
+            },
+          };
+          break;
+        case ShopOrder.Review:
+          orderQuery = {
+            $sort: {
+              reviewCount: -1,
+            },
+          };
+          break;
+      }
+
       let shops = await Shop.aggregate([
         // 해당 가게 찾은 후에
         { $match: filter },
@@ -25,17 +49,36 @@ export class ShopController {
             as: 'reviews',
           },
         },
+        // 해당 가게 Like 한사람 Join
+        {
+          $lookup: {
+            from: 'users',
+            let: { shopId: '$_id' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $in: ['$$shopId', '$likeShop'],
+                  },
+                },
+              },
+            ],
+            as: 'liker',
+          },
+        },
         // Review 평균 구해서 scoreAverage 추가
         {
-          $addFields: { scoreAverage: { $avg: '$reviews.score' }, reviewCount: { $size: '$reviews' } },
+          $addFields: { scoreAverage: { $avg: '$reviews.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
         },
         // Review 가리도록
         {
           $project: {
             reviews: 0,
             __v: 0,
+            liker: 0,
           },
         },
+        orderQuery,
       ]);
       return shops;
     } else {
