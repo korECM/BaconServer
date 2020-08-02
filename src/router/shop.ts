@@ -7,6 +7,8 @@ import { isValidObjectId } from 'mongoose';
 import { ReviewController } from '../DB/controller/Review/ReviewController';
 import { upload } from '../lib/upload';
 import { ShopController } from '../DB/controller/Shop/ShopController';
+import { UserController } from '../DB/controller/User/UserController';
+import { UserService } from '../service/UserService';
 
 const router = express.Router();
 
@@ -41,6 +43,25 @@ router.post('/review/:shopId', async (req, res, next) => {
   }
 
   return res.status(201).send();
+});
+
+router.post('/like/:shopId', async (req, res, next) => {
+  const shopId = req.params.shopId as string;
+  if (!shopId || shopId.length === 0) return res.status(400).send();
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+  if (!req.user) return res.status(401).send();
+
+  let userService = new UserService();
+  try {
+    let result = await userService.addLikeShop(req.user._id, shopId);
+    if (result == false) return res.status(404).send();
+
+    return res.status(201).send();
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send();
+  }
 });
 
 router.post('/image/:shopId', upload.array('imgFile', 5), async (req, res, next) => {
