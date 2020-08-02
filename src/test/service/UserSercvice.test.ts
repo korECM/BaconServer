@@ -8,25 +8,23 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 describe('UserService', () => {
+  let userController: UserController;
+  let userDBStub: Sinon.SinonStubbedInstance<UserController>;
+  let userService: UserService;
+
+  beforeEach(async () => {
+    userController = new UserController();
+    userDBStub = Sinon.stub(userController);
+    userService = new UserService(userDBStub);
+  });
   describe('signUp', () => {
+    const validForm = {
+      name: faker.name.findName(),
+      provider: 'local',
+      email: faker.internet.exampleEmail(),
+      password: faker.internet.password(),
+    };
     describe('localLogin', () => {
-      let userController: UserController;
-      let userDBStub: Sinon.SinonStubbedInstance<UserController>;
-      let userService: UserService;
-
-      const validForm = {
-        name: faker.name.findName(),
-        provider: 'local',
-        email: faker.internet.exampleEmail(),
-        password: faker.internet.password(),
-      };
-
-      beforeEach(async () => {
-        userController = new UserController();
-        userDBStub = Sinon.stub(userController);
-        userService = new UserService(userDBStub);
-      });
-
       it('name, email, password가 주어지지 않으면 null 반환', async () => {
         // Arrange
         let testData = [
@@ -110,20 +108,11 @@ describe('UserService', () => {
   });
 
   describe('signIn', () => {
-    let userController: UserController;
-    let userDBStub: Sinon.SinonStubbedInstance<UserController>;
-    let userService: UserService;
-
     const validForm = {
       email: faker.internet.exampleEmail(),
       password: faker.internet.password(),
     };
 
-    beforeEach(async () => {
-      userController = new UserController();
-      userDBStub = Sinon.stub(userController);
-      userService = new UserService(userDBStub);
-    });
     it('email 또는 password가 주어지지 않으면 null 반홤', async () => {
       // Arrange
       let invalidForm: SignInInterface[] = [
