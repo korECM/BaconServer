@@ -25,19 +25,18 @@ export class ShopController {
             as: 'reviews',
           },
         },
-        // Review의 shop 안보이도록
-        {
-          $project: {
-            'reviews.shop': 0,
-          },
-        },
         // Review 평균 구해서 scoreAverage 추가
         {
-          $addFields: { scoreAverage: { $avg: '$reviews.score' } },
+          $addFields: { scoreAverage: { $avg: '$reviews.score' }, reviewCount: { $size: '$reviews' } },
+        },
+        // Review 가리도록
+        {
+          $project: {
+            reviews: 0,
+            __v: 0,
+          },
         },
       ]);
-      // reviews 안에 있는 userId Join
-      await User.populate(shops, { path: 'reviews.user', select: '_id name email' });
       return shops;
     } else {
       return await Shop.find(filter);
