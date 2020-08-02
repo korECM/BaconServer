@@ -1,5 +1,5 @@
-import Review, { ReviewInterface } from '../../models/Review';
-import Shop from '../../models/Shop';
+import Review, { ReviewInterface, ReviewSchemaInterface } from '../../models/Review';
+import { Schema } from 'mongoose';
 import { ShopController } from '../Shop/ShopController';
 
 export class ReviewController {
@@ -17,6 +17,7 @@ export class ReviewController {
         user,
         shop,
         comment,
+        like: [],
         score,
       });
 
@@ -29,6 +30,26 @@ export class ReviewController {
     } catch (error) {
       console.error(error);
       return null;
+    }
+  }
+
+  async findById(id: string) {
+    return (await Review.findById(id)) as ReviewInterface;
+  }
+
+  async likeReview(userId: string, reviewId: string) {
+    try {
+      let review = (await this.findById(reviewId)) as ReviewSchemaInterface;
+      if (!review) return false;
+
+      if ((review.like as string[]).includes(userId) === false) {
+        (review.like as string[]).push(userId);
+        await review.save();
+      }
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
   }
 }
