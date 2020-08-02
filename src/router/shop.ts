@@ -27,7 +27,7 @@ router.post('/review/:shopId', async (req, res, next) => {
   if (!shopId || shopId.length === 0) return res.status(404).send();
   if (isValidObjectId(shopId) === false) return res.status(404).send();
   const { score } = req.body;
-  if (!score || isNaN(Number(score))) return res.status(404).send();
+  if (!score || isNaN(Number(score))) return res.status(400).send();
 
   if (!req.user) return res.status(401).send();
 
