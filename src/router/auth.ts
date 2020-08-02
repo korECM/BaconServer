@@ -61,7 +61,7 @@ router.post('/signIn', async (req, res, next) => {
     httpOnly: true,
   });
 
-  res.status(200).send(user);
+  res.status(200).send();
 });
 
 const kakaoCallback = 'http://127.0.0.1:8001/auth/signIn/kakao/callback';
@@ -107,7 +107,7 @@ router.get('/signIn/kakao/callback', async (req, res, next) => {
       httpOnly: true,
     });
 
-    res.status(200).send(user);
+    res.status(200).send();
   } catch (error) {
     console.error(error);
     return res.status(500).send();
