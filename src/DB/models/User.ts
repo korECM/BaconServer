@@ -6,6 +6,7 @@ export interface UserInterface {
   password: string;
   provider: string;
   snsId: string;
+  likeShop: UserSchemaInterface[] | mongoose.Types.ObjectId[];
   registerDate: Date;
   _id: any;
 }
@@ -18,6 +19,7 @@ export let UserSchema = new Schema({
   password: { type: String, required: true },
   provider: { type: String, required: true },
   snsId: { type: String, required: true },
+  likeShop: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   registerDate: {
     type: Date,
     default: Date.now,

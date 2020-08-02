@@ -28,6 +28,7 @@ export class UserController implements IUserController {
       email,
       provider: 'local',
       snsId: 'none',
+      likeShop: [],
       password: hashPassword,
     });
 
@@ -51,6 +52,7 @@ export class UserController implements IUserController {
         name,
         email: 'none',
         provider: 'kakao',
+        likeShop: [],
         snsId: id,
         password: 'none',
       });

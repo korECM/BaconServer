@@ -16,6 +16,7 @@ describe('UserController', () => {
       password: faker.internet.password(),
       provider: 'local',
       registerDate: new Date(),
+      likeShop: [],
       snsId: 'none',
     });
 
@@ -25,6 +26,7 @@ describe('UserController', () => {
       password: 'none',
       provider: 'kakao',
       registerDate: new Date(),
+      likeShop: [],
       snsId: 'kakaoId',
     });
   });

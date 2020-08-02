@@ -96,6 +96,7 @@ describe('UserService', () => {
           password: '',
           provider: 'local',
           registerDate: testDate,
+          likeShop: [],
           snsId: '',
           _id: '123456789',
         };
@@ -168,6 +169,7 @@ describe('UserService', () => {
         password: hashPassword,
         provider: 'local',
         registerDate: new Date(),
+        likeShop: [],
         snsId: '',
       });
       // Act
