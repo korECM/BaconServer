@@ -52,4 +52,20 @@ export class ReviewController {
       return false;
     }
   }
+
+  async unlikeReview(userId: string, reviewId: string) {
+    try {
+      let review = (await this.findById(reviewId)) as ReviewSchemaInterface;
+      if (!review) return false;
+
+      if ((review.like as string[]).includes(userId) === true) {
+        review.like = (review.like as string[]).filter((liker) => `${liker}` !== `${userId}`);
+        await review.save();
+      }
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
 }

@@ -103,4 +103,27 @@ describe('ReviewController', () => {
       expect(changedReview!.like.includes(user._id)).toBeTruthy();
     });
   });
+
+  describe('unlikeReview', () => {
+    it('해당 리뷰가 존재하지 않으면 false 반환', async () => {
+      // Arrange
+      let reviewController = new ReviewController();
+      // Act
+      let result = await reviewController.unlikeReview(user._id, new mongoose.Types.ObjectId().toHexString());
+      // Assert
+      expect(result).toBeFalsy();
+    });
+
+    it('해당 리뷰가 존재하면 like에 userId 추가하고 true 반환', async () => {
+      // Arrange
+      let reviewController = new ReviewController();
+      // Act
+      await reviewController.likeReview(user._id, review._id);
+      let result = await reviewController.unlikeReview(user._id, review._id);
+      let changedReview = await reviewController.findById(review._id);
+      // Assert
+      expect(result).toBeTruthy();
+      expect(changedReview!.like.includes(user._id)).toBeFalsy();
+    });
+  });
 });
