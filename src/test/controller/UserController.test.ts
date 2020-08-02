@@ -9,6 +9,7 @@ setupDB('User');
 describe('UserController', () => {
   let dataUser: UserSchemaInterface;
   let kakaouser: UserSchemaInterface;
+  let testShopId = new mongoose.Types.ObjectId();
   beforeAll(async () => {
     dataUser = await User.create({
       email: faker.internet.email(),
@@ -16,7 +17,7 @@ describe('UserController', () => {
       password: faker.internet.password(),
       provider: 'local',
       registerDate: new Date(),
-      likeShop: [],
+      likeShop: [testShopId],
       snsId: 'none',
     });
 
@@ -125,6 +126,34 @@ describe('UserController', () => {
 
       // Assert
       expect(result).toBeFalsy();
+    });
+  });
+
+  describe('addLikeShop', () => {
+    it('user의 likeShop에 해당 가게 id가 없는 경우 해당 가게 id 추가', async () => {
+      // Arrange
+      let userController = new UserController();
+      let shopId = new mongoose.Types.ObjectId();
+
+      // Act
+      await userController.addLikeShop(dataUser, shopId);
+
+      // Assert
+      expect(dataUser.likeShop.length).toBe(2);
+      expect((dataUser.likeShop as mongoose.Types.ObjectId[]).includes(shopId)).toBeTruthy();
+    });
+
+    it('user의 likeShop에 이미 가게 id가 존재하면 추가하지 않는다', async () => {
+      // Arrange
+      let userController = new UserController();
+      let prevLength = dataUser.likeShop.length;
+
+      // Act
+      await userController.addLikeShop(dataUser, testShopId);
+
+      // Assert
+      expect(dataUser.likeShop.length).toBe(prevLength);
+      expect((dataUser.likeShop as mongoose.Types.ObjectId[]).includes(testShopId)).toBeTruthy();
     });
   });
 

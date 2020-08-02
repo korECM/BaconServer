@@ -1,6 +1,8 @@
-import User, { UserInterface } from '../../models/User';
+import User, { UserInterface, UserSchemaInterface } from '../../models/User';
 import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 import { IUserController } from './IUserController';
+import { ShopInterface } from '../../models/Shop';
 
 export class UserController implements IUserController {
   constructor() {}
@@ -19,6 +21,13 @@ export class UserController implements IUserController {
 
   async checkNameExist(name: string) {
     return (await User.findOne({ name })) !== null;
+  }
+
+  async addLikeShop(user: UserSchemaInterface, shopId: mongoose.Types.ObjectId) {
+    if ((user.likeShop as mongoose.Types.ObjectId[]).includes(shopId) == false) {
+      (user.likeShop as mongoose.Types.ObjectId[]).push(shopId);
+      await user.save();
+    }
   }
 
   async createLocalUser(name: string, email: string, password: string) {
