@@ -78,7 +78,26 @@ router.post('/like/review/:reviewId', async (req, res, next) => {
     if (result == false) return res.status(404).send();
 
     return res.status(201).send();
-  } catch (error) {``
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send();
+  }
+});
+
+router.post('/unlike/review/:reviewId', async (req, res, next) => {
+  const reviewId = req.params.reviewId as string;
+  if (!reviewId || reviewId.length === 0) return res.status(400).send();
+  if (isValidObjectId(reviewId) === false) return res.status(400).send();
+
+  if (!req.user) return res.status(401).send();
+
+  let reviewController = new ReviewController();
+  try {
+    let result = await reviewController.unlikeReview(req.user._id, reviewId);
+    if (result == false) return res.status(404).send();
+
+    return res.status(201).send();
+  } catch (error) {
     console.error(error);
     return res.status(500).send();
   }
