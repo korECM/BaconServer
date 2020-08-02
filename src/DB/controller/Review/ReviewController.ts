@@ -1,6 +1,7 @@
 import Review, { ReviewInterface, ReviewSchemaInterface } from '../../models/Review';
 import { Schema } from 'mongoose';
 import { ShopController } from '../Shop/ShopController';
+import User from '../../models/User';
 
 export class ReviewController {
   constructor() {}
@@ -34,7 +35,11 @@ export class ReviewController {
   }
 
   async getReviewsForShop(shopId: string) {
-    return (await Review.find({ shop: shopId })) as ReviewInterface[];
+    let reviews = await Review.find({ shop: shopId });
+
+    // reviews 안에 있는 userId Join
+    await User.populate(reviews, { path: 'user', select: '_id name email' });
+    return reviews as ReviewInterface[];
   }
 
   async findById(id: string) {
