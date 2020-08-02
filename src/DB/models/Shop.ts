@@ -37,7 +37,7 @@ export interface ShopSchemaInterface extends ShopInterface, mongoose.Document {}
 
 export let ShopSchema = new Schema({
   name: { type: String, required: true },
-  contact: { type: String, required: true },
+  contact: { type: String },
   address: { type: String, required: true },
   open: { type: String },
   closed: { type: String },
