@@ -33,6 +33,10 @@ export class ReviewController {
     }
   }
 
+  async getReviewsForShop(shopId: string) {
+    return (await Review.find({ shop: shopId })) as ReviewInterface[];
+  }
+
   async findById(id: string) {
     return (await Review.findById(id)) as ReviewInterface;
   }

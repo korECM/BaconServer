@@ -62,6 +62,26 @@ describe('ReviewController', () => {
     });
   });
 
+  describe('getReviewsForShop', () => {
+    it('해당 shopId가 없으면 [] 반환', async () => {
+      // Arrange
+      let reviewController = new ReviewController();
+      // Act
+      let result = await reviewController.getReviewsForShop(new mongoose.mongo.ObjectId().toHexString());
+      // Assert
+      expect(result).toStrictEqual([]);
+    });
+
+    it('해당 shopId가 있으면 Review 목록 반환', async () => {
+      // Arrange
+      let reviewController = new ReviewController();
+      // Act
+      let result = await reviewController.getReviewsForShop(shop._id);
+      // Assert
+      expect(result).not.toBeNull();
+    });
+  });
+
   describe('findById', () => {
     it('해당 Review가 존재하면 해당 Review 반환', async () => {
       // Arrange
