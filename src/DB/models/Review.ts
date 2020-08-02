@@ -1,5 +1,5 @@
 import mongoose, { Schema, models } from 'mongoose';
-import { UserInterface } from './User';
+import { UserInterface, UserSchemaInterface } from './User';
 import { ShopInterface } from './Shop';
 
 export interface ReviewInterface {
@@ -7,6 +7,7 @@ export interface ReviewInterface {
   shop: ShopInterface;
   score: number;
   comment: string;
+  like: UserSchemaInterface[] | string[];
   registerDate: Date;
   _id: any;
 }
@@ -18,6 +19,7 @@ export let ReviewSchema = new Schema({
   shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
   score: { type: Number, required: true },
   comment: { type: String, required: true },
+  like: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   registerDate: {
     type: Date,
     default: Date.now,
