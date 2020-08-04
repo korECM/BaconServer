@@ -17,6 +17,8 @@ COPY yarn.lock ./
 #패키지파일들 받기
 RUN yarn install
  
+RUN yarn global add typescript
+
 COPY . .
 
 #배포버젼으로 설정 - 이 설정으로 환경을 나눌 수 있습니다.
