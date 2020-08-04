@@ -10,6 +10,10 @@ export class ShopController {
     return await Shop.findById(id);
   }
 
+  async getShop(id: string): Promise<ShopSchemaInterface | null> {
+    return await Shop.findById(id).populate('keyword');
+  }
+
   async getShops(filter: any, order: ShopOrder, withOrder: boolean): Promise<ShopInterface[] | null> {
     if (withOrder) {
       let orderQuery: any;

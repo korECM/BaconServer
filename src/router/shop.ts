@@ -7,7 +7,6 @@ import { isValidObjectId } from 'mongoose';
 import { ReviewController } from '../DB/controller/Review/ReviewController';
 import { upload } from '../lib/upload';
 import { ShopController } from '../DB/controller/Shop/ShopController';
-import { UserController } from '../DB/controller/User/UserController';
 import { UserService } from '../service/UserService';
 
 const router = express.Router();
@@ -22,6 +21,20 @@ router.get('/', async (req, res, next) => {
   let shops = await shopService.getShops({ category: category as any, location: location as any, order: order as any }, true);
 
   res.status(200).json(shops);
+});
+
+router.get('/:shopId', async (req, res, next) => {
+  const shopId = req.params.shopId as string;
+  if (!shopId || shopId.length === 0) return res.status(400).send();
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+  let shopController = new ShopController();
+
+  let shop = await shopController.getShop(shopId);
+
+  if (shop === null) return res.status(404).send();
+
+  return res.status(200).json(shop);
 });
 
 router.get('/review/:shopId', async (req, res, next) => {
