@@ -1,7 +1,9 @@
 import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location } from '../../models/Shop';
 import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
 import { ShopOrder } from '../../../service/ShopService';
-import User from '../../models/User';
+import mongoose from 'mongoose';
+
+const ObjectId = mongoose.Types.ObjectId;
 
 export class ShopController {
   constructor() {}
@@ -10,8 +12,86 @@ export class ShopController {
     return await Shop.findById(id);
   }
 
-  async getShop(id: string): Promise<ShopSchemaInterface | null> {
-    return await Shop.findById(id).populate('keyword');
+  async getShop(id: string, userId?: string): Promise<ShopInterface | null> {
+    let shops = await Shop.aggregate([
+      {
+        $match: {
+          _id: ObjectId(id),
+        },
+      },
+      {
+        $lookup: {
+          from: 'keywords',
+          localField: 'keyword',
+          foreignField: '_id',
+          as: 'keywords',
+        },
+      },
+      {
+        $unwind: {
+          path: '$keywords',
+        },
+      },
+      {
+        $project: {
+          keywords: {
+            __v: 0,
+            registerDate: 0,
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'reviews',
+          localField: '_id',
+          foreignField: 'shop',
+          as: 'reviews',
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          let: {
+            shopId: '$_id',
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $in: ['$$shopId', '$likeShop'],
+                },
+              },
+            },
+          ],
+          as: 'liker',
+        },
+      },
+      {
+        $addFields: {
+          scoreAverage: {
+            $avg: '$reviews.score',
+          },
+          reviewCount: {
+            $size: '$reviews',
+          },
+          likerCount: {
+            $size: '$liker',
+          },
+          didLike: {
+            $in: [ObjectId(userId), '$liker._id'],
+          },
+        },
+      },
+      {
+        $project: {
+          reviews: 0,
+          __v: 0,
+          liker: 0,
+        },
+      },
+    ]);
+    if (shops.length === 0) return null;
+    return shops[0];
   }
 
   async getShops(filter: any, order: ShopOrder, withOrder: boolean): Promise<ShopInterface[] | null> {
