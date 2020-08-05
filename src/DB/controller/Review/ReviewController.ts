@@ -2,6 +2,7 @@ import Review, { ReviewInterface, ReviewSchemaInterface } from '../../models/Rev
 import { ShopController } from '../Shop/ShopController';
 
 import mongoose from 'mongoose';
+import Score from '../../models/Score';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -16,12 +17,20 @@ export class ReviewController {
 
       if (!targetShop) return null;
 
+      let scoreModel = await Score.findOne({ user });
+      if (!scoreModel) {
+        scoreModel = new Score();
+        scoreModel.user = user;
+        scoreModel.shop = shop;
+      }
+      scoreModel.score = score;
+      await scoreModel.save();
+
       let review = new Review({
         user,
         shop,
         comment,
         like: [],
-        score,
       });
 
       await review.save();
