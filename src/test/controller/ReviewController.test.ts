@@ -56,7 +56,6 @@ describe('ReviewController', () => {
       if (result) {
         expect(result.user).toBe(user._id);
         expect(result.shop).toBe(shop._id);
-        expect(result.score).toBe(3.5);
         expect(result.comment).toBe('내용');
       }
     });

@@ -67,9 +67,17 @@ export class ShopController {
         },
       },
       {
+        $lookup: {
+          from: 'scores',
+          localField: '_id',
+          foreignField: 'shop',
+          as: 'scores',
+        },
+      },
+      {
         $addFields: {
           scoreAverage: {
-            $avg: '$reviews.score',
+            $avg: '$scores.score',
           },
           reviewCount: {
             $size: '$reviews',
@@ -87,6 +95,7 @@ export class ShopController {
           reviews: 0,
           __v: 0,
           liker: 0,
+          scores: 0,
         },
       },
     ]);
@@ -139,6 +148,14 @@ export class ShopController {
             as: 'reviews',
           },
         },
+        {
+          $lookup: {
+            from: 'scores',
+            localField: '_id',
+            foreignField: 'shop',
+            as: 'scores',
+          },
+        },
         // 해당 가게 Like 한사람 Join
         {
           $lookup: {
@@ -158,7 +175,7 @@ export class ShopController {
         },
         // Review 평균 구해서 scoreAverage 추가
         {
-          $addFields: { scoreAverage: { $avg: '$reviews.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
+          $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
         },
         // Review 가리도록
         {
@@ -166,6 +183,7 @@ export class ShopController {
             reviews: 0,
             __v: 0,
             liker: 0,
+            scores: 0,
           },
         },
         orderQuery,

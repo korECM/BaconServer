@@ -5,7 +5,6 @@ import { ShopInterface } from './Shop';
 export interface ReviewInterface {
   user: UserInterface | string;
   shop: ShopInterface | string;
-  score: number;
   comment: string;
   like: UserSchemaInterface[] | string[];
   registerDate: Date;
@@ -17,7 +16,6 @@ export interface ReviewSchemaInterface extends ReviewInterface, mongoose.Documen
 export let ReviewSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
-  score: { type: Number, required: true },
   comment: { type: String, required: true },
   like: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   registerDate: {
