@@ -44,7 +44,7 @@ router.get('/review/:shopId', async (req, res, next) => {
 
   let reviewController = new ReviewController();
   try {
-    let result = await reviewController.getReviewsForShop(shopId);
+    let result = await reviewController.getReviewsForShop(shopId, req.user?._id);
     return res.status(200).json(result);
   } catch (error) {
     console.error(error);

@@ -1,7 +1,9 @@
 import Review, { ReviewInterface, ReviewSchemaInterface } from '../../models/Review';
-import { Schema } from 'mongoose';
 import { ShopController } from '../Shop/ShopController';
-import User from '../../models/User';
+
+import mongoose from 'mongoose';
+
+const ObjectId = mongoose.Types.ObjectId;
 
 export class ReviewController {
   constructor() {}
@@ -31,11 +33,51 @@ export class ReviewController {
     }
   }
 
-  async getReviewsForShop(shopId: string) {
-    let reviews = await Review.find({ shop: shopId });
+  async getReviewsForShop(shopId: string, userId?: string) {
+    let reviews = await Review.aggregate([
+      {
+        $match: {
+          shop: ObjectId(shopId),
+        },
+      },
+      {
+        $addFields: {
+          didLike: {
+            $in: [ObjectId(userId), '$like'],
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'user',
+          foreignField: '_id',
+          as: 'user',
+        },
+      },
+      {
+        $unwind: {
+          path: '$user',
+        },
+      },
+      {
+        $project: {
+          like: 0,
+          shop: 0,
+          __v: 0,
+          user: {
+            __v: 0,
+            password: 0,
+            snsId: 0,
+            provider: 0,
+            email: 0,
+            likeShop: 0,
+            registerDate: 0,
+          },
+        },
+      },
+    ]);
 
-    // reviews 안에 있는 userId Join
-    await User.populate(reviews, { path: 'user', select: '_id name email' });
     return reviews as ReviewInterface[];
   }
 
