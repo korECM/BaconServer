@@ -6,10 +6,19 @@ import Score from '../../models/Score';
 
 const ObjectId = mongoose.Types.ObjectId;
 
+interface TempKeyword {
+  costRatio: boolean;
+  atmosphere: boolean;
+  group: boolean;
+  individual: boolean;
+  riceAppointment: boolean;
+  spicy: boolean;
+}
+
 export class ReviewController {
   constructor() {}
 
-  async createReview(score: number, user: string, shop: string, comment: string) {
+  async createReview(score: number, user: string, shop: string, comment: string, keywords: TempKeyword) {
     if (score <= 0 || score > 4.5) return null;
     try {
       let shopController = new ShopController();
@@ -24,6 +33,11 @@ export class ReviewController {
         scoreModel.shop = shop;
       }
       scoreModel.score = score;
+
+      for (const [key, value] of Object.entries(keywords)) {
+        if (value) (scoreModel as any)[key] += 1;
+      }
+
       await scoreModel.save();
 
       let review = new Review({

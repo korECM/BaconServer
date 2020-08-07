@@ -56,15 +56,14 @@ router.post('/review/:shopId', async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (!shopId || shopId.length === 0) return res.status(400).send();
   if (isValidObjectId(shopId) === false) return res.status(400).send();
-  const { score, comment } = req.body;
+  const { score, comment, keywords } = req.body;
   if (!score || isNaN(Number(score))) return res.status(400).send();
-  if (!comment || comment.length === 0) return res.status(400).send();
 
   if (!req.user) return res.status(401).send();
 
   let reviewController = new ReviewController();
   try {
-    let result = await reviewController.createReview(score, req.user._id, shopId, comment);
+    let result = await reviewController.createReview(score, req.user._id, shopId, comment, keywords);
     if (result === null) return res.status(400).send();
   } catch (error) {
     console.error(error);

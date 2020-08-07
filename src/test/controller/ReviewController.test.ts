@@ -21,7 +21,14 @@ describe('ReviewController', () => {
     let reviewController = new ReviewController();
     user = (await userController.createLocalUser(faker.name.findName(), faker.internet.email(), faker.internet.password()))!;
     shop = (await shopController.createShop('식당', '번호', '주소', [], '열음', '닫음', Location.Back, ShopCategory.Korean))!;
-    review = (await reviewController.createReview(3, user._id, shop._id, '댓글'))!;
+    review = (await reviewController.createReview(3, user._id, shop._id, '댓글', {
+      costRatio: false,
+      atmosphere: false,
+      group: false,
+      individual: false,
+      riceAppointment: false,
+      spicy: false,
+    }))!;
   });
   describe('createReview', () => {
     it('score가 0 이하거나 4.5 초과라면 모델을 생성하지 않고 null 반환', async () => {
@@ -29,9 +36,30 @@ describe('ReviewController', () => {
       let reviewController = new ReviewController();
       // Act
       let result = await Promise.all([
-        reviewController.createReview(0, user._id, shop._id, ''),
-        reviewController.createReview(-2, user._id, shop._id, ''),
-        reviewController.createReview(5, user._id, shop._id, ''),
+        reviewController.createReview(0, user._id, shop._id, '', {
+          costRatio: false,
+          atmosphere: false,
+          group: false,
+          individual: false,
+          riceAppointment: false,
+          spicy: false,
+        }),
+        reviewController.createReview(-2, user._id, shop._id, '', {
+          costRatio: false,
+          atmosphere: false,
+          group: false,
+          individual: false,
+          riceAppointment: false,
+          spicy: false,
+        }),
+        reviewController.createReview(5, user._id, shop._id, '', {
+          costRatio: false,
+          atmosphere: false,
+          group: false,
+          individual: false,
+          riceAppointment: false,
+          spicy: false,
+        }),
       ]);
       // Assert
       expect(result.every((e) => e === null)).toBeTruthy();
@@ -41,7 +69,14 @@ describe('ReviewController', () => {
       // Arrange
       let reviewController = new ReviewController();
       // Act
-      let result = await reviewController.createReview(3.5, user._id, new mongoose.mongo.ObjectId().toHexString(), '');
+      let result = await reviewController.createReview(3.5, user._id, new mongoose.mongo.ObjectId().toHexString(), '', {
+        costRatio: false,
+        atmosphere: false,
+        group: false,
+        individual: false,
+        riceAppointment: false,
+        spicy: false,
+      });
       // Assert
       expect(result).toBeNull();
     });
@@ -50,7 +85,14 @@ describe('ReviewController', () => {
       // Arrange
       let reviewController = new ReviewController();
       // Act
-      let result = await reviewController.createReview(3.5, user._id, shop._id, '내용');
+      let result = await reviewController.createReview(3.5, user._id, shop._id, '내용', {
+        costRatio: false,
+        atmosphere: false,
+        group: false,
+        individual: false,
+        riceAppointment: false,
+        spicy: false,
+      });
       // Assert
       expect(result).not.toBeNull();
       if (result) {
