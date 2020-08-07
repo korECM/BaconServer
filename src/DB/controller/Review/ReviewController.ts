@@ -3,6 +3,7 @@ import { ShopController } from '../Shop/ShopController';
 
 import mongoose from 'mongoose';
 import Score from '../../models/Score';
+import Keyword from '../../models/Keyword';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -34,11 +35,16 @@ export class ReviewController {
       }
       scoreModel.score = score;
 
+      await scoreModel.save();
+
+      let keyword = await Keyword.findById(targetShop.keyword);
+      if (!keyword) return null;
+
       for (const [key, value] of Object.entries(keywords)) {
-        if (value) (scoreModel as any)[key] += 1;
+        if (value) (keyword as any)[key] += 1;
       }
 
-      await scoreModel.save();
+      await keyword.save();
 
       let review = new Review({
         user,
