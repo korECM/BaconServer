@@ -19,6 +19,7 @@ describe('UserController', () => {
       registerDate: new Date(),
       likeShop: [testShopId],
       snsId: 'none',
+      kakaoNameSet: true,
     });
 
     kakaouser = await User.create({
@@ -29,6 +30,7 @@ describe('UserController', () => {
       registerDate: new Date(),
       likeShop: [],
       snsId: 'kakaoId',
+      kakaoNameSet: true,
     });
   });
   describe('findById', () => {
@@ -245,7 +247,7 @@ describe('UserController', () => {
 
       let userController = new UserController();
       // Act
-      let user = await userController.createKakaoUser(name, id);
+      let user = await userController.createKakaoUser(name, id, true);
 
       // Assert
       expect(user).not.toBeNull();

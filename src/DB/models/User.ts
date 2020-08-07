@@ -7,6 +7,7 @@ export interface UserInterface {
   provider: string;
   snsId: string;
   likeShop: UserSchemaInterface[] | mongoose.Types.ObjectId[];
+  kakaoNameSet: boolean;
   registerDate: Date;
   _id: any;
 }
@@ -20,6 +21,7 @@ export let UserSchema = new Schema({
   provider: { type: String, required: true },
   snsId: { type: String, required: true },
   likeShop: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  kakaoNameSet: Boolean,
   registerDate: {
     type: Date,
     default: Date.now,

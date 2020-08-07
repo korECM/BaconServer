@@ -10,5 +10,5 @@ export interface IUserController {
   unlikeShop(user: UserSchemaInterface, shop: mongoose.Types.ObjectId): Promise<void>;
   createLocalUser(name: string, email: string, password: string): Promise<UserInterface | null>;
   getKakaoUserExist(id: string): Promise<UserInterface | null>;
-  createKakaoUser(name: string, id: string): Promise<UserInterface | null>;
+  createKakaoUser(name: string, id: string, withName: boolean): Promise<UserInterface | null>;
 }

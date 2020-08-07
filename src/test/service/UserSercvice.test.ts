@@ -61,7 +61,7 @@ describe('UserService', () => {
         let result: (null | UserInterface)[] = [];
 
         for (let data of testData) {
-          result.push(await userService.signUp(data as any));
+          result.push(await userService.signUp(data as any, true));
         }
 
         // Assert
@@ -72,7 +72,7 @@ describe('UserService', () => {
         // Arrange
         userDBStub.checkEmailExist.resolves(true);
         // Act
-        let user = await userService.signUp(validForm);
+        let user = await userService.signUp(validForm, true);
         // Assert
         expect(user).toBeNull();
         expect(userDBStub.checkEmailExist.calledOnceWith(validForm.email)).toBe(true);
@@ -83,7 +83,7 @@ describe('UserService', () => {
         userDBStub.checkEmailExist.resolves(false);
         userDBStub.checkNameExist.resolves(true);
         // Act
-        let user = await userService.signUp(validForm);
+        let user = await userService.signUp(validForm, true);
         // Assert
         expect(user).toBeNull();
         expect(userDBStub.checkNameExist.calledOnceWith(validForm.name)).toBe(true);
@@ -103,10 +103,11 @@ describe('UserService', () => {
           likeShop: [],
           snsId: '',
           _id: '123456789',
+          kakaoNameSet: true,
         };
         userDBStub.createLocalUser.resolves(testUser);
         // Act
-        let user = await userService.signUp(validForm);
+        let user = await userService.signUp(validForm, true);
         // Assert
         expect(user).toBe(testUser);
       });
@@ -166,6 +167,7 @@ describe('UserService', () => {
         registerDate: new Date(),
         likeShop: [],
         snsId: '',
+        kakaoNameSet: true,
       });
       // Act
       let user = await userService.signIn(validForm);

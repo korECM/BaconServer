@@ -58,11 +58,22 @@ export class UserController implements IUserController {
     }
   }
 
+  async setName(id: string, name: string) {
+    let user = await User.findById(id);
+    if (!user) return null;
+
+    user.name = name;
+    user.kakaoNameSet = true;
+    await user.save();
+
+    return user as UserInterface;
+  }
+
   async getKakaoUserExist(id: string): Promise<UserInterface | null> {
     return await User.findOne({ provider: 'kakao', snsId: id });
   }
 
-  async createKakaoUser(name: string, id: string) {
+  async createKakaoUser(name: string, id: string, withName: boolean) {
     try {
       let user = new User({
         name,
@@ -71,6 +82,7 @@ export class UserController implements IUserController {
         likeShop: [],
         snsId: id,
         password: 'none',
+        kakaoNameSet: withName,
       });
 
       await user.save();

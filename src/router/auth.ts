@@ -4,6 +4,7 @@ import axios from 'axios';
 import { UserService } from '../service/UserService';
 import { isInvalid } from './validate';
 import { generateToken } from '../lib/jwtMiddleware';
+import { UserController } from '../DB/controller/User/UserController';
 
 const ONE_DAY = 1000 * 60 * 60 * 24;
 
@@ -23,7 +24,7 @@ router.post('/signUp', async (req, res, next) => {
   }
 
   const userService = new UserService();
-  const user = await userService.signUp(req.body);
+  const user = await userService.signUp(req.body, true);
 
   if (!user) return res.status(409).send();
 
@@ -64,7 +65,7 @@ router.post('/signIn', async (req, res, next) => {
   res.status(200).send();
 });
 
-const kakaoCallback = 'http://127.0.0.1:8001/auth/signIn/kakao/callback';
+const kakaoCallback = 'http://localhost:3000/auth/kakao/callback';
 
 router.get('/signIn/kakao', async (req, res, next) => {
   // 사용자 동의 화면으로 리다이렉트
@@ -89,16 +90,36 @@ router.get('/signIn/kakao/callback', async (req, res, next) => {
 
     const { id, gender } = profileResponse.data;
 
-    const userService = new UserService();
-    const user = await userService.signUp({
-      name: '일단 임시 이름',
-      provider: 'kakao',
-      email: 'none',
-      password: 'none',
-      snsId: id,
-    });
+    const userController = new UserController();
+
+    let user = await userController.getKakaoUserExist(id);
+
+    if (user === null) {
+      const userService = new UserService();
+      user = await userService.signUp(
+        {
+          name: '설정 전 이름',
+          provider: 'kakao',
+          email: 'none',
+          password: 'none',
+          snsId: id,
+        },
+        false,
+      );
+      return res.status(206).json({
+        id: user?._id,
+        status: 303,
+      });
+    }
 
     if (!user) return res.status(409).send();
+
+    if (user.kakaoNameSet === false) {
+      return res.status(206).json({
+        id: user?._id,
+        status: 303,
+      });
+    }
 
     let token = generateToken(user);
 
@@ -114,6 +135,26 @@ router.get('/signIn/kakao/callback', async (req, res, next) => {
   }
 
   res.send();
+});
+
+router.post('/kakao/name', async (req, res, next) => {
+  const name = req.body.name as string;
+  const id = req.body.id as string;
+  if (!name || name.length === 0) return res.status(400).send();
+
+  const userController = new UserController();
+
+  let user = await userController.setName(id, name);
+  if (!user) return res.status(409).send();
+
+  let token = generateToken(user);
+
+  res.cookie('access_token', token, {
+    maxAge: ONE_DAY * 7,
+    httpOnly: true,
+  });
+
+  res.status(200).send();
 });
 
 router.get('/check', async (req, res, next) => {

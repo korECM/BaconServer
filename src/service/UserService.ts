@@ -27,7 +27,7 @@ export class UserService {
     return !!data && data.length > 0;
   }
 
-  async signUp(form: SignUpInterface) {
+  async signUp(form: SignUpInterface, withName: boolean) {
     const { name, provider, email, password, snsId } = form;
     if (provider === 'local') {
       if (this.checkStringValidation(name) === false || this.checkStringValidation(password) === false || this.checkStringValidation(email) === false)
@@ -56,7 +56,7 @@ export class UserService {
 
       // 가입된 카카오 계정이 없다면 생성
       let userController = new UserController();
-      let createdKakaoUser = await userController.createKakaoUser(name!, snsId!);
+      let createdKakaoUser = await userController.createKakaoUser(name!, snsId!, withName);
 
       return createdKakaoUser;
     } else {
