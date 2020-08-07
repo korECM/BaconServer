@@ -71,7 +71,9 @@ router.post('/review/:shopId', async (req, res, next) => {
     return res.status(500).send();
   }
 
-  return res.status(201).send();
+  return res.status(201).json({
+    message: 'success',
+  });
 });
 
 router.post('/like/:shopId', async (req, res, next) => {
@@ -86,7 +88,9 @@ router.post('/like/:shopId', async (req, res, next) => {
     let result = await userService.addLikeShop(req.user._id, shopId);
     if (result == false) return res.status(404).send();
 
-    return res.status(201).send();
+    return res.status(201).json({
+      message: 'success',
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).send();
@@ -105,7 +109,9 @@ router.post('/unlike/:shopId', async (req, res, next) => {
     let result = await userService.unlikeShop(req.user._id, shopId);
     if (result == false) return res.status(404).send();
 
-    return res.status(201).send();
+    return res.status(201).json({
+      message: 'success',
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).send();
@@ -124,7 +130,9 @@ router.post('/like/review/:reviewId', async (req, res, next) => {
     let result = await reviewController.likeReview(req.user._id, reviewId);
     if (result == false) return res.status(404).send();
 
-    return res.status(201).send();
+    return res.status(201).json({
+      message: 'success',
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).send();
@@ -143,7 +151,9 @@ router.post('/unlike/review/:reviewId', async (req, res, next) => {
     let result = await reviewController.unlikeReview(req.user._id, reviewId);
     if (result == false) return res.status(404).send();
 
-    return res.status(201).send();
+    return res.status(201).json({
+      message: 'success',
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).send();
