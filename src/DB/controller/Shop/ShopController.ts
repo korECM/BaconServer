@@ -24,12 +24,12 @@ export class ShopController {
           from: 'keywords',
           localField: 'keyword',
           foreignField: '_id',
-          as: 'keywords',
+          as: 'keyword',
         },
       },
       {
         $unwind: {
-          path: '$keywords',
+          path: '$keyword',
         },
       },
       {
