@@ -29,6 +29,7 @@ describe('ShopService', () => {
     location: Location.Back,
     name: '이름',
     open: '',
+    price: 0,
     registerDate: new Date(),
   };
   describe('getAllShops', () => {

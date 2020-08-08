@@ -28,6 +28,7 @@ export interface ShopInterface {
   closed: string;
   location: Location;
   category: ShopCategory;
+  price: number;
   keyword: KeywordInterface;
   registerDate: Date;
   _id: any;
@@ -44,6 +45,7 @@ export let ShopSchema = new Schema({
   image: { type: [String], required: true },
   location: { type: String, enum: Object.values(Location), required: true },
   category: { type: String, enum: Object.values(ShopCategory), required: true },
+  price: Number,
   keyword: { type: Schema.Types.ObjectId, ref: 'Keyword' },
   registerDate: {
     type: Date,

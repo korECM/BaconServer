@@ -20,6 +20,7 @@ export interface IShopController {
     image: string[],
     open: string,
     closed: string,
+    price: number,
     location: Location,
     category: ShopCategory,
   ): Promise<ShopInterface | null>;

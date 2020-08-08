@@ -31,6 +31,7 @@ describe('ShopController', () => {
       location: Location.Front,
       name: '식당 이름',
       open: ' ',
+      price: 0,
       registerDate: new Date(),
       keyword: keyword._id,
     });
@@ -44,6 +45,7 @@ describe('ShopController', () => {
       location: Location.Back,
       name: '식당 이름',
       open: ' ',
+      price: 0,
       registerDate: new Date(),
       keyword: keyword._id,
     });
