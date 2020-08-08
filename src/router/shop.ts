@@ -15,10 +15,13 @@ router.get('/', async (req, res, next) => {
   const { order } = req.query;
   const location = req.query.location ? (req.query.location as string).split(',') : undefined;
   const category = req.query.category ? (req.query.category as string).split(',') : undefined;
+  const price = req.query.price ? (req.query.price as string) : undefined;
 
   let shopService = new ShopService();
 
-  let shops = await shopService.getShops({ category: category as any, location: location as any, order: order as any }, true);
+  console.log(price);
+
+  let shops = await shopService.getShops({ category: category as any, location: location as any, order: order as any, price: price as any }, true);
 
   res.status(200).json(shops);
 });
