@@ -11,6 +11,7 @@ interface Data {
   foodCategory: string;
   closed: string;
   open: string;
+  price?: number;
   location: string;
 }
 
@@ -702,7 +703,17 @@ let data: Data[] = [
   let shopController = new ShopController();
 
   for (let shop of data) {
-    await shopController.createShop(shop.name, shop.contact, shop.address, [], shop.open, shop.closed, shop.location as any, shop.category as any);
+    await shopController.createShop(
+      shop.name,
+      shop.contact,
+      shop.address,
+      [],
+      shop.open,
+      shop.closed,
+      shop.price || 0,
+      shop.location as any,
+      shop.category as any,
+    );
   }
   console.log('Shop Insert 완료');
 })();
