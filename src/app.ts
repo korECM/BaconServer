@@ -29,6 +29,13 @@ class App {
       this.app.use(morgan('dev'));
     }
 
+    this.app.use(
+      cors({
+        origin: true,
+        credentials: true,
+      }),
+    );
+
     this.app.use(express.static(path.join(__dirname, 'public')));
 
     this.app.use(express.json());
@@ -53,9 +60,6 @@ class App {
     this.app.use(session(sessionOption));
 
     this.app.use(jwtMiddleware);
-
-    // this.app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
-    this.app.use(cors({ origin: [], credentials: true }));
   }
   private errorHandler(): void {
     this.app.use((req, res, next) => {
