@@ -8,6 +8,7 @@ import { ReviewController } from '../DB/controller/Review/ReviewController';
 import { upload } from '../lib/upload';
 import { ShopController } from '../DB/controller/Shop/ShopController';
 import { UserService } from '../service/UserService';
+import { isLogin } from '../lib/userMiddleware';
 
 const router = express.Router();
 
@@ -19,8 +20,6 @@ router.get('/', async (req, res, next) => {
 
   let shopService = new ShopService();
 
-  console.log(price);
-
   let shops = await shopService.getShops({ category: category as any, location: location as any, order: order as any, price: price as any }, true);
 
   res.status(200).json(shops);
@@ -28,7 +27,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:shopId', async (req, res, next) => {
   const shopId = req.params.shopId as string;
-  if (!shopId || shopId.length === 0) return res.status(400).send();
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
   let shopController = new ShopController();
@@ -42,7 +40,6 @@ router.get('/:shopId', async (req, res, next) => {
 
 router.get('/review/:shopId', async (req, res, next) => {
   const shopId = req.params.shopId as string;
-  if (!shopId || shopId.length === 0) return res.status(400).send();
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
   let reviewController = new ReviewController();
@@ -55,40 +52,34 @@ router.get('/review/:shopId', async (req, res, next) => {
   }
 });
 
-router.post('/review/:shopId', async (req, res, next) => {
+router.post('/review/:shopId', isLogin, async (req, res, next) => {
   const shopId = req.params.shopId as string;
-  if (!shopId || shopId.length === 0) return res.status(400).send();
   if (isValidObjectId(shopId) === false) return res.status(400).send();
   const { score, comment, keywords } = req.body;
   if (!score || isNaN(Number(score))) return res.status(400).send();
 
-  if (!req.user) return res.status(401).send();
-
   let reviewController = new ReviewController();
   try {
-    let result = await reviewController.createReview(score, req.user._id, shopId, comment, keywords);
+    let result = await reviewController.createReview(score, req.user!._id, shopId, comment, keywords);
     if (result === null) return res.status(400).send();
+    
+    return res.status(201).json({
+      message: 'success',
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).send();
   }
-
-  return res.status(201).json({
-    message: 'success',
-  });
 });
 
-router.post('/like/:shopId', async (req, res, next) => {
+router.post('/like/:shopId', isLogin, async (req, res, next) => {
   const shopId = req.params.shopId as string;
-  if (!shopId || shopId.length === 0) return res.status(400).send();
   if (isValidObjectId(shopId) === false) return res.status(400).send();
-
-  if (!req.user) return res.status(401).send();
 
   let userService = new UserService();
   try {
-    let result = await userService.addLikeShop(req.user._id, shopId);
-    if (result == false) return res.status(404).send();
+    let result = await userService.addLikeShop(req.user!._id, shopId);
+    if (result == false) return res.status(406).send();
 
     return res.status(201).json({
       message: 'success',
@@ -99,17 +90,14 @@ router.post('/like/:shopId', async (req, res, next) => {
   }
 });
 
-router.post('/unlike/:shopId', async (req, res, next) => {
+router.post('/unlike/:shopId', isLogin, async (req, res, next) => {
   const shopId = req.params.shopId as string;
-  if (!shopId || shopId.length === 0) return res.status(400).send();
   if (isValidObjectId(shopId) === false) return res.status(400).send();
-
-  if (!req.user) return res.status(401).send();
 
   let userService = new UserService();
   try {
-    let result = await userService.unlikeShop(req.user._id, shopId);
-    if (result == false) return res.status(404).send();
+    let result = await userService.unlikeShop(req.user!._id, shopId);
+    if (result == false) return res.status(406).send();
 
     return res.status(201).json({
       message: 'success',
@@ -120,17 +108,14 @@ router.post('/unlike/:shopId', async (req, res, next) => {
   }
 });
 
-router.post('/like/review/:reviewId', async (req, res, next) => {
+router.post('/like/review/:reviewId', isLogin, async (req, res, next) => {
   const reviewId = req.params.reviewId as string;
-  if (!reviewId || reviewId.length === 0) return res.status(400).send();
   if (isValidObjectId(reviewId) === false) return res.status(400).send();
-
-  if (!req.user) return res.status(401).send();
 
   let reviewController = new ReviewController();
   try {
-    let result = await reviewController.likeReview(req.user._id, reviewId);
-    if (result == false) return res.status(404).send();
+    let result = await reviewController.likeReview(req.user!._id, reviewId);
+    if (result == false) return res.status(406).send();
 
     return res.status(201).json({
       message: 'success',
@@ -141,17 +126,14 @@ router.post('/like/review/:reviewId', async (req, res, next) => {
   }
 });
 
-router.post('/unlike/review/:reviewId', async (req, res, next) => {
+router.post('/unlike/review/:reviewId', isLogin, async (req, res, next) => {
   const reviewId = req.params.reviewId as string;
-  if (!reviewId || reviewId.length === 0) return res.status(400).send();
   if (isValidObjectId(reviewId) === false) return res.status(400).send();
-
-  if (!req.user) return res.status(401).send();
 
   let reviewController = new ReviewController();
   try {
-    let result = await reviewController.unlikeReview(req.user._id, reviewId);
-    if (result == false) return res.status(404).send();
+    let result = await reviewController.unlikeReview(req.user!._id, reviewId);
+    if (result == false) return res.status(406).send();
 
     return res.status(201).json({
       message: 'success',
@@ -162,9 +144,8 @@ router.post('/unlike/review/:reviewId', async (req, res, next) => {
   }
 });
 
-router.post('/image/:shopId', upload.array('imgFile', 5), async (req, res, next) => {
+router.post('/image/:shopId', isLogin, upload.array('imgFile', 5), async (req, res, next) => {
   const shopId = req.params.shopId as string;
-  if (!shopId || shopId.length === 0) return res.status(400).send();
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
   let shopController = new ShopController();
