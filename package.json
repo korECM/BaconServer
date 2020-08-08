@@ -6,7 +6,9 @@
   "scripts": {
     "start": "tsc && node dist/index.js",
     "dev": "nodemon --exec ./node_modules/.bin/ts-node --files ./src/index.ts",
-    "test": "jest --clearCache && NODE_ENV=test jest"
+    "test": "jest --clearCache && NODE_ENV=test jest",
+    "docker": "docker build -t bacon_server . && docker tag bacon_server:latest jeffyoun/bacon_server:latest && docker push jeffyoun/bacon_server:latest",
+    "container": "docker stop bacon_server  && docker rm bacon_server   && docker create --name bacon_server -p 8001:8001 bacon_server:latest && docker start bacon_server"
   },
   "dependencies": {
     "aws-sdk": "^2.725.0",
