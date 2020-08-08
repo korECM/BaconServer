@@ -13,5 +13,5 @@ docker create --name bacon_server -p 8001:8001 bacon_server:latest
 
 ## Run
 ```bash
-docker pull jeffyoun/bacon_server:latest
+sudo docker stop bacon_server && sudo docker rm bacon_server && sudo docker rmi $(docker images -q) && sudo docker create --name bacon_server -p 8001:8001 jeffyoun/bacon_server:latest && sudo docker start bacon_server && sudo service nginx restart
 ```
