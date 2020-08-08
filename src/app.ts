@@ -54,7 +54,8 @@ class App {
 
     this.app.use(jwtMiddleware);
 
-    this.app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
+    // this.app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
+    this.app.use(cors({ origin: [], credentials: true }));
   }
   private errorHandler(): void {
     this.app.use((req, res, next) => {
