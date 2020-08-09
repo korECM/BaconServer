@@ -19,8 +19,6 @@ router.get('/', async (req, res, next) => {
 
   let shops = await shopController.getShops({ category: category as any, location: location as any, order: order as any, price: price as any });
 
-  if (shops === null) shops = [];
-
   res.status(200).json(shops);
 });
 

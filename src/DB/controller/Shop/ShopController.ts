@@ -116,7 +116,7 @@ export class ShopController {
     return shops[0];
   }
 
-  async getShops(filter: ShopFilterInterface): Promise<ShopInterface[] | null> {
+  async getShops(filter: ShopFilterInterface): Promise<ShopInterface[]> {
     let where: any = {};
     let { category, location, order, price } = filter;
     if (category && category.length > 0) where.category = { $in: category };
@@ -207,7 +207,7 @@ export class ShopController {
       },
       orderQuery,
     ]);
-    return shops;
+    return shops || [];
   }
 
   async getAllShops(): Promise<ShopInterface[] | null> {
