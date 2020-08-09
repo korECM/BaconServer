@@ -4,7 +4,7 @@
  */
 import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location } from '../../models/Shop';
 import { KeywordSchemaInterface } from '../../models/Keyword';
-import { ShopOrder } from '../../../service/ShopService';
+import { ShopOrder } from './ShopController';
 
 export interface IShopController {
   findById(id: string): Promise<ShopSchemaInterface | null>;
