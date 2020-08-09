@@ -102,6 +102,7 @@ export class ReviewController {
             email: 0,
             likeShop: 0,
             registerDate: 0,
+            kakaoNameSet: 0,
           },
         },
       },
