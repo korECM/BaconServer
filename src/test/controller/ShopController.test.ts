@@ -2,9 +2,8 @@ import mongoose from 'mongoose';
 import { setupDB } from '../DBTestUtil';
 import faker from 'faker/locale/ko';
 import Shop, { ShopSchemaInterface, ShopCategory, Location } from '../../DB/models/Shop';
-import { ShopController } from '../../DB/controller/Shop/ShopController';
+import { ShopController, ShopOrder } from '../../DB/controller/Shop/ShopController';
 import Keyword, { KeywordSchemaInterface } from '../../DB/models/Keyword';
-import { ShopOrder } from '../../service/ShopService';
 
 setupDB('shop');
 
@@ -110,13 +109,10 @@ describe('ShopController', () => {
       let shopController = new ShopController();
 
       // Act
-      const shop = await shopController.getShops(
-        {
-          category: { $in: ShopCategory.Korean },
-        },
-        ShopOrder.Recommended,
-        false,
-      );
+      const shop = await shopController.getShops({
+        category: [ShopCategory.Korean],
+        order: ShopOrder.Recommended,
+      });
 
       // Assert
       expect(shop).not.toBeNull();
@@ -131,13 +127,10 @@ describe('ShopController', () => {
       let shopController = new ShopController();
 
       // Act
-      const shop = await shopController.getShops(
-        {
-          category: { $in: [ShopCategory.Korean, ShopCategory.Japanese] },
-        },
-        ShopOrder.Recommended,
-        false,
-      );
+      const shop = await shopController.getShops({
+        category: [ShopCategory.Korean, ShopCategory.Japanese],
+        order: ShopOrder.Recommended,
+      });
 
       // Assert
       expect(shop).not.toBeNull();
@@ -154,13 +147,10 @@ describe('ShopController', () => {
       let shopController = new ShopController();
 
       // Act
-      const shop = await shopController.getShops(
-        {
-          location: { $in: [Location.Front, Location.Back] },
-        },
-        ShopOrder.Recommended,
-        false,
-      );
+      const shop = await shopController.getShops({
+        location: [Location.Front, Location.Back],
+        order: ShopOrder.Recommended,
+      });
 
       // Assert
       expect(shop).not.toBeNull();

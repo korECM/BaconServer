@@ -1,8 +1,5 @@
 import express from 'express';
 import Joi from 'joi';
-import { isInvalid } from './validate';
-import { ShopService, ShopOrder } from '../service/ShopService';
-import { Location } from '../DB/models/Shop';
 import { isValidObjectId } from 'mongoose';
 import { ReviewController } from '../DB/controller/Review/ReviewController';
 import { upload } from '../lib/upload';
@@ -18,9 +15,11 @@ router.get('/', async (req, res, next) => {
   const category = req.query.category ? (req.query.category as string).split(',') : undefined;
   const price = req.query.price ? (req.query.price as string) : undefined;
 
-  let shopService = new ShopService();
+  let shopController = new ShopController();
 
-  let shops = await shopService.getShops({ category: category as any, location: location as any, order: order as any, price: price as any }, true);
+  let shops = await shopController.getShops({ category: category as any, location: location as any, order: order as any, price: price as any });
+
+  if (shops === null) shops = [];
 
   res.status(200).json(shops);
 });
@@ -62,7 +61,7 @@ router.post('/review/:shopId', isLogin, async (req, res, next) => {
   try {
     let result = await reviewController.createReview(score, req.user!._id, shopId, comment, keywords);
     if (result === null) return res.status(400).send();
-    
+
     return res.status(201).json({
       message: 'success',
     });

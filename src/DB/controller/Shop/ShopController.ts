@@ -1,9 +1,22 @@
 import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location } from '../../models/Shop';
 import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
-import { ShopOrder } from '../../../service/ShopService';
 import mongoose from 'mongoose';
 
 const ObjectId = mongoose.Types.ObjectId;
+
+// TODO: 키워드, 가격 검색 추가 필요
+export enum ShopOrder {
+  Recommended = 'recommended',
+  Rate = 'rate',
+  Review = 'review',
+}
+
+export interface ShopFilterInterface {
+  category?: ShopCategory[];
+  location?: Location[];
+  price?: string;
+  order?: ShopOrder;
+}
 
 export class ShopController {
   constructor() {}
@@ -103,95 +116,98 @@ export class ShopController {
     return shops[0];
   }
 
-  async getShops(filter: any, order: ShopOrder, withOrder: boolean): Promise<ShopInterface[] | null> {
-    if (withOrder) {
-      let orderQuery: any;
-      switch (order) {
-        case ShopOrder.Rate:
-          orderQuery = {
-            $sort: {
-              scoreAverage: -1,
-              likerCount: -1,
-              reviewCount: -1,
-            },
-          };
-          break;
-        case ShopOrder.Recommended:
-          orderQuery = {
-            $sort: {
-              likerCount: -1,
-              scoreAverage: -1,
-              reviewCount: -1,
-            },
-          };
-          break;
-        case ShopOrder.Review:
-          orderQuery = {
-            $sort: {
-              reviewCount: -1,
-              scoreAverage: -1,
-              likerCount: -1,
-            },
-          };
-          break;
-      }
+  async getShops(filter: ShopFilterInterface): Promise<ShopInterface[] | null> {
+    let where: any = {};
+    let { category, location, order, price } = filter;
+    if (category && category.length > 0) where.category = { $in: category };
+    if (location && location.length > 0) where.location = { $in: location };
+    if (price && !isNaN(Number(price))) where.price = { $lte: parseInt(price) };
+    order = order || ShopOrder.Recommended;
 
-      let shops = await Shop.aggregate([
-        // 해당 가게 찾은 후에
-        { $match: filter },
-        // reviews에 Review Join
-        {
-          $lookup: {
-            from: 'reviews',
-            localField: '_id',
-            foreignField: 'shop',
-            as: 'reviews',
+    let orderQuery: any;
+    switch (order) {
+      case ShopOrder.Rate:
+        orderQuery = {
+          $sort: {
+            scoreAverage: -1,
+            likerCount: -1,
+            reviewCount: -1,
           },
-        },
-        {
-          $lookup: {
-            from: 'scores',
-            localField: '_id',
-            foreignField: 'shop',
-            as: 'scores',
+        };
+        break;
+      case ShopOrder.Recommended:
+        orderQuery = {
+          $sort: {
+            likerCount: -1,
+            scoreAverage: -1,
+            reviewCount: -1,
           },
+        };
+        break;
+      case ShopOrder.Review:
+        orderQuery = {
+          $sort: {
+            reviewCount: -1,
+            scoreAverage: -1,
+            likerCount: -1,
+          },
+        };
+        break;
+    }
+
+    let shops = await Shop.aggregate([
+      // 해당 가게 찾은 후에
+      { $match: where },
+      // reviews에 Review Join
+      {
+        $lookup: {
+          from: 'reviews',
+          localField: '_id',
+          foreignField: 'shop',
+          as: 'reviews',
         },
-        // 해당 가게 Like 한사람 Join
-        {
-          $lookup: {
-            from: 'users',
-            let: { shopId: '$_id' },
-            pipeline: [
-              {
-                $match: {
-                  $expr: {
-                    $in: ['$$shopId', '$likeShop'],
-                  },
+      },
+      {
+        $lookup: {
+          from: 'scores',
+          localField: '_id',
+          foreignField: 'shop',
+          as: 'scores',
+        },
+      },
+      // 해당 가게 Like 한사람 Join
+      {
+        $lookup: {
+          from: 'users',
+          let: { shopId: '$_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $in: ['$$shopId', '$likeShop'],
                 },
               },
-            ],
-            as: 'liker',
-          },
+            },
+          ],
+          as: 'liker',
         },
-        // Review 평균 구해서 scoreAverage 추가
-        {
-          $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
+      },
+      // Review 평균 구해서 scoreAverage 추가
+      {
+        $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
+      },
+      // Review 가리도록
+      {
+        $project: {
+          reviews: 0,
+          __v: 0,
+          liker: 0,
+          scores: 0,
         },
-        // Review 가리도록
-        {
-          $project: {
-            reviews: 0,
-            __v: 0,
-            liker: 0,
-            scores: 0,
-          },
-        },
-        orderQuery,
-      ]);
-      return shops;
-    } else {
-      return await Shop.find(filter);
-    }
+      },
+      orderQuery,
+    ]);
+    return shops;
   }
 
   async getAllShops(): Promise<ShopInterface[] | null> {
