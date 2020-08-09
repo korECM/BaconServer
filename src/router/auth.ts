@@ -2,7 +2,6 @@ import express from 'express';
 import Joi from 'joi';
 import axios from 'axios';
 import { UserService } from '../service/UserService';
-import { isInvalid } from './validate';
 import { generateToken } from '../lib/jwtMiddleware';
 import { UserController } from '../DB/controller/User/UserController';
 import { isNotLogin, isLogin } from '../lib/userMiddleware';
