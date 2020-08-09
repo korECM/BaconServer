@@ -30,7 +30,7 @@ router.get('/:shopId', async (req, res, next) => {
 
   let shop = await shopController.getShop(shopId, req.user?._id);
 
-  if (shop === null) return res.status(404).send();
+  if (shop === null) return res.status(406).send();
 
   return res.status(200).json(shop);
 });
