@@ -6,6 +6,7 @@ import { upload } from '../lib/upload';
 import { ShopController } from '../DB/controller/Shop/ShopController';
 import { UserService } from '../service/UserService';
 import { isLogin } from '../lib/userMiddleware';
+import { reqValidate } from '../lib/JoiValidate';
 
 const router = express.Router();
 
@@ -49,25 +50,37 @@ router.get('/review/:shopId', async (req, res, next) => {
   }
 });
 
-router.post('/review/:shopId', isLogin, async (req, res, next) => {
-  const shopId = req.params.shopId as string;
-  if (isValidObjectId(shopId) === false) return res.status(400).send();
-  const { score, comment, keywords } = req.body;
-  if (!score || isNaN(Number(score))) return res.status(400).send();
+router.post(
+  '/review/:shopId',
+  isLogin,
+  reqValidate(
+    Joi.object({
+      score: Joi.number().required(),
+      comment: Joi.optional(),
+      keywords: Joi.object().required(),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const shopId = req.params.shopId as string;
+    if (isValidObjectId(shopId) === false) return res.status(400).send();
+    const { score, comment, keywords } = req.body;
+    // if (!score || isNaN(Number(score))) return res.status(400).send();
 
-  let reviewController = new ReviewController();
-  try {
-    let result = await reviewController.createReview(score, req.user!._id, shopId, comment, keywords);
-    if (result === null) return res.status(400).send();
+    let reviewController = new ReviewController();
+    try {
+      let result = await reviewController.createReview(score, req.user!._id, shopId, comment, keywords);
+      if (result === null) return res.status(400).send();
 
-    return res.status(201).json({
-      message: 'success',
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send();
-  }
-});
+      return res.status(201).json({
+        message: 'success',
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send();
+    }
+  },
+);
 
 router.post('/like/:shopId', isLogin, async (req, res, next) => {
   const shopId = req.params.shopId as string;
@@ -146,6 +159,11 @@ router.post('/image/:shopId', isLogin, upload.array('imgFile', 5), async (req, r
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
   let shopController = new ShopController();
+
+  if (!req.files)
+    return res.status(504).send({
+      error: 'Fail To Upload',
+    });
 
   const locations = (req.files as Express.MulterS3.File[]).map((file) => file.location);
 
