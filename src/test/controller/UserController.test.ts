@@ -4,7 +4,7 @@ import { setupDB } from '../DBTestUtil';
 import User, { UserSchemaInterface } from '../../DB/models/User';
 import { UserController } from '../../DB/controller/User/UserController';
 
-setupDB('User');
+setupDB();
 
 describe('UserController', () => {
   let dataUser: UserSchemaInterface;

@@ -5,7 +5,7 @@ import Shop, { ShopSchemaInterface, ShopCategory, Location } from '../../DB/mode
 import { ShopController, ShopOrder } from '../../DB/controller/Shop/ShopController';
 import Keyword, { KeywordSchemaInterface } from '../../DB/models/Keyword';
 
-setupDB('shop');
+setupDB();
 
 describe('ShopController', () => {
   let dataShop: ShopSchemaInterface;

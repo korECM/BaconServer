@@ -3,7 +3,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 
 const mongod = new MongoMemoryServer();
 
-export function setupDB(databaseName: string) {
+export function setupDB() {
   beforeAll(async () => {
     // const url = `mongodb://127.0.0.1/${databaseName}`;
 

@@ -10,7 +10,7 @@ import Score from '../../DB/models/Score';
 import { generateToken } from '../../lib/jwtMiddleware';
 import { ReviewController } from '../../DB/controller/Review/ReviewController';
 
-setupDB('shopRouter');
+setupDB();
 
 let shops: ShopInterface[] = [];
 let user: UserInterface;
