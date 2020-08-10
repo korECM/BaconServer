@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon --exec ./node_modules/.bin/ts-node --files ./src/index.ts",
-    "test": "jest --clearCache && NODE_ENV=test jest",
+    "test": "NODE_ENV=test jest --coverage --runInBand",
     "docker": "tsc && docker build -t bacon_server . && docker tag bacon_server:latest jeffyoun/bacon_server:latest && docker push jeffyoun/bacon_server:latest",
     "container": "tsc && docker stop bacon_server  && docker rm bacon_server   && docker create --name bacon_server -p 8001:8001 bacon_server:latest && docker start bacon_server",
     "publishAndLocal": "tsc && docker build -t bacon_server . && docker tag bacon_server:latest jeffyoun/bacon_server:latest && docker push jeffyoun/bacon_server:latest && docker stop bacon_server  && docker rm bacon_server   && docker create --name bacon_server -p 8001:8001 bacon_server:latest && docker start bacon_server"
