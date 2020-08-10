@@ -43,15 +43,8 @@ describe('POST /auth/signUp', () => {
       },
     ];
 
-    //Act
-    let result = [];
-    for (let form of invalidForm) {
-      let tempResult = await request(app).post('/auth/signUp').send(form);
-      result.push(tempResult.status);
-    }
-
-    // Assert
-    expect(result.every((status) => status === 400)).toBe(true);
+    //Act, Assert
+    for (let form of invalidForm) await request(app).post('/auth/signUp').send(form).expect(400);
   });
 });
 
@@ -73,14 +66,7 @@ describe('POST /auth/signIn', () => {
       },
     ];
 
-    //Act
-    let result = [];
-    for (let form of invalidForm) {
-      let tempResult = await request(app).post('/auth/signIn').send(form);
-      result.push(tempResult.status);
-    }
-
-    // Assert
-    expect(result.every((status) => status === 400)).toBe(true);
+    //Act, Assert
+    for (let form of invalidForm) await request(app).post('/auth/signIn').send(form).expect(400);
   });
 });
