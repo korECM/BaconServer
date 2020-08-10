@@ -8,19 +8,17 @@ export function setupDB(databaseName: string) {
     // const url = `mongodb://127.0.0.1/${databaseName}`;
 
     const url = await mongod.getConnectionString();
-
     await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
   });
-
   // Cleans up database between each test
   afterEach(async () => {
     // await removeAllCollections();
   });
-
   // Disconnect Mongoose
   afterAll(async () => {
     await dropAllCollections();
     await mongoose.connection.close();
+    await mongod.stop();
   });
 }
 
