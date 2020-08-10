@@ -1,8 +1,14 @@
 import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+
+const mongod = new MongoMemoryServer();
 
 export function setupDB(databaseName: string) {
   beforeAll(async () => {
-    const url = `mongodb://127.0.0.1/${databaseName}`;
+    // const url = `mongodb://127.0.0.1/${databaseName}`;
+
+    const url = await mongod.getConnectionString();
+
     await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
   });
 

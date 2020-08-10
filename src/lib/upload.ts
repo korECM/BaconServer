@@ -2,7 +2,7 @@ import multer from 'multer';
 import multerS3 from 'multer-s3';
 import AWS from 'aws-sdk';
 import path from 'path';
-import UUID from 'uuid';
+import * as UUID from 'uuid';
 import dotenv from 'dotenv';
 dotenv.config();
 
