@@ -6,7 +6,10 @@ class DB {
   public async connect() {
     if (process.env.DB_URL) {
       try {
-        await mongoose.connect(process.env.DB_URL);
+        await mongoose.connect(process.env.DB_URL, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
         console.log('DB CONNECTED');
       } catch (error) {
         console.error(error);
