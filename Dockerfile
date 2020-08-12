@@ -11,10 +11,11 @@ WORKDIR /app
 #서버 파일 복사 ADD [어플리케이션파일 위치] [컨테이너내부의 어플리케이션 파일위치]
 #저는 Dockerfile과 서버파일이 같은위치에 있어서 ./입니다
 # ADD ./ /app
+COPY .env ./
+
 COPY package*.json ./
 COPY yarn.lock ./
 
-COPY .env ./
 
 #패키지파일들 받기
 RUN yarn install
