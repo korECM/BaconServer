@@ -154,6 +154,34 @@ router.post('/unlike/review/:reviewId', isLogin, async (req, res, next) => {
   }
 });
 
+router.post(
+  '/menu/:shopId',
+  isLogin,
+  reqValidate(
+    Joi.object({
+      title: Joi.string().required(),
+      price: Joi.number().required(),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const shopId = req.params.shopId as string;
+    if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+    let title = req.body.title as string;
+    let price = req.body.price as number;
+
+    let shopController = new ShopController();
+    if (await shopController.addMenu(shopId, title, price)) {
+      return res.status(301).send({
+        message: 'success',
+      });
+    } else {
+      return res.status(406).send();
+    }
+  },
+);
+
 router.post('/image/:shopId', isLogin, upload.array('imgFile', 5), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();

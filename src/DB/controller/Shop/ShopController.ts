@@ -1,6 +1,7 @@
 import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location } from '../../models/Shop';
 import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
 import mongoose from 'mongoose';
+import Menu from '../../models/Menu';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -30,6 +31,14 @@ export class ShopController {
       {
         $match: {
           _id: ObjectId(id),
+        },
+      },
+      {
+        $lookup: {
+          from: 'menus',
+          localField: '_id',
+          foreignField: 'shopId',
+          as: 'menus',
         },
       },
       {
@@ -109,6 +118,11 @@ export class ShopController {
           __v: 0,
           liker: 0,
           scores: 0,
+          menus: {
+            shopId: 0,
+            registerDate: 0,
+            __v: 0,
+          },
         },
       },
     ]);
@@ -238,6 +252,26 @@ export class ShopController {
       shop.menuImage.push(...imageLink);
 
       await shop.save();
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async addMenu(shopId: string, title: string, price: number) {
+    try {
+      let shop = await this.findById(shopId);
+      if (shop === null) return false;
+
+      let menu = await Menu.create({
+        title,
+        price,
+        shopId,
+      });
+
+      await menu.save();
 
       return true;
     } catch (error) {
