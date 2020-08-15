@@ -178,4 +178,28 @@ router.post('/image/:shopId', isLogin, upload.array('imgFile', 5), async (req, r
   }
 });
 
+router.post('/menuImage/:shopId', isLogin, upload.array('imgFile', 3), async (req, res, next) => {
+  const shopId = req.params.shopId as string;
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+  let shopController = new ShopController();
+
+  if (!req.files)
+    return res.status(504).send({
+      error: 'Fail To Upload',
+    });
+
+  const locations = (req.files as Express.MulterS3.File[]).map((file) => file.location);
+
+  if (await shopController.addMenuImage(shopId, locations)) {
+    res.status(201).send({
+      locations,
+    });
+  } else {
+    res.status(504).send({
+      error: 'Fail To Upload',
+    });
+  }
+});
+
 export default router;

@@ -230,6 +230,22 @@ export class ShopController {
     }
   }
 
+  async addMenuImage(id: string, imageLink: string[]) {
+    try {
+      let shop = await this.findById(id);
+      if (shop === null) return false;
+      if (!shop.menuImage) shop.menuImage = [];
+      shop.menuImage.push(...imageLink);
+
+      await shop.save();
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async createShop(
     name: string,
     contact: string,
