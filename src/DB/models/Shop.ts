@@ -24,6 +24,7 @@ export interface ShopInterface {
   contact: string;
   address: string;
   image: string[];
+  menuImage: string[];
   open: string;
   closed: string;
   location: Location;
@@ -45,6 +46,7 @@ export let ShopSchema = new Schema({
   open: { type: String },
   closed: { type: String },
   image: { type: [String], required: true },
+  menuImage: { type: [String], required: true },
   location: { type: String, enum: Object.values(Location), required: true },
   latitude: Number,
   longitude: Number,
