@@ -27,6 +27,7 @@ describe('UserService', () => {
     const validForm = {
       name: faker.name.findName(),
       provider: 'local',
+      gender: 'm',
       email: faker.internet.exampleEmail(),
       password: faker.internet.password(),
     };
@@ -99,6 +100,7 @@ describe('UserService', () => {
           email: validForm.email,
           password: '',
           provider: 'local',
+          gender: 'm',
           registerDate: testDate,
           likeShop: [],
           snsId: '',
@@ -164,6 +166,7 @@ describe('UserService', () => {
         name: 'name',
         password: hashPassword,
         provider: 'local',
+        gender: 'm',
         registerDate: new Date(),
         likeShop: [],
         snsId: '',

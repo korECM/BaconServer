@@ -30,10 +30,11 @@ router.post(
   isNotLogin,
   reqValidate(
     Joi.object({
-      name: Joi.string(),
-      email: Joi.string().email(),
-      password: Joi.string().optional(),
+      name: Joi.string().min(2).max(10),
+      email: Joi.string().email().max(50),
+      password: Joi.string().optional().max(20),
       snsId: Joi.optional(),
+      gender: Joi.string().valid(...['m', 'f']),
       provider: Joi.string().valid(...['local', 'kakao']),
     }),
     'body',
@@ -91,7 +92,7 @@ router.get('/signIn/kakao/callback', isNotLogin, async (req, res, next) => {
 
     const profileResponse = await axios.get(profileRequestURL, { headers: { Authorization: `Bearer ${access_token}` } });
 
-    const { id, gender } = profileResponse.data;
+    const { id } = profileResponse.data;
 
     const userController = new UserController();
 
@@ -105,6 +106,7 @@ router.get('/signIn/kakao/callback', isNotLogin, async (req, res, next) => {
         {
           name: '설정 전 이름',
           provider: 'kakao',
+          gender: '',
           email: 'none',
           password: 'none',
           snsId: id,
@@ -144,6 +146,7 @@ router.post(
       id: Joi.string().required(),
       // TODO: 이름 글자수 제한 필요
       name: Joi.string().required(),
+      gender: Joi.string().valid(...['m', 'f']),
     }),
     'body',
   ),

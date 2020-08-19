@@ -57,6 +57,7 @@ beforeAll(async () => {
     likeShop: [shops[0]._id],
     name: '이름',
     password: '비밀번호',
+    gender: 'm',
     provider: 'local',
     registerDate: new Date(),
     snsId: 'none',

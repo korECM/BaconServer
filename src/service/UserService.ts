@@ -11,6 +11,7 @@ export interface SignUpInterface {
   email?: string;
   password?: string;
   provider: string;
+  gender: string;
   snsId?: string;
 }
 
@@ -44,21 +45,22 @@ export class UserService {
         return null;
       }
 
-      const user = await this.UserDB.createLocalUser(name, email!, password!);
+      const user = await this.UserDB.createLocalUser(name, email!, password!, 'm');
 
       return user;
     } else if (provider === 'kakao') {
-      if (this.checkStringValidation(name) === false || this.checkStringValidation(snsId) === false) return null;
+      // if (this.checkStringValidation(name) === false || this.checkStringValidation(snsId) === false) return null;
 
-      let exKakaoUser = await this.UserDB.getKakaoUserExist(snsId!);
+      // let exKakaoUser = await this.UserDB.getKakaoUserExist(snsId!);
 
-      if (exKakaoUser) return exKakaoUser;
+      // if (exKakaoUser) return exKakaoUser;
 
-      // 가입된 카카오 계정이 없다면 생성
-      let userController = new UserController();
-      let createdKakaoUser = await userController.createKakaoUser(name!, snsId!, withName);
+      // // 가입된 카카오 계정이 없다면 생성
+      // let userController = new UserController();
+      // let createdKakaoUser = await userController.createKakaoUser(name!, snsId!, withName);
 
-      return createdKakaoUser;
+      // return createdKakaoUser;
+      return null;
     } else {
       return null;
     }

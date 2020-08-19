@@ -37,7 +37,7 @@ export class UserController implements IUserController {
     }
   }
 
-  async createLocalUser(name: string, email: string, password: string) {
+  async createLocalUser(name: string, email: string, password: string, gender: string) {
     let hashPassword = await bcrypt.hash(password, 12);
     let user = new User({
       name,
@@ -45,6 +45,7 @@ export class UserController implements IUserController {
       provider: 'local',
       snsId: 'none',
       likeShop: [],
+      gender,
       password: hashPassword,
     });
 
@@ -73,24 +74,24 @@ export class UserController implements IUserController {
     return await User.findOne({ provider: 'kakao', snsId: id });
   }
 
-  async createKakaoUser(name: string, id: string, withName: boolean) {
-    try {
-      let user = new User({
-        name,
-        email: 'none',
-        provider: 'kakao',
-        likeShop: [],
-        snsId: id,
-        password: 'none',
-        kakaoNameSet: withName,
-      });
+  // async createKakaoUser(name: string, id: string, withName: boolean) {
+  //   try {
+  //     let user = new User({
+  //       name,
+  //       email: 'none',
+  //       provider: 'kakao',
+  //       likeShop: [],
+  //       snsId: id,
+  //       password: 'none',
+  //       kakaoNameSet: withName,
+  //     });
 
-      await user.save();
+  //     await user.save();
 
-      return user as UserInterface;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  }
+  //     return user as UserInterface;
+  //   } catch (error) {
+  //     console.error(error);
+  //     return null;
+  //   }
+  // }
 }

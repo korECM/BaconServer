@@ -19,7 +19,7 @@ describe('ReviewController', () => {
     let userController = new UserController();
     let shopController = new ShopController();
     let reviewController = new ReviewController();
-    user = (await userController.createLocalUser(faker.name.findName(), faker.internet.email(), faker.internet.password()))!;
+    user = (await userController.createLocalUser(faker.name.findName(), faker.internet.email(), faker.internet.password(), 'm'))!;
     shop = (await shopController.createShop('식당', '번호', '주소', [], '열음', '닫음', 0, Location.Back, ShopCategory.Korean))!;
     review = (await reviewController.createReview(3, user._id, shop._id, '댓글', {
       costRatio: false,
