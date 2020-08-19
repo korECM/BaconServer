@@ -69,7 +69,7 @@ router.post(
   },
 );
 
-const kakaoCallback = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/auth/kakao/callback' : 'http://221.149.10.240:5000/auth/kakao/callback';
+const kakaoCallback = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/auth/kakao/callback' : 'https://caufooding.com/auth/kakao/callback';
 
 router.get('/signIn/kakao', async (req, res, next) => {
   // 사용자 동의 화면으로 리다이렉트
