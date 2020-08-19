@@ -59,39 +59,51 @@ export class UserController implements IUserController {
     }
   }
 
-  async setName(id: string, name: string) {
+  async setName(id: string, name: string, gender: string) {
     let user = await User.findById(id);
-    if (!user) return null;
+    if (!user)
+      return {
+        user: null,
+        error: '해당 유저가 존재하지 않습니다',
+      };
+    let exUser = await User.find({ name });
+    if (exUser.length > 0)
+      return {
+        user: null,
+        error: '이미 사용중인 닉네임입니다',
+      };
 
     user.name = name;
+    user.gender = gender;
     user.kakaoNameSet = true;
     await user.save();
 
-    return user as UserInterface;
+    return { user: user as UserInterface, error: null };
   }
 
   async getKakaoUserExist(id: string): Promise<UserInterface | null> {
     return await User.findOne({ provider: 'kakao', snsId: id });
   }
 
-  // async createKakaoUser(name: string, id: string, withName: boolean) {
-  //   try {
-  //     let user = new User({
-  //       name,
-  //       email: 'none',
-  //       provider: 'kakao',
-  //       likeShop: [],
-  //       snsId: id,
-  //       password: 'none',
-  //       kakaoNameSet: withName,
-  //     });
+  async createKakaoUser(name: string, id: string, withName: boolean) {
+    try {
+      let user = new User({
+        name,
+        email: 'none',
+        provider: 'kakao',
+        likeShop: [],
+        gender: 'none',
+        snsId: id,
+        password: 'none',
+        kakaoNameSet: withName,
+      });
 
-  //     await user.save();
+      await user.save();
 
-  //     return user as UserInterface;
-  //   } catch (error) {
-  //     console.error(error);
-  //     return null;
-  //   }
-  // }
+      return user as UserInterface;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 }

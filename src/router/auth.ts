@@ -63,7 +63,7 @@ router.post(
     const userService = new UserService();
     const user = await userService.signIn(req.body);
 
-    if (!user) return res.status(409).send();
+    if (!user) return res.status(409).send('가입되지 않은 이메일이거나, 잘못된 비밀번호입니다.');
 
     return userToToken(res, user, 200);
   },
@@ -146,8 +146,7 @@ router.post(
   reqValidate(
     Joi.object({
       id: Joi.string().required(),
-      // TODO: 이름 글자수 제한 필요
-      name: Joi.string().required(),
+      name: Joi.string().min(2).max(10),
       gender: Joi.string().valid(...['m', 'f']),
     }),
     'body',
@@ -155,13 +154,14 @@ router.post(
   async (req, res, next) => {
     const name = req.body.name as string;
     const id = req.body.id as string;
+    const gender = req.body.id as string;
 
     const userController = new UserController();
 
-    let user = await userController.setName(id, name);
-    if (!user) return res.status(409).send();
+    let user = await userController.setName(id, name, gender);
+    if (!user.user) return res.status(409).send(user.error);
 
-    return userToToken(res, user, 200);
+    return userToToken(res, user.user, 200);
   },
 );
 

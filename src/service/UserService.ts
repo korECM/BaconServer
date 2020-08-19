@@ -57,21 +57,17 @@ export class UserService {
 
       return { user, error: null };
     } else if (provider === 'kakao') {
-      // if (this.checkStringValidation(name) === false || this.checkStringValidation(snsId) === false) return null;
+      if (this.checkStringValidation(name) === false || this.checkStringValidation(snsId) === false) return { user: null, error: '적절하지 않은 양식입니다' };
 
-      // let exKakaoUser = await this.UserDB.getKakaoUserExist(snsId!);
+      let exKakaoUser = await this.UserDB.getKakaoUserExist(snsId!);
 
-      // if (exKakaoUser) return exKakaoUser;
+      if (exKakaoUser) return { user: exKakaoUser, error: '' };
 
-      // // 가입된 카카오 계정이 없다면 생성
-      // let userController = new UserController();
-      // let createdKakaoUser = await userController.createKakaoUser(name!, snsId!, withName);
+      // 가입된 카카오 계정이 없다면 생성
+      let userController = new UserController();
+      let createdKakaoUser = await userController.createKakaoUser(name!, snsId!, withName);
 
-      // return createdKakaoUser;
-      return {
-        user: null,
-        error: '',
-      };
+      return { user: createdKakaoUser, error: '' };
     } else {
       return {
         user: null,
