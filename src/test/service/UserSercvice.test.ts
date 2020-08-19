@@ -32,7 +32,7 @@ describe('UserService', () => {
       password: faker.internet.password(),
     };
     describe('localLogin', () => {
-      it('name, email, password가 주어지지 않으면 null 반환', async () => {
+      it('name, email, password가 주어지지 않으면 user : null 반환', async () => {
         // Arrange
         let testData = [
           {
@@ -62,31 +62,33 @@ describe('UserService', () => {
         let result: (null | UserInterface)[] = [];
 
         for (let data of testData) {
-          result.push(await userService.signUp(data as any, true));
+          result.push((await userService.signUp(data as any, true)).user);
         }
 
         // Assert
         expect(result.every((data) => !!data)).toBe(false);
       });
 
-      it('가입하려는 이메일이 이미 존재하면 null을 반환한다', async () => {
+      it('가입하려는 이메일이 이미 존재하면 "이미 사용중인 이메일입니다"를 반환한다', async () => {
         // Arrange
         userDBStub.checkEmailExist.resolves(true);
         // Act
         let user = await userService.signUp(validForm, true);
         // Assert
-        expect(user).toBeNull();
+        expect(user.user).toBeNull();
+        expect(user.error).toBe('이미 사용중인 이메일입니다');
         expect(userDBStub.checkEmailExist.calledOnceWith(validForm.email)).toBe(true);
       });
 
-      it('가입하려는 이름이 이미 존재하면 null을 반환한다', async () => {
+      it('가입하려는 이름이 이미 존재하면 "이미 사용중인 닉네임입니다"를 반환한다', async () => {
         // Arrange
         userDBStub.checkEmailExist.resolves(false);
         userDBStub.checkNameExist.resolves(true);
         // Act
         let user = await userService.signUp(validForm, true);
         // Assert
-        expect(user).toBeNull();
+        expect(user.user).toBeNull();
+        expect(user.error).toBe('이미 사용중인 닉네임입니다');
         expect(userDBStub.checkNameExist.calledOnceWith(validForm.name)).toBe(true);
       });
 
@@ -111,7 +113,7 @@ describe('UserService', () => {
         // Act
         let user = await userService.signUp(validForm, true);
         // Assert
-        expect(user).toBe(testUser);
+        expect(user.user).toBe(testUser);
       });
     });
   });

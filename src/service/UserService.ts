@@ -32,22 +32,30 @@ export class UserService {
     const { name, provider, email, password, snsId } = form;
     if (provider === 'local') {
       if (this.checkStringValidation(name) === false || this.checkStringValidation(password) === false || this.checkStringValidation(email) === false)
-        return null;
+        return {
+          user: null,
+          error: '적절하지 않은 양식입니다',
+        };
 
       // 만약 가입하려는 이메일이 이미 존재한다면
       if ((await this.UserDB.checkEmailExist(email!)) === true) {
-        return null;
+        return {
+          user: null,
+          error: '이미 사용중인 이메일입니다',
+        };
       }
 
       // 가입하려는 닉네임이 이미 존재한다면
       if ((await this.UserDB.checkNameExist(name!)) === true) {
-        // TODO: 어케할까
-        return null;
+        return {
+          user: null,
+          error: '이미 사용중인 닉네임입니다',
+        };
       }
 
       const user = await this.UserDB.createLocalUser(name, email!, password!, 'm');
 
-      return user;
+      return { user, error: null };
     } else if (provider === 'kakao') {
       // if (this.checkStringValidation(name) === false || this.checkStringValidation(snsId) === false) return null;
 
@@ -60,9 +68,15 @@ export class UserService {
       // let createdKakaoUser = await userController.createKakaoUser(name!, snsId!, withName);
 
       // return createdKakaoUser;
-      return null;
+      return {
+        user: null,
+        error: '',
+      };
     } else {
-      return null;
+      return {
+        user: null,
+        error: '',
+      };
     }
   }
 

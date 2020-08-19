@@ -43,9 +43,9 @@ router.post(
     const userService = new UserService();
     const user = await userService.signUp(req.body, true);
 
-    if (!user) return res.status(409).send();
+    if (!user.user) return res.status(409).send(user.error);
 
-    return userToToken(res, user, 201);
+    return userToToken(res, user.user, 201);
   },
 );
 
@@ -102,17 +102,19 @@ router.get('/signIn/kakao/callback', isNotLogin, async (req, res, next) => {
     if (user === null) {
       const userService = new UserService();
       // 일단 이름이 설정되지 않은 카카오 계정을 하나 만든다
-      user = await userService.signUp(
-        {
-          name: '설정 전 이름',
-          provider: 'kakao',
-          gender: '',
-          email: 'none',
-          password: 'none',
-          snsId: id,
-        },
-        false,
-      );
+      user = (
+        await userService.signUp(
+          {
+            name: '설정 전 이름',
+            provider: 'kakao',
+            gender: '',
+            email: 'none',
+            password: 'none',
+            snsId: id,
+          },
+          false,
+        )
+      ).user;
       // 해당 카카오 계정의 닉네임을 프론트로부터 받기 위해서
       // 계정의 id를 보낸다
       return res.status(206).json({
