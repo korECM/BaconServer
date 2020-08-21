@@ -23,8 +23,6 @@ export interface ShopInterface {
   name: string;
   contact: string;
   address: string;
-  image: string[];
-  menuImage: string[];
   open: string;
   closed: string;
   location: Location;
@@ -45,11 +43,9 @@ export let ShopSchema = new Schema({
   address: { type: String, required: true },
   open: { type: String },
   closed: { type: String },
-  image: { type: [String], required: true },
-  menuImage: { type: [String], required: true },
   location: { type: String, enum: Object.values(Location), required: true },
-  latitude: Number,
-  longitude: Number,
+  latitude: { type: Number, required: false },
+  longitude: { type: Number, required: false },
   category: { type: String, enum: Object.values(ShopCategory), required: true },
   price: Number,
   keyword: { type: Schema.Types.ObjectId, ref: 'Keyword' },
