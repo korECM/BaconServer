@@ -43,12 +43,12 @@ beforeAll(async () => {
 
   {
     let { address, category, closed, contact, foodCategory, location, name, open } = firstShopData;
-    shops.push((await shopController.createShop(name, contact, address, [], open, closed, 0, location as any, category as any))!);
+    shops.push((await shopController.createShop(name, contact, address, open, closed, 0, 0, 0, location as any, category as any))!);
   }
   {
     let { address, category, closed, contact, foodCategory, location, name, open } = secondShopData;
 
-    shops.push((await shopController.createShop(name, contact, address, [], open, closed, 0, location as any, category as any))!);
+    shops.push((await shopController.createShop(name, contact, address, open, closed, 0, 0, 0, location as any, category as any))!);
   }
 
   user = await User.create({
@@ -111,19 +111,7 @@ describe('ShopRouter', () => {
           .get('/shop/' + shops[0]._id)
           .expect(200);
 
-        expect(response.body).toContainKeys([
-          '_id',
-          'image',
-          'name',
-          'contact',
-          'address',
-          'category',
-          'keyword',
-          'open',
-          'closed',
-          'location',
-          'registerDate',
-        ]);
+        expect(response.body).toContainKeys(['_id', 'name', 'contact', 'address', 'category', 'keyword', 'open', 'closed', 'location', 'registerDate']);
 
         expect(response.body).toContainKeys(['didLike', 'likerCount', 'reviewCount', 'scoreAverage']);
         expect(response.body.likerCount).toBePositive();

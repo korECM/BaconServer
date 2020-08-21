@@ -26,8 +26,6 @@ describe('ShopController', () => {
       category: ShopCategory.Korean,
       closed: ' ',
       contact: faker.phone.phoneNumber(),
-      image: ['testLink'],
-      menuImage: [],
       location: Location.Front,
       latitude: 0,
       longitude: 0,
@@ -43,8 +41,6 @@ describe('ShopController', () => {
       category: ShopCategory.Japanese,
       closed: ' ',
       contact: faker.phone.phoneNumber(),
-      image: [''],
-      menuImage: [],
       location: Location.Back,
       latitude: 0,
       longitude: 0,
@@ -93,20 +89,7 @@ describe('ShopController', () => {
       expect(shop).toBeFalsy();
     });
 
-    it('주어진 shop이 존재하면 해당 shop image에 링크 추가', async () => {
-      // Arrange
-      let shopController = new ShopController();
-      let link = faker.internet.url();
-      // Act
-      const shop = await shopController.addImage(dataShop.id, [link, link + '1']);
-
-      const modifiedShop = await shopController.findById(dataShop.id);
-
-      // Assert
-      expect(shop).toBeTruthy();
-
-      expect(modifiedShop!.image.join(',')).toBe(['testLink', link, link + '1'].join(','));
-    });
+    it('주어진 shop이 존재하면 해당 shop image에 링크 추가', async () => {});
   });
 
   describe('getShops', () => {

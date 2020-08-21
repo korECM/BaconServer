@@ -12,6 +12,8 @@ interface Data {
   closed: string;
   open: string;
   price?: number;
+  latitude?: number;
+  longitude?: number;
   location: string;
 }
 
@@ -707,10 +709,11 @@ let data: Data[] = [
       shop.name,
       shop.contact,
       shop.address,
-      [],
       shop.open,
       shop.closed,
       shop.price || 0,
+      shop.latitude || 0,
+      shop.longitude || 0,
       shop.location as any,
       shop.category as any,
     );

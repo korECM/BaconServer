@@ -17,10 +17,11 @@ export interface IShopController {
     name: string,
     contact: string,
     address: string,
-    image: string[],
     open: string,
     closed: string,
     price: number,
+    latitude: number,
+    longitude: number,
     location: Location,
     category: ShopCategory,
   ): Promise<ShopInterface | null>;

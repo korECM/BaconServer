@@ -2,6 +2,7 @@ import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location } from
 import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
 import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
+import Image, { ImageType } from '../../models/Image';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -31,6 +32,34 @@ export class ShopController {
       {
         $match: {
           _id: ObjectId(id),
+        },
+      },
+      {
+        $lookup: {
+          from: 'images',
+          let: { shopId: '$_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+              },
+            },
+          ],
+          as: 'shopImage',
+        },
+      },
+      {
+        $lookup: {
+          from: 'images',
+          let: { shopId: '$_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['menu', '$type'] }] },
+              },
+            },
+          ],
+          as: 'menuImage',
         },
       },
       {
@@ -120,6 +149,18 @@ export class ShopController {
           scores: 0,
           menus: {
             shopId: 0,
+            registerDate: 0,
+            __v: 0,
+          },
+          shopImage: {
+            shopId: 0,
+            type: 0,
+            registerDate: 0,
+            __v: 0,
+          },
+          menuImage: {
+            shopId: 0,
+            type: 0,
             registerDate: 0,
             __v: 0,
           },
@@ -233,9 +274,13 @@ export class ShopController {
       let shop = await this.findById(id);
       if (shop === null) return false;
 
-      shop.image.push(...imageLink);
-
-      await shop.save();
+      for (let link of imageLink) {
+        await Image.create({
+          imageLink: link,
+          shopId: shop._id,
+          type: ImageType.Shop,
+        });
+      }
 
       return true;
     } catch (error) {
@@ -248,10 +293,14 @@ export class ShopController {
     try {
       let shop = await this.findById(id);
       if (shop === null) return false;
-      if (!shop.menuImage) shop.menuImage = [];
-      shop.menuImage.push(...imageLink);
 
-      await shop.save();
+      for (let link of imageLink) {
+        await Image.create({
+          imageLink: link,
+          shopId: shop._id,
+          type: ImageType.Menu,
+        });
+      }
 
       return true;
     } catch (error) {
@@ -284,10 +333,11 @@ export class ShopController {
     name: string,
     contact: string,
     address: string,
-    image: string[],
     open: string,
     closed: string,
     price: number,
+    latitude: number,
+    longitude: number,
     location: Location,
     category: ShopCategory,
   ): Promise<ShopInterface | null> {
@@ -303,20 +353,20 @@ export class ShopController {
 
       await keyword.save();
 
-      let shop = new Shop({
+      let shop = await Shop.create({
         name,
         contact,
         address,
-        image,
         category,
-        keyword: keyword._id,
-        reviews: [],
         open,
         closed,
         location,
+        keyword: keyword._id,
+        latitude,
+        longitude,
+        price,
+        registerDate: new Date(),
       });
-
-      await shop.save();
 
       return shop as ShopInterface;
     } catch (error) {
