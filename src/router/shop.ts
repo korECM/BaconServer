@@ -182,6 +182,73 @@ router.post(
   },
 );
 
+router.post(
+  '/report/:shopId',
+  isLogin,
+  reqValidate(
+    Joi.object({
+      type: Joi.array().items(Joi.number()),
+      comment: Joi.string().optional().max(200),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const shopId = req.params.shopId as string;
+    if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+    let type = req.body.type as number[];
+    let comment = req.body.comment as string;
+
+    if (type.some((t) => t < 0 || t > 5)) return res.status(400).send();
+
+    let shopController = new ShopController();
+    if (
+      await shopController.addReport(shopId, {
+        comment,
+        type,
+        userId: req.user!._id,
+      })
+    ) {
+      return res.status(301).send({
+        message: 'success',
+      });
+    } else {
+      return res.status(406).send();
+    }
+  },
+);
+
+router.post(
+  '/review/report/:reviewId',
+  isLogin,
+  reqValidate(
+    Joi.object({
+      comment: Joi.number().optional().max(200),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const reviewId = req.params.reviewId as string;
+    if (isValidObjectId(reviewId) === false) return res.status(400).send();
+
+    let comment = req.body.comment as string;
+
+    let reviewController = new ReviewController();
+    if (
+      await reviewController.addReport(reviewId, {
+        comment,
+        userId: req.user!._id,
+      })
+    ) {
+      return res.status(301).send({
+        message: 'success',
+      });
+    } else {
+      return res.status(406).send();
+    }
+  },
+);
+
 router.post('/image/:shopId', isLogin, upload.array('imgFile', 5), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();

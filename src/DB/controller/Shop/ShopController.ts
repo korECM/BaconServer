@@ -3,6 +3,7 @@ import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
 import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
 import Image, { ImageType } from '../../models/Image';
+import ShopReport from '../../models/ShopReport';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -18,6 +19,12 @@ export interface ShopFilterInterface {
   location?: Location[];
   price?: string;
   order?: ShopOrder;
+}
+
+export interface ReportOption {
+  type: number[];
+  comment: string;
+  userId: string;
 }
 
 export class ShopController {
@@ -407,6 +414,26 @@ export class ShopController {
     } catch (error) {
       console.error(error);
       return null;
+    }
+  }
+
+  async addReport(shopId: string, data: ReportOption) {
+    try {
+      let shop = await this.findById(shopId);
+      if (shop === null) return false;
+
+      await ShopReport.create({
+        comment: data.comment,
+        registerDate: new Date(),
+        shopId,
+        type: data.type,
+        userId: data.userId,
+      });
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
   }
 }

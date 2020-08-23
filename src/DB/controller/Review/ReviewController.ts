@@ -4,6 +4,7 @@ import { ShopController } from '../Shop/ShopController';
 import mongoose from 'mongoose';
 import Score from '../../models/Score';
 import Keyword from '../../models/Keyword';
+import ReviewReport from '../../models/ReviewReport';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -14,6 +15,11 @@ interface TempKeyword {
   individual: boolean;
   riceAppointment: boolean;
   spicy: boolean;
+}
+
+export interface ReportOption {
+  comment: string;
+  userId: string;
 }
 
 export class ReviewController {
@@ -153,6 +159,25 @@ export class ReviewController {
         review.like = (review.like as string[]).filter((liker) => `${liker}` !== `${userId}`);
         await review.save();
       }
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async addReport(reviewId: string, data: ReportOption) {
+    try {
+      let review = (await this.findById(reviewId)) as ReviewSchemaInterface;
+      if (!review) return false;
+
+      await ReviewReport.create({
+        comment: data.comment,
+        registerDate: new Date(),
+        reviewId,
+        userId: data.userId,
+      });
+
       return true;
     } catch (error) {
       console.error(error);

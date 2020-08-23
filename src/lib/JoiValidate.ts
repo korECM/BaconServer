@@ -6,6 +6,7 @@ export function reqValidate(schema: Joi.Schema, type: 'body' | 'params') {
     switch (type) {
       case 'body':
         if (schema.validate(req.body).error) {
+          console.log(schema.validate(req.body).error);
           return res.status(400).send();
         }
         break;
