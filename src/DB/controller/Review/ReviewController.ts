@@ -77,6 +77,13 @@ export class ReviewController {
         },
       },
       {
+        $addFields: {
+          likeNum: {
+            $size: '$like',
+          },
+        },
+      },
+      {
         $lookup: {
           from: 'users',
           localField: 'user',
