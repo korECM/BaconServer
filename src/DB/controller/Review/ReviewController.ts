@@ -113,6 +113,12 @@ export class ReviewController {
           },
         },
       },
+      {
+        $sort: {
+          likeNum: -1,
+          registerDate: -1,
+        },
+      },
     ]);
 
     return reviews as ReviewInterface[];
