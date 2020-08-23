@@ -213,6 +213,41 @@ export class ShopController {
     let shops = await Shop.aggregate([
       // 해당 가게 찾은 후에
       { $match: where },
+      {
+        $lookup: {
+          from: 'images',
+          let: { shopId: '$_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+              },
+            },
+          ],
+          as: 'shopImage',
+        },
+      },
+      {
+        $lookup: {
+          from: 'keywords',
+          localField: 'keyword',
+          foreignField: '_id',
+          as: 'keyword',
+        },
+      },
+      {
+        $unwind: {
+          path: '$keyword',
+        },
+      },
+      {
+        $project: {
+          keywords: {
+            __v: 0,
+            registerDate: 0,
+          },
+        },
+      },
       // reviews에 Review Join
       {
         $lookup: {
