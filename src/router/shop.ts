@@ -223,7 +223,7 @@ router.post(
   isLogin,
   reqValidate(
     Joi.object({
-      comment: Joi.number().optional().max(200),
+      comment: Joi.string().required().max(200),
     }),
     'body',
   ),
