@@ -7,10 +7,13 @@ import { ShopController } from '../DB/controller/Shop/ShopController';
 import { UserService } from '../service/UserService';
 import { isLogin } from '../lib/userMiddleware';
 import { reqValidate } from '../lib/JoiValidate';
+import apiCache from 'apicache';
 
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
+const cache = apiCache.middleware;
+
+router.get('/', cache('5 minutes'), async (req, res, next) => {
   const { order } = req.query;
   const location = req.query.location ? (req.query.location as string).split(',') : undefined;
   const category = req.query.category ? (req.query.category as string).split(',') : undefined;
@@ -30,7 +33,7 @@ router.get('/', async (req, res, next) => {
   res.status(200).json(shops);
 });
 
-router.get('/:shopId', async (req, res, next) => {
+router.get('/:shopId', cache('5 minutes'), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
@@ -43,7 +46,7 @@ router.get('/:shopId', async (req, res, next) => {
   return res.status(200).json(shop);
 });
 
-router.get('/review/:shopId', async (req, res, next) => {
+router.get('/review/:shopId', cache('1 minutes'), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
