@@ -19,6 +19,15 @@ export enum Location {
   FrontFar = 'front_far',
 }
 
+export enum Keyword {
+  CostRatio = 'costRatio',
+  Atmosphere = 'atmosphere',
+  Group = 'group',
+  Individual = 'individual',
+  RiceAppointment = 'riceAppointment',
+  Spicy = 'spicy',
+}
+
 export interface ShopInterface {
   name: string;
   contact: string;

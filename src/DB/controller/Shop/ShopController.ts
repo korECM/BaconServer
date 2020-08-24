@@ -1,4 +1,4 @@
-import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location } from '../../models/Shop';
+import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location, Keyword as KeywordInterface } from '../../models/Shop';
 import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
 import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
@@ -19,6 +19,7 @@ export interface ShopFilterInterface {
   location?: Location[];
   price?: string;
   order?: ShopOrder;
+  keyword?: KeywordInterface[];
 }
 
 export interface ReportOption {
@@ -180,10 +181,17 @@ export class ShopController {
 
   async getShops(filter: ShopFilterInterface): Promise<ShopInterface[]> {
     let where: any = {};
-    let { category, location, order, price } = filter;
+    let keywordWhere: any = {};
+    let minKeywordSum = -1;
+    let { category, location, order, price, keyword } = filter;
     if (category && category.length > 0) where.category = { $in: category };
     if (location && location.length > 0) where.location = { $in: location };
     if (price && !isNaN(Number(price))) where.price = { $lte: parseInt(price) };
+    if (keyword && keyword.length > 0) {
+      keywordWhere.topKeyword = { $in: keyword };
+      minKeywordSum = 0;
+    }
+
     order = order || ShopOrder.Recommended;
 
     let orderQuery: any;
@@ -222,6 +230,109 @@ export class ShopController {
       { $match: where },
       {
         $lookup: {
+          from: 'keywords',
+          localField: 'keyword',
+          foreignField: '_id',
+          as: 'keyword',
+        },
+      },
+      {
+        $unwind: {
+          path: '$keyword',
+        },
+      },
+      {
+        $project: {
+          keyword: {
+            _id: 0,
+            registerDate: 0,
+            __v: 0,
+          },
+        },
+      },
+      {
+        $addFields: {
+          keywordObjectArray: {
+            $objectToArray: '$keyword',
+          },
+          keywordSum: {
+            $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment', '$keyword.spicy'],
+          },
+        },
+      },
+      // TODO:Keyword 평가가 아예 없는 경우 제외 팀원한테 확인
+      {
+        $match: {
+          $expr: {
+            $gt: ['$keywordSum', minKeywordSum],
+          },
+        },
+      },
+      {
+        $unwind: {
+          path: '$keywordObjectArray',
+        },
+      },
+      {
+        $sort: {
+          'keywordObjectArray.v': 1,
+        },
+      },
+      {
+        $group: {
+          _id: '$_id',
+          sortedKeywordObjectArray: {
+            $push: '$keywordObjectArray',
+          },
+          name: {
+            $first: '$name',
+          },
+          contact: {
+            $first: '$contact',
+          },
+          category: {
+            $first: '$category',
+          },
+          keyword: {
+            $first: '$keyword',
+          },
+          open: {
+            $first: '$open',
+          },
+          closed: {
+            $first: '$closed',
+          },
+          location: {
+            $first: '$location',
+          },
+          registerDate: {
+            $first: '$registerDate',
+          },
+        },
+      },
+      {
+        $addFields: {
+          topKeyword: {
+            $map: {
+              input: '$sortedKeywordObjectArray',
+              as: 'object',
+              in: {
+                $concat: ['$$object.k', ''],
+              },
+            },
+          },
+        },
+      },
+      {
+        $addFields: {
+          topKeyword: {
+            $slice: ['$topKeyword', 2],
+          },
+        },
+      },
+      { $match: keywordWhere },
+      {
+        $lookup: {
           from: 'images',
           let: { shopId: '$_id' },
           pipeline: [
@@ -232,19 +343,6 @@ export class ShopController {
             },
           ],
           as: 'shopImage',
-        },
-      },
-      {
-        $lookup: {
-          from: 'keywords',
-          localField: 'keyword',
-          foreignField: '_id',
-          as: 'keyword',
-        },
-      },
-      {
-        $unwind: {
-          path: '$keyword',
         },
       },
       {
