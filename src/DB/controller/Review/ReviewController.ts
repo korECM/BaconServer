@@ -130,6 +130,70 @@ export class ReviewController {
     return reviews as ReviewInterface[];
   }
 
+  async getMyReview(userId: string) {
+    let reviews = await Review.aggregate([
+      {
+        $match: {
+          user: {
+            $eq: ObjectId(userId),
+          },
+        },
+      },
+      {
+        $addFields: {
+          didLike: {
+            $in: [ObjectId(userId), '$like'],
+          },
+        },
+      },
+      {
+        $addFields: {
+          likeNum: {
+            $size: '$like',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'user',
+          foreignField: '_id',
+          as: 'user',
+        },
+      },
+      {
+        $unwind: {
+          path: '$user',
+        },
+      },
+      {
+        $project: {
+          like: 0,
+          shop: 0,
+          __v: 0,
+          user: {
+            __v: 0,
+            password: 0,
+            snsId: 0,
+            provider: 0,
+            email: 0,
+            likeShop: 0,
+            registerDate: 0,
+            kakaoNameSet: 0,
+          },
+        },
+      },
+      {
+        $sort: {
+          likeNum: -1,
+          registerDate: -1,
+        },
+      },
+    ]);
+
+    return reviews as ReviewInterface[];
+  }
+
   async findById(id: string) {
     return (await Review.findById(id)) as ReviewInterface;
   }

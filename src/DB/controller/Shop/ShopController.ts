@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
 import Image, { ImageType } from '../../models/Image';
 import ShopReport from '../../models/ShopReport';
+import User from '../../models/User';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -331,6 +332,195 @@ export class ShopController {
         },
       },
       { $match: keywordWhere },
+      {
+        $lookup: {
+          from: 'images',
+          let: { shopId: '$_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+              },
+            },
+          ],
+          as: 'shopImage',
+        },
+      },
+      {
+        $project: {
+          keywords: {
+            __v: 0,
+            registerDate: 0,
+          },
+        },
+      },
+      // reviews에 Review Join
+      {
+        $lookup: {
+          from: 'reviews',
+          localField: '_id',
+          foreignField: 'shop',
+          as: 'reviews',
+        },
+      },
+      {
+        $lookup: {
+          from: 'scores',
+          localField: '_id',
+          foreignField: 'shop',
+          as: 'scores',
+        },
+      },
+      // 해당 가게 Like 한사람 Join
+      {
+        $lookup: {
+          from: 'users',
+          let: { shopId: '$_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $in: ['$$shopId', '$likeShop'],
+                },
+              },
+            },
+          ],
+          as: 'liker',
+        },
+      },
+      // Review 평균 구해서 scoreAverage 추가
+      {
+        $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
+      },
+      // Review 가리도록
+      {
+        $project: {
+          reviews: 0,
+          __v: 0,
+          liker: 0,
+          scores: 0,
+        },
+      },
+      orderQuery,
+    ]);
+    return shops || [];
+  }
+
+  async getMyShop(userId: string) {
+    const user = await User.findById(userId);
+    if (!user) return [];
+
+    let orderQuery = {
+      $sort: {
+        scoreAverage: -1,
+        likerCount: -1,
+        reviewCount: -1,
+      },
+    };
+
+    let shops = await Shop.aggregate([
+      // 해당 가게 찾은 후에
+      {
+        $match: {
+          _id: {
+            $in: user.likeShop,
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'keywords',
+          localField: 'keyword',
+          foreignField: '_id',
+          as: 'keyword',
+        },
+      },
+      {
+        $unwind: {
+          path: '$keyword',
+        },
+      },
+      {
+        $project: {
+          keyword: {
+            _id: 0,
+            registerDate: 0,
+            __v: 0,
+          },
+        },
+      },
+      {
+        $addFields: {
+          keywordObjectArray: {
+            $objectToArray: '$keyword',
+          },
+          keywordSum: {
+            $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment', '$keyword.spicy'],
+          },
+        },
+      },
+      {
+        $unwind: {
+          path: '$keywordObjectArray',
+        },
+      },
+      {
+        $sort: {
+          'keywordObjectArray.v': 1,
+        },
+      },
+      {
+        $group: {
+          _id: '$_id',
+          sortedKeywordObjectArray: {
+            $push: '$keywordObjectArray',
+          },
+          name: {
+            $first: '$name',
+          },
+          contact: {
+            $first: '$contact',
+          },
+          category: {
+            $first: '$category',
+          },
+          keyword: {
+            $first: '$keyword',
+          },
+          open: {
+            $first: '$open',
+          },
+          closed: {
+            $first: '$closed',
+          },
+          location: {
+            $first: '$location',
+          },
+          registerDate: {
+            $first: '$registerDate',
+          },
+        },
+      },
+      {
+        $addFields: {
+          topKeyword: {
+            $map: {
+              input: '$sortedKeywordObjectArray',
+              as: 'object',
+              in: {
+                $concat: ['$$object.k', ''],
+              },
+            },
+          },
+        },
+      },
+      {
+        $addFields: {
+          topKeyword: {
+            $slice: ['$topKeyword', 2],
+          },
+        },
+      },
       {
         $lookup: {
           from: 'images',

@@ -33,6 +33,22 @@ router.get('/', cache('5 minutes'), async (req, res, next) => {
   res.status(200).json(shops);
 });
 
+router.get('/myShop', isLogin, cache('5 minutes'), async (req, res, next) => {
+  let shopController = new ShopController();
+
+  let shops = await shopController.getMyShop(req.user!._id);
+
+  res.status(200).json(shops);
+});
+
+router.get('/myReview', isLogin, cache('5 minutes'), async (req, res, next) => {
+  let reviewController = new ReviewController();
+
+  let reviews = await reviewController.getMyReview(req.user!._id);
+
+  res.status(200).json(reviews);
+});
+
 router.get('/:shopId', cache('5 minutes'), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
