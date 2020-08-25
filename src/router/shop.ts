@@ -49,7 +49,7 @@ router.get('/myReview', isLogin, cache('5 minutes'), async (req, res, next) => {
   res.status(200).json(reviews);
 });
 
-router.post('/edit/:shopId', isLogin, async (req, res, next) => {
+router.put('/:shopId', isLogin, async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
