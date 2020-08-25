@@ -659,6 +659,20 @@ export class ShopController {
     }
   }
 
+  async deleteMenu(menuId: string) {
+    try {
+      let menu = await Menu.findById(menuId);
+      if (menu === null) return false;
+
+      await menu.remove();
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async createShop(
     name: string,
     contact: string,

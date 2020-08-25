@@ -219,6 +219,23 @@ router.post(
   },
 );
 
+router.delete('/menu/:menuId', isLogin, async (req, res, next) => {
+  const menuId = req.params.menuId as string;
+  if (isValidObjectId(menuId) === false) return res.status(400).send();
+
+  let title = req.body.title as string;
+  let price = req.body.price as number;
+
+  let shopController = new ShopController();
+  if (await shopController.deleteMenu(menuId)) {
+    return res.status(200).send({
+      message: 'success',
+    });
+  } else {
+    return res.status(406).send();
+  }
+});
+
 router.post(
   '/report/:shopId',
   isLogin,
