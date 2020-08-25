@@ -724,4 +724,42 @@ export class ShopController {
       return false;
     }
   }
+
+  async editShop(shopId: string, shopData: ShopEditData) {
+    try {
+      let shop = await this.findById(shopId);
+      if (shop === null) return false;
+
+      const { name, address, latitude, location, longitude, category, closed, contact, open } = shopData;
+
+      shop.name = name;
+      shop.address = address;
+      shop.latitude = latitude;
+      shop.location = location;
+      shop.longitude = longitude;
+      shop.category = category;
+      shop.closed = closed;
+      shop.contact = contact;
+      shop.open = open;
+
+      await shop.save();
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+}
+
+interface ShopEditData {
+  name: string;
+  address: string;
+  location: Location;
+  latitude: number;
+  longitude: number;
+  category: ShopCategory;
+  contact: string;
+  open: string;
+  closed: string;
 }

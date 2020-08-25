@@ -49,6 +49,17 @@ router.get('/myReview', isLogin, cache('5 minutes'), async (req, res, next) => {
   res.status(200).json(reviews);
 });
 
+router.post('/edit/:shopId', isLogin, async (req, res, next) => {
+  const shopId = req.params.shopId as string;
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+  let shopController = new ShopController();
+
+  let shops = await shopController.editShop(shopId, req.body);
+
+  res.status(201).json(shops);
+});
+
 router.get('/:shopId', cache('5 minutes'), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
