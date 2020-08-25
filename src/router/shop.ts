@@ -210,7 +210,7 @@ router.post(
 
     let shopController = new ShopController();
     if (await shopController.addMenu(shopId, title, price)) {
-      return res.status(301).send({
+      return res.status(201).send({
         message: 'success',
       });
     } else {
