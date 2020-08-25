@@ -2,7 +2,7 @@ import express from 'express';
 import Joi from 'joi';
 import { isValidObjectId } from 'mongoose';
 import { ReviewController } from '../DB/controller/Review/ReviewController';
-import { upload } from '../lib/upload';
+import { upload } from '../lib/image';
 import { ShopController } from '../DB/controller/Shop/ShopController';
 import { UserService } from '../service/UserService';
 import { isLogin } from '../lib/userMiddleware';
@@ -372,6 +372,21 @@ router.post('/menuImage/:shopId', isLogin, upload.array('imgFile', 3), async (re
     res.status(201).send({
       locations,
     });
+  } else {
+    res.status(504).send({
+      error: 'Fail To Upload',
+    });
+  }
+});
+
+router.delete('/menuImage/:imageId', isLogin, async (req, res, next) => {
+  const imageId = req.params.imageId as string;
+  if (isValidObjectId(imageId) === false) return res.status(400).send();
+
+  let shopController = new ShopController();
+
+  if (await shopController.deleteMenuImage(imageId)) {
+    res.status(201).send();
   } else {
     res.status(504).send({
       error: 'Fail To Upload',

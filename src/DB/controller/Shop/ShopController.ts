@@ -5,6 +5,7 @@ import Menu from '../../models/Menu';
 import Image, { ImageType } from '../../models/Image';
 import ShopReport from '../../models/ShopReport';
 import User from '../../models/User';
+import { deleteImage } from '../../../lib/image';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -631,6 +632,24 @@ export class ShopController {
           type: ImageType.Menu,
         });
       }
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async deleteMenuImage(imageId: string) {
+    try {
+      let image = await Image.findById(imageId);
+      if (image === null) return false;
+
+      let imageNameArray = image.imageLink.split('/');
+      let imageName = imageNameArray[imageNameArray.length - 1];
+      if (!imageName) return false;
+
+      await deleteImage(imageName);
 
       return true;
     } catch (error) {

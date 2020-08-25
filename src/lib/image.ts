@@ -29,3 +29,22 @@ export const upload = multer({
   }),
   limits: { fileSize: 5 * 1024 * 1024 }, // 용량 제한
 });
+
+export const deleteImage = async (imageName: string) => {
+  return new Promise((resolve, reject) => {
+    s3.deleteObject(
+      {
+        Bucket: 'bacon-shop-origin',
+        Key: 'images/' + imageName,
+      },
+      (err, data) => {
+        if (err) {
+          console.error('이미지 삭제 실패');
+          reject();
+        }
+        console.log('delete Image', data);
+        resolve();
+      },
+    );
+  });
+};
