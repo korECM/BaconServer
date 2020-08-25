@@ -219,6 +219,34 @@ router.post(
   },
 );
 
+router.put(
+  '/menu/:menuId',
+  isLogin,
+  reqValidate(
+    Joi.object({
+      title: Joi.string().required(),
+      price: Joi.number().required(),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const menuId = req.params.menuId as string;
+    if (isValidObjectId(menuId) === false) return res.status(400).send();
+
+    let title = req.body.title as string;
+    let price = req.body.price as number;
+
+    let shopController = new ShopController();
+    if (await shopController.editMenu(menuId, title, price)) {
+      return res.status(200).send({
+        message: 'success',
+      });
+    } else {
+      return res.status(406).send();
+    }
+  },
+);
+
 router.delete('/menu/:menuId', isLogin, async (req, res, next) => {
   const menuId = req.params.menuId as string;
   if (isValidObjectId(menuId) === false) return res.status(400).send();
