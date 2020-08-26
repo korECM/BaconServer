@@ -13,7 +13,7 @@ const router = express.Router();
 
 const cache = apiCache.middleware;
 
-router.get('/', cache('5 minutes'), async (req, res, next) => {
+router.get('/', cache('10 minutes'), async (req, res, next) => {
   const { order } = req.query;
   const location = req.query.location ? (req.query.location as string).split(',') : undefined;
   const category = req.query.category ? (req.query.category as string).split(',') : undefined;
@@ -33,7 +33,7 @@ router.get('/', cache('5 minutes'), async (req, res, next) => {
   res.status(200).json(shops);
 });
 
-router.get('/myShop', isLogin, cache('5 minutes'), async (req, res, next) => {
+router.get('/myShop', isLogin, cache('1 minutes'), async (req, res, next) => {
   let shopController = new ShopController();
 
   let shops = await shopController.getMyShop(req.user!._id);
@@ -41,7 +41,7 @@ router.get('/myShop', isLogin, cache('5 minutes'), async (req, res, next) => {
   res.status(200).json(shops);
 });
 
-router.get('/myReview', isLogin, cache('5 minutes'), async (req, res, next) => {
+router.get('/myReview', isLogin, cache('1 minutes'), async (req, res, next) => {
   let reviewController = new ReviewController();
 
   let reviews = await reviewController.getMyReview(req.user!._id);
@@ -60,7 +60,7 @@ router.put('/:shopId', isLogin, async (req, res, next) => {
   res.status(201).json(shops);
 });
 
-router.get('/:shopId', cache('5 minutes'), async (req, res, next) => {
+router.get('/:shopId', cache('5 seconds'), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
@@ -73,7 +73,7 @@ router.get('/:shopId', cache('5 minutes'), async (req, res, next) => {
   return res.status(200).json(shop);
 });
 
-router.get('/review/:shopId', cache('1 minutes'), async (req, res, next) => {
+router.get('/review/:shopId', cache('5 seconds'), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
@@ -372,6 +372,21 @@ router.post('/menuImage/:shopId', isLogin, upload.array('imgFile', 3), async (re
     res.status(201).send({
       locations,
     });
+  } else {
+    res.status(504).send({
+      error: 'Fail To Upload',
+    });
+  }
+});
+
+router.delete('/shopImage/:imageId', isLogin, async (req, res, next) => {
+  const imageId = req.params.imageId as string;
+  if (isValidObjectId(imageId) === false) return res.status(400).send();
+
+  let shopController = new ShopController();
+
+  if (await shopController.deleteShopImage(imageId)) {
+    res.status(201).send();
   } else {
     res.status(504).send({
       error: 'Fail To Upload',

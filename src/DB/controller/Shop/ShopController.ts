@@ -640,6 +640,26 @@ export class ShopController {
     }
   }
 
+  async deleteShopImage(imageId: string) {
+    try {
+      let image = await Image.findById(imageId);
+      if (image === null) return false;
+
+      let imageNameArray = image.imageLink.split('/');
+      let imageName = imageNameArray[imageNameArray.length - 1];
+      if (!imageName) return false;
+
+      await deleteImage(imageName);
+
+      await image.remove();
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async deleteMenuImage(imageId: string) {
     try {
       let image = await Image.findById(imageId);
@@ -650,6 +670,8 @@ export class ShopController {
       if (!imageName) return false;
 
       await deleteImage(imageName);
+
+      await image.remove();
 
       return true;
     } catch (error) {
