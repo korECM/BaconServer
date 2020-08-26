@@ -119,6 +119,24 @@ router.post(
   },
 );
 
+router.delete('/review/:reviewId', isLogin, async (req, res, next) => {
+  const reviewId = req.params.reviewId as string;
+  if (isValidObjectId(reviewId) === false) return res.status(400).send();
+
+  let reviewController = new ReviewController();
+  try {
+    let result = await reviewController.deleteReview(reviewId);
+    if (result === false) return res.status(400).send();
+
+    return res.status(201).json({
+      message: 'success',
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send();
+  }
+});
+
 router.post('/like/:shopId', isLogin, async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();

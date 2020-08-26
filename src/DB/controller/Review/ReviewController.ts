@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import Score from '../../models/Score';
 import Keyword from '../../models/Keyword';
 import ReviewReport from '../../models/ReviewReport';
+import Shop from '../../models/Shop';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -65,6 +66,31 @@ export class ReviewController {
     } catch (error) {
       console.error(error);
       return null;
+    }
+  }
+
+  async deleteReview(reviewId: string) {
+    try {
+      let review = await Review.findById(reviewId);
+      if (!review) return false;
+
+      let shop = await Shop.findById(review.shop);
+      if (!shop) return false;
+
+      let anotherReview = await Review.find({ user: review.user });
+      // 만약 작성자가 남긴 유일한 리뷰를 지우는거라면
+      if (anotherReview.length === 1) {
+        let score = await Score.findOne({ user: review.user });
+        if (!score) return false;
+
+        await score.remove();
+      }
+
+      await review.remove();
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
   }
 
