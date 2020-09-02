@@ -6,6 +6,7 @@ import Image, { ImageType } from '../../models/Image';
 import ShopReport from '../../models/ShopReport';
 import User from '../../models/User';
 import { deleteImage } from '../../../lib/image';
+import ImageReport from '../../models/ImageReport';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -788,6 +789,21 @@ export class ShopController {
         shopId,
         type: data.type,
         userId: data.userId,
+      });
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async addImageReport(imageId: string, userId: string) {
+    try {
+      await ImageReport.create({
+        registerDate: new Date(),
+        imageId,
+        userId,
       });
 
       return true;
