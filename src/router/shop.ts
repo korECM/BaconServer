@@ -309,7 +309,7 @@ router.post(
         userId: req.user!._id,
       })
     ) {
-      return res.status(301).send({
+      return res.status(201).send({
         message: 'success',
       });
     } else {
@@ -340,7 +340,7 @@ router.post(
         userId: req.user!._id,
       })
     ) {
-      return res.status(301).send({
+      return res.status(201).send({
         message: 'success',
       });
     } else {
