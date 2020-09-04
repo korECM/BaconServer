@@ -363,6 +363,33 @@ router.post('/report/image/:imageId', isLogin, async (req, res, next) => {
   }
 });
 
+router.post(
+  '/mainImage/:shopId',
+  isLogin,
+  reqValidate(
+    Joi.object({
+      imageLink: Joi.string().required(),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const shopId = req.params.shopId as string;
+    if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+    let imageLink = req.body.imageLink as string;
+
+    let shopController = new ShopController();
+
+    if (await shopController.setMainImage(shopId, imageLink)) {
+      return res.status(201).send({
+        message: 'success',
+      });
+    } else {
+      return res.status(406).send();
+    }
+  },
+);
+
 router.post('/image/:shopId', isLogin, upload.array('imgFile', 5), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
