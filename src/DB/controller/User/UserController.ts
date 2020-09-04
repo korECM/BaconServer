@@ -46,6 +46,7 @@ export class UserController implements IUserController {
       snsId: 'none',
       likeShop: [],
       gender,
+      isAdmin: false,
       password: hashPassword,
     });
 
@@ -95,6 +96,7 @@ export class UserController implements IUserController {
         gender: 'none',
         snsId: id,
         password: 'none',
+        isAdmin: false,
         kakaoNameSet: withName,
       });
 

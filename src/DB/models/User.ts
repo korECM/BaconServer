@@ -6,6 +6,7 @@ export interface UserInterface {
   password: string;
   provider: string;
   snsId: string;
+  isAdmin: boolean;
   gender: string;
   likeShop: UserSchemaInterface[] | mongoose.Types.ObjectId[];
   kakaoNameSet: boolean;
@@ -22,6 +23,7 @@ export let UserSchema = new Schema({
   provider: { type: String, required: true },
   gender: { type: String, required: true },
   snsId: { type: String, required: true },
+  isAdmin: { type: Boolean, required: true },
   likeShop: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   kakaoNameSet: Boolean,
   registerDate: {
