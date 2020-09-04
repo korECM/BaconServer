@@ -23,6 +23,7 @@ describe('ShopController', () => {
 
     dataShop = await Shop.create({
       address: faker.address.streetAddress(),
+      mainImage: '',
       category: ShopCategory.Korean,
       closed: ' ',
       contact: faker.phone.phoneNumber(),
@@ -38,6 +39,7 @@ describe('ShopController', () => {
 
     await Shop.create({
       address: faker.address.streetAddress(),
+      mainImage: '',
       category: ShopCategory.Japanese,
       closed: ' ',
       contact: faker.phone.phoneNumber(),

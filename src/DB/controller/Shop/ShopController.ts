@@ -1,4 +1,4 @@
-import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location, Keyword as KeywordInterface } from '../../models/Shop';
+import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location, Keyword as KeywordInterface, FoodCategory } from '../../models/Shop';
 import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
 import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
@@ -289,6 +289,9 @@ export class ShopController {
           },
           name: {
             $first: '$name',
+          },
+          mainImage: {
+            $first: '$mainImage',
           },
           contact: {
             $first: '$contact',
@@ -621,6 +624,22 @@ export class ShopController {
     }
   }
 
+  async setMainImage(id: string, imageLink: string) {
+    try {
+      let shop = await this.findById(id);
+      if (shop === null) return false;
+
+      shop.mainImage = imageLink;
+
+      await shop.save();
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async addMenuImage(id: string, imageLink: string[]) {
     try {
       let shop = await this.findById(id);
@@ -742,6 +761,7 @@ export class ShopController {
     latitude: number,
     longitude: number,
     location: Location,
+    foodCategory: FoodCategory[],
     category: ShopCategory,
   ): Promise<ShopInterface | null> {
     try {
@@ -758,9 +778,11 @@ export class ShopController {
 
       let shop = await Shop.create({
         name,
+        mainImage: '',
         contact,
         address,
         category,
+        foodCategory,
         open,
         closed,
         location,
