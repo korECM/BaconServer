@@ -156,6 +156,20 @@ export class ReviewController {
     return reviews as ReviewInterface[];
   }
 
+  async existsReviewOnToday(userId: string, shopId: string) {
+    let today = new Date();
+    let review = await Review.findOne({
+      user: userId,
+      shop: shopId,
+      registerDate: {
+        $gte: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+      },
+    });
+    console.log(review);
+    console.log(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+    return review !== null;
+  }
+
   async getMyReview(userId: string) {
     let reviews = await Review.aggregate([
       {

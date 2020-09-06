@@ -73,6 +73,27 @@ router.get('/:shopId', cache('5 seconds'), async (req, res, next) => {
   return res.status(200).json(shop);
 });
 
+router.get('/review/checkToday/:shopId', isLogin, async (req, res, next) => {
+  const shopId = req.params.shopId as string;
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+  let reviewController = new ReviewController();
+  try {
+    let result = await reviewController.existsReviewOnToday(req.user!._id, shopId);
+    // 오늘 작성한 리뷰가 없다면
+    if (result === false) {
+      return res.status(200).json({
+        message: 'success',
+      });
+    } else {
+      return res.status(401).send();
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send();
+  }
+});
+
 router.get('/review/:shopId', cache('5 seconds'), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
@@ -106,6 +127,8 @@ router.post(
 
     let reviewController = new ReviewController();
     try {
+      let isExisted = await reviewController.existsReviewOnToday(req.user!._id, shopId);
+      if (isExisted) return res.status(401).send();
       let result = await reviewController.createReview(score, req.user!._id, shopId, comment, keywords);
       if (result === null) return res.status(400).send();
 
