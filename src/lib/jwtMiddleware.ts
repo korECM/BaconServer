@@ -6,6 +6,7 @@ export interface UserTokenInterface {
   _id: string;
   name: string;
   email: string;
+  isAdmin: boolean;
 }
 
 export function generateToken(user: UserInterface) {
@@ -13,6 +14,7 @@ export function generateToken(user: UserInterface) {
     _id: user._id,
     name: user.name,
     email: user.email,
+    isAdmin: user.isAdmin,
   };
 
   const token = jwt.sign(userToken, process.env.JWT_SECRET!, {
@@ -30,6 +32,7 @@ export function jwtMiddleware(req: express.Request, res: express.Response, next:
       _id: decoded._id,
       name: decoded.name,
       email: decoded.email,
+      isAdmin: decoded.isAdmin,
     };
     return next();
   } catch (error) {

@@ -15,3 +15,11 @@ export function isNotLogin(req: express.Request, res: express.Response, next: ex
     return res.status(403).send();
   }
 }
+
+export function isAdmin(req: express.Request, res: express.Response, next: express.NextFunction) {
+  if (req.user?.isAdmin) {
+    next();
+  } else {
+    return res.status(403).send();
+  }
+}
