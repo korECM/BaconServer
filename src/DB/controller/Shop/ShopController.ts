@@ -278,7 +278,7 @@ export class ShopController {
       },
       {
         $sort: {
-          'keywordObjectArray.v': 1,
+          'keywordObjectArray.v': -1,
         },
       },
       {
