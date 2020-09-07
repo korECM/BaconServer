@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { app } from '../../index';
 import { setupDB } from '../DBTestUtil';
-import Shop, { ShopInterface } from '../../DB/models/Shop';
+import Shop, { ShopInterface, ShopCategory, FoodCategory } from '../../DB/models/Shop';
 import User, { UserInterface } from '../../DB/models/User';
 import { ShopController } from '../../DB/controller/Shop/ShopController';
 import { UserController } from '../../DB/controller/User/UserController';
@@ -43,12 +43,12 @@ beforeAll(async () => {
 
   {
     let { address, category, closed, contact, foodCategory, location, name, open } = firstShopData;
-    shops.push((await shopController.createShop(name, contact, address, open, closed, 0, 0, 0, location as any, category as any))!);
+    shops.push((await shopController.createShop(name, contact, address, open, closed, 0, 0, 0, location as any, [] as FoodCategory[], category as any))!);
   }
   {
     let { address, category, closed, contact, foodCategory, location, name, open } = secondShopData;
 
-    shops.push((await shopController.createShop(name, contact, address, open, closed, 0, 0, 0, location as any, category as any))!);
+    shops.push((await shopController.createShop(name, contact, address, open, closed, 0, 0, 0, location as any, [] as FoodCategory[], category as any))!);
   }
 
   user = await User.create({
@@ -59,6 +59,7 @@ beforeAll(async () => {
     password: '비밀번호',
     gender: 'm',
     provider: 'local',
+    isAdmin: false,
     registerDate: new Date(),
     snsId: 'none',
   });

@@ -28,8 +28,17 @@ export enum Keyword {
   Spicy = 'spicy',
 }
 
+export enum FoodCategory {
+  Rice = 'rice',
+  Bread = 'bread',
+  Noodle = 'noodle',
+  Meat = 'meat',
+  Etc = 'etc',
+}
+
 export interface ShopInterface {
   name: string;
+  mainImage: string;
   contact: string;
   address: string;
   open: string;
@@ -38,6 +47,7 @@ export interface ShopInterface {
   latitude: number;
   longitude: number;
   category: ShopCategory;
+  foodCategory: FoodCategory[];
   price: number;
   keyword: KeywordInterface;
   registerDate: Date;
@@ -48,6 +58,7 @@ export interface ShopSchemaInterface extends ShopInterface, mongoose.Document {}
 
 export let ShopSchema = new Schema({
   name: { type: String, required: true },
+  mainImage: { type: String },
   contact: { type: String },
   address: { type: String, required: true },
   open: { type: String },
@@ -56,6 +67,7 @@ export let ShopSchema = new Schema({
   latitude: { type: Number, required: false },
   longitude: { type: Number, required: false },
   category: { type: String, enum: Object.values(ShopCategory), required: true },
+  FoodCategory: { type: [String], enum: Object.values(FoodCategory), required: true },
   price: Number,
   keyword: { type: Schema.Types.ObjectId, ref: 'Keyword' },
   registerDate: {

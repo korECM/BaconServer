@@ -5,7 +5,7 @@ import { ReviewController } from '../DB/controller/Review/ReviewController';
 import { upload } from '../lib/image';
 import { ShopController } from '../DB/controller/Shop/ShopController';
 import { UserService } from '../service/UserService';
-import { isLogin } from '../lib/userMiddleware';
+import { isLogin, isAdmin } from '../lib/userMiddleware';
 import { reqValidate } from '../lib/JoiValidate';
 import apiCache from 'apicache';
 
@@ -13,7 +13,7 @@ const router = express.Router();
 
 const cache = apiCache.middleware;
 
-router.get('/', cache('5 minutes'), async (req, res, next) => {
+router.get('/', cache('10 minutes'), async (req, res, next) => {
   const { order } = req.query;
   const location = req.query.location ? (req.query.location as string).split(',') : undefined;
   const category = req.query.category ? (req.query.category as string).split(',') : undefined;
@@ -35,7 +35,7 @@ router.get('/', cache('5 minutes'), async (req, res, next) => {
   res.status(200).json(shops);
 });
 
-router.get('/myShop', isLogin, cache('5 minutes'), async (req, res, next) => {
+router.get('/myShop', isLogin, cache('1 minutes'), async (req, res, next) => {
   let shopController = new ShopController();
 
   let shops = await shopController.getMyShop(req.user!._id);
@@ -43,7 +43,7 @@ router.get('/myShop', isLogin, cache('5 minutes'), async (req, res, next) => {
   res.status(200).json(shops);
 });
 
-router.get('/myReview', isLogin, cache('5 minutes'), async (req, res, next) => {
+router.get('/myReview', isLogin, cache('1 minutes'), async (req, res, next) => {
   let reviewController = new ReviewController();
 
   let reviews = await reviewController.getMyReview(req.user!._id);
@@ -51,7 +51,7 @@ router.get('/myReview', isLogin, cache('5 minutes'), async (req, res, next) => {
   res.status(200).json(reviews);
 });
 
-router.put('/:shopId', isLogin, async (req, res, next) => {
+router.put('/:shopId', isAdmin, async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
@@ -62,7 +62,7 @@ router.put('/:shopId', isLogin, async (req, res, next) => {
   res.status(201).json(shops);
 });
 
-router.get('/:shopId', cache('5 minutes'), async (req, res, next) => {
+router.get('/:shopId', cache('5 seconds'), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
@@ -75,7 +75,28 @@ router.get('/:shopId', cache('5 minutes'), async (req, res, next) => {
   return res.status(200).json(shop);
 });
 
-router.get('/review/:shopId', cache('1 minutes'), async (req, res, next) => {
+router.get('/review/checkToday/:shopId', isLogin, async (req, res, next) => {
+  const shopId = req.params.shopId as string;
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+  let reviewController = new ReviewController();
+  try {
+    let result = await reviewController.existsReviewOnToday(req.user!._id, shopId);
+    // 오늘 작성한 리뷰가 없다면
+    if (result === false) {
+      return res.status(200).json({
+        message: 'success',
+      });
+    } else {
+      return res.status(401).send();
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send();
+  }
+});
+
+router.get('/review/:shopId', cache('5 seconds'), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
@@ -108,6 +129,8 @@ router.post(
 
     let reviewController = new ReviewController();
     try {
+      let isExisted = await reviewController.existsReviewOnToday(req.user!._id, shopId);
+      if (isExisted) return res.status(401).send();
       let result = await reviewController.createReview(score, req.user!._id, shopId, comment, keywords);
       if (result === null) return res.status(400).send();
 
@@ -120,6 +143,29 @@ router.post(
     }
   },
 );
+
+router.delete('/review/:reviewId', isLogin, async (req, res, next) => {
+  const reviewId = req.params.reviewId as string;
+  if (isValidObjectId(reviewId) === false) return res.status(400).send();
+
+  let reviewController = new ReviewController();
+  try {
+    let review = await reviewController.findById(reviewId);
+    if (req.user?._id === review._id || req.user?.isAdmin) {
+      let result = await reviewController.deleteReview(reviewId);
+      if (result === false) return res.status(400).send();
+
+      return res.status(201).json({
+        message: 'success',
+      });
+    } else {
+      return res.status(400).send();
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send();
+  }
+});
 
 router.post('/like/:shopId', isLogin, async (req, res, next) => {
   const shopId = req.params.shopId as string;
@@ -195,7 +241,7 @@ router.post('/unlike/review/:reviewId', isLogin, async (req, res, next) => {
 
 router.post(
   '/menu/:shopId',
-  isLogin,
+  isAdmin,
   reqValidate(
     Joi.object({
       title: Joi.string().required(),
@@ -223,7 +269,7 @@ router.post(
 
 router.put(
   '/menu/:menuId',
-  isLogin,
+  isAdmin,
   reqValidate(
     Joi.object({
       title: Joi.string().required(),
@@ -249,7 +295,7 @@ router.put(
   },
 );
 
-router.delete('/menu/:menuId', isLogin, async (req, res, next) => {
+router.delete('/menu/:menuId', isAdmin, async (req, res, next) => {
   const menuId = req.params.menuId as string;
   if (isValidObjectId(menuId) === false) return res.status(400).send();
 
@@ -293,7 +339,7 @@ router.post(
         userId: req.user!._id,
       })
     ) {
-      return res.status(301).send({
+      return res.status(201).send({
         message: 'success',
       });
     } else {
@@ -324,7 +370,48 @@ router.post(
         userId: req.user!._id,
       })
     ) {
-      return res.status(301).send({
+      return res.status(201).send({
+        message: 'success',
+      });
+    } else {
+      return res.status(406).send();
+    }
+  },
+);
+
+router.post('/report/image/:imageId', isLogin, async (req, res, next) => {
+  const imageId = req.params.imageId as string;
+  if (isValidObjectId(imageId) === false) return res.status(400).send();
+
+  let shopController = new ShopController();
+  if (await shopController.addImageReport(imageId, req.user!._id)) {
+    return res.status(201).send({
+      message: 'success',
+    });
+  } else {
+    return res.status(406).send();
+  }
+});
+
+router.post(
+  '/mainImage/:shopId',
+  isLogin,
+  reqValidate(
+    Joi.object({
+      imageLink: Joi.string().required(),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const shopId = req.params.shopId as string;
+    if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+    let imageLink = req.body.imageLink as string;
+
+    let shopController = new ShopController();
+
+    if (await shopController.setMainImage(shopId, imageLink)) {
+      return res.status(201).send({
         message: 'success',
       });
     } else {
@@ -381,7 +468,22 @@ router.post('/menuImage/:shopId', isLogin, upload.array('imgFile', 3), async (re
   }
 });
 
-router.delete('/menuImage/:imageId', isLogin, async (req, res, next) => {
+router.delete('/shopImage/:imageId', isAdmin, async (req, res, next) => {
+  const imageId = req.params.imageId as string;
+  if (isValidObjectId(imageId) === false) return res.status(400).send();
+
+  let shopController = new ShopController();
+
+  if (await shopController.deleteShopImage(imageId)) {
+    res.status(201).send();
+  } else {
+    res.status(504).send({
+      error: 'Fail To Upload',
+    });
+  }
+});
+
+router.delete('/menuImage/:imageId', isAdmin, async (req, res, next) => {
   const imageId = req.params.imageId as string;
   if (isValidObjectId(imageId) === false) return res.status(400).send();
 

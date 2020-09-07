@@ -1,4 +1,4 @@
-import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location, Keyword as KeywordInterface } from '../../models/Shop';
+import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location, Keyword as KeywordInterface, FoodCategory } from '../../models/Shop';
 import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
 import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
@@ -6,6 +6,7 @@ import Image, { ImageType } from '../../models/Image';
 import ShopReport from '../../models/ShopReport';
 import User from '../../models/User';
 import { deleteImage } from '../../../lib/image';
+import ImageReport from '../../models/ImageReport';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -263,6 +264,20 @@ export class ShopController {
       { $match: priceQuery },
       {
         $lookup: {
+          from: 'images',
+          let: { shopId: '$_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+              },
+            },
+          ],
+          as: 'shopImage',
+        },
+      },
+      {
+        $lookup: {
           from: 'keywords',
           localField: 'keyword',
           foreignField: '_id',
@@ -308,7 +323,7 @@ export class ShopController {
       },
       {
         $sort: {
-          'keywordObjectArray.v': 1,
+          'keywordObjectArray.v': -1,
         },
       },
       {
@@ -319,6 +334,9 @@ export class ShopController {
           },
           name: {
             $first: '$name',
+          },
+          mainImage: {
+            $first: '$mainImage',
           },
           contact: {
             $first: '$contact',
@@ -652,6 +670,22 @@ export class ShopController {
     }
   }
 
+  async setMainImage(id: string, imageLink: string) {
+    try {
+      let shop = await this.findById(id);
+      if (shop === null) return false;
+
+      shop.mainImage = imageLink;
+
+      await shop.save();
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async addMenuImage(id: string, imageLink: string[]) {
     try {
       let shop = await this.findById(id);
@@ -672,6 +706,26 @@ export class ShopController {
     }
   }
 
+  async deleteShopImage(imageId: string) {
+    try {
+      let image = await Image.findById(imageId);
+      if (image === null) return false;
+
+      let imageNameArray = image.imageLink.split('/');
+      let imageName = imageNameArray[imageNameArray.length - 1];
+      if (!imageName) return false;
+
+      await deleteImage(imageName);
+
+      await image.remove();
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async deleteMenuImage(imageId: string) {
     try {
       let image = await Image.findById(imageId);
@@ -682,6 +736,8 @@ export class ShopController {
       if (!imageName) return false;
 
       await deleteImage(imageName);
+
+      await image.remove();
 
       return true;
     } catch (error) {
@@ -751,6 +807,7 @@ export class ShopController {
     latitude: number,
     longitude: number,
     location: Location,
+    foodCategory: FoodCategory[],
     category: ShopCategory,
   ): Promise<ShopInterface | null> {
     try {
@@ -767,9 +824,11 @@ export class ShopController {
 
       let shop = await Shop.create({
         name,
+        mainImage: '',
         contact,
         address,
         category,
+        foodCategory,
         open,
         closed,
         location,
@@ -798,6 +857,21 @@ export class ShopController {
         shopId,
         type: data.type,
         userId: data.userId,
+      });
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async addImageReport(imageId: string, userId: string) {
+    try {
+      await ImageReport.create({
+        registerDate: new Date(),
+        imageId,
+        userId,
       });
 
       return true;
