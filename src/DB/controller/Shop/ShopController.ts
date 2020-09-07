@@ -233,6 +233,20 @@ export class ShopController {
       { $match: where },
       {
         $lookup: {
+          from: 'images',
+          let: { shopId: '$_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+              },
+            },
+          ],
+          as: 'shopImage',
+        },
+      },
+      {
+        $lookup: {
           from: 'keywords',
           localField: 'keyword',
           foreignField: '_id',
