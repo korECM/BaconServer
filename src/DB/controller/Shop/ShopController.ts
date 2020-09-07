@@ -19,9 +19,10 @@ export enum ShopOrder {
 export interface ShopFilterInterface {
   category?: ShopCategory[];
   location?: Location[];
-  price?: string;
+  price?: string[];
   order?: ShopOrder;
   keyword?: KeywordInterface[];
+  name?: string;
 }
 
 export interface ReportOption {
@@ -181,14 +182,43 @@ export class ShopController {
     return shops[0];
   }
 
+  private priceToQuery(price: number) {
+    switch (price) {
+      case 5000:
+        return {
+          $lt: 5000,
+        };
+      case 10000:
+        return {
+          $lt: 10000,
+          $gt: 5000,
+        };
+      case 15000:
+        return {
+          $lt: 20000,
+          $gt: 10000,
+        };
+      case 20000:
+        return {
+          $gt: 20000,
+        };
+    }
+  }
+
   async getShops(filter: ShopFilterInterface): Promise<ShopInterface[]> {
     let where: any = {};
+    let priceQuery: any = {};
     let keywordWhere: any = {};
     let minKeywordSum = -1;
-    let { category, location, order, price, keyword } = filter;
+    let { category, location, order, price, keyword, name } = filter;
     if (category && category.length > 0) where.category = { $in: category };
     if (location && location.length > 0) where.location = { $in: location };
-    if (price && !isNaN(Number(price))) where.price = { $lte: parseInt(price) };
+    if (name && name.length > 0) where.name = { $regex: name };
+    if (price && price.every((p) => !isNaN(Number(p)))) {
+      priceQuery = {
+        $or: price.map((p) => ({ price: this.priceToQuery(parseInt(p)) })),
+      };
+    }
     if (keyword && keyword.length > 0) {
       keywordWhere.topKeyword = { $in: keyword };
       minKeywordSum = 0;
@@ -230,6 +260,7 @@ export class ShopController {
     let shops = await Shop.aggregate([
       // 해당 가게 찾은 후에
       { $match: where },
+      { $match: priceQuery },
       {
         $lookup: {
           from: 'keywords',
@@ -400,6 +431,7 @@ export class ShopController {
           __v: 0,
           liker: 0,
           scores: 0,
+          sortedKeywordObjectArray: 0,
         },
       },
       orderQuery,
