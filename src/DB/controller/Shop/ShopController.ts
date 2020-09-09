@@ -304,7 +304,7 @@ export class ShopController {
             $objectToArray: '$keyword',
           },
           keywordSum: {
-            $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment', '$keyword.spicy'],
+            $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment'],
           },
         },
       },
@@ -355,6 +355,9 @@ export class ShopController {
           },
           location: {
             $first: '$location',
+          },
+          foodCategory: {
+            $first: '$foodCategory',
           },
           registerDate: {
             $first: '$registerDate',

@@ -25,7 +25,7 @@ export enum Keyword {
   Group = 'group',
   Individual = 'individual',
   RiceAppointment = 'riceAppointment',
-  Spicy = 'spicy',
+  // Spicy = 'spicy',
 }
 
 export enum FoodCategory {
@@ -67,7 +67,7 @@ export let ShopSchema = new Schema({
   latitude: { type: Number, required: false },
   longitude: { type: Number, required: false },
   category: { type: String, enum: Object.values(ShopCategory), required: true },
-  FoodCategory: { type: [String], enum: Object.values(FoodCategory), required: true },
+  foodCategory: { type: [String], enum: Object.values(FoodCategory), required: true },
   price: Number,
   keyword: { type: Schema.Types.ObjectId, ref: 'Keyword' },
   registerDate: {

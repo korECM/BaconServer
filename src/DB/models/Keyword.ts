@@ -6,7 +6,7 @@ export interface KeywordInterface {
   group: number;
   individual: number;
   riceAppointment: number;
-  spicy: number;
+  // spicy: number;
   registerDate: Date;
   _id: any;
 }
@@ -19,7 +19,7 @@ export let KeywordSchema = new Schema({
   group: { type: Number, required: true },
   individual: { type: Number, required: true },
   riceAppointment: { type: Number, required: true },
-  spicy: { type: Number, required: true },
+  // spicy: { type: Number, required: true },
   registerDate: {
     type: Date,
     default: Date.now,
