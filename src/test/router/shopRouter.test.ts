@@ -44,14 +44,42 @@ beforeAll(async () => {
   {
     let { address, category, closed, contact, foodCategory, location, name, open } = firstShopData;
     shops.push(
-      (await shopController.createShop(name, contact, address, open, closed, 0, 0, 0, location as any, [] as FoodCategory[], category as any, {} as any))!,
+      (await shopController.createShop(
+        name,
+        contact,
+        address,
+        open,
+        closed,
+        0,
+        0,
+        0,
+        location as any,
+        [] as FoodCategory[],
+        category as any,
+        {} as any,
+        [] as any,
+      ))!,
     );
   }
   {
     let { address, category, closed, contact, foodCategory, location, name, open } = secondShopData;
 
     shops.push(
-      (await shopController.createShop(name, contact, address, open, closed, 0, 0, 0, location as any, [] as FoodCategory[], category as any, {} as any))!,
+      (await shopController.createShop(
+        name,
+        contact,
+        address,
+        open,
+        closed,
+        0,
+        0,
+        0,
+        location as any,
+        [] as FoodCategory[],
+        category as any,
+        {} as any,
+        [] as any,
+      ))!,
     );
   }
 

@@ -1,5 +1,5 @@
 import DB from '../DB';
-import { ShopController } from '../DB/controller/Shop/ShopController';
+import { MenuInputInterface, ShopController } from '../DB/controller/Shop/ShopController';
 import dotenv from 'dotenv';
 import dataJson from './finalData.json';
 import { FoodCategory, ShopCategory } from '../DB/models/Shop';
@@ -28,6 +28,12 @@ export interface Data {
   noodle: number;
   meat: number;
   etc: number;
+  menu1: string;
+  price1: number;
+  menu2: string;
+  price2: number;
+  menu3: string;
+  price3: number;
 }
 
 export enum Location {
@@ -44,6 +50,7 @@ export enum Location {
   for (let shop of dataJson as Data[]) {
     index += 1;
     let foodCategory: FoodCategory[] = [];
+    let menus: MenuInputInterface[] = [];
     let keyword: KeywordInterface = {
       _id: '',
       atmosphere: shop.atmosphere,
@@ -58,6 +65,24 @@ export enum Location {
     if (shop.noodle) foodCategory.push(FoodCategory.Noodle);
     if (shop.meat) foodCategory.push(FoodCategory.Meat);
     if (shop.etc) foodCategory.push(FoodCategory.Etc);
+    if (shop.menu1) {
+      menus.push({
+        menu: shop.menu1,
+        price: shop.price1,
+      });
+    }
+    if (shop.menu2) {
+      menus.push({
+        menu: shop.menu2,
+        price: shop.price2,
+      });
+    }
+    if (shop.menu3) {
+      menus.push({
+        menu: shop.menu3,
+        price: shop.price3,
+      });
+    }
 
     await shopController.createShop(
       shop.name,
@@ -72,6 +97,7 @@ export enum Location {
       foodCategory,
       shop.category,
       keyword,
+      menus,
     );
     console.log(`${index} : ${dataJson.length} ${shop.name} 생성`);
   }

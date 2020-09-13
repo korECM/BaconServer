@@ -32,6 +32,11 @@ export interface ReportOption {
   userId: string;
 }
 
+export interface MenuInputInterface {
+  menu: string;
+  price: number;
+}
+
 export class ShopController {
   constructor() {}
 
@@ -813,6 +818,7 @@ export class ShopController {
     foodCategory: FoodCategory[],
     category: ShopCategory,
     keywordInput: KeywordInterface,
+    menus: MenuInputInterface[],
   ): Promise<ShopInterface | null> {
     try {
       let keyword = new Keyword({
@@ -841,6 +847,14 @@ export class ShopController {
         price,
         registerDate: new Date(),
       });
+
+      for (let menu of menus) {
+        await Menu.create({
+          price: menu.price,
+          shopId: shop._id,
+          title: menu.menu,
+        });
+      }
 
       return shop as ShopInterface;
     } catch (error) {
