@@ -3,6 +3,7 @@ import { ShopController } from '../DB/controller/Shop/ShopController';
 import dotenv from 'dotenv';
 import dataJson from './finalData.json';
 import { FoodCategory, ShopCategory } from '../DB/models/Shop';
+import { KeywordInterface } from '../DB/models/Keyword';
 dotenv.config();
 
 export interface Data {
@@ -39,9 +40,19 @@ export enum Location {
 (async () => {
   await DB.connect();
   let shopController = new ShopController();
-
+  let index = 0;
   for (let shop of dataJson as Data[]) {
+    index += 1;
     let foodCategory: FoodCategory[] = [];
+    let keyword: KeywordInterface = {
+      _id: '',
+      atmosphere: shop.atmosphere,
+      costRatio: shop.costRatio,
+      individual: shop.individual,
+      group: shop.group,
+      riceAppointment: shop.riceAppointment,
+      registerDate: new Date(),
+    };
     if (shop.rice) foodCategory.push(FoodCategory.Rice);
     if (shop.bread) foodCategory.push(FoodCategory.Bread);
     if (shop.noodle) foodCategory.push(FoodCategory.Noodle);
@@ -60,7 +71,9 @@ export enum Location {
       shop.location,
       foodCategory,
       shop.category,
+      keyword,
     );
+    console.log(`${index} : ${dataJson.length} ${shop.name} 생성`);
   }
   console.log('Shop Insert 완료');
 })();

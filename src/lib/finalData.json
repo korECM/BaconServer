@@ -20,7 +20,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "부대찌개 1인분",
+    "price1": 7000,
+    "menu2": "부대찌개 소",
+    "price2": 14000,
+    "menu3": "팬 스테이크",
+    "price3": 15000
   },
   {
     "name": "가마로강정",
@@ -43,7 +49,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "매콤/달콤강정 대",
+    "price1": 14000,
+    "menu2": "매콤/달콤강정 중",
+    "price2": 8000,
+    "menu3": "매콥/달콤강정 컵",
+    "price3": 3000
   },
   {
     "name": "가야",
@@ -66,7 +78,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "보쌈정식",
+    "price1": 9000,
+    "menu2": "로스트보쌈",
+    "price2": 26000,
+    "menu3": "훈제족발",
+    "price3": 26000
   },
   {
     "name": "갈매울감자탕",
@@ -89,7 +107,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "뼈 해장국",
+    "price1": 8000,
+    "menu2": "감자탕 전골 소",
+    "price2": 25000,
+    "menu3": "메밀 막국수 비빔/물",
+    "price3": 7000
   },
   {
     "name": "거구장",
@@ -112,7 +136,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "한우생등심(국내산한우1++)",
+    "price1": 38000,
+    "menu2": "소불고기/생삼겹살/생목살",
+    "price2": 15000,
+    "menu3": "영양갈비탕",
+    "price3": 10000
   },
   {
     "name": "고기먹으러",
@@ -135,7 +165,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "삼겹살 (150g)",
+    "price1": 6000,
+    "menu2": "왕소금구이 (150g)",
+    "price2": 5500,
+    "menu3": "왕갈비",
+    "price3": 8000
   },
   {
     "name": "고기스토리",
@@ -158,7 +194,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "허브삼겹살 (180g)",
+    "price1": 8000,
+    "menu2": "와인삼겹살 (180g)",
+    "price2": 8000,
+    "menu3": "[점심] 철판제육/김치찌개/순두부찌개/된장찌개",
+    "price3": 6000
   },
   {
     "name": "고깃집",
@@ -181,7 +223,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "항정살 (180g)",
+    "price1": 12000,
+    "menu2": "소갈비살 (150g)",
+    "price2": 13000,
+    "menu3": "모둠한판 (1kg)",
+    "price3": 42000
   },
   {
     "name": "고봉삼계탕",
@@ -204,7 +252,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "약수 상황삼계탕",
+    "price1": 15000,
+    "menu2": "오리훈제(중)",
+    "price2": 25000,
+    "menu3": "전복닭죽",
+    "price3": 10000
   },
   {
     "name": "고씨네",
@@ -227,7 +281,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "스페셜 카레",
+    "price1": 9000,
+    "menu2": "돈까스카레우동",
+    "price2": 7000,
+    "menu3": "돈까스 카레",
+    "price3": 6500
   },
   {
     "name": "곤지암할매소머리국밥",
@@ -250,7 +310,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "한우 소머리국밥",
+    "price1": 7000,
+    "menu2": "순대국",
+    "price2": 7000,
+    "menu3": "한우 소머리수육(중)",
+    "price3": 25000
   },
   {
     "name": "곰팔이생고기",
@@ -273,7 +339,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "흑돼지 삼겹살(180g)",
+    "price1": 12000,
+    "menu2": "한우육회(200g)",
+    "price2": 20000,
+    "menu3": "한우등심(200g)",
+    "price3": 38000
   },
   {
     "name": "곱창고",
@@ -296,7 +368,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "한우곱창",
+    "price1": 15900,
+    "menu2": "곱창모듬구이",
+    "price2": 11900,
+    "menu3": "특양모듬구이",
+    "price3": 13900
   },
   {
     "name": "곱창스토브",
@@ -319,7 +397,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "삼창구이 (600g)",
+    "price1": 42000,
+    "menu2": "곱창구이 (200g)",
+    "price2": 17000,
+    "menu3": "염통구이",
+    "price3": 10000
   },
   {
     "name": "곱창의전설",
@@ -342,7 +426,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "치즈 통마늘 알곱창",
+    "price1": 10900,
+    "menu2": "새우 통마늘 알곱창",
+    "price2": 12900,
+    "menu3": "야채 곱창",
+    "price3": 8900
   },
   {
     "name": "구공탄불고기",
@@ -365,7 +455,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "고추장불고기백반 (1인분 200g)",
+    "price1": 8000,
+    "menu2": "간장불고기백반(1인분 200g)",
+    "price2": 8000,
+    "menu3": "간장불고기(1인분 300g)",
+    "price3": 10000
   },
   {
     "name": "내가찜한닭",
@@ -388,7 +484,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "안동찜닭(뼈)(小)",
+    "price1": 19000,
+    "menu2": "순살안동찜닭(小)",
+    "price2": 20000,
+    "menu3": "치즈순살고추장찜닭(小)",
+    "price3": 23000
   },
   {
     "name": "닥터로빈",
@@ -411,10 +513,16 @@
     "bread": 1,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "매콥버섯새우크림파스타",
+    "price1": 17500,
+    "menu2": "통단호박스프",
+    "price2": 18000,
+    "menu3": "트러플향이 가득한 버섯크림리조또",
+    "price3": 17500
   },
   {
-    "name": "단비식당",
+    "name": "단비분식",
     "address": "서울특별시 동작구 흑석로9길 13",
     "location": "front",
     "latitude": "",
@@ -434,7 +542,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "육개장",
+    "price1": 6000,
+    "menu2": "소고기국밥",
+    "price2": 5000,
+    "menu3": "소고기덮밥",
+    "price3": 5000
   },
   {
     "name": "대박",
@@ -457,7 +571,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "모듬초밥(10PS)",
+    "price1": 10000,
+    "menu2": "회덮밥",
+    "price2": 8000,
+    "menu3": "모듬회(小)",
+    "price3": 55000
   },
   {
     "name": "더돼지",
@@ -480,7 +600,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "삼겹살",
+    "price1": 13000,
+    "menu2": "항정살",
+    "price2": 13000,
+    "menu3": "가브리살",
+    "price3": 13000
   },
   {
     "name": "더진국",
@@ -503,7 +629,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "수육국밥",
+    "price1": 6500,
+    "menu2": "순대국밥",
+    "price2": 6500,
+    "menu3": "얼큰국밥",
+    "price3": 7000
   },
   {
     "name": "도리도리하찌",
@@ -526,7 +658,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "마늘 닭도리탕",
+    "price1": 21000,
+    "menu2": "얼큰 닭도리탕",
+    "price2": 19000,
+    "menu3": "감자전",
+    "price3": 5000
   },
   {
     "name": "등촌샤브칼국수",
@@ -549,7 +687,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "버섯칼국수",
+    "price1": 8000,
+    "menu2": "비빔막국수",
+    "price2": 7000,
+    "menu3": "소고기샤브(추가)",
+    "price3": 9000
   },
   {
     "name": "또우리",
@@ -572,7 +716,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "직화 쭈꾸미/제육볶음",
+    "price1": 8000,
+    "menu2": "생 삼겹살/목살(200g)",
+    "price2": 12000,
+    "menu3": "한우 등심 (150g)",
+    "price3": 33000
   },
   {
     "name": "뚜레쥬르",
@@ -595,7 +745,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "정통고로케",
+    "price1": 1800,
+    "menu2": "BELT 샌드위치",
+    "price2": 5500,
+    "menu3": "치킨 텐더 샐러드",
+    "price3": 6500
   },
   {
     "name": "라이스 & 포테이토",
@@ -618,7 +774,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "김치볶음밥",
+    "price1": 4500,
+    "menu2": "베이컨김치볶음밥",
+    "price2": 5500,
+    "menu3": "우삼겹김치볶음밥",
+    "price3": 6500
   },
   {
     "name": "라화쿵부",
@@ -641,7 +803,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 1
+    "etc": 1,
+    "menu1": "마라탕",
+    "price1": 5000,
+    "menu2": "만두류",
+    "price2": 7000,
+    "menu3": "운남 쌀국수",
+    "price3": 8000
   },
   {
     "name": "리얼후라이",
@@ -651,7 +819,7 @@
     "longitude": "",
     "contact": "02-813-1804",
     "category": "western",
-    "price": 16000,
+    "price": 15000,
     "closed": "",
     "open": "16:00 - 01:00",
     "costRatio": 0,
@@ -664,7 +832,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "오미치킨",
+    "price1": 16000,
+    "menu2": "크리스피 후라이드",
+    "price2": 15000,
+    "menu3": "오미갈릭치킨",
+    "price3": 17000
   },
   {
     "name": "마포최대포숯불갈매기돼지갈비",
@@ -687,7 +861,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "갈매기살",
+    "price1": 12000,
+    "menu2": "돼지갈비",
+    "price2": 12000,
+    "menu3": "가브리살",
+    "price3": 12000
   },
   {
     "name": "맛있으면돼지",
@@ -710,14 +890,20 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "생삼겹살(국내산)200g",
+    "price1": 13000,
+    "menu2": "곱창전골(대)",
+    "price2": 20000,
+    "menu3": "삼겹살(독일산)160g",
+    "price3": 6900
   },
   {
     "name": "맥도날드",
     "address": "서울특별시 동작구 흑석동 221 중앙대학교 약학대학 R&D센터",
     "location": "front",
-    "latitude": 37.506431,
-    "longitude": 126.958634,
+    "latitude": 37.506661,
+    "longitude": 126.958719,
     "contact": "070-7017-1417",
     "category": "western",
     "price": 4000,
@@ -733,7 +919,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "빅맥 세트",
+    "price1": 4900,
+    "menu2": "맥스파이시 상하이버거",
+    "price2": 4900,
+    "menu3": "상하이 치킨 스낵랩",
+    "price3": 2000
   },
   {
     "name": "명당김밥",
@@ -756,7 +948,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 1,
+    "menu1": "명당김밥",
+    "price1": 2600,
+    "menu2": "참치김밥",
+    "price2": 3600,
+    "menu3": "라볶이",
+    "price3": 3600
   },
   {
     "name": "명문본가왕족발과보쌈",
@@ -779,7 +977,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "보쌈小",
+    "price1": 25000,
+    "menu2": "족발小",
+    "price2": 25000,
+    "menu3": "보쌈+족발 SET(小)",
+    "price3": 45000
   },
   {
     "name": "모모치",
@@ -802,7 +1006,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "모모치 카레",
+    "price1": 4000,
+    "menu2": "돈까스 카레",
+    "price2": 6000,
+    "menu3": "해산물 카레라면",
+    "price3": 5500
   },
   {
     "name": "미니자이언트",
@@ -825,7 +1035,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "아마트리치아나",
+    "price1": 7000,
+    "menu2": "로제파스타",
+    "price2": 7000,
+    "menu3": "수제함박스테이크",
+    "price3": 8000
   },
   {
     "name": "미묘라멘",
@@ -848,7 +1064,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "돈코츠라멘",
+    "price1": 6000,
+    "menu2": "아마이라멘",
+    "price2": 6500,
+    "menu3": "미소라멘",
+    "price3": 6500
   },
   {
     "name": "미소야",
@@ -871,7 +1093,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "로스카츠",
+    "price1": 8000,
+    "menu2": "고구마 치즈 돈카츠",
+    "price2": 9500,
+    "menu3": "알밥정식",
+    "price3": 8500
   },
   {
     "name": "원조미스터꼼장어쭈꾸미",
@@ -894,7 +1122,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "꼼장어",
+    "price1": 13000,
+    "menu2": "쭈꾸미",
+    "price2": 12000,
+    "menu3": "뼈없는닭발",
+    "price3": 10000
   },
   {
     "name": "밀짚모자",
@@ -917,7 +1151,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "모둠전",
+    "price1": 12000,
+    "menu2": "잔치국수",
+    "price2": 5000,
+    "menu3": "모둠취김",
+    "price3": 16000
   },
   {
     "name": "바야흐로",
@@ -940,7 +1180,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "관자버터구이",
+    "price1": 22000,
+    "menu2": "블랙앵거스스테이크",
+    "price2": 32000,
+    "menu3": "바지락술찜",
+    "price3": 26000
   },
   {
     "name": "박가부대",
@@ -950,7 +1196,7 @@
     "longitude": "",
     "contact": "02-822-8854",
     "category": "korean",
-    "price": 9000,
+    "price": 7500,
     "closed": "",
     "open": "11:30 - 23:00",
     "costRatio": 0,
@@ -963,7 +1209,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "수제햄부대찌개(1인분)",
+    "price1": 8900,
+    "menu2": "박가부대찌개(1인분)",
+    "price2": 7500,
+    "menu3": "빠네퐁듀닭갈비(1인분)",
+    "price3": 11900
   },
   {
     "name": "박군하누",
@@ -986,7 +1238,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "하누모둠",
+    "price1": 32000,
+    "menu2": "하누등심",
+    "price2": 32000,
+    "menu3": "하누갈비살",
+    "price3": 30000
   },
   {
     "name": "반할",
@@ -1009,7 +1267,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "연어 아보카도에그덮밥",
+    "price1": 13500,
+    "menu2": "들깨크림파스타",
+    "price2": 12000,
+    "menu3": "동남아풍 바질돼지고기덮밥",
+    "price3": 9500
   },
   {
     "name": "복양꼬치샤브샤브",
@@ -1032,7 +1296,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "동파육 중",
+    "price1": 6000,
+    "menu2": "꿔바로우",
+    "price2": 13000,
+    "menu3": "마라탕면",
+    "price3": 6000
   },
   {
     "name": "본죽",
@@ -1055,7 +1325,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "쇠고기야채죽",
+    "price1": 9000,
+    "menu2": "전복죽",
+    "price2": 11000,
+    "menu3": "단호박죽",
+    "price3": 9000
   },
   {
     "name": "봉평면옥",
@@ -1078,7 +1354,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "메밀막국수(물,비빔)",
+    "price1": 6000,
+    "menu2": "메밀전병",
+    "price2": 5000,
+    "menu3": "만두",
+    "price3": 5000
   },
   {
     "name": "사과나무왕돈까스",
@@ -1101,7 +1383,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "왕돈까스",
+    "price1": 6000,
+    "menu2": "제육덮밥",
+    "price2": 6000,
+    "menu3": "우동",
+    "price3": 5500
   },
   {
     "name": "사이공리",
@@ -1124,7 +1412,13 @@
     "bread": 1,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "쌀국수",
+    "price1": 6900,
+    "menu2": "반미",
+    "price2": 5900,
+    "menu3": "분짜",
+    "price3": 6900
   },
   {
     "name": "삼대째손두부",
@@ -1147,7 +1441,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "순두부찌개",
+    "price1": 8000,
+    "menu2": "물 순두부",
+    "price2": 9000,
+    "menu3": "두부 보쌈(소)",
+    "price3": 27000
   },
   {
     "name": "삼목등심",
@@ -1170,7 +1470,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "와규 프리미엄(150g)",
+    "price1": 28000,
+    "menu2": "와규 스페셜(150g)",
+    "price2": 22000,
+    "menu3": "와규불초밥",
+    "price3": 21000
   },
   {
     "name": "상도늘보리",
@@ -1180,7 +1486,7 @@
     "longitude": "",
     "contact": "02-822-2941",
     "category": "korean",
-    "price": 8000,
+    "price": 10000,
     "closed": "",
     "open": "10:00 - 22:00",
     "costRatio": 0,
@@ -1193,7 +1499,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "코다리조림 (소)",
+    "price1": 29000,
+    "menu2": "쭈꾸미철판 1인",
+    "price2": 11000,
+    "menu3": "꼬막비빔밥",
+    "price3": 10000
   },
   {
     "name": "상도정",
@@ -1216,7 +1528,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "곱창전골(1인)",
+    "price1": 20000,
+    "menu2": "버섯생불고기",
+    "price2": 20000,
+    "menu3": "생등심(1인분)",
+    "price3": 45000
   },
   {
     "name": "샤브일번가",
@@ -1239,7 +1557,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "태양초블루스",
+    "price1": 16000,
+    "menu2": "차숙이블루스",
+    "price2": 15000,
+    "menu3": "뚝배기 샤브",
+    "price3": 7000
   },
   {
     "name": "서브웨이",
@@ -1262,7 +1586,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "얼티밋",
+    "price1": 6500,
+    "menu2": "햄",
+    "price2": 4700,
+    "menu3": "베지",
+    "price3": 3900
   },
   {
     "name": "성민양꼬치",
@@ -1285,7 +1615,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "양꼬치",
+    "price1": 11000,
+    "menu2": "양갈비살",
+    "price2": 13000,
+    "menu3": "호남새우",
+    "price3": 20000
   },
   {
     "name": "소문난만천곱장",
@@ -1308,7 +1644,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "야채곱창",
+    "price1": 9000,
+    "menu2": "소곱창전골 (소)",
+    "price2": 22000,
+    "menu3": "닭갈비",
+    "price3": 10000
   },
   {
     "name": "수목식당",
@@ -1331,7 +1673,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "라제비",
+    "price1": 4000,
+    "menu2": "잔치국수",
+    "price2": 4000,
+    "menu3": "칼국수",
+    "price3": 5000
   },
   {
     "name": "순대나라",
@@ -1354,7 +1702,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "순대국밥",
+    "price1": 7000,
+    "menu2": "따로국밥",
+    "price2": 8000,
+    "menu3": "술국(안주)",
+    "price3": 12000
   },
   {
     "name": "스시초이",
@@ -1377,7 +1731,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "찹스테이크 덮밥 정식",
+    "price1": 10000,
+    "menu2": "치즈 고로케(5p)",
+    "price2": 4000,
+    "menu3": "특선초밥(10p) 정식",
+    "price3": 10000
   },
   {
     "name": "스시톡톡",
@@ -1400,7 +1760,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "오늘의 초밥(12ps)",
+    "price1": 13000,
+    "menu2": "싱싱회덮밥",
+    "price2": 7000,
+    "menu3": "알탕(1인분)",
+    "price3": 8000
   },
   {
     "name": "신룽푸마라탕",
@@ -1423,7 +1789,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 1
+    "etc": 1,
+    "menu1": "내 마음대로 마라탕 450g",
+    "price1": 8000,
+    "menu2": "내 마음대로 마라샹궈 600g",
+    "price2": 18000,
+    "menu3": "꿔바로우",
+    "price3": 8000
   },
   {
     "name": "아이언키친",
@@ -1446,7 +1818,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "페퍼로니베이컨볶음밥",
+    "price1": 7500,
+    "menu2": "떡돈(돈가스+떡볶이)",
+    "price2": 10000,
+    "menu3": "페퍼로니알리오올리오",
+    "price3": 11000
   },
   {
     "name": "안동장",
@@ -1469,7 +1847,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "짜장면",
+    "price1": 5500,
+    "menu2": "짬뽕",
+    "price2": 6000,
+    "menu3": "탕수육",
+    "price3": 14000
   },
   {
     "name": "양쉐프",
@@ -1492,7 +1876,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "치킨스테이크",
+    "price1": 5000,
+    "menu2": "양념스테이크",
+    "price2": 5500,
+    "menu3": "로스스테이크",
+    "price3": 5000
   },
   {
     "name": "어부사시가",
@@ -1515,7 +1905,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "고둥어구이",
+    "price1": 10000,
+    "menu2": "갈치구이",
+    "price2": 12000,
+    "menu3": "김치찌개",
+    "price3": 6000
   },
   {
     "name": "엉터리생고기 흑석점",
@@ -1538,7 +1934,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "소한마리",
+    "price1": 99000,
+    "menu2": "돼지한마리",
+    "price2": 62000,
+    "menu3": "생삼겹살(170g)",
+    "price3": 15000
   },
   {
     "name": "엉터리생고기 중앙대점",
@@ -1561,7 +1963,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "돼지 무한리필 A SET",
+    "price1": 13000,
+    "menu2": "돼지 무한리필 B SET",
+    "price2": 13900,
+    "menu3": "소고기 무한리필 SET",
+    "price3": 23000
   },
   {
     "name": "국가대패",
@@ -1584,30 +1992,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
-  },
-  {
-    "name": "엉터리양평해장국",
-    "address": "서울특별시 동작구 서달로14나길 8",
-    "location": "hs_station",
-    "latitude": "",
-    "longitude": "",
-    "contact": "02-822-3374",
-    "category": "korean",
-    "price": 0,
-    "closed": "",
-    "open": "11:00 - 22:50",
-    "costRatio": 0,
-    "atmosphere": 0,
-    "group": 0,
-    "individual": 0,
-    "riceAppointment": 0,
-    "spicy": 0,
-    "rice": 0,
-    "bread": 0,
-    "noodle": 0,
-    "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "5mm 대패삼겹살",
+    "price1": 3900,
+    "menu2": "국내산 차돌박이",
+    "price2": 9900,
+    "menu3": "2cm 숙성삼겹살",
+    "price3": 3900
   },
   {
     "name": "연어이야기",
@@ -1630,7 +2021,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "생연어 사시미 리필",
+    "price1": 17900,
+    "menu2": "특수부위 생연어 사시미 리필",
+    "price2": 19900,
+    "menu3": "VIP 실장님 생연어 사시미 리필",
+    "price3": 22900
   },
   {
     "name": "열정식당",
@@ -1653,7 +2050,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "제육볶음",
+    "price1": 5000,
+    "menu2": "돼지갈비찜",
+    "price2": 5000,
+    "menu3": "김치찌개",
+    "price3": 5000
   },
   {
     "name": "영광족발",
@@ -1676,7 +2079,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "웰빙왕족발 (소)",
+    "price1": 12000,
+    "menu2": "사골곰탕",
+    "price2": 8000,
+    "menu3": "육사시미 (중)",
+    "price3": 30000
   },
   {
     "name": "오시오떡볶이",
@@ -1699,7 +2108,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "떡볶이",
+    "price1": 2500,
+    "menu2": "만두 3개",
+    "price2": 1200,
+    "menu3": "김밥 3개",
+    "price3": 1200
   },
   {
     "name": "올바른식당",
@@ -1722,7 +2137,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "통삼겹살(150g)",
+    "price1": 6900,
+    "menu2": "통목살(150g)",
+    "price2": 6900,
+    "menu3": "육회 비빔밥",
+    "price3": 8000
   },
   {
     "name": "우뇽파스타",
@@ -1745,7 +2166,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "베이컨과 훈제연어 스파게티",
+    "price1": 6000,
+    "menu2": "새우파스타",
+    "price2": 8000,
+    "menu3": "베이컨과 카라멜양파 파스타",
+    "price3": 7000
   },
   {
     "name": "우리집칼국수",
@@ -1768,7 +2195,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "바지락 칼국수",
+    "price1": 5000,
+    "menu2": "들깨 칼국수",
+    "price2": 6000,
+    "menu3": "떡 만두국",
+    "price3": 6000
   },
   {
     "name": "우슬재",
@@ -1791,7 +2224,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "꼬막 비빔밥",
+    "price1": 7000,
+    "menu2": "갈치조림(한마리)",
+    "price2": 25000,
+    "menu3": "묵은지닭볶음탕",
+    "price3": 35000
   },
   {
     "name": "원조꼬끼오숯불통닭",
@@ -1814,7 +2253,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "숯불구이 양념",
+    "price1": 18000,
+    "menu2": "숯불구이 소금",
+    "price2": 18000,
+    "menu3": "한치구이",
+    "price3": 15000
   },
   {
     "name": "원조소금구이",
@@ -1837,7 +2282,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "생LA갈비(250g)",
+    "price1": 13000,
+    "menu2": "생삼겹살(200g)",
+    "price2": 11000,
+    "menu3": "소금구이(200g)",
+    "price3": 9000
   },
   {
     "name": "원할머니보쌈족발",
@@ -1860,7 +2311,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "보쌈정식",
+    "price1": 9000,
+    "menu2": "오리보쌈정식",
+    "price2": 10000,
+    "menu3": "모둠보쌈 (소)",
+    "price3": 30000
   },
   {
     "name": "유유초밥",
@@ -1883,7 +2340,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "노란접시",
+    "price1": 1500,
+    "menu2": "빨간접시",
+    "price2": 2600,
+    "menu3": "검은접시",
+    "price3": 4400
   },
   {
     "name": "유정쌈밥",
@@ -1906,30 +2369,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
-  },
-  {
-    "name": "육반연반",
-    "address": "서울특별시 동작구 서달로14길 24 2F",
-    "location": "hs_station",
-    "latitude": "",
-    "longitude": "",
-    "contact": "010-3616-3609",
-    "category": "korean",
-    "price": 0,
-    "closed": "",
-    "open": "18:00 - 02:00",
-    "costRatio": 0,
-    "atmosphere": 0,
-    "group": 0,
-    "individual": 0,
-    "riceAppointment": 0,
-    "spicy": 0,
-    "rice": 0,
-    "bread": 0,
-    "noodle": 0,
-    "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "유정쌈밥(국내산)",
+    "price1": 8000,
+    "menu2": "유정쌈밥(미국산)",
+    "price2": 7000,
+    "menu3": "소불고기쌈밥(국내산)",
+    "price3": 12000
   },
   {
     "name": "은행골",
@@ -1952,7 +2398,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "특상초밥",
+    "price1": 20000,
+    "menu2": "특선초밥",
+    "price2": 15000,
+    "menu3": "특미초밥",
+    "price3": 10000
   },
   {
     "name": "이탈리안 돈까스 칡불냉면",
@@ -1975,7 +2427,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "매콤 돈가스",
+    "price1": 7500,
+    "menu2": "돈냉면",
+    "price2": 7500,
+    "menu3": "물냉면",
+    "price3": 6000
   },
   {
     "name": "일이삼식당",
@@ -1998,7 +2456,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "제육볶음정식",
+    "price1": 6000,
+    "menu2": "김치제육볶음정식",
+    "price2": 6000,
+    "menu3": "닭볶음정식",
+    "price3": 6000
   },
   {
     "name": "자담상",
@@ -2021,7 +2485,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "한 상 정식 1인기준(2인 기본)",
+    "price1": 15000,
+    "menu2": "불고기",
+    "price2": 20000,
+    "menu3": "해물파전",
+    "price3": 15000
   },
   {
     "name": "재일양꼬치",
@@ -2044,7 +2514,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "양꼬치",
+    "price1": 10000,
+    "menu2": "양갈비살",
+    "price2": 9000,
+    "menu3": "양고기 전골",
+    "price3": 25000
   },
   {
     "name": "재팔이네닭발",
@@ -2067,7 +2543,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "매운국물닭발",
+    "price1": 18000,
+    "menu2": "숯불무뼈닭발",
+    "price2": 18000,
+    "menu3": "숯불순살닭갈비",
+    "price3": 18000
   },
   {
     "name": "정가네 고려왕족발",
@@ -2090,7 +2572,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "족발",
+    "price1": 22000,
+    "menu2": "치즈불족발",
+    "price2": 27000,
+    "menu3": "미니족",
+    "price3": 13000
   },
   {
     "name": "정직한 김치찌개",
@@ -2113,7 +2601,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "돼지고기 김치찌개",
+    "price1": 7000,
+    "menu2": "스팸 김치찌개",
+    "price2": 7000,
+    "menu3": "계란말이",
+    "price3": 6000
   },
   {
     "name": "죠스떡볶이",
@@ -2136,7 +2630,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "죠스떡볶이",
+    "price1": 3000,
+    "menu2": "치즈떡볶이",
+    "price2": 4500,
+    "menu3": "죠스찰순대",
+    "price3": 3500
   },
   {
     "name": "주주총회",
@@ -2146,7 +2646,7 @@
     "longitude": "",
     "contact": "02-812-6685",
     "category": "japanese",
-    "price": 27000,
+    "price": 17000,
     "closed": "일 휴무",
     "open": "17:00 - 24:00",
     "costRatio": 1,
@@ -2159,7 +2659,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "싱글 세트",
+    "price1": 27000,
+    "menu2": "숙성회 2인",
+    "price2": 43000,
+    "menu3": "숙성회 초밥(10pcs)",
+    "price3": 17000
   },
   {
     "name": "준호가만드는부대찌개",
@@ -2182,7 +2688,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "부대찌개 1인분",
+    "price1": 7000,
+    "menu2": "라면사리",
+    "price2": 500,
+    "menu3": "모듬소세지",
+    "price3": 4000
   },
   {
     "name": "준호가만드는즉석떡볶이",
@@ -2205,7 +2717,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "기본 떡볶이",
+    "price1": 4500,
+    "menu2": "치즈 떡볶이",
+    "price2": 5500,
+    "menu3": "버터갈릭감자튀김",
+    "price3": 3000
   },
   {
     "name": "준호네돈가스",
@@ -2228,7 +2746,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "카레돈가스",
+    "price1": 6000,
+    "menu2": "매콤돈가스",
+    "price2": 6000,
+    "menu3": "매콤피자돈가스",
+    "price3": 6500
   },
   {
     "name": "중대양곱창",
@@ -2251,7 +2775,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "곱창(200g)",
+    "price1": 19000,
+    "menu2": "육사시미(뭉티기)(200g)",
+    "price2": 30000,
+    "menu3": "모듬한판 中(2~3인)(500g)",
+    "price3": 45000
   },
   {
     "name": "중문닭갈비",
@@ -2274,7 +2804,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "닭갈비",
+    "price1": 7500,
+    "menu2": "닭갈비 덮밥",
+    "price2": 5000,
+    "menu3": "짜장 닭갈비",
+    "price3": 7500
   },
   {
     "name": "중앙돼지마을",
@@ -2284,7 +2820,7 @@
     "longitude": "",
     "contact": "02-827-0608",
     "category": "korean",
-    "price": 5500,
+    "price": 5000,
     "closed": "",
     "open": "09:30 - 22:00",
     "costRatio": 1,
@@ -2297,7 +2833,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "삼겹살",
+    "price1": 6500,
+    "menu2": "철판삼겹살볶음",
+    "price2": 6000,
+    "menu3": "김치찌개",
+    "price3": 5000
   },
   {
     "name": "진미순대",
@@ -2320,7 +2862,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "순대국밥",
+    "price1": 6000,
+    "menu2": "따로국밥",
+    "price2": 7000,
+    "menu3": "편육",
+    "price3": 10000
   },
   {
     "name": "진상천",
@@ -2343,7 +2891,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "짜장면",
+    "price1": 5000,
+    "menu2": "짬뽕",
+    "price2": 6000,
+    "menu3": "볶음밥",
+    "price3": 6000
   },
   {
     "name": "채홍",
@@ -2366,7 +2920,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "옛날콩짜장",
+    "price1": 6000,
+    "menu2": "홍합짬뽕(밥)",
+    "price2": 7000,
+    "menu3": "잡채밥",
+    "price3": 7000
   },
   {
     "name": "청기와뼈다귀해장국",
@@ -2389,7 +2949,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "뼈해장국",
+    "price1": 8000,
+    "menu2": "뚝배기불고기",
+    "price2": 8000,
+    "menu3": "뼈전골 (소)",
+    "price3": 25000
   },
   {
     "name": "초반식당",
@@ -2412,7 +2978,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "숙성삼겹살 170g",
+    "price1": 13000,
+    "menu2": "숙성목살 170g",
+    "price2": 13000,
+    "menu3": "소 곱창 180g",
+    "price3": 16000
   },
   {
     "name": "초원떡볶이",
@@ -2435,7 +3007,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "쌀떡볶이",
+    "price1": 2500,
+    "menu2": "튀김 5개",
+    "price2": 2500,
+    "menu3": "찹쌀순대",
+    "price3": 3000
   },
   {
     "name": "충북순대",
@@ -2458,30 +3036,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
-  },
-  {
-    "name": "충북원조순대국밥",
-    "address": "서울특별시 동작구 서달로14길 16",
-    "location": "hs_station",
-    "latitude": "",
-    "longitude": "",
-    "contact": "02-823-0729",
-    "category": "korean",
-    "price": 7000,
-    "closed": "",
-    "open": "",
-    "costRatio": 0,
-    "atmosphere": 0,
-    "group": 0,
-    "individual": 1,
-    "riceAppointment": 0,
-    "spicy": 0,
-    "rice": 1,
-    "bread": 0,
-    "noodle": 0,
-    "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "순대국밥",
+    "price1": 7000,
+    "menu2": "따로국밥",
+    "price2": 8000,
+    "menu3": "모둠순대",
+    "price3": 12000
   },
   {
     "name": "치폴레옹",
@@ -2504,7 +3065,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "웰빙 스테이크",
+    "price1": 5500,
+    "menu2": "간장 스테이크",
+    "price2": 6000,
+    "menu3": "칠리 스테이크",
+    "price3": 6500
   },
   {
     "name": "칠기마라탕",
@@ -2514,7 +3081,7 @@
     "longitude": "",
     "contact": "02-817-7798",
     "category": "chinese",
-    "price": 7000,
+    "price": 6000,
     "closed": "명절 휴무",
     "open": "11:00 - 22:00",
     "costRatio": 0,
@@ -2527,7 +3094,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 1
+    "etc": 1,
+    "menu1": "마라탕 100g(6000~)",
+    "price1": 1800,
+    "menu2": "마라샹궈 100g(16000~)",
+    "price2": 3200,
+    "menu3": "꿔바로우 소",
+    "price3": 7000
   },
   {
     "name": "침사추이",
@@ -2537,7 +3110,7 @@
     "longitude": "",
     "contact": "02-816-7472",
     "category": "chinese",
-    "price": 7000,
+    "price": 8000,
     "closed": "",
     "open": "11:30 - 22:00",
     "costRatio": 0,
@@ -2550,7 +3123,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "자장면",
+    "price1": 8000,
+    "menu2": "삼선짬뽕",
+    "price2": 11000,
+    "menu3": "Special Menu",
+    "price3": 250000
   },
   {
     "name": "커리야",
@@ -2573,10 +3152,16 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "치킨 마크니",
+    "price1": 11000,
+    "menu2": "비프 코르마",
+    "price2": 11000,
+    "menu3": "치킨 티카 마살라",
+    "price3": 11000
   },
   {
-    "name": "쿵푸마라탕",
+    "name": "탕화쿵푸마라탕",
     "address": "서울시 동작구 흑석동 190-25",
     "location": "front",
     "latitude": "",
@@ -2596,7 +3181,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 1
+    "etc": 1,
+    "menu1": "마라탕 100g(5000~)",
+    "price1": 1500,
+    "menu2": "마라샹궈 100g(15000~)",
+    "price2": 3000,
+    "menu3": "소고기 (100g)",
+    "price3": 3000
   },
   {
     "name": "크리스피크림도넛",
@@ -2606,7 +3197,7 @@
     "longitude": "",
     "contact": "02-3280-1937",
     "category": "western",
-    "price": 2500,
+    "price": 1500,
     "closed": "",
     "open": "08:00 - 22:00",
     "costRatio": 0,
@@ -2619,7 +3210,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "리고 피넛버터",
+    "price1": 2000,
+    "menu2": "뉴욕 치즈케익",
+    "price2": 1800,
+    "menu3": "캬라멜 아이스트",
+    "price3": 1500
   },
   {
     "name": "큰맘할매순대국",
@@ -2642,7 +3239,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "순대국밥",
+    "price1": 7000,
+    "menu2": "수육국밥",
+    "price2": 7000,
+    "menu3": "뼈해장국",
+    "price3": 8000
   },
   {
     "name": "타누키돈부리",
@@ -2665,7 +3268,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "가츠동",
+    "price1": 6500,
+    "menu2": "가라야게동",
+    "price2": 7500,
+    "menu3": "사케동",
+    "price3": 9500
   },
   {
     "name": "태능솔밭갈비",
@@ -2688,7 +3297,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "돼지갈비",
+    "price1": 12000,
+    "menu2": "선지탕",
+    "price2": 6000,
+    "menu3": "냉면",
+    "price3": 6000
   },
   {
     "name": "토마트",
@@ -2711,7 +3326,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "마르게리따",
+    "price1": 17000,
+    "menu2": "치마살스테이크",
+    "price2": 36000,
+    "menu3": "마리나라",
+    "price3": 15000
   },
   {
     "name": "이태원샐러드",
@@ -2734,7 +3355,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "이태원 비프 스테이크 샐러드",
+    "price1": 8500,
+    "menu2": "이태원 수제 리코타 치즈 샐러드",
+    "price2": 7500,
+    "menu3": "이태원 바질 파스타",
+    "price3": 6900
   },
   {
     "name": "팜카페",
@@ -2757,7 +3384,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "로스트비프 빈스 샐러드",
+    "price1": 8900,
+    "menu2": "햄 치즈 샌드위치",
+    "price2": 8900,
+    "menu3": "단호박 브리또",
+    "price3": 3900
   },
   {
     "name": "맥피스",
@@ -2780,7 +3413,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "페퍼로니 피자",
+    "price1": 16000,
+    "menu2": "리얼베이컨포테이토피자",
+    "price2": 17000,
+    "menu3": "버팔로 핫윙",
+    "price3": 17000
   },
   {
     "name": "포포인",
@@ -2803,7 +3442,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "포포인 쌀국수 S",
+    "price1": 6500,
+    "menu2": "나시고랭",
+    "price2": 11500,
+    "menu3": "누들 떡볶이",
+    "price3": 4000
   },
   {
     "name": "프랑세즈",
@@ -2826,7 +3471,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "치아바타샌드위치",
+    "price1": 6000,
+    "menu2": "베이컨치즈",
+    "price2": 4300,
+    "menu3": "크림치즈빵빵",
+    "price3": 1800
   },
   {
     "name": "피자보이시나",
@@ -2836,7 +3487,7 @@
     "longitude": "",
     "contact": "02-815-6564",
     "category": "western",
-    "price": 0,
+    "price": 8900,
     "closed": "",
     "open": "11:00 - 22:30",
     "costRatio": 0,
@@ -2849,7 +3500,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "렌치스파이스 R",
+    "price1": 11900,
+    "menu2": "베이컨체다 R",
+    "price2": 11900,
+    "menu3": "마가리타 R",
+    "price3": 8900
   },
   {
     "name": "하꼬멘",
@@ -2872,7 +3529,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "돈코츠멘",
+    "price1": 5000,
+    "menu2": "소유멘",
+    "price2": 5000,
+    "menu3": "탄탄멘",
+    "price3": 5000
   },
   {
     "name": "하노이별",
@@ -2895,7 +3558,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "생홍두깨 쌀국수",
+    "price1": 7000,
+    "menu2": "생홍두깨와 차돌박이쌀국수",
+    "price2": 7000,
+    "menu3": "신선한 해산물쌀국수",
+    "price3": 7500
   },
   {
     "name": "학교종이땡땡땡",
@@ -2918,7 +3587,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "제육덮밥",
+    "price1": 5500,
+    "menu2": "오징어짬뽕라면",
+    "price2": 4500,
+    "menu3": "쫄순(순두부찌개/쫄면사리)",
+    "price3": 6000
   },
   {
     "name": "해랑",
@@ -2941,7 +3616,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "모듬 초밥 1인분",
+    "price1": 10000,
+    "menu2": "모듬초밥 스페셜",
+    "price2": 15000,
+    "menu3": "왕새우 튀김",
+    "price3": 15000
   },
   {
     "name": "해오름갈비",
@@ -2964,7 +3645,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "한우꽃등심(A++/150g)",
+    "price1": 39000,
+    "menu2": "와규꽃등심(150g)",
+    "price2": 29000,
+    "menu3": "인삼불고기정식",
+    "price3": 12000
   },
   {
     "name": "허수아비",
@@ -2987,7 +3674,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "로스까스",
+    "price1": 6000,
+    "menu2": "쇠고기쌀국수",
+    "price2": 5500,
+    "menu3": "매운쇠고기쌀국수",
+    "price3": 6500
   },
   {
     "name": "호치킨",
@@ -3010,7 +3703,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "크리스피치킨",
+    "price1": 9500,
+    "menu2": "양념치킨",
+    "price2": 10900,
+    "menu3": "간장치킨",
+    "price3": 10900
   },
   {
     "name": "홍당무",
@@ -3033,7 +3732,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "믹스주먹밥",
+    "price1": 2800,
+    "menu2": "참치김밥",
+    "price2": 3500,
+    "menu3": "치즈떡볶이",
+    "price3": 5000
   },
   {
     "name": "홍천닭갈비",
@@ -3043,7 +3748,7 @@
     "longitude": "",
     "contact": "02-817-8637",
     "category": "korean",
-    "price": 9000,
+    "price": 9500,
     "closed": "",
     "open": "11:30 - 22:50",
     "costRatio": 0,
@@ -3056,7 +3761,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "닭갈비",
+    "price1": 9000,
+    "menu2": "매운닭갈비",
+    "price2": 9000,
+    "menu3": "목삼겹 두루치기",
+    "price3": 9000
   },
   {
     "name": "홍콩반점0410",
@@ -3079,7 +3790,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "짜장면",
+    "price1": 4500,
+    "menu2": "짬뽕",
+    "price2": 5500,
+    "menu3": "탕수육 小",
+    "price3": 11000
   },
   {
     "name": "화르르",
@@ -3102,7 +3819,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "풍천민물장어",
+    "price1": 19000,
+    "menu2": "꼼장어",
+    "price2": 10000,
+    "menu3": "닭발",
+    "price3": 10000
   },
   {
     "name": "황토정",
@@ -3125,7 +3848,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "소등심(180g)",
+    "price1": 35000,
+    "menu2": "삼겹살(180g)",
+    "price2": 12000,
+    "menu3": "비빔밥",
+    "price3": 6000
   },
   {
     "name": "흑석드럼통소금구이",
@@ -3148,7 +3877,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "소금구이",
+    "price1": 10000,
+    "menu2": "목살",
+    "price2": 12000,
+    "menu3": "막창",
+    "price3": 12000
   },
   {
     "name": "흑석호치민",
@@ -3168,10 +3903,16 @@
     "riceAppointment": 1,
     "spicy": 0,
     "rice": 1,
-    "bread": 0,
-    "noodle": 0,
-    "meat": 1,
-    "etc": 0
+    "bread": 1,
+    "noodle": 1,
+    "meat": 0,
+    "etc": 0,
+    "menu1": "쌀국수",
+    "price1": 11000,
+    "menu2": "분짜",
+    "price2": 13000,
+    "menu3": "반미 샌드위치",
+    "price3": 8500
   },
   {
     "name": "흑수돈",
@@ -3194,7 +3935,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "돈가스 무한리필",
+    "price1": 7500,
+    "menu2": "",
+    "price2": "",
+    "menu3": "",
+    "price3": ""
   },
   {
     "name": "KFC",
@@ -3217,7 +3964,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "타워버거",
+    "price1": 3900,
+    "menu2": "징거박스",
+    "price2": 7700,
+    "menu3": "닭껍질튀김",
+    "price3": 2800
   },
   {
     "name": "맘스터치",
@@ -3240,7 +3993,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "싸이버거 단품",
+    "price1": 3800,
+    "menu2": "간장마늘치킨 (하프)",
+    "price2": 9000,
+    "menu3": "싸이버거 세트",
+    "price3": 5800
   },
   {
     "name": "김밥매니아",
@@ -3263,7 +4022,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "참치, 김치, 샐러드 김밥",
+    "price1": 3000,
+    "menu2": "김치, 참치, 된장 찌개",
+    "price2": 5500,
+    "menu3": "떡볶이, 라볶이",
+    "price3": 4500
   },
   {
     "name": "봉구스밥버거",
@@ -3286,7 +4051,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "봉구스",
+    "price1": 2300,
+    "menu2": "햄",
+    "price2": 2800,
+    "menu3": "에그치즈쏘야",
+    "price3": 3300
   },
   {
     "name": "교촌치킨 상도터널점",
@@ -3309,7 +4080,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "교촌 오리지날",
+    "price1": 15000,
+    "menu2": "교촌 허니콤보",
+    "price2": 18000,
+    "menu3": "교촌 레드콤보",
+    "price3": 18000
   },
   {
     "name": "교촌치킨 흑석1호점",
@@ -3332,7 +4109,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "교촌 오리지날",
+    "price1": 15000,
+    "menu2": "교촌 허니콤보",
+    "price2": 18000,
+    "menu3": "교촌 레드콤보",
+    "price3": 18000
   },
   {
     "name": "BBQ 흑석",
@@ -3342,7 +4125,7 @@
     "longitude": "",
     "contact": "0504-3142-1241",
     "category": "korean",
-    "price": 15000,
+    "price": 16000,
     "closed": "",
     "open": "",
     "costRatio": 0,
@@ -3355,7 +4138,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "황금올리브치킨",
+    "price1": 18000,
+    "menu2": "바삭칸 치킨",
+    "price2": 16000,
+    "menu3": "핫황금올리브 레드착착",
+    "price3": 19000
   },
   {
     "name": "김밥천국 중앙대점",
@@ -3378,7 +4167,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "원조김밥",
+    "price1": 2500,
+    "menu2": "참치김밥",
+    "price2": 3500,
+    "menu3": "라면",
+    "price3": 3500
   },
   {
     "name": "우리도한번잘구워보세",
@@ -3388,7 +4183,7 @@
     "longitude": "",
     "contact": "0507-1398-7981",
     "category": "korean",
-    "price": 9900,
+    "price": 8000,
     "closed": "",
     "open": "11:10 - 23:00",
     "costRatio": 1,
@@ -3401,7 +4196,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "칼집삼겹살 180g",
+    "price1": 9900,
+    "menu2": "뚝배기불고기",
+    "price2": 8000,
+    "menu3": "목살양념구이정식",
+    "price3": 8000
   },
   {
     "name": "쭝화대반점 짬뽕잘하는집",
@@ -3424,7 +4225,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "",
+    "price1": "",
+    "menu2": "",
+    "price2": "",
+    "menu3": "",
+    "price3": ""
   },
   {
     "name": "다락",
@@ -3447,7 +4254,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "3인 기본 냉동 삼겹살(450g)",
+    "price1": 18000,
+    "menu2": "추가 1인 냉동 삼겹살(150g)",
+    "price2": 6500,
+    "menu3": "차돌박이(150g)",
+    "price3": 9500
   },
   {
     "name": "고고차돌",
@@ -3470,7 +4283,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "차돌박이 150g",
+    "price1": 6900,
+    "menu2": "삼겹살 200g",
+    "price2": 6900,
+    "menu3": "육회비빔밥(점심)",
+    "price3": 7000
   },
   {
     "name": "부어치킨",
@@ -3493,10 +4312,16 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "크리스피치킨",
+    "price1": 12000,
+    "menu2": "맛쇼킹 순살",
+    "price2": 15000,
+    "menu3": "양념치킨",
+    "price3": 13000
   },
   {
-    "name": "노란통닭",
+    "name": "노랑통닭",
     "address": "서울특별시 동작구 상도로 274-1",
     "location": "back",
     "latitude": "",
@@ -3516,7 +4341,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "엄청 큰 후라이드치킨",
+    "price1": 17000,
+    "menu2": "숭살(3종세트)",
+    "price2": 19000,
+    "menu3": "눈꽃치즈 떡볶이",
+    "price3": 7000
   },
   {
     "name": "피자헛",
@@ -3539,7 +4370,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "메가크런치 페페로니L",
+    "price1": 14900,
+    "menu2": "얼티밋 치즈포켓 L",
+    "price2": 25130,
+    "menu3": "이탈리안살시챠 L 리치골드",
+    "price3": 25130
   },
   {
     "name": "파파존스",
@@ -3562,7 +4399,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "마가리타 오리지널 (L)",
+    "price1": 21500,
+    "menu2": "위스콘신 치즈 포테이토 오리지널 (L)",
+    "price2": 27500,
+    "menu3": "치폴레 치킨 오리지널 (L)",
+    "price3": 27500
   },
   {
     "name": "이삭토스트",
@@ -3585,7 +4428,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "햄스페셜 토스트",
+    "price1": 2900,
+    "menu2": "딥치즈베이컨포테이토",
+    "price2": 4100,
+    "menu3": "더블치즈돈까스",
+    "price3": 4400
   },
   {
     "name": "THE마니치킨",
@@ -3595,7 +4444,7 @@
     "longitude": "",
     "contact": "010-2227-4944",
     "category": "korean",
-    "price": 18500,
+    "price": 17500,
     "closed": "",
     "open": "16:00 - 02:00",
     "costRatio": 1,
@@ -3608,7 +4457,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "THE마니 순살치킨 小",
+    "price1": 17500,
+    "menu2": "THE마니 마음치킨 小",
+    "price2": 27500,
+    "menu3": "THE마니 마음치킨 大",
+    "price3": 29500
   },
   {
     "name": "북경",
@@ -3631,7 +4486,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "짜장",
+    "price1": 4000,
+    "menu2": "홍합짬뽕",
+    "price2": 5000,
+    "menu3": "볶음밥",
+    "price3": 6000
   },
   {
     "name": "복돼지순대국",
@@ -3654,7 +4515,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "장터 소고기 국밥",
+    "price1": 7000,
+    "menu2": "순대국",
+    "price2": 6000,
+    "menu3": "돼지국밥",
+    "price3": 7000
   },
   {
     "name": "토스트굽는사람들",
@@ -3664,7 +4531,7 @@
     "longitude": "",
     "contact": "02-812-8224",
     "category": "school",
-    "price": 1800,
+    "price": 3300,
     "closed": "",
     "open": "08:00 - 23:00",
     "costRatio": 1,
@@ -3677,7 +4544,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "베이컨토스트",
+    "price1": 3300,
+    "menu2": "스테이크토스트",
+    "price2": 3500,
+    "menu3": "떡갈비토스트",
+    "price3": 4000
   },
   {
     "name": "알렉스플레이스",
@@ -3700,7 +4573,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "치즈버거",
+    "price1": 5900,
+    "menu2": "베이컨 잼 버거",
+    "price2": 6900,
+    "menu3": "불고기 잼 버거",
+    "price3": 6900
   },
   {
     "name": "다성반점",
@@ -3710,7 +4589,7 @@
     "longitude": "",
     "contact": "02-814-1199",
     "category": "chinese",
-    "price": 5500,
+    "price": 5000,
     "closed": "",
     "open": "11:00 - 21:00",
     "costRatio": 0,
@@ -3723,7 +4602,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "짜장면",
+    "price1": 5000,
+    "menu2": "짬뽕",
+    "price2": 6000,
+    "menu3": "볶음밥",
+    "price3": 6500
   },
   {
     "name": "고모밥죠",
@@ -3733,7 +4618,7 @@
     "longitude": "",
     "contact": "070-8980-9267",
     "category": "korean",
-    "price": 7000,
+    "price": 5500,
     "closed": "주말, 공휴일 휴무",
     "open": "11:00 - 20:00",
     "costRatio": 1,
@@ -3746,7 +4631,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "제육볶음",
+    "price1": 6500,
+    "menu2": "된장찌개",
+    "price2": 6500,
+    "menu3": "시래기국",
+    "price3": 5500
   },
   {
     "name": "처갓집앙념치킨",
@@ -3756,7 +4647,7 @@
     "longitude": "",
     "contact": "02-3280-7088",
     "category": "korean",
-    "price": 9000,
+    "price": 15000,
     "closed": "",
     "open": "",
     "costRatio": 0,
@@ -3769,7 +4660,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "후라이드치킨",
+    "price1": 15000,
+    "menu2": "올리고당양념",
+    "price2": 16000,
+    "menu3": "슈프림양념치킨",
+    "price3": 17000
   },
   {
     "name": "돈&돈",
@@ -3792,7 +4689,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "가게정보매우부족",
+    "price1": "",
+    "menu2": "",
+    "price2": "",
+    "menu3": "",
+    "price3": ""
   },
   {
     "name": "속초향속초물회",
@@ -3815,7 +4718,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "광어 中",
+    "price1": 28000,
+    "menu2": "모듬회",
+    "price2": 70000,
+    "menu3": "오징어물회",
+    "price3": 25000
   },
   {
     "name": "가네미",
@@ -3838,7 +4747,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "가네미스꾸나이초밥",
+    "price1": 7000,
+    "menu2": "가네미모듬초밥",
+    "price2": 9000,
+    "menu3": "연어초밥",
+    "price3": 14000
   },
   {
     "name": "직구삼",
@@ -3861,7 +4776,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "가게정보매우부족",
+    "price1": "",
+    "menu2": "",
+    "price2": "",
+    "menu3": "",
+    "price3": ""
   },
   {
     "name": "엽기떡볶이",
@@ -3884,7 +4805,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "2인엽떡",
+    "price1": 9000,
+    "menu2": "엽기떡볶이",
+    "price2": 14000,
+    "menu3": "엽기 세트 A",
+    "price3": 17000
   },
   {
     "name": "닭치고",
@@ -3907,7 +4834,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "뼈 한 마리",
+    "price1": 15000,
+    "menu2": "뼈 두마리",
+    "price2": 22000,
+    "menu3": "순살 한 마리",
+    "price3": 15000
   },
   {
     "name": "늘푸른수제돈까스",
@@ -3930,7 +4863,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "돈가스",
+    "price1": 7500,
+    "menu2": "이탈리안돈가스",
+    "price2": 10000,
+    "menu3": "치즈돈가스",
+    "price3": 9000
   },
   {
     "name": "도미노피자 상도점",
@@ -3953,7 +4892,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "리얼 불고기 피자 L 오리지날 도우",
+    "price1": 22320,
+    "menu2": "리얼 불고기 피자 M 오리지날 도우",
+    "price2": 16800,
+    "menu3": "리얼 불고기 피자 L 나폴리도우",
+    "price3": 22320
   },
   {
     "name": "영양족발보쌈",
@@ -3976,7 +4921,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "칼국수정식(칼국수+보쌈+무밥)",
+    "price1": 7000,
+    "menu2": "전통칼국수",
+    "price2": 3000,
+    "menu3": "족발",
+    "price3": 19800
   },
   {
     "name": "조선화로집",
@@ -3999,7 +4950,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "꽃갈비정식",
+    "price1": 9900,
+    "menu2": "한돈수제숯불갈비정식",
+    "price2": 9900,
+    "menu3": "꼬막비빔밥",
+    "price3": 10000
   },
   {
     "name": "메밀면도토리",
@@ -4022,7 +4979,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "메밀국수(물,비빔)",
+    "price1": 7000,
+    "menu2": "메밀 접시만두",
+    "price2": 6000,
+    "menu3": "메밀전병(1인분)",
+    "price3": 5000
   },
   {
     "name": "콩시루",
@@ -4045,7 +5008,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "콩나물해장국",
+    "price1": 6500,
+    "menu2": "육개장",
+    "price2": 7000,
+    "menu3": "돌솥비빔밥",
+    "price3": 7000
   },
   {
     "name": "인근주민",
@@ -4068,7 +5037,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "퐁듀 통닭",
+    "price1": 23000,
+    "menu2": "이태리통닭",
+    "price2": 22000,
+    "menu3": "허니매콤간장통닭",
+    "price3": 19000
   },
   {
     "name": "상도정",
@@ -4091,7 +5066,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "곱창전골(1인)",
+    "price1": 20000,
+    "menu2": "버섯생불고기",
+    "price2": 20000,
+    "menu3": "생등심(1인분)",
+    "price3": 45000
   },
   {
     "name": "김밥천국 중앙대점",
@@ -4101,7 +5082,7 @@
     "longitude": "",
     "contact": "02-815-6357",
     "category": "school",
-    "price": 2500,
+    "price": 2000,
     "closed": "",
     "open": "00:00 - 24:00",
     "costRatio": 1,
@@ -4114,7 +5095,13 @@
     "bread": 0,
     "noodle": 1,
     "meat": 0,
-    "etc": 1
+    "etc": 1,
+    "menu1": "야채김밥",
+    "price1": 2000,
+    "menu2": "참치마요김밥",
+    "price2": 3500,
+    "menu3": "참치볶음밥",
+    "price3": 6000
   },
   {
     "name": "기꾸참치",
@@ -4124,7 +5111,7 @@
     "longitude": "",
     "contact": "02-821-2929",
     "category": "japanese",
-    "price": 9000,
+    "price": 15000,
     "closed": "명절 휴무",
     "open": "11:30 - 01:00",
     "costRatio": 0,
@@ -4137,7 +5124,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "참치 미 1人",
+    "price1": 35000,
+    "menu2": "참치스폐셜 1人",
+    "price2": 70000,
+    "menu3": "초밥",
+    "price3": 15000
   },
   {
     "name": "김빠빠누룽지통닭",
@@ -4160,7 +5153,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "한방통닭",
+    "price1": 16000,
+    "menu2": "누룽지통닭",
+    "price2": 17000,
+    "menu3": "누룽지 콘치즈닭",
+    "price3": 21000
   },
   {
     "name": "가마로강정 상도역점",
@@ -4183,7 +5182,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "매콤강정(대)",
+    "price1": 14000,
+    "menu2": "달콤강정(대)",
+    "price2": 14000,
+    "menu3": "마늘간장 순살치킨(중)",
+    "price3": 8500
   },
   {
     "name": "딱좋아",
@@ -4206,7 +5211,13 @@
     "bread": 0,
     "noodle": 0,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "광어",
+    "price1": 15000,
+    "menu2": "우럭",
+    "price2": 15000,
+    "menu3": "모듬물회",
+    "price3": 30000
   },
   {
     "name": "파리바게뜨 상도역점",
@@ -4229,7 +5240,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "디럭스 샌드위치",
+    "price1": 5200,
+    "menu2": "한입 쏙 미니버거",
+    "price2": 6000,
+    "menu3": "추억의소시지빵",
+    "price3": 2100
   },
   {
     "name": "파리바게뜨 중앙대점",
@@ -4252,7 +5269,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "디럭스 샌드위치",
+    "price1": 5200,
+    "menu2": "한입 쏙 미니버거",
+    "price2": 6000,
+    "menu3": "추억의소시지빵",
+    "price3": 2100
   },
   {
     "name": "파리바게뜨 중앙대학교점",
@@ -4275,7 +5298,13 @@
     "bread": 1,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "디럭스 샌드위치",
+    "price1": 5200,
+    "menu2": "한입 쏙 미니버거",
+    "price2": 6000,
+    "menu3": "추억의소시지빵",
+    "price3": 2100
   },
   {
     "name": "홍익돈까스 중앙대점",
@@ -4298,19 +5327,25 @@
     "bread": 0,
     "noodle": 1,
     "meat": 1,
-    "etc": 0
+    "etc": 0,
+    "menu1": "스파이시어니언돈까스",
+    "price1": 11000,
+    "menu2": "더블치즈돈까스",
+    "price2": 11000,
+    "menu3": "홍익우동",
+    "price3": 5000
   },
   {
     "name": "북촌순두부&쭈꾸미",
     "address": "서울특별시 동작구 흑석로 84 약학대학 102관 지하1층 112호",
     "location": "front",
-    "latitude": 37.506431,
-    "longitude": 126.958634,
+    "latitude": 37.506661,
+    "longitude": 126.958719,
     "contact": "02-812-5001",
     "category": "korean",
     "price": 7500,
     "closed": "",
-    "open": "02-812-5001",
+    "open": "",
     "costRatio": 1,
     "atmosphere": 0,
     "group": 0,
@@ -4321,6 +5356,41 @@
     "bread": 0,
     "noodle": 0,
     "meat": 0,
-    "etc": 0
+    "etc": 0,
+    "menu1": "해물순두부",
+    "price1": 8500,
+    "menu2": "김치순두부",
+    "price2": 7500,
+    "menu3": "비지찌개",
+    "price3": 7500
+  },
+  {
+    "name": "노랑통닭 중앙대점",
+    "address": "서울특별시 동작구 흑석로 101-3",
+    "location": "front",
+    "latitude": "",
+    "longitude": "",
+    "contact": "0507-1417-0208",
+    "category": "korean",
+    "price": 15000,
+    "closed": "",
+    "open": "12:00 - 03:00",
+    "costRatio": 1,
+    "atmosphere": 0,
+    "group": 0,
+    "individual": 0,
+    "riceAppointment": 0,
+    "spicy": 0,
+    "rice": 0,
+    "bread": 0,
+    "noodle": 0,
+    "meat": 1,
+    "etc": 0,
+    "menu1": "엄청 큰 후라이드치킨",
+    "price1": 17000,
+    "menu2": "숭살(3종세트)",
+    "price2": 19000,
+    "menu3": "눈꽃치즈 떡볶이",
+    "price3": 7000
   }
 ]

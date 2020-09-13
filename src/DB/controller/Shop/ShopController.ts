@@ -1,5 +1,5 @@
-import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location, Keyword as KeywordInterface, FoodCategory } from '../../models/Shop';
-import Keyword, { KeywordSchemaInterface } from '../../models/Keyword';
+import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location, FoodCategory } from '../../models/Shop';
+import Keyword, { KeywordInterface } from '../../models/Keyword';
 import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
 import Image, { ImageType } from '../../models/Image';
@@ -812,15 +812,15 @@ export class ShopController {
     location: Location,
     foodCategory: FoodCategory[],
     category: ShopCategory,
+    keywordInput: KeywordInterface,
   ): Promise<ShopInterface | null> {
     try {
       let keyword = new Keyword({
-        atmosphere: 0,
-        costRatio: 0,
-        group: 0,
-        individual: 0,
-        riceAppointment: 0,
-        spicy: 0,
+        atmosphere: keywordInput.atmosphere,
+        costRatio: keywordInput.costRatio,
+        group: keywordInput.group,
+        individual: keywordInput.individual,
+        riceAppointment: keywordInput.riceAppointment,
       });
 
       await keyword.save();

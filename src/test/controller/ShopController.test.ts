@@ -18,7 +18,6 @@ describe('ShopController', () => {
       individual: 0,
       registerDate: new Date(),
       riceAppointment: 0,
-      spicy: 0,
     });
 
     dataShop = await Shop.create({
