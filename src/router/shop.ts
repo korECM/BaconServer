@@ -17,6 +17,7 @@ router.get('/', cache('10 minutes'), async (req, res, next) => {
   const { order } = req.query;
   const location = req.query.location ? (req.query.location as string).split(',') : undefined;
   const category = req.query.category ? (req.query.category as string).split(',') : undefined;
+  const foodCategory = req.query.foodCategory ? (req.query.foodCategory as string).split(',') : undefined;
   const keyword = req.query.keyword ? (req.query.keyword as string).split(',') : undefined;
   const price = req.query.price ? (req.query.price as string).split(',') : undefined;
   const name = req.query.name ? (req.query.name as string) : undefined;
@@ -30,6 +31,7 @@ router.get('/', cache('10 minutes'), async (req, res, next) => {
     price: price as any,
     keyword: keyword as any,
     name,
+    foodCategory: foodCategory as any,
   });
 
   res.status(200).json(shops);

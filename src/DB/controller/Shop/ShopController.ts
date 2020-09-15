@@ -19,6 +19,7 @@ export enum ShopOrder {
 
 export interface ShopFilterInterface {
   category?: ShopCategory[];
+  foodCategory?: FoodCategory[];
   location?: Location[];
   price?: string[];
   order?: ShopOrder;
@@ -215,11 +216,33 @@ export class ShopController {
     let where: any = {};
     let priceQuery: any = {};
     let keywordWhere: any = {};
+    let menuQuery: any = {};
     let minKeywordSum = -1;
-    let { category, location, order, price, keyword, name } = filter;
+    let { category, location, order, price, keyword, name, foodCategory } = filter;
     if (category && category.length > 0) where.category = { $in: category };
+    if (foodCategory && foodCategory.length > 0) where.foodCategory = { $in: foodCategory };
     if (location && location.length > 0) where.location = { $in: location };
-    if (name && name.length > 0) where.name = { $regex: name };
+    if (name && name.length > 0) {
+      menuQuery = {
+        $or: [
+          { name: { $regex: name } },
+          {
+            menus: {
+              $elemMatch: {
+                $regex: name,
+              },
+            },
+          },
+        ],
+      };
+    } else {
+      menuQuery = {
+        $expr: {
+          $gt: ['$keywordSum', -1],
+        },
+      };
+    }
+    console.log(menuQuery);
     if (price && price.every((p) => !isNaN(Number(p)))) {
       priceQuery = {
         $or: price.map((p) => ({ price: this.priceToQuery(parseInt(p)) })),
@@ -283,6 +306,14 @@ export class ShopController {
       },
       {
         $lookup: {
+          from: 'menus',
+          localField: '_id',
+          foreignField: 'shopId',
+          as: 'menus',
+        },
+      },
+      {
+        $lookup: {
           from: 'keywords',
           localField: 'keyword',
           foreignField: '_id',
@@ -311,7 +342,17 @@ export class ShopController {
           keywordSum: {
             $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment'],
           },
+          menus: {
+            $map: {
+              input: '$menus',
+              as: 'el',
+              in: '$$el.title',
+            },
+          },
         },
+      },
+      {
+        $match: menuQuery,
       },
       // TODO:Keyword 평가가 아예 없는 경우 제외 팀원한테 확인
       {
@@ -367,6 +408,9 @@ export class ShopController {
           registerDate: {
             $first: '$registerDate',
           },
+          menus: {
+            $first: '$menus',
+          },
         },
       },
       {
@@ -409,6 +453,13 @@ export class ShopController {
           keywords: {
             __v: 0,
             registerDate: 0,
+          },
+          menus: {
+            __v: 0,
+            _id: 0,
+            price: 0,
+            registerDate: 0,
+            shopId: 0,
           },
         },
       },
