@@ -420,7 +420,7 @@ router.post(
   },
 );
 
-router.post('/image/:shopId', isLogin, upload.array('imgFile', 5), async (req, res, next) => {
+router.post('/image/:shopId', isLogin, upload.array('imgFile', 10), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
@@ -444,7 +444,7 @@ router.post('/image/:shopId', isLogin, upload.array('imgFile', 5), async (req, r
   }
 });
 
-router.post('/menuImage/:shopId', isLogin, upload.array('imgFile', 3), async (req, res, next) => {
+router.post('/menuImage/:shopId', isLogin, upload.array('imgFile', 10), async (req, res, next) => {
   const shopId = req.params.shopId as string;
   if (isValidObjectId(shopId) === false) return res.status(400).send();
 
