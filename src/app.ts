@@ -68,10 +68,11 @@ class App {
     });
 
     this.app.use((err: MyError, req: express.Request, res: express.Response, next: express.NextFunction) => {
+      console.error(err);
       res.locals.message = err.message;
       res.locals.error = req.app.get('env') === 'development' ? err : {};
       res.status(err.status || 500);
-      res.render('error');
+      return res.status(err.status || 500).send(err.message);
     });
   }
 }
