@@ -2,7 +2,7 @@ import express from 'express';
 import Joi from 'joi';
 import axios from 'axios';
 import { UserService } from '../service/UserService';
-import { generateToken } from '../lib/jwtMiddleware';
+import { generateToken, userToToken } from '../lib/jwtMiddleware';
 import { UserController } from '../DB/controller/User/UserController';
 import { isNotLogin, isLogin } from '../lib/userMiddleware';
 import { reqValidate } from '../lib/JoiValidate';
@@ -11,19 +11,6 @@ import { UserInterface } from '../DB/models/User';
 const ONE_DAY = 1000 * 60 * 60 * 24;
 
 const router = express.Router();
-
-const userToToken = (res: express.Response, user: UserInterface, status: number) => {
-  let token = generateToken(user);
-
-  res.cookie('access_token', token, {
-    maxAge: ONE_DAY * 7,
-    httpOnly: true,
-  });
-
-  res.status(status).send({
-    message: 'success',
-  });
-};
 
 router.post(
   '/signUp',
