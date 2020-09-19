@@ -1003,7 +1003,7 @@ export class ShopController {
         })),
         ...imageReport.map((report) => ({
           title: ((report.shopId as any).name as string) + ' 사진',
-          text: '&nbsp',
+          text: '',
           registerDate: report.registerDate,
           state: report.state as string,
         })),
