@@ -272,7 +272,7 @@ export class ReviewController {
 
   async getReviewReport() {
     try {
-      return await ReviewReport.find().where('state').nin([ReviewReportState.Done, ReviewReportState.Rejected]);
+      return await ReviewReport.find().where('state').nin([ReviewReportState.Done, ReviewReportState.Rejected]).populate('userId');
     } catch (error) {
       console.error(error);
       return [];
