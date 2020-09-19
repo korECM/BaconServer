@@ -3,10 +3,11 @@ import Keyword, { KeywordInterface } from '../../models/Keyword';
 import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
 import Image, { ImageType } from '../../models/Image';
-import ShopReport from '../../models/ShopReport';
+import ShopReport, { ShopReportState } from '../../models/ShopReport';
 import User from '../../models/User';
 import { deleteImage } from '../../../lib/image';
-import ImageReport from '../../models/ImageReport';
+import ImageReport, { ImageReportState } from '../../models/ImageReport';
+import { ReviewReportState } from '../../models/ReviewReport';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -917,6 +918,24 @@ export class ShopController {
     }
   }
 
+  async getShopReport() {
+    try {
+      return await ShopReport.find().where('state').nin([ShopReportState.Done, ShopReportState.Rejected]);
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+
+  async getImageReport() {
+    try {
+      return await ImageReport.find().where('state').nin([ImageReportState.Done, ImageReportState.Rejected]);
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+
   async addReport(shopId: string, data: ReportOption) {
     try {
       let shop = await this.findById(shopId);
@@ -928,6 +947,7 @@ export class ShopController {
         shopId,
         type: data.type,
         userId: data.userId,
+        state: ShopReportState.Issued,
       });
 
       return true;
@@ -943,6 +963,7 @@ export class ShopController {
         registerDate: new Date(),
         imageId,
         userId,
+        state: ImageReportState.Issued,
       });
 
       return true;

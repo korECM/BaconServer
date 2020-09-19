@@ -4,7 +4,7 @@ import { ShopController } from '../Shop/ShopController';
 import mongoose from 'mongoose';
 import Score from '../../models/Score';
 import Keyword from '../../models/Keyword';
-import ReviewReport from '../../models/ReviewReport';
+import ReviewReport, { ReviewReportState } from '../../models/ReviewReport';
 import Shop from '../../models/Shop';
 
 const ObjectId = mongoose.Types.ObjectId;
@@ -270,6 +270,15 @@ export class ReviewController {
     }
   }
 
+  async getReviewReport() {
+    try {
+      return await ReviewReport.find().where('state').nin([ReviewReportState.Done, ReviewReportState.Rejected]);
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+
   async addReport(reviewId: string, data: ReportOption) {
     try {
       let review = (await this.findById(reviewId)) as ReviewSchemaInterface;
@@ -280,6 +289,7 @@ export class ReviewController {
         registerDate: new Date(),
         reviewId,
         userId: data.userId,
+        state: ReviewReportState.Issued,
       });
 
       return true;

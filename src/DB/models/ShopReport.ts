@@ -6,11 +6,20 @@ export interface ShopReportSchemaInterface extends mongoose.Document {
   shopId: Schema.Types.ObjectId;
   userId: Schema.Types.ObjectId;
   registerDate: Date;
+  state: ShopReportState;
+}
+
+export enum ShopReportState {
+  Issued = 'issued',
+  Confirmed = 'confirmed',
+  Rejected = 'rejected',
+  Done = 'done',
 }
 
 export let ShopReportSchema = new Schema({
   shopId: { type: Schema.Types.ObjectId, ref: 'Shop' },
   type: { type: [Number], required: true },
+  state: { type: String, enum: Object.values(ShopReportState), required: true },
   comment: { type: String, required: true },
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
   registerDate: {

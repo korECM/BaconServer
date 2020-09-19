@@ -5,11 +5,19 @@ export interface ReviewReportSchemaInterface extends mongoose.Document {
   reviewId: Schema.Types.ObjectId;
   userId: Schema.Types.ObjectId;
   registerDate: Date;
+  state: ReviewReportState;
+}
+
+export enum ReviewReportState {
+  Issued = 'issued',
+  Rejected = 'rejected',
+  Done = 'done',
 }
 
 export let ReviewReportSchema = new Schema({
   reviewId: { type: Schema.Types.ObjectId, ref: 'Review' },
   comment: { type: String, required: true },
+  state: { type: String, enum: Object.values(ReviewReportState), required: true },
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
   registerDate: {
     type: Date,
