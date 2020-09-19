@@ -3,6 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 export interface ImageReportSchemaInterface extends mongoose.Document {
   imageId: string;
   userId: Schema.Types.ObjectId;
+  shopId: Schema.Types.ObjectId;
   registerDate: Date;
   state: ImageReportState;
 }
@@ -16,6 +17,7 @@ export enum ImageReportState {
 export let ImageReportSchema = new Schema({
   imageId: { type: Schema.Types.ObjectId, ref: 'Image' },
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
+  shopId: { type: Schema.Types.ObjectId, ref: 'Shop' },
   state: { type: String, enum: Object.values(ImageReportState), required: true },
   registerDate: {
     type: Date,
