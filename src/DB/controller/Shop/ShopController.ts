@@ -920,7 +920,7 @@ export class ShopController {
 
   async getShopReport() {
     try {
-      return await ShopReport.find().where('state').nin([ShopReportState.Done, ShopReportState.Rejected]);
+      return await ShopReport.find().where('state').nin([ShopReportState.Done, ShopReportState.Rejected]).populate('shopId');
     } catch (error) {
       console.error(error);
       return [];
