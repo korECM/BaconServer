@@ -37,7 +37,7 @@ router.get('/', cache('3 minutes'), async (req, res, next) => {
   res.status(200).json(shops);
 });
 
-router.get('/myShop', isLogin, cache('1 minutes'), async (req, res, next) => {
+router.get('/myShop', isLogin, cache('5 seconds'), async (req, res, next) => {
   let shopController = new ShopController();
 
   let shops = await shopController.getMyShop(req.user!._id);
@@ -45,7 +45,7 @@ router.get('/myShop', isLogin, cache('1 minutes'), async (req, res, next) => {
   res.status(200).json(shops);
 });
 
-router.get('/myReview', isLogin, cache('1 minutes'), async (req, res, next) => {
+router.get('/myReview', isLogin, cache('5 seconds'), async (req, res, next) => {
   let reviewController = new ReviewController();
 
   let reviews = await reviewController.getMyReview(req.user!._id);
