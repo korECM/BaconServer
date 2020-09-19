@@ -8,6 +8,16 @@ import { reqValidate } from '../lib/JoiValidate';
 
 const router = express.Router();
 
+router.get('/my', isLogin, async (req, res, next) => {
+  let shopController = new ShopController();
+  try {
+    let reports = await shopController.getMyReport(req.user!._id);
+    return res.status(200).send(reports);
+  } catch (error) {
+    return res.status(406).send();
+  }
+});
+
 router.get('/shop', isAdmin, async (req, res, next) => {
   let shopController = new ShopController();
   try {

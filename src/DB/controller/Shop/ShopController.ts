@@ -7,7 +7,7 @@ import ShopReport, { ShopReportState } from '../../models/ShopReport';
 import User from '../../models/User';
 import { deleteImage } from '../../../lib/image';
 import ImageReport, { ImageReportState } from '../../models/ImageReport';
-import { ReviewReportState } from '../../models/ReviewReport';
+import ReviewReport, { ReviewReportState } from '../../models/ReviewReport';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -952,6 +952,68 @@ export class ShopController {
     }
   }
 
+  reportTypeToString(report: number) {
+    switch (report) {
+      case 0:
+        return '폐업했어요';
+      case 1:
+        return '주소가 틀려요';
+      case 2:
+        return '가격이 틀려요';
+      case 3:
+        return '메뉴가 틀려요';
+      case 4:
+        return '영업일 틀려요';
+      case 5:
+        return '전화번호 틀려요';
+    }
+    return '';
+  }
+
+  async getMyReport(userId: string) {
+    try {
+      let shopReport = await ShopReport.find().where('userId').equals(userId).populate('shopId');
+      let reviewReport = await ReviewReport.find()
+        .where('userId')
+        .equals(userId)
+        .populate('userId')
+        .populate('reviewId')
+        .populate({
+          path: 'reviewId',
+          populate: { path: 'user', select: 'name' },
+        })
+        .populate({
+          path: 'reviewId',
+          populate: { path: 'shop', select: 'name _id' },
+        });
+      let imageReport = await ImageReport.find().where('userId').equals(userId).populate('imageId').populate('shopId');
+
+      return [
+        ...shopReport.map((report) => ({
+          title: (report.shopId as any).name as string,
+          text: report.type.length > 0 ? report.type.map((type) => this.reportTypeToString(type)).join(', ') + ' ' + report.comment : report.comment,
+          registerDate: report.registerDate,
+          state: report.state as string,
+        })),
+        ...reviewReport.map((report) => ({
+          title: (report.userId as any).name + '님의 ' + ((report.reviewId as any).shop.name as string) + ' 리뷰',
+          text: report.comment,
+          registerDate: report.registerDate,
+          state: report.state as string,
+        })),
+        ...imageReport.map((report) => ({
+          title: ((report.shopId as any).name as string) + ' 사진',
+          text: '&nbsp',
+          registerDate: report.registerDate,
+          state: report.state as string,
+        })),
+      ];
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+
   async getShopReport() {
     try {
       return await ShopReport.find().where('state').nin([ShopReportState.Done, ShopReportState.Rejected]).populate('shopId');
@@ -1000,11 +1062,15 @@ export class ShopController {
 
   async addImageReport(imageId: string, userId: string) {
     try {
+      let image = await Image.findById(imageId);
+      if (!image) return false;
+
       await ImageReport.create({
         registerDate: new Date(),
         imageId,
         userId,
         state: ImageReportState.Issued,
+        shopId: image.shopId,
       });
 
       return true;
