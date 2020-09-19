@@ -594,6 +594,9 @@ export class ShopController {
           category: {
             $first: '$category',
           },
+          foodCategory: {
+            $first: '$foodCategory',
+          },
           keyword: {
             $first: '$keyword',
           },
