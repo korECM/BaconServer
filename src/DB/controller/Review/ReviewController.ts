@@ -272,7 +272,22 @@ export class ReviewController {
 
   async getReviewReport() {
     try {
-      return await ReviewReport.find().where('state').nin([ReviewReportState.Done, ReviewReportState.Rejected]).populate('userId');
+      let report = await ReviewReport.find()
+        .where('state')
+        .nin([ReviewReportState.Done, ReviewReportState.Rejected])
+        .populate('userId')
+        .populate('reviewId')
+        .populate({
+          path: 'reviewId',
+          populate: { path: 'user', select: 'name' },
+        });
+
+      report = report.map((r) => {
+        (r.userId as any).password = null;
+        return r;
+      });
+
+      return report;
     } catch (error) {
       console.error(error);
       return [];
