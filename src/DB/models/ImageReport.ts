@@ -14,7 +14,7 @@ export enum ImageReportState {
 }
 
 export let ImageReportSchema = new Schema({
-  imageId: { type: Schema.Types.ObjectId, ref: 'Review' },
+  imageId: { type: Schema.Types.ObjectId, ref: 'Image' },
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
   state: { type: String, enum: Object.values(ImageReportState), required: true },
   registerDate: {

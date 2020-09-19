@@ -14,7 +14,7 @@ export enum ImageType {
 export let MenuSchema = new Schema({
   imageLink: { type: String, required: true },
   type: { type: String, enum: Object.values(ImageType), required: true },
-  shopId: { type: Schema.Types.ObjectId, required: true },
+  shopId: { type: Schema.Types.ObjectId, required: true, ref: 'Shop' },
   registerDate: {
     type: Date,
     default: Date.now,

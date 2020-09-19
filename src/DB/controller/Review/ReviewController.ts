@@ -270,6 +270,25 @@ export class ReviewController {
     }
   }
 
+  async setReportState(reportId: string, state: string) {
+    try {
+      let report = await ReviewReport.findById(reportId);
+      if (!report) return false;
+
+      if (state === 'done') {
+        report.state = ReviewReportState.Done;
+      } else if (state === 'reject') {
+        report.state = ReviewReportState.Rejected;
+      }
+
+      await report.save();
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async getReviewReport() {
     try {
       let report = await ReviewReport.find()

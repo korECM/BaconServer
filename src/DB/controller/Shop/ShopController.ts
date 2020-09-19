@@ -918,6 +918,40 @@ export class ShopController {
     }
   }
 
+  async setShopReportMode(reportId: string, mode: string) {
+    try {
+      let report = await ShopReport.findById(reportId);
+      if (!report) return false;
+      if (mode === 'confirm') {
+        report.state = ShopReportState.Confirmed;
+      } else if (mode === 'done') {
+        report.state = ShopReportState.Done;
+      } else {
+        report.state = ShopReportState.Rejected;
+      }
+      await report.save();
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async setImageReportMode(reportId: string, mode: string) {
+    try {
+      let report = await ImageReport.findById(reportId);
+      if (!report) return false;
+      if (mode === 'done') {
+        report.state = ImageReportState.Done;
+      } else {
+        report.state = ImageReportState.Rejected;
+      }
+      await report.save();
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async getShopReport() {
     try {
       return await ShopReport.find().where('state').nin([ShopReportState.Done, ShopReportState.Rejected]).populate('shopId');
@@ -929,7 +963,14 @@ export class ShopController {
 
   async getImageReport() {
     try {
-      return await ImageReport.find().where('state').nin([ImageReportState.Done, ImageReportState.Rejected]);
+      return await ImageReport.find()
+        .where('state')
+        .nin([ImageReportState.Done, ImageReportState.Rejected])
+        .populate('imageId')
+        .populate({
+          path: 'imageId',
+          populate: { path: 'shopId', select: 'name _id' },
+        });
     } catch (error) {
       console.error(error);
       return [];

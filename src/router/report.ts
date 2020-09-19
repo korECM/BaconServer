@@ -38,6 +38,102 @@ router.get('/review', isAdmin, async (req, res, next) => {
   }
 });
 
+router.put(
+  '/shop/:reportId',
+  isAdmin,
+  reqValidate(
+    Joi.object({
+      state: Joi.string(),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const reportId = req.params.reportId as string;
+    if (isValidObjectId(reportId) === false) return res.status(400).send();
+
+    let state = req.body.state as string;
+
+    let shopController = new ShopController();
+
+    try {
+      if (shopController.setShopReportMode(reportId, state)) {
+        return res.status(201).send({
+          message: 'success',
+        });
+      } else {
+        return res.status(406).send();
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(406).send();
+    }
+  },
+);
+
+router.put(
+  '/review/:reportId',
+  isAdmin,
+  reqValidate(
+    Joi.object({
+      state: Joi.string(),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const reportId = req.params.reportId as string;
+    if (isValidObjectId(reportId) === false) return res.status(400).send();
+
+    let state = req.body.state as string;
+
+    let reviewController = new ReviewController();
+
+    try {
+      if (reviewController.setReportState(reportId, state)) {
+        return res.status(201).send({
+          message: 'success',
+        });
+      } else {
+        return res.status(406).send();
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(406).send();
+    }
+  },
+);
+
+router.put(
+  '/image/:reportId',
+  isAdmin,
+  reqValidate(
+    Joi.object({
+      state: Joi.string(),
+    }),
+    'body',
+  ),
+  async (req, res, next) => {
+    const reportId = req.params.reportId as string;
+    if (isValidObjectId(reportId) === false) return res.status(400).send();
+
+    let state = req.body.state as string;
+
+    let shopController = new ShopController();
+
+    try {
+      if (shopController.setImageReportMode(reportId, state)) {
+        return res.status(201).send({
+          message: 'success',
+        });
+      } else {
+        return res.status(406).send();
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(406).send();
+    }
+  },
+);
+
 router.post(
   '/shop/:shopId',
   isLogin,
