@@ -13,7 +13,7 @@ const router = express.Router();
 
 const cache = apiCache.middleware;
 
-router.get('/', cache('10 minutes'), async (req, res, next) => {
+router.get('/', cache('3 minutes'), async (req, res, next) => {
   const { order } = req.query;
   const location = req.query.location ? (req.query.location as string).split(',') : undefined;
   const category = req.query.category ? (req.query.category as string).split(',') : undefined;
