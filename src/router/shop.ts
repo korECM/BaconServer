@@ -127,6 +127,7 @@ router.post(
     const shopId = req.params.shopId as string;
     if (isValidObjectId(shopId) === false) return res.status(400).send();
     const { score, comment, keywords } = req.body;
+    if (comment && (comment as string).length > 500) return res.status(400).send();
     // if (!score || isNaN(Number(score))) return res.status(400).send();
 
     let reviewController = new ReviewController();
