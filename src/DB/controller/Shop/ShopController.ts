@@ -996,7 +996,10 @@ export class ShopController {
           state: report.state as string,
         })),
         ...reviewReport.map((report) => ({
-          title: (report.userId as any).name + '님의 ' + ((report.reviewId as any).shop.name as string) + ' 리뷰',
+          title:
+            report.reviewId === null
+              ? (report.userId as any).name + '님의 ' + '삭제된 댓글'
+              : (report.userId as any).name + '님의 ' + ((report.reviewId as any).shop.name as string) + ' 리뷰',
           text: report.comment,
           registerDate: report.registerDate,
           state: report.state as string,
