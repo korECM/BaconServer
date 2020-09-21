@@ -218,7 +218,7 @@ export class ShopController {
     }
   }
 
-  async getShops(filter: ShopFilterInterface): Promise<ShopInterface[]> {
+  async getShops(filter: ShopFilterInterface): Promise<ShopInterface[] | null> {
     let where: any = {};
     let priceQuery: any = {};
     let keywordWhere: any = {};
