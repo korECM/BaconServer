@@ -47,147 +47,152 @@ export class ShopController {
   }
 
   async getShop(id: string, userId?: string): Promise<ShopInterface | null> {
-    let shops = await Shop.aggregate([
-      {
-        $match: {
-          _id: ObjectId(id),
-        },
-      },
-      {
-        $lookup: {
-          from: 'images',
-          let: { shopId: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
-              },
-            },
-          ],
-          as: 'shopImage',
-        },
-      },
-      {
-        $lookup: {
-          from: 'images',
-          let: { shopId: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['menu', '$type'] }] },
-              },
-            },
-          ],
-          as: 'menuImage',
-        },
-      },
-      {
-        $lookup: {
-          from: 'menus',
-          localField: '_id',
-          foreignField: 'shopId',
-          as: 'menus',
-        },
-      },
-      {
-        $lookup: {
-          from: 'keywords',
-          localField: 'keyword',
-          foreignField: '_id',
-          as: 'keyword',
-        },
-      },
-      {
-        $unwind: {
-          path: '$keyword',
-        },
-      },
-      {
-        $project: {
-          keywords: {
-            __v: 0,
-            registerDate: 0,
+    try {
+      let shops = await Shop.aggregate([
+        {
+          $match: {
+            _id: ObjectId(id),
           },
         },
-      },
-      {
-        $lookup: {
-          from: 'reviews',
-          localField: '_id',
-          foreignField: 'shop',
-          as: 'reviews',
-        },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          let: {
-            shopId: '$_id',
-          },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $in: ['$$shopId', '$likeShop'],
+        {
+          $lookup: {
+            from: 'images',
+            let: { shopId: '$_id' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
                 },
               },
+            ],
+            as: 'shopImage',
+          },
+        },
+        {
+          $lookup: {
+            from: 'images',
+            let: { shopId: '$_id' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['menu', '$type'] }] },
+                },
+              },
+            ],
+            as: 'menuImage',
+          },
+        },
+        {
+          $lookup: {
+            from: 'menus',
+            localField: '_id',
+            foreignField: 'shopId',
+            as: 'menus',
+          },
+        },
+        {
+          $lookup: {
+            from: 'keywords',
+            localField: 'keyword',
+            foreignField: '_id',
+            as: 'keyword',
+          },
+        },
+        {
+          $unwind: {
+            path: '$keyword',
+          },
+        },
+        {
+          $project: {
+            keywords: {
+              __v: 0,
+              registerDate: 0,
             },
-          ],
-          as: 'liker',
-        },
-      },
-      {
-        $lookup: {
-          from: 'scores',
-          localField: '_id',
-          foreignField: 'shop',
-          as: 'scores',
-        },
-      },
-      {
-        $addFields: {
-          scoreAverage: {
-            $avg: '$scores.score',
-          },
-          reviewCount: {
-            $size: '$reviews',
-          },
-          likerCount: {
-            $size: '$liker',
-          },
-          didLike: {
-            $in: [ObjectId(userId), '$liker._id'],
           },
         },
-      },
-      {
-        $project: {
-          reviews: 0,
-          __v: 0,
-          liker: 0,
-          scores: 0,
-          menus: {
-            shopId: 0,
-            registerDate: 0,
+        {
+          $lookup: {
+            from: 'reviews',
+            localField: '_id',
+            foreignField: 'shop',
+            as: 'reviews',
+          },
+        },
+        {
+          $lookup: {
+            from: 'users',
+            let: {
+              shopId: '$_id',
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $in: ['$$shopId', '$likeShop'],
+                  },
+                },
+              },
+            ],
+            as: 'liker',
+          },
+        },
+        {
+          $lookup: {
+            from: 'scores',
+            localField: '_id',
+            foreignField: 'shop',
+            as: 'scores',
+          },
+        },
+        {
+          $addFields: {
+            scoreAverage: {
+              $avg: '$scores.score',
+            },
+            reviewCount: {
+              $size: '$reviews',
+            },
+            likerCount: {
+              $size: '$liker',
+            },
+            didLike: {
+              $in: [ObjectId(userId), '$liker._id'],
+            },
+          },
+        },
+        {
+          $project: {
+            reviews: 0,
             __v: 0,
-          },
-          shopImage: {
-            shopId: 0,
-            type: 0,
-            registerDate: 0,
-            __v: 0,
-          },
-          menuImage: {
-            shopId: 0,
-            type: 0,
-            registerDate: 0,
-            __v: 0,
+            liker: 0,
+            scores: 0,
+            menus: {
+              shopId: 0,
+              registerDate: 0,
+              __v: 0,
+            },
+            shopImage: {
+              shopId: 0,
+              type: 0,
+              registerDate: 0,
+              __v: 0,
+            },
+            menuImage: {
+              shopId: 0,
+              type: 0,
+              registerDate: 0,
+              __v: 0,
+            },
           },
         },
-      },
-    ]);
-    if (shops.length === 0) return null;
-    return shops[0];
+      ]);
+      if (shops.length === 0) return null;
+      return shops[0];
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   }
 
   private priceToQuery(price: number) {
@@ -243,7 +248,6 @@ export class ShopController {
         },
       };
     }
-    console.log(menuQuery);
     if (price && price.every((p) => !isNaN(Number(p)))) {
       priceQuery = {
         $or: price.map((p) => ({ price: this.priceToQuery(parseInt(p)) })),
@@ -287,234 +291,239 @@ export class ShopController {
         break;
     }
 
-    let shops = await Shop.aggregate([
-      // 해당 가게 찾은 후에
-      { $match: where },
-      { $match: priceQuery },
-      {
-        $lookup: {
-          from: 'images',
-          let: { shopId: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+    try {
+      let shops = await Shop.aggregate([
+        // 해당 가게 찾은 후에
+        { $match: where },
+        { $match: priceQuery },
+        {
+          $lookup: {
+            from: 'images',
+            let: { shopId: '$_id' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+                },
               },
-            },
-          ],
-          as: 'shopImage',
-        },
-      },
-      {
-        $lookup: {
-          from: 'menus',
-          localField: '_id',
-          foreignField: 'shopId',
-          as: 'menus',
-        },
-      },
-      {
-        $lookup: {
-          from: 'keywords',
-          localField: 'keyword',
-          foreignField: '_id',
-          as: 'keyword',
-        },
-      },
-      {
-        $unwind: {
-          path: '$keyword',
-        },
-      },
-      {
-        $project: {
-          keyword: {
-            _id: 0,
-            registerDate: 0,
-            __v: 0,
+            ],
+            as: 'shopImage',
           },
         },
-      },
-      {
-        $addFields: {
-          keywordObjectArray: {
-            $objectToArray: '$keyword',
+        {
+          $lookup: {
+            from: 'menus',
+            localField: '_id',
+            foreignField: 'shopId',
+            as: 'menus',
           },
-          keywordSum: {
-            $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment'],
+        },
+        {
+          $lookup: {
+            from: 'keywords',
+            localField: 'keyword',
+            foreignField: '_id',
+            as: 'keyword',
           },
-          menus: {
-            $map: {
-              input: '$menus',
-              as: 'el',
-              in: '$$el.title',
+        },
+        {
+          $unwind: {
+            path: '$keyword',
+          },
+        },
+        {
+          $project: {
+            keyword: {
+              _id: 0,
+              registerDate: 0,
+              __v: 0,
             },
           },
         },
-      },
-      {
-        $match: menuQuery,
-      },
-      // TODO:Keyword 평가가 아예 없는 경우 제외 팀원한테 확인
-      {
-        $match: {
-          $expr: {
-            $gt: ['$keywordSum', minKeywordSum],
-          },
-        },
-      },
-      {
-        $unwind: {
-          path: '$keywordObjectArray',
-        },
-      },
-      {
-        $sort: {
-          'keywordObjectArray.v': -1,
-        },
-      },
-      {
-        $group: {
-          _id: '$_id',
-          sortedKeywordObjectArray: {
-            $push: '$keywordObjectArray',
-          },
-          name: {
-            $first: '$name',
-          },
-          mainImage: {
-            $first: '$mainImage',
-          },
-          contact: {
-            $first: '$contact',
-          },
-          category: {
-            $first: '$category',
-          },
-          keyword: {
-            $first: '$keyword',
-          },
-          open: {
-            $first: '$open',
-          },
-          closed: {
-            $first: '$closed',
-          },
-          location: {
-            $first: '$location',
-          },
-          foodCategory: {
-            $first: '$foodCategory',
-          },
-          registerDate: {
-            $first: '$registerDate',
-          },
-          menus: {
-            $first: '$menus',
-          },
-        },
-      },
-      {
-        $addFields: {
-          topKeyword: {
-            $map: {
-              input: '$sortedKeywordObjectArray',
-              as: 'object',
-              in: {
-                $concat: ['$$object.k', ''],
+        {
+          $addFields: {
+            keywordObjectArray: {
+              $objectToArray: '$keyword',
+            },
+            keywordSum: {
+              $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment'],
+            },
+            menus: {
+              $map: {
+                input: '$menus',
+                as: 'el',
+                in: '$$el.title',
               },
             },
           },
         },
-      },
-      {
-        $addFields: {
-          topKeyword: {
-            $slice: ['$topKeyword', 2],
-          },
+        {
+          $match: menuQuery,
         },
-      },
-      { $match: keywordWhere },
-      {
-        $lookup: {
-          from: 'images',
-          let: { shopId: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
-              },
+        // TODO:Keyword 평가가 아예 없는 경우 제외 팀원한테 확인
+        {
+          $match: {
+            $expr: {
+              $gt: ['$keywordSum', minKeywordSum],
             },
-          ],
-          as: 'shopImage',
-        },
-      },
-      {
-        $project: {
-          keywords: {
-            __v: 0,
-            registerDate: 0,
-          },
-          menus: {
-            __v: 0,
-            _id: 0,
-            price: 0,
-            registerDate: 0,
-            shopId: 0,
           },
         },
-      },
-      // reviews에 Review Join
-      {
-        $lookup: {
-          from: 'reviews',
-          localField: '_id',
-          foreignField: 'shop',
-          as: 'reviews',
+        {
+          $unwind: {
+            path: '$keywordObjectArray',
+          },
         },
-      },
-      {
-        $lookup: {
-          from: 'scores',
-          localField: '_id',
-          foreignField: 'shop',
-          as: 'scores',
+        {
+          $sort: {
+            'keywordObjectArray.v': -1,
+          },
         },
-      },
-      // 해당 가게 Like 한사람 Join
-      {
-        $lookup: {
-          from: 'users',
-          let: { shopId: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $in: ['$$shopId', '$likeShop'],
+        {
+          $group: {
+            _id: '$_id',
+            sortedKeywordObjectArray: {
+              $push: '$keywordObjectArray',
+            },
+            name: {
+              $first: '$name',
+            },
+            mainImage: {
+              $first: '$mainImage',
+            },
+            contact: {
+              $first: '$contact',
+            },
+            category: {
+              $first: '$category',
+            },
+            keyword: {
+              $first: '$keyword',
+            },
+            open: {
+              $first: '$open',
+            },
+            closed: {
+              $first: '$closed',
+            },
+            location: {
+              $first: '$location',
+            },
+            foodCategory: {
+              $first: '$foodCategory',
+            },
+            registerDate: {
+              $first: '$registerDate',
+            },
+            menus: {
+              $first: '$menus',
+            },
+          },
+        },
+        {
+          $addFields: {
+            topKeyword: {
+              $map: {
+                input: '$sortedKeywordObjectArray',
+                as: 'object',
+                in: {
+                  $concat: ['$$object.k', ''],
                 },
               },
             },
-          ],
-          as: 'liker',
+          },
         },
-      },
-      // Review 평균 구해서 scoreAverage 추가
-      {
-        $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
-      },
-      // Review 가리도록
-      {
-        $project: {
-          reviews: 0,
-          __v: 0,
-          liker: 0,
-          scores: 0,
-          sortedKeywordObjectArray: 0,
+        {
+          $addFields: {
+            topKeyword: {
+              $slice: ['$topKeyword', 2],
+            },
+          },
         },
-      },
-      orderQuery,
-    ]);
-    return shops || [];
+        { $match: keywordWhere },
+        {
+          $lookup: {
+            from: 'images',
+            let: { shopId: '$_id' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+                },
+              },
+            ],
+            as: 'shopImage',
+          },
+        },
+        {
+          $project: {
+            keywords: {
+              __v: 0,
+              registerDate: 0,
+            },
+            menus: {
+              __v: 0,
+              _id: 0,
+              price: 0,
+              registerDate: 0,
+              shopId: 0,
+            },
+          },
+        },
+        // reviews에 Review Join
+        {
+          $lookup: {
+            from: 'reviews',
+            localField: '_id',
+            foreignField: 'shop',
+            as: 'reviews',
+          },
+        },
+        {
+          $lookup: {
+            from: 'scores',
+            localField: '_id',
+            foreignField: 'shop',
+            as: 'scores',
+          },
+        },
+        // 해당 가게 Like 한사람 Join
+        {
+          $lookup: {
+            from: 'users',
+            let: { shopId: '$_id' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $in: ['$$shopId', '$likeShop'],
+                  },
+                },
+              },
+            ],
+            as: 'liker',
+          },
+        },
+        // Review 평균 구해서 scoreAverage 추가
+        {
+          $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
+        },
+        // Review 가리도록
+        {
+          $project: {
+            reviews: 0,
+            __v: 0,
+            liker: 0,
+            scores: 0,
+            sortedKeywordObjectArray: 0,
+          },
+        },
+        orderQuery,
+      ]);
+      return shops || [];
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   }
 
   async getMyShop(userId: string) {
@@ -529,188 +538,198 @@ export class ShopController {
       },
     };
 
-    let shops = await Shop.aggregate([
-      // 해당 가게 찾은 후에
-      {
-        $match: {
-          _id: {
-            $in: user.likeShop,
-          },
-        },
-      },
-      {
-        $lookup: {
-          from: 'keywords',
-          localField: 'keyword',
-          foreignField: '_id',
-          as: 'keyword',
-        },
-      },
-      {
-        $unwind: {
-          path: '$keyword',
-        },
-      },
-      {
-        $project: {
-          keyword: {
-            _id: 0,
-            registerDate: 0,
-            __v: 0,
-          },
-        },
-      },
-      {
-        $addFields: {
-          keywordObjectArray: {
-            $objectToArray: '$keyword',
-          },
-          keywordSum: {
-            $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment', '$keyword.spicy'],
-          },
-        },
-      },
-      {
-        $unwind: {
-          path: '$keywordObjectArray',
-        },
-      },
-      {
-        $sort: {
-          'keywordObjectArray.v': -1,
-        },
-      },
-      {
-        $group: {
-          _id: '$_id',
-          sortedKeywordObjectArray: {
-            $push: '$keywordObjectArray',
-          },
-          name: {
-            $first: '$name',
-          },
-          contact: {
-            $first: '$contact',
-          },
-          category: {
-            $first: '$category',
-          },
-          foodCategory: {
-            $first: '$foodCategory',
-          },
-          keyword: {
-            $first: '$keyword',
-          },
-          open: {
-            $first: '$open',
-          },
-          closed: {
-            $first: '$closed',
-          },
-          location: {
-            $first: '$location',
-          },
-          registerDate: {
-            $first: '$registerDate',
-          },
-        },
-      },
-      {
-        $addFields: {
-          topKeyword: {
-            $map: {
-              input: '$sortedKeywordObjectArray',
-              as: 'object',
-              in: {
-                $concat: ['$$object.k', ''],
-              },
+    try {
+      let shops = await Shop.aggregate([
+        // 해당 가게 찾은 후에
+        {
+          $match: {
+            _id: {
+              $in: user.likeShop,
             },
           },
         },
-      },
-      {
-        $addFields: {
-          topKeyword: {
-            $slice: ['$topKeyword', 2],
+        {
+          $lookup: {
+            from: 'keywords',
+            localField: 'keyword',
+            foreignField: '_id',
+            as: 'keyword',
           },
         },
-      },
-      {
-        $lookup: {
-          from: 'images',
-          let: { shopId: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
-              },
+        {
+          $unwind: {
+            path: '$keyword',
+          },
+        },
+        {
+          $project: {
+            keyword: {
+              _id: 0,
+              registerDate: 0,
+              __v: 0,
             },
-          ],
-          as: 'shopImage',
-        },
-      },
-      {
-        $project: {
-          keywords: {
-            __v: 0,
-            registerDate: 0,
           },
         },
-      },
-      // reviews에 Review Join
-      {
-        $lookup: {
-          from: 'reviews',
-          localField: '_id',
-          foreignField: 'shop',
-          as: 'reviews',
+        {
+          $addFields: {
+            keywordObjectArray: {
+              $objectToArray: '$keyword',
+            },
+            keywordSum: {
+              $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment', '$keyword.spicy'],
+            },
+          },
         },
-      },
-      {
-        $lookup: {
-          from: 'scores',
-          localField: '_id',
-          foreignField: 'shop',
-          as: 'scores',
+        {
+          $unwind: {
+            path: '$keywordObjectArray',
+          },
         },
-      },
-      // 해당 가게 Like 한사람 Join
-      {
-        $lookup: {
-          from: 'users',
-          let: { shopId: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $in: ['$$shopId', '$likeShop'],
+        {
+          $sort: {
+            'keywordObjectArray.v': -1,
+          },
+        },
+        {
+          $group: {
+            _id: '$_id',
+            sortedKeywordObjectArray: {
+              $push: '$keywordObjectArray',
+            },
+            name: {
+              $first: '$name',
+            },
+            contact: {
+              $first: '$contact',
+            },
+            category: {
+              $first: '$category',
+            },
+            foodCategory: {
+              $first: '$foodCategory',
+            },
+            keyword: {
+              $first: '$keyword',
+            },
+            open: {
+              $first: '$open',
+            },
+            closed: {
+              $first: '$closed',
+            },
+            location: {
+              $first: '$location',
+            },
+            registerDate: {
+              $first: '$registerDate',
+            },
+          },
+        },
+        {
+          $addFields: {
+            topKeyword: {
+              $map: {
+                input: '$sortedKeywordObjectArray',
+                as: 'object',
+                in: {
+                  $concat: ['$$object.k', ''],
                 },
               },
             },
-          ],
-          as: 'liker',
+          },
         },
-      },
-      // Review 평균 구해서 scoreAverage 추가
-      {
-        $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
-      },
-      // Review 가리도록
-      {
-        $project: {
-          reviews: 0,
-          __v: 0,
-          liker: 0,
-          scores: 0,
+        {
+          $addFields: {
+            topKeyword: {
+              $slice: ['$topKeyword', 2],
+            },
+          },
         },
-      },
-      orderQuery,
-    ]);
-    return shops || [];
+        {
+          $lookup: {
+            from: 'images',
+            let: { shopId: '$_id' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+                },
+              },
+            ],
+            as: 'shopImage',
+          },
+        },
+        {
+          $project: {
+            keywords: {
+              __v: 0,
+              registerDate: 0,
+            },
+          },
+        },
+        // reviews에 Review Join
+        {
+          $lookup: {
+            from: 'reviews',
+            localField: '_id',
+            foreignField: 'shop',
+            as: 'reviews',
+          },
+        },
+        {
+          $lookup: {
+            from: 'scores',
+            localField: '_id',
+            foreignField: 'shop',
+            as: 'scores',
+          },
+        },
+        // 해당 가게 Like 한사람 Join
+        {
+          $lookup: {
+            from: 'users',
+            let: { shopId: '$_id' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $in: ['$$shopId', '$likeShop'],
+                  },
+                },
+              },
+            ],
+            as: 'liker',
+          },
+        },
+        // Review 평균 구해서 scoreAverage 추가
+        {
+          $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
+        },
+        // Review 가리도록
+        {
+          $project: {
+            reviews: 0,
+            __v: 0,
+            liker: 0,
+            scores: 0,
+          },
+        },
+        orderQuery,
+      ]);
+      return shops || [];
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   }
 
   async getAllShops(): Promise<ShopInterface[] | null> {
-    return await Shop.find({});
+    try {
+      return await Shop.find({});
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   }
 
   async addImage(id: string, imageLink: string[]) {

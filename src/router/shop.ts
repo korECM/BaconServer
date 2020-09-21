@@ -34,6 +34,8 @@ router.get('/', cache('3 minutes'), async (req, res, next) => {
     foodCategory: foodCategory as any,
   });
 
+  if (shops === null) return res.status(406).send();
+
   res.status(200).json(shops);
 });
 
@@ -41,6 +43,8 @@ router.get('/myShop', isLogin, cache('5 seconds'), async (req, res, next) => {
   let shopController = new ShopController();
 
   let shops = await shopController.getMyShop(req.user!._id);
+
+  if (shops === null) return res.status(406).send();
 
   res.status(200).json(shops);
 });
