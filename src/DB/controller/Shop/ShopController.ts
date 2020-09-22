@@ -8,6 +8,7 @@ import User from '../../models/User';
 import { deleteImage } from '../../../lib/image';
 import ImageReport, { ImageReportState } from '../../models/ImageReport';
 import ReviewReport, { ReviewReportState } from '../../models/ReviewReport';
+import { s3ToCf } from '../../../lib/imageUrlConverting';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -751,7 +752,7 @@ export class ShopController {
 
       for (let link of imageLink) {
         await Image.create({
-          imageLink: link,
+          imageLink: s3ToCf(link),
           shopId: shop._id,
           type: ImageType.Shop,
         });
@@ -787,7 +788,7 @@ export class ShopController {
 
       for (let link of imageLink) {
         await Image.create({
-          imageLink: link,
+          imageLink: s3ToCf(link),
           shopId: shop._id,
           type: ImageType.Menu,
         });
