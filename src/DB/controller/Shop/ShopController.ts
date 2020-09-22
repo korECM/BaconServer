@@ -422,6 +422,17 @@ export class ShopController {
         },
         {
           $addFields: {
+            sortedKeywordObjectArray: {
+              $filter: {
+                input: '$sortedKeywordObjectArray',
+                as: 'object',
+                cond: { $gt: ['$$object.v', 0] },
+              },
+            },
+          },
+        },
+        {
+          $addFields: {
             topKeyword: {
               $map: {
                 input: '$sortedKeywordObjectArray',
