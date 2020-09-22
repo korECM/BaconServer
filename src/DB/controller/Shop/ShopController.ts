@@ -254,7 +254,8 @@ export class ShopController {
       };
     }
     if (keyword && keyword.length > 0) {
-      keywordWhere.topKeyword = { $in: keyword };
+      // keywordWhere.topKeyword = { $in: keyword };
+      keywordWhere.topKeyword = { $all: keyword };
       minKeywordSum = 0;
     }
 
@@ -435,7 +436,7 @@ export class ShopController {
         {
           $addFields: {
             topKeyword: {
-              $slice: ['$topKeyword', 2],
+              $slice: ['$topKeyword', 3],
             },
           },
         },
