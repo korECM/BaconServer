@@ -26,7 +26,11 @@ class App {
     this.app.set('port', process.env.PORT || 8001);
 
     if (process.env.NODE_ENV !== 'test') {
-      this.app.use(morgan('dev'));
+      if (process.env.NODE_ENV === 'production') {
+        this.app.use(morgan('combined'));
+      } else {
+        this.app.use(morgan('dev'));
+      }
     }
 
     this.app.use(
@@ -56,6 +60,10 @@ class App {
         secure: false,
       },
     };
+    if (process.env.NODE_ENV === 'production') {
+      sessionOption.proxy = true;
+      sessionOption.cookie!.secure = true;
+    }
 
     this.app.use(session(sessionOption));
 

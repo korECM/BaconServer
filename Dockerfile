@@ -12,6 +12,7 @@ WORKDIR /app
 #저는 Dockerfile과 서버파일이 같은위치에 있어서 ./입니다
 # ADD ./ /app
 COPY .env ./
+RUN yarn global add pm2
 
 COPY package*.json ./
 COPY yarn.lock ./
@@ -37,4 +38,5 @@ ENV NODE_ENV=production
 
 EXPOSE 8001
 #서버실행
-CMD ["yarn", "start"]
+# CMD ["yarn", "start"]
+CMD [ "pm2-runtime", "start", "pm2.json" ]
