@@ -32,7 +32,9 @@ COPY ./dist/service ./service
 COPY ./dist/test ./test
 COPY ./dist/types ./types
 
-COPY .pm2.json ./
+COPY pm2.json ./
+
+RUN pm2 install pm2-logrotate
 
 #배포버젼으로 설정 - 이 설정으로 환경을 나눌 수 있습니다.
 ENV NODE_ENV=production
