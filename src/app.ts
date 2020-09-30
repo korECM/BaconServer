@@ -65,8 +65,8 @@ class App {
       },
     };
     if (process.env.NODE_ENV === 'production') {
-      sessionOption.proxy = true;
-      sessionOption.cookie!.secure = true;
+      // sessionOption.proxy = true;
+      // sessionOption.cookie!.secure = true;
     }
 
     this.app.use(session(sessionOption));
