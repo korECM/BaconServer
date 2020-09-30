@@ -34,7 +34,7 @@ export class ReviewController {
 
       if (!targetShop) return null;
 
-      let scoreModel = await Score.findOne({ user });
+      let scoreModel = await Score.findOne({ user, shop });
       if (!scoreModel) {
         scoreModel = new Score();
         scoreModel.user = user;
