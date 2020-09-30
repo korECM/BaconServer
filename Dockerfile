@@ -22,7 +22,14 @@ RUN yarn install
 
 # RUN yarn global add typescript
 
-COPY ./dist .
+COPY ./dist/app.js .
+COPY ./dist/index.js .
+COPY ./dist/DB ./DB
+COPY ./dist/lib ./lib
+COPY ./dist/router ./router
+COPY ./dist/service ./service
+COPY ./dist/test ./test
+COPY ./dist/types ./types
 
 #배포버젼으로 설정 - 이 설정으로 환경을 나눌 수 있습니다.
 ENV NODE_ENV=production
