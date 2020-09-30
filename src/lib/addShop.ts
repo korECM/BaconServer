@@ -64,7 +64,7 @@ let shopData: Data[] = [];
       keyword,
       menus,
     );
-    console.log(`${index} : ${dataJson.length} ${shop.name} 생성`);
+    console.log(`${index} : ${shopData.length} ${shop.name} 생성`);
   }
   console.log('Shop Insert 완료');
 })();
