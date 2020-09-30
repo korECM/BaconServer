@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import path from 'path';
+import helmet from 'helmet';
+import hpp from 'hpp';
 import { MyError } from './types';
 import { jwtMiddleware } from './lib/jwtMiddleware';
 import cors from 'cors';
@@ -28,6 +30,8 @@ class App {
     if (process.env.NODE_ENV !== 'test') {
       if (process.env.NODE_ENV === 'production') {
         this.app.use(morgan('combined'));
+        this.app.use(helmet());
+        this.app.use(hpp());
       } else {
         this.app.use(morgan('dev'));
       }
