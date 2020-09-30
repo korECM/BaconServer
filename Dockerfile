@@ -1,4 +1,4 @@
-FROM node:12.18.2
+FROM node:12.18.2-alpine
 MAINTAINER ECM jeffyoun@naver.com
 
 #app 폴더 만들기 - NodeJS 어플리케이션 폴더
