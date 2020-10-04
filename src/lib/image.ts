@@ -23,7 +23,7 @@ export const upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     key: (req, file, cb) => {
-      let extension = path.extname(file.originalname);
+      let extension = path.extname(file.originalname) || '.jpg';
       cb(null, uuid() + Date.now().toString() + extension);
     },
   }),
