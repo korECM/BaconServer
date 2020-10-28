@@ -38,7 +38,7 @@ router.post(
 
 router.post(
   '/signIn',
-  isNotLogin,
+  // isNotLogin,
   reqValidate(
     Joi.object({
       email: Joi.string().email(),
@@ -63,7 +63,7 @@ router.get('/signIn/kakao', async (req, res, next) => {
   res.redirect(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_REST_API_KEY}&redirect_uri=${kakaoCallback}&response_type=code`);
 });
 
-router.get('/signIn/kakao/callback', isNotLogin, async (req, res, next) => {
+router.get('/signIn/kakao/callback', /*isNotLogin,*/ async (req, res, next) => {
   const { code } = req.query;
   // 얻은 코드를 바탕으로 access_token 얻기
   const tokenRequestURL = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.KAKAO_REST_API_KEY}&redirect_uri=${kakaoCallback}&code=${code}`;
