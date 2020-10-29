@@ -9,6 +9,7 @@ import { deleteImage } from '../../../lib/image';
 import ImageReport, { ImageReportState } from '../../models/ImageReport';
 import ReviewReport, { ReviewReportState } from '../../models/ReviewReport';
 import { s3ToCf } from '../../../lib/imageUrlConverting';
+import { Client } from '@elastic/elasticsearch';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -733,6 +734,30 @@ export class ShopController {
     } catch (error) {
       console.error(error);
       return null;
+    }
+  }
+
+  async searchShop(keyword: string): Promise<any[]> {
+    try {
+      const esClient = new Client({
+        node: process.env.ELASTICSEARCH,
+      });
+
+      let { body } = await esClient.search({
+        index: 'shop',
+        body: {
+          query: {
+            query_string: {
+              fields: ['name^2.0', 'menus^1.0'],
+              query: `*${keyword}*`,
+            },
+          },
+        },
+      });
+      return body.hits.hits.map((data: any) => data._source.name);
+    } catch (error) {
+      console.error(error);
+      return [];
     }
   }
 

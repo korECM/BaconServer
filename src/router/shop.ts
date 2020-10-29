@@ -424,4 +424,12 @@ router.delete('/menuImage/:imageId', isAdmin, async (req, res, next) => {
   }
 });
 
+router.get('/search/:keyword', async (req, res, next) => {
+  const keyword = req.params.keyword as string;
+  if (!keyword || keyword.length === 0) return [];
+  let shopController = new ShopController();
+  let shops = await shopController.searchShop(keyword);
+  res.status(200).send(shops);
+});
+
 export default router;
