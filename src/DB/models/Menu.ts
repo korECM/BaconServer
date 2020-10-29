@@ -9,7 +9,7 @@ export interface MenuSchemaInterface extends mongoose.Document {
 export let MenuSchema = new Schema({
   title: { type: String, required: true },
   price: { type: Number, required: true },
-  shopId: { type: Schema.Types.ObjectId, required: true },
+  shopId: { type: Schema.Types.ObjectId, required: true, ref : 'Shop' },
   registerDate: {
     type: Date,
     default: Date.now,
