@@ -12,6 +12,7 @@
     "publishAndLocal": "yarn docker && yarn container && git checkout release && git pull && git merge master && git push && git checkout master"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^7.9.1",
     "apicache": "^1.5.3",
     "aws-sdk": "^2.725.0",
     "axios": "^0.19.2",
