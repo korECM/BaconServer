@@ -11,6 +11,8 @@ import { MyError } from './types';
 import { jwtMiddleware } from './lib/jwtMiddleware';
 import cors from 'cors';
 import redis from 'redis';
+import connectRedis from 'connect-redis';
+const RedisStore = connectRedis(session);
 
 class App {
   public app: express.Application;
@@ -21,14 +23,14 @@ class App {
     dotenv.config();
 
     this.app = express();
-    this.config();
-    this.routes.routes(this.app);
-    this.errorHandler();
     if (process.env.NODE_ENV === 'production') {
       this.redisClient = redis.createClient(6379, process.env.REDIS);
     } else {
       this.redisClient = redis.createClient(6379, 'host.docker.internal');
     }
+    this.config();
+    this.routes.routes(this.app);
+    this.errorHandler();
   }
 
   private config() {
@@ -70,6 +72,7 @@ class App {
         httpOnly: true,
         secure: false,
       },
+      store: new RedisStore({ client: this.redisClient }),
     };
     if (process.env.NODE_ENV === 'production') {
       // sessionOption.proxy = true;
