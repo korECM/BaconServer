@@ -8,7 +8,7 @@
     "dev": "NODE_ENV=development nodemon --exec ./node_modules/.bin/ts-node --files ./src/index.ts",
     "test": "NODE_ENV=test jest --coverage --runInBand",
     "docker": "tsc && docker build -t bacon_server . && docker tag bacon_server:latest jeffyoun/bacon_server:latest && docker push jeffyoun/bacon_server:latest",
-    "container": "docker stop bacon_server  && docker rm bacon_server && docker create --name bacon_server -p 8001:8001 -e NODE_ENV=development bacon_server:latest && docker start bacon_server",
+    "container": "docker stop bacon_server  && docker rm bacon_server && docker create --name bacon_server -p 8001:8001 -p 6379:6379 -e NODE_ENV=development bacon_server:latest && docker start bacon_server",
     "publishAndLocal": "yarn docker && yarn container && git checkout release && git pull && git merge master && git push && git checkout master"
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
+    "redis": "^3.0.2",
     "sinon": "^9.0.2",
     "uuid": "^8.3.0"
   },

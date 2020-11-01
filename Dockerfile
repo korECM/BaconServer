@@ -12,7 +12,7 @@ WORKDIR /app
 #저는 Dockerfile과 서버파일이 같은위치에 있어서 ./입니다
 # ADD ./ /app
 COPY .env ./
-RUN yarn global add pm2
+# RUN yarn global add pm2
 
 COPY package*.json ./
 COPY yarn.lock ./
@@ -32,15 +32,15 @@ COPY ./dist/service ./service
 COPY ./dist/test ./test
 COPY ./dist/types ./types
 
-COPY pm2.json ./
+# COPY pm2.json ./
 
-RUN pm2 install pm2-logrotate
+# RUN pm2 install pm2-logrotate
 
 #배포버젼으로 설정 - 이 설정으로 환경을 나눌 수 있습니다.
 ENV NODE_ENV=production
 
 
-EXPOSE 8001
+EXPOSE 8001 6379
 #서버실행
-# CMD ["yarn", "start"]
-CMD [ "pm2-runtime", "start", "pm2.json" ]
+CMD ["yarn", "start"]
+# CMD [ "pm2-runtime", "start", "pm2.json" ]

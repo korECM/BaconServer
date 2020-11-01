@@ -10,10 +10,12 @@ import hpp from 'hpp';
 import { MyError } from './types';
 import { jwtMiddleware } from './lib/jwtMiddleware';
 import cors from 'cors';
+import redis from 'redis';
 
 class App {
   public app: express.Application;
   public routes: Routes = new Routes();
+  public redisClient: redis.RedisClient;
 
   constructor() {
     dotenv.config();
@@ -22,6 +24,11 @@ class App {
     this.config();
     this.routes.routes(this.app);
     this.errorHandler();
+    if (process.env.NODE_ENV === 'production') {
+      this.redisClient = redis.createClient(6379, process.env.REDIS);
+    } else {
+      this.redisClient = redis.createClient(6379, 'host.docker.internal');
+    }
   }
 
   private config() {
@@ -89,4 +96,7 @@ class App {
   }
 }
 
-export default new App().app;
+const appContainer = new App();
+const app = appContainer.app;
+
+export { app, appContainer };

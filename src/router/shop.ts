@@ -1,5 +1,6 @@
 import express from 'express';
 import Joi from 'joi';
+import { appContainer } from '../index';
 import { isValidObjectId } from 'mongoose';
 import { ReviewController } from '../DB/controller/Review/ReviewController';
 import { upload } from '../lib/image';
@@ -21,7 +22,6 @@ router.get('/', cache('3 minutes'), async (req, res, next) => {
   const keyword = req.query.keyword ? (req.query.keyword as string).split(',') : undefined;
   const price = req.query.price ? (req.query.price as string).split(',') : undefined;
   const name = req.query.name ? (req.query.name as string) : undefined;
-
   let shopController = new ShopController();
 
   let shops = await shopController.getShops({
@@ -425,11 +425,28 @@ router.delete('/menuImage/:imageId', isAdmin, async (req, res, next) => {
 });
 
 router.get('/search/:keyword', cache('1 day'), async (req, res, next) => {
-  const keyword = req.params.keyword as string;
+  let keyword = req.params.keyword as string;
   if (!keyword || keyword.length === 0) return [];
-  let shopController = new ShopController();
-  let shops = await shopController.searchShop(keyword);
-  res.status(200).send(shops);
+
+  keyword = keyword.trim();
+
+  appContainer.redisClient.get(keyword, async (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send([]);
+      return;
+    }
+    if (data) {
+      res.status(200).send(JSON.parse(data));
+    } else {
+      let shopController = new ShopController();
+      let shops = await shopController.searchShop(keyword);
+
+      appContainer.redisClient.set(keyword, JSON.stringify(shops), 'EX', 60 * 60);
+
+      res.status(200).json(shops);
+    }
+  });
 });
 
 export default router;

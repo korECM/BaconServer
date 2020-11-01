@@ -1,4 +1,4 @@
-import app from './app';
+import { app, appContainer } from './app';
 import DB from './DB';
 import { createServer } from 'http';
 
@@ -12,4 +12,4 @@ import { createServer } from 'http';
   }
 })();
 
-export { app };
+export { app, appContainer };
