@@ -26,7 +26,11 @@ class App {
     if (process.env.NODE_ENV === 'production') {
       this.redisClient = redis.createClient(6379, process.env.REDIS);
     } else {
-      this.redisClient = redis.createClient(6379, 'host.docker.internal');
+      if (process.env.NODEMON_ENV === 'true') {
+        this.redisClient = redis.createClient(6379, 'localhost');
+      } else {
+        this.redisClient = redis.createClient(6379, 'host.docker.internal');
+      }
     }
     this.config();
     this.routes.routes(this.app);
