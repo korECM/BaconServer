@@ -472,6 +472,17 @@ export class ShopController {
           },
         },
         {
+          $addFields: {
+            shopImage: {
+              $cond: {
+                if: { $gte: [{ $size: '$shopImage' }, 1] },
+                then: { $slice: ['$shopImage', 1] },
+                else: '',
+              },
+            },
+          },
+        },
+        {
           $project: {
             keywords: {
               __v: 0,
@@ -677,6 +688,17 @@ export class ShopController {
               },
             ],
             as: 'shopImage',
+          },
+        },
+        {
+          $addFields: {
+            shopImage: {
+              $cond: {
+                if: { $gte: [{ $size: '$shopImage' }, 1] },
+                then: { $slice: ['$shopImage', 1] },
+                else: '',
+              },
+            },
           },
         },
         {
