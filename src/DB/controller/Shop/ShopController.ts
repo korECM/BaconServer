@@ -1,4 +1,4 @@
-import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location, FoodCategory } from '../../models/Shop';
+import Shop, { ShopInterface, ShopSchemaInterface, ShopCategory, Location, FoodCategory, DetailFoodCategory } from '../../models/Shop';
 import Keyword, { KeywordInterface } from '../../models/Keyword';
 import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
@@ -414,6 +414,9 @@ export class ShopController {
             foodCategory: {
               $first: '$foodCategory',
             },
+            detailFoodCategory: {
+              $first: '$detailFoodCategory',
+            },
             registerDate: {
               $first: '$registerDate',
             },
@@ -621,6 +624,9 @@ export class ShopController {
             },
             foodCategory: {
               $first: '$foodCategory',
+            },
+            detailFoodCategory: {
+              $first: '$detailFoodCategory',
             },
             keyword: {
               $first: '$keyword',
@@ -928,6 +934,7 @@ export class ShopController {
     longitude: number,
     location: Location,
     foodCategory: FoodCategory[],
+    detailFoodCategory: DetailFoodCategory[],
     category: ShopCategory,
     keywordInput: KeywordInterface,
     menus: MenuInputInterface[],
@@ -950,6 +957,7 @@ export class ShopController {
         address,
         category,
         foodCategory,
+        detailFoodCategory,
         open,
         closed,
         location,

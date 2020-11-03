@@ -60,6 +60,7 @@ let shopData: Data[] = [];
       parseInt(shop.longitude) || 0,
       shop.location,
       foodCategory,
+      [], // detailFoodCategory
       shop.category,
       keyword,
       menus,

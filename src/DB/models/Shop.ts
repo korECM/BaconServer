@@ -36,6 +36,23 @@ export enum FoodCategory {
   Etc = 'etc',
 }
 
+export enum DetailFoodCategory {
+  Chicken = 'chicken',
+  Empty = '',
+  Fastfood = 'fastfood',
+  Korean = 'korean',
+  Pig = 'pig',
+  Steamed = 'steamed',
+  Stew = 'stew',
+  Asian = 'asian',
+  Bakery = 'bakery',
+  Chinese = 'chinese',
+  Japanese = 'japanese',
+  Pizza = 'pizza',
+  School = 'school',
+  Western = 'western',
+}
+
 export interface ShopInterface {
   name: string;
   mainImage: string;
@@ -48,6 +65,7 @@ export interface ShopInterface {
   longitude: number;
   category: ShopCategory;
   foodCategory: FoodCategory[];
+  detailFoodCategory: DetailFoodCategory[];
   price: number;
   keyword: KeywordInterface;
   registerDate: Date;
@@ -68,6 +86,7 @@ export let ShopSchema = new Schema({
   longitude: { type: Number, required: false },
   category: { type: String, enum: Object.values(ShopCategory), required: true },
   foodCategory: { type: [String], enum: Object.values(FoodCategory), required: true },
+  detailFoodCategory: { type: [String], enum: Object.values(DetailFoodCategory), required: true },
   price: Number,
   keyword: { type: Schema.Types.ObjectId, ref: 'Keyword' },
   registerDate: {

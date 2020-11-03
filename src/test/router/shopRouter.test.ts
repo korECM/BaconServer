@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { app } from '../../index';
 import { setupDB } from '../DBTestUtil';
-import Shop, { ShopInterface, ShopCategory, FoodCategory } from '../../DB/models/Shop';
+import Shop, { ShopInterface, ShopCategory, FoodCategory, DetailFoodCategory } from '../../DB/models/Shop';
 import User, { UserInterface } from '../../DB/models/User';
 import { ShopController } from '../../DB/controller/Shop/ShopController';
 import { UserController } from '../../DB/controller/User/UserController';
@@ -55,6 +55,7 @@ beforeAll(async () => {
         0,
         location as any,
         [] as FoodCategory[],
+        [] as DetailFoodCategory[],
         category as any,
         {} as any,
         [] as any,
@@ -76,6 +77,7 @@ beforeAll(async () => {
         0,
         location as any,
         [] as FoodCategory[],
+        [] as DetailFoodCategory[],
         category as any,
         {} as any,
         [] as any,

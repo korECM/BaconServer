@@ -1,0 +1,2324 @@
+[
+  {
+    "_id": "5f5dc63ae2abb10f6ec9005a",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "45년의정부부대찌개",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "stew",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec9005f",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "가마로강정",
+    "category": "korean",
+    "price": 8000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec90064",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "가야",
+    "category": "korean",
+    "price": 9000,
+    "detailCategory1": "pig",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec90069",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "갈매울감자탕",
+    "category": "korean",
+    "price": 8000,
+    "detailCategory1": "stew",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec9006e",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "거구장",
+    "category": "korean",
+    "price": 12000,
+    "detailCategory1": "korean",
+    "detailCategory2": "stew",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec90073",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "고기먹으러",
+    "category": "korean",
+    "price": 6000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec90078",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "고기스토리",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec9007d",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "고깃집",
+    "category": "korean",
+    "price": 12000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec90082",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "고봉삼계탕",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "stew",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec90087",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "고씨네",
+    "category": "japanese",
+    "price": 6500,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec9008c",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "곤지암할매소머리국밥",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ae2abb10f6ec90091",
+    "foodCategory": [],
+    "name": "곰팔이생고기",
+    "category": "korean",
+    "price": 12000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90096",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "곱창고",
+    "category": "korean",
+    "price": 12000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec9009b",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "곱창스토브",
+    "category": "korean",
+    "price": 10000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900a0",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "곱창의전설",
+    "category": "korean",
+    "price": 9000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900a5",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "구공탄불고기",
+    "category": "korean",
+    "price": 8000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900aa",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "내가찜한닭",
+    "category": "korean",
+    "price": 19000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "steamed",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900af",
+    "foodCategory": [
+      "rice",
+      "bread",
+      "noodle",
+      "meat"
+    ],
+    "name": "닥터로빈",
+    "category": "western",
+    "price": 17500,
+    "detailCategory1": "western",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900b4",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "단비분식",
+    "category": "korean",
+    "price": 5000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900b9",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "대박",
+    "category": "japanese",
+    "price": 10000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900be",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "더돼지",
+    "category": "korean",
+    "price": 13000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900c3",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "더진국",
+    "category": "korean",
+    "price": 6500,
+    "detailCategory1": "korean",
+    "detailCategory2": "pig",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900c8",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "도리도리하찌",
+    "category": "korean",
+    "price": 19000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "korean",
+    "detailCategory3": "stew"
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900cd",
+    "foodCategory": [
+      "noodle",
+      "meat"
+    ],
+    "name": "등촌샤브칼국수",
+    "category": "japanese",
+    "price": 8000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900d2",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "또우리",
+    "category": "korean",
+    "price": 8000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900d7",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "뚜레쥬르",
+    "category": "western",
+    "price": 3000,
+    "detailCategory1": "bakery",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900dc",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "라이스 & 포테이토",
+    "category": "korean",
+    "price": 4500,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900e1",
+    "foodCategory": [
+      "noodle",
+      "meat",
+      "etc"
+    ],
+    "name": "라화쿵부",
+    "category": "chinese",
+    "price": 8000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "stew",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900e6",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "리얼후라이",
+    "category": "western",
+    "price": 15000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900eb",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "마포최대포숯불갈매기돼지갈비",
+    "category": "korean",
+    "price": 12000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900f0",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "맛있으면돼지",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900f5",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "맥도날드",
+    "category": "western",
+    "price": 4000,
+    "detailCategory1": "fastfood",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900fa",
+    "foodCategory": [
+      "rice",
+      "etc"
+    ],
+    "name": "명당김밥",
+    "category": "school",
+    "price": 2600,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec900ff",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "명문본가왕족발과보쌈",
+    "category": "korean",
+    "price": 25000,
+    "detailCategory1": "pig",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90104",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "모모치",
+    "category": "japanese",
+    "price": 4000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90109",
+    "foodCategory": [
+      "rice",
+      "noodle",
+      "meat"
+    ],
+    "name": "미니자이언트",
+    "category": "western",
+    "price": 7000,
+    "detailCategory1": "western",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec9010e",
+    "foodCategory": [
+      "noodle"
+    ],
+    "name": "미묘라멘",
+    "category": "japanese",
+    "price": 6000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90113",
+    "foodCategory": [
+      "noodle",
+      "meat"
+    ],
+    "name": "미소야",
+    "category": "japanese",
+    "price": 8000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90118",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "원조미스터꼼장어쭈꾸미",
+    "category": "korean",
+    "price": 11000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec9011d",
+    "foodCategory": [
+      "noodle",
+      "etc"
+    ],
+    "name": "밀짚모자",
+    "category": "korean",
+    "price": 12000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90122",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "바야흐로",
+    "category": "korean",
+    "price": 22000,
+    "detailCategory1": "korean",
+    "detailCategory2": "steamed",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90127",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "박가부대",
+    "category": "korean",
+    "price": 7500,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec9012c",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "박군하누",
+    "category": "korean",
+    "price": 30000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90131",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "반할",
+    "category": "fusion",
+    "price": 9500,
+    "detailCategory1": "western",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90136",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "복양꼬치샤브샤브",
+    "category": "chinese",
+    "price": 6000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "stew",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec9013b",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "본죽",
+    "category": "korean",
+    "price": 9000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90140",
+    "foodCategory": [
+      "noodle"
+    ],
+    "name": "봉평면옥",
+    "category": "korean",
+    "price": 6000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90145",
+    "foodCategory": [
+      "rice",
+      "noodle",
+      "meat"
+    ],
+    "name": "사과나무왕돈까스",
+    "category": "school",
+    "price": 5500,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec9014a",
+    "foodCategory": [
+      "bread",
+      "noodle"
+    ],
+    "name": "사이공리",
+    "category": "other",
+    "price": 8000,
+    "detailCategory1": "asian",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec9014f",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "삼대째손두부",
+    "category": "korean",
+    "price": 8000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63be2abb10f6ec90154",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "삼목등심",
+    "category": "korean",
+    "price": 22000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90159",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "상도늘보리",
+    "category": "korean",
+    "price": 10000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec9015e",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "상도정",
+    "category": "korean",
+    "price": 20000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90163",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "샤브일번가",
+    "category": "japanese",
+    "price": 7000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90168",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "서브웨이",
+    "category": "western",
+    "price": 4000,
+    "detailCategory1": "fastfood",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec9016d",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "성민양꼬치",
+    "category": "chinese",
+    "price": 11000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90172",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "소문난만천곱창",
+    "category": "korean",
+    "price": 9000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90177",
+    "foodCategory": [
+      "noodle"
+    ],
+    "name": "수목식당",
+    "category": "korean",
+    "price": 4000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec9017c",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "순대나라",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90181",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "스시초이",
+    "category": "japanese",
+    "price": 10000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90186",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "스시톡톡",
+    "category": "japanese",
+    "price": 7000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "stew",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec9018b",
+    "foodCategory": [
+      "noodle",
+      "meat",
+      "etc"
+    ],
+    "name": "신룽푸마라탕",
+    "category": "chinese",
+    "price": 8000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90190",
+    "foodCategory": [
+      "rice",
+      "noodle",
+      "meat"
+    ],
+    "name": "아이언키친",
+    "category": "school",
+    "price": 7500,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90195",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "안동장",
+    "category": "chinese",
+    "price": 5500,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec9019a",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "양쉐프",
+    "category": "fusion",
+    "price": 4500,
+    "detailCategory1": "chicken",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec9019f",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "어부사시가",
+    "category": "korean",
+    "price": 6000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901a4",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "엉터리생고기 흑석점",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901a9",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "엉터리생고기 중앙대점",
+    "category": "korean",
+    "price": 14000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901ae",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "국가대패",
+    "category": "korean",
+    "price": 3900,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901b3",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "연어이야기",
+    "category": "japanese",
+    "price": 18000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901b8",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "열정식당",
+    "category": "korean",
+    "price": 5000,
+    "detailCategory1": "korean",
+    "detailCategory2": "steamed",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901bd",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "영광족발",
+    "category": "korean",
+    "price": 8000,
+    "detailCategory1": "pig",
+    "detailCategory2": "stew",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901c2",
+    "foodCategory": [
+      "etc"
+    ],
+    "name": "오시오떡볶이",
+    "category": "school",
+    "price": 2500,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901c7",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "올바른식당",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901cc",
+    "foodCategory": [
+      "noodle"
+    ],
+    "name": "우뇽파스타",
+    "category": "western",
+    "price": 6000,
+    "detailCategory1": "western",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901d1",
+    "foodCategory": [
+      "noodle"
+    ],
+    "name": "우리집칼국수",
+    "category": "korean",
+    "price": 5500,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901d6",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "우슬재",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901db",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "원조꼬끼오숯불통닭",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901e0",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "원조소금구이",
+    "category": "korean",
+    "price": 9000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901e5",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "원할머니보쌈족발",
+    "category": "korean",
+    "price": 9000,
+    "detailCategory1": "pig",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901ea",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "유유초밥",
+    "category": "japanese",
+    "price": 1500,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901ef",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "유정쌈밥",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901f4",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "은행골",
+    "category": "japanese",
+    "price": 10000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901f9",
+    "foodCategory": [
+      "noodle",
+      "meat"
+    ],
+    "name": "이탈리안 돈까스 칡불냉면",
+    "category": "korean",
+    "price": 6000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec901fe",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "일이삼식당",
+    "category": "korean",
+    "price": 6000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90203",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "자담상",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90208",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "재일양꼬치",
+    "category": "chinese",
+    "price": 9000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec9020d",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "재팔이네닭발",
+    "category": "korean",
+    "price": 18000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90212",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "정가네 고려왕족발",
+    "category": "korean",
+    "price": 13000,
+    "detailCategory1": "pig",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ce2abb10f6ec90217",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "정직한 김치찌개",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9021c",
+    "foodCategory": [
+      "etc"
+    ],
+    "name": "죠스떡볶이",
+    "category": "school",
+    "price": 3000,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90221",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "주주총회",
+    "category": "japanese",
+    "price": 17000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90226",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "준호가만드는부대찌개",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9022b",
+    "foodCategory": [
+      "etc"
+    ],
+    "name": "준호가만드는즉석떡볶이",
+    "category": "school",
+    "price": 4500,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90230",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "준호네돈가스",
+    "category": "korean",
+    "price": 5500,
+    "detailCategory1": "japanese",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90235",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "중대양곱창",
+    "category": "korean",
+    "price": 19000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9023a",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "중문닭갈비",
+    "category": "korean",
+    "price": 5000,
+    "detailCategory1": "korean",
+    "detailCategory2": "chicken",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9023f",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "중앙돼지마을",
+    "category": "korean",
+    "price": 5000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90244",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "진미순대",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90249",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "진상천",
+    "category": "chinese",
+    "price": 5000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9024e",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "채홍",
+    "category": "chinese",
+    "price": 6000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90253",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "청기와뼈다귀해장국",
+    "category": "korean",
+    "price": 8000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90258",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "초반식당",
+    "category": "korean",
+    "price": 13000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9025d",
+    "foodCategory": [
+      "etc"
+    ],
+    "name": "초원떡볶이",
+    "category": "school",
+    "price": 2500,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90262",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "충북순대",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90267",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "치폴레옹",
+    "category": "fusion",
+    "price": 5500,
+    "detailCategory1": "chicken",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9026c",
+    "foodCategory": [
+      "noodle",
+      "meat",
+      "etc"
+    ],
+    "name": "칠기마라탕",
+    "category": "chinese",
+    "price": 6000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "stew",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90271",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "침사추이",
+    "category": "chinese",
+    "price": 8000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90276",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "커리야",
+    "category": "other",
+    "price": 11000,
+    "detailCategory1": "asian",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9027b",
+    "foodCategory": [
+      "noodle",
+      "meat",
+      "etc"
+    ],
+    "name": "탕화쿵푸마라탕",
+    "category": "chinese",
+    "price": 7000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "stew",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90280",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "크리스피크림도넛",
+    "category": "western",
+    "price": 1500,
+    "detailCategory1": "bakery",
+    "detailCategory2": "fastfood",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90285",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "큰맘할매순대국",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9028a",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "타누키돈부리",
+    "category": "japanese",
+    "price": 6500,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9028f",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "태능솔밭갈비",
+    "category": "korean",
+    "price": 6000,
+    "detailCategory1": "korean",
+    "detailCategory2": "stew",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90294",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "토마트",
+    "category": "western",
+    "price": 15000,
+    "detailCategory1": "western",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec90299",
+    "foodCategory": [
+      "noodle",
+      "etc"
+    ],
+    "name": "이태원샐러드",
+    "category": "western",
+    "price": 7000,
+    "detailCategory1": "western",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec9029e",
+    "foodCategory": [
+      "bread",
+      "etc"
+    ],
+    "name": "팜카페",
+    "category": "western",
+    "price": 4000,
+    "detailCategory1": "bakery",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902a3",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "맥피스",
+    "category": "western",
+    "price": 16000,
+    "detailCategory1": "pizza",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902a8",
+    "foodCategory": [
+      "noodle"
+    ],
+    "name": "포포인",
+    "category": "other",
+    "price": 8500,
+    "detailCategory1": "asian",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902ad",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "프랑세즈",
+    "category": "western",
+    "price": 3000,
+    "detailCategory1": "bakery",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902b2",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "피자보이시나",
+    "category": "western",
+    "price": 8900,
+    "detailCategory1": "pizza",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902b7",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "하꼬멘",
+    "category": "japanese",
+    "price": 5000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902bc",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "하노이별",
+    "category": "other",
+    "price": 7000,
+    "detailCategory1": "asian",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902c1",
+    "foodCategory": [
+      "rice",
+      "noodle",
+      "etc"
+    ],
+    "name": "학교종이땡땡땡",
+    "category": "school",
+    "price": 4500,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902c6",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "해랑",
+    "category": "japanese",
+    "price": 7000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902cb",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "해오름갈비",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902d0",
+    "foodCategory": [
+      "rice",
+      "noodle",
+      "meat"
+    ],
+    "name": "허수아비",
+    "category": "korean",
+    "price": 5500,
+    "detailCategory1": "asian",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902d5",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "호치킨",
+    "category": "western",
+    "price": 9500,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902da",
+    "foodCategory": [
+      "rice",
+      "etc"
+    ],
+    "name": "홍당무",
+    "category": "school",
+    "price": 2800,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902df",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "홍천닭갈비",
+    "category": "korean",
+    "price": 9500,
+    "detailCategory1": "chicken",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63de2abb10f6ec902e4",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "홍콩반점0410",
+    "category": "chinese",
+    "price": 4500,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec902e9",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "화르르",
+    "category": "korean",
+    "price": 10000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec902ee",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "황토정",
+    "category": "korean",
+    "price": 6000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec902f3",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "흑석드럼통소금구이",
+    "category": "korean",
+    "price": 10000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec902f8",
+    "foodCategory": [
+      "rice",
+      "bread",
+      "noodle"
+    ],
+    "name": "흑석호치민",
+    "category": "other",
+    "price": 11000,
+    "detailCategory1": "asian",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec902fd",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "흑수돈",
+    "category": "korean",
+    "price": 7500,
+    "detailCategory1": "chinese",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90300",
+    "foodCategory": [
+      "bread",
+      "meat"
+    ],
+    "name": "KFC",
+    "category": "western",
+    "price": 3000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "fastfood",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90305",
+    "foodCategory": [
+      "bread",
+      "meat"
+    ],
+    "name": "맘스터치",
+    "category": "western",
+    "price": 4000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "fastfood",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9030a",
+    "foodCategory": [
+      "rice",
+      "noodle",
+      "etc"
+    ],
+    "name": "김밥매니아",
+    "category": "school",
+    "price": 3000,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9030f",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "봉구스밥버거",
+    "category": "school",
+    "price": 2300,
+    "detailCategory1": "school",
+    "detailCategory2": "fastfood",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90314",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "교촌치킨 상도터널점",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90319",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "교촌치킨 흑석1호점",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9031e",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "BBQ 흑석",
+    "category": "korean",
+    "price": 16000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90323",
+    "foodCategory": [
+      "rice",
+      "noodle",
+      "etc"
+    ],
+    "name": "김밥천국 중앙대점",
+    "category": "school",
+    "price": 2000,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90328",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "우리도한번잘구워보세",
+    "category": "korean",
+    "price": 8000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9032d",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "쭝화대반점 짬뽕잘하는집",
+    "category": "chinese",
+    "price": 5500,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9032f",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "다락",
+    "category": "korean",
+    "price": 6500,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90334",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "고고차돌",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90339",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "부어치킨",
+    "category": "korean",
+    "price": 12000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9033e",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "노랑통닭",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90343",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "피자헛",
+    "category": "western",
+    "price": 15000,
+    "detailCategory1": "pizza",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90348",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "파파존스",
+    "category": "western",
+    "price": 21500,
+    "detailCategory1": "pizza",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9034d",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "이삭토스트",
+    "category": "school",
+    "price": 2900,
+    "detailCategory1": "school",
+    "detailCategory2": "fastfood",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90352",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "THE마니치킨",
+    "category": "korean",
+    "price": 17500,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90357",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "북경",
+    "category": "chinese",
+    "price": 4000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9035c",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "복돼지순대국",
+    "category": "korean",
+    "price": 6000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90361",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "토스트굽는사람들",
+    "category": "school",
+    "price": 3300,
+    "detailCategory1": "school",
+    "detailCategory2": "fastfood",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90366",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "알렉스플레이스",
+    "category": "western",
+    "price": 5900,
+    "detailCategory1": "western",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9036b",
+    "foodCategory": [
+      "rice",
+      "noodle"
+    ],
+    "name": "다성반점",
+    "category": "chinese",
+    "price": 5000,
+    "detailCategory1": "chinese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90370",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "고모밥죠",
+    "category": "korean",
+    "price": 5500,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90375",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "처갓집앙념치킨",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9037a",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "돈&돈",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9037d",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "속초향속초물회",
+    "category": "japanese",
+    "price": 25000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90382",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "가네미",
+    "category": "japanese",
+    "price": 7000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90387",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "직구삼",
+    "category": "korean",
+    "price": 10000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9038a",
+    "foodCategory": [
+      "etc"
+    ],
+    "name": "엽기떡볶이",
+    "category": "school",
+    "price": 9000,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9038f",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "닭치고",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90394",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "늘푸른수제돈까스",
+    "category": "korean",
+    "price": 7500,
+    "detailCategory1": "japanese",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec90399",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "도미노피자 상도점",
+    "category": "western",
+    "price": 16800,
+    "detailCategory1": "pizza",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec9039e",
+    "foodCategory": [
+      "noodle",
+      "meat"
+    ],
+    "name": "영양족발보쌈",
+    "category": "korean",
+    "price": 3000,
+    "detailCategory1": "pig",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec903a3",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "조선화로집",
+    "category": "korean",
+    "price": 9900,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63ee2abb10f6ec903a8",
+    "foodCategory": [
+      "noodle"
+    ],
+    "name": "메밀면도토리",
+    "category": "korean",
+    "price": 7000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903ad",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "콩시루",
+    "category": "korean",
+    "price": 6500,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903b2",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "인근주민",
+    "category": "korean",
+    "price": 19000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903b7",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "상도정",
+    "category": "korean",
+    "price": 20000,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903bc",
+    "foodCategory": [
+      "rice",
+      "noodle",
+      "etc"
+    ],
+    "name": "김밥천국 중앙대점",
+    "category": "school",
+    "price": 2000,
+    "detailCategory1": "school",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903c1",
+    "foodCategory": [
+      "rice",
+      "meat"
+    ],
+    "name": "기꾸참치",
+    "category": "japanese",
+    "price": 15000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903c6",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "김빠빠누룽지통닭",
+    "category": "korean",
+    "price": 16000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903cb",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "가마로강정 상도역점",
+    "category": "korean",
+    "price": 8000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903d0",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "딱좋아",
+    "category": "japanese",
+    "price": 15000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903d5",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "파리바게뜨 상도역점",
+    "category": "western",
+    "price": 2000,
+    "detailCategory1": "bakery",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903da",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "파리바게뜨 중앙대점",
+    "category": "western",
+    "price": 2000,
+    "detailCategory1": "bakery",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903df",
+    "foodCategory": [
+      "bread"
+    ],
+    "name": "파리바게뜨 중앙대학교점",
+    "category": "western",
+    "price": 2000,
+    "detailCategory1": "bakery",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903e4",
+    "foodCategory": [
+      "noodle",
+      "meat"
+    ],
+    "name": "홍익돈까스 중앙대점",
+    "category": "korean",
+    "price": 5000,
+    "detailCategory1": "japanese",
+    "detailCategory2": "korean",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903e9",
+    "foodCategory": [
+      "rice"
+    ],
+    "name": "북촌순두부&쭈꾸미",
+    "category": "korean",
+    "price": 7500,
+    "detailCategory1": "korean",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  },
+  {
+    "_id": "5f5dc63fe2abb10f6ec903ee",
+    "foodCategory": [
+      "meat"
+    ],
+    "name": "노랑통닭 중앙대점",
+    "category": "korean",
+    "price": 15000,
+    "detailCategory1": "chicken",
+    "detailCategory2": "",
+    "detailCategory3": ""
+  }
+]
