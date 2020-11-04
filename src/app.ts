@@ -12,6 +12,8 @@ import { jwtMiddleware } from './lib/jwtMiddleware';
 import cors from 'cors';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
+import { updateESData } from './lib/updateESData';
+import schedule from 'node-schedule';
 const RedisStore = connectRedis(session);
 
 class App {
@@ -35,6 +37,14 @@ class App {
     this.config();
     this.routes.routes(this.app);
     this.errorHandler();
+    this.schedule();
+  }
+
+  private schedule() {
+    schedule.scheduleJob('0 0 * * *', () => {
+      console.log('scheduled updateESData');
+      updateESData();
+    });
   }
 
   private config() {
