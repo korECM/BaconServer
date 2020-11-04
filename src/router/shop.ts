@@ -433,7 +433,10 @@ router.get('/search/:keyword', cache('1 day'), async (req, res, next) => {
   appContainer.redisClient.get(keyword, async (err, data) => {
     if (err) {
       console.error(err);
-      res.status(500).send([]);
+      res.status(500).send({
+        shops: [],
+        menus: [],
+      });
       return;
     }
     if (data) {

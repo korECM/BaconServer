@@ -765,27 +765,72 @@ export class ShopController {
     }
   }
 
-  async searchShop(keyword: string): Promise<any[]> {
+  async searchShop(keyword: string): Promise<ShopSearchResult> {
     try {
       const esClient = new Client({
         node: process.env.ELASTICSEARCH,
       });
 
-      let { body } = await esClient.search({
-        index: 'shop',
-        body: {
-          query: {
-            query_string: {
-              fields: ['name^2.0', 'menus^1.0'],
-              query: `*${keyword}*`,
+      console.time('search');
+      console.log('Search 시작');
+
+      // let { body } = await esClient.search({
+      //   index: 'shop',
+      //   body: {
+      //     query: {
+      //       query_string: {
+      //         fields: ['name^2.0', 'menus^1.0'],
+      //         query: `*${keyword}*`,
+      //       },
+      //     },
+      //   },
+      // });
+      let shops = (
+        await esClient.search({
+          index: 'shop',
+          body: {
+            query: {
+              bool: {
+                should: [{ term: { name: keyword } }, { match_phrase: { 'name.ngram': keyword } }],
+                minimum_should_match: 1,
+              },
             },
           },
-        },
-      });
-      return body.hits.hits.map((data: any) => data._source.name);
+        })
+      ).body.hits.hits.map((data: any) => ({
+        name: data._source.name,
+      }));
+      console.timeLog('search', 'shop');
+      let menus = (
+        await esClient.search({
+          index: 'menu',
+          body: {
+            query: {
+              bool: {
+                should: [{ term: { menu: keyword } }, { match_phrase: { 'menu.ngram': keyword } }],
+                minimum_should_match: 1,
+              },
+            },
+          },
+        })
+      ).body.hits.hits.map((data: any) => ({
+        name: data._source.name,
+        menu: data._source.menu,
+      }));
+      console.timeLog('search', 'menu');
+      console.timeEnd('search');
+
+      return {
+        shops,
+        menus,
+      };
+      // return body.hits.hits.map((data: any) => data._source.name);
     } catch (error) {
       console.error(error);
-      return [];
+      return {
+        shops: [],
+        menus: [],
+      };
     }
   }
 
@@ -1207,4 +1252,17 @@ interface ShopEditData {
   contact: string;
   open: string;
   closed: string;
+}
+
+interface ShopSearch {
+  name: string;
+}
+
+interface MenuSearch {
+  name: string;
+  menu: string;
+}
+export interface ShopSearchResult {
+  shops: ShopSearch[];
+  menus: MenuSearch[];
 }
