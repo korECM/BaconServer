@@ -23,6 +23,7 @@ export enum ShopOrder {
 export interface ShopFilterInterface {
   category?: ShopCategory[];
   foodCategory?: FoodCategory[];
+  detailCategory?: DetailFoodCategory[];
   location?: Location[];
   price?: string[];
   order?: ShopOrder;
@@ -226,9 +227,10 @@ export class ShopController {
     let keywordWhere: any = {};
     let menuQuery: any = {};
     let minKeywordSum = -1;
-    let { category, location, order, price, keyword, name, foodCategory } = filter;
+    let { category, location, order, price, keyword, name, foodCategory, detailCategory } = filter;
     if (category && category.length > 0) where.category = { $in: category };
     if (foodCategory && foodCategory.length > 0) where.foodCategory = { $in: foodCategory };
+    if (detailCategory && detailCategory.length > 0) where.detailFoodCategory = { $in: detailCategory };
     if (location && location.length > 0) where.location = { $in: location };
     if (name && name.length > 0) {
       menuQuery = {

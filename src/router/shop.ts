@@ -32,11 +32,63 @@ router.get('/', cache('3 minutes'), async (req, res, next) => {
     keyword: keyword as any,
     name,
     foodCategory: foodCategory as any,
+    detailCategory: undefined,
   });
 
   if (shops === null) return res.status(406).send();
 
   res.status(200).json(shops);
+});
+
+router.get('/detailCategory', cache('1 day'), async (req, res, next) => {
+  let detailCategory = req.query.detailCategory ? (req.query.detailCategory as string).split(',') : undefined;
+  if (detailCategory === undefined) return res.status(406).send();
+
+  if (detailCategory) {
+    let temp: string[] = [];
+    detailCategory.forEach((category) => {
+      if (category === 'asianWestern') {
+        temp.push('asian');
+        temp.push('western');
+      } else if (category === 'stew') {
+        temp.push('stew');
+        temp.push('steamed');
+      } else {
+        temp.push(category);
+      }
+    });
+    detailCategory = temp;
+  }
+
+  let keyword = detailCategory.join(',');
+
+  appContainer.redisClient.get(keyword, async (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(406).send();
+    }
+    if (data) {
+      res.status(200).send(JSON.parse(data));
+    } else {
+      let shopController = new ShopController();
+      let shops = await shopController.getShops({
+        category: undefined,
+        location: undefined,
+        order: undefined,
+        price: undefined,
+        keyword: undefined,
+        name: undefined,
+        foodCategory: undefined,
+        detailCategory: detailCategory as any,
+      });
+
+      if (shops === null) return res.status(406).send();
+
+      appContainer.redisClient.set(keyword, JSON.stringify(shops), 'EX', 60 * 60);
+
+      res.status(200).json(shops);
+    }
+  });
 });
 
 router.get('/myShop', isLogin, cache('5 seconds'), async (req, res, next) => {
