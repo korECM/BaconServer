@@ -799,6 +799,7 @@ export class ShopController {
         })
       ).body.hits.hits.map((data: any) => ({
         name: data._source.name,
+        id: data._source.id,
       }));
       console.timeLog('search', 'shop');
       let menus = (
@@ -816,6 +817,7 @@ export class ShopController {
       ).body.hits.hits.map((data: any) => ({
         name: data._source.name,
         menu: data._source.menu,
+        id: data._source.id,
       }));
       console.timeLog('search', 'menu');
       console.timeEnd('search');

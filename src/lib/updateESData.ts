@@ -31,7 +31,7 @@ export async function updateESData() {
 
     shopsWithMenu.forEach((shop, index) => {
       data.push(`{"index":{"_id":"${index + 1}"}}`);
-      data.push(`{"name":"${(shop as any).shopId.name}", "menu":"${shop.title}", "price":"${shop.price}"}`);
+      data.push(`{"id":"${(shop as any).shopId._id}","name":"${(shop as any).shopId.name}", "menu":"${shop.title}", "price":"${shop.price}"}`);
     });
     console.log('ES Menus data Push');
     response = await esClient.bulk({
