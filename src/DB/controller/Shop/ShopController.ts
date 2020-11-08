@@ -42,6 +42,206 @@ export interface MenuInputInterface {
   price: number;
 }
 
+const keywordToArrayQuery = [
+  {
+    $lookup: {
+      from: 'keywords',
+      localField: 'keyword',
+      foreignField: '_id',
+      as: 'keyword',
+    },
+  },
+  {
+    $unwind: {
+      path: '$keyword',
+    },
+  },
+  {
+    $project: {
+      keyword: {
+        _id: 0,
+        registerDate: 0,
+        __v: 0,
+      },
+    },
+  },
+  {
+    $addFields: {
+      keywordObjectArray: {
+        $objectToArray: '$keyword',
+      },
+      keywordSum: {
+        $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment'],
+      },
+    },
+  },
+];
+
+const sortKeyword = [
+  {
+    $unwind: {
+      path: '$keywordObjectArray',
+    },
+  },
+  {
+    $sort: {
+      'keywordObjectArray.v': -1,
+    },
+  },
+];
+
+const groupStage = {
+  _id: '$_id',
+  sortedKeywordObjectArray: {
+    $push: '$keywordObjectArray',
+  },
+  name: {
+    $first: '$name',
+  },
+  contact: {
+    $first: '$contact',
+  },
+  category: {
+    $first: '$category',
+  },
+  foodCategory: {
+    $first: '$foodCategory',
+  },
+  detailFoodCategory: {
+    $first: '$detailFoodCategory',
+  },
+  keyword: {
+    $first: '$keyword',
+  },
+  open: {
+    $first: '$open',
+  },
+  closed: {
+    $first: '$closed',
+  },
+  location: {
+    $first: '$location',
+  },
+  registerDate: {
+    $first: '$registerDate',
+  },
+};
+
+const topKeywordSlice = [
+  {
+    $addFields: {
+      sortedKeywordObjectArray: {
+        $filter: {
+          input: '$sortedKeywordObjectArray',
+          as: 'object',
+          cond: { $gt: ['$$object.v', 0] },
+        },
+      },
+    },
+  },
+  {
+    $addFields: {
+      topKeyword: {
+        $map: {
+          input: '$sortedKeywordObjectArray',
+          as: 'object',
+          in: {
+            $concat: ['$$object.k', ''],
+          },
+        },
+      },
+    },
+  },
+  {
+    $addFields: {
+      topKeyword: {
+        $slice: ['$topKeyword', 3],
+      },
+    },
+  },
+];
+
+const getShopMainImage = [
+  {
+    $lookup: {
+      from: 'images',
+      let: { shopId: '$_id' },
+      pipeline: [
+        {
+          $match: {
+            $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
+          },
+        },
+      ],
+      as: 'shopImage',
+    },
+  },
+  {
+    $addFields: {
+      shopImage: {
+        $cond: {
+          if: { $gte: [{ $size: '$shopImage' }, 1] },
+          then: { $slice: ['$shopImage', 1] },
+          else: '',
+        },
+      },
+    },
+  },
+];
+
+const getLikerQuery = [
+  {
+    $lookup: {
+      from: 'reviews',
+      localField: '_id',
+      foreignField: 'shop',
+      as: 'reviews',
+    },
+  },
+  {
+    $lookup: {
+      from: 'scores',
+      localField: '_id',
+      foreignField: 'shop',
+      as: 'scores',
+    },
+  },
+  // 해당 가게 Like 한사람 Join
+  {
+    $lookup: {
+      from: 'users',
+      let: { shopId: '$_id' },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $in: ['$$shopId', '$likeShop'],
+            },
+          },
+        },
+      ],
+      as: 'liker',
+    },
+  },
+  // Review 평균 구해서 scoreAverage 추가
+  {
+    $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
+  },
+];
+
+const projectQuery = {
+  $project: {
+    reviews: 0,
+    __v: 0,
+    liker: 0,
+    scores: 0,
+    keywords: {
+      __v: 0,
+      registerDate: 0,
+    },
+  },
+};
+
 export class ShopController {
   constructor() {}
 
@@ -324,35 +524,7 @@ export class ShopController {
           },
         },
         {
-          $lookup: {
-            from: 'keywords',
-            localField: 'keyword',
-            foreignField: '_id',
-            as: 'keyword',
-          },
-        },
-        {
-          $unwind: {
-            path: '$keyword',
-          },
-        },
-        {
-          $project: {
-            keyword: {
-              _id: 0,
-              registerDate: 0,
-              __v: 0,
-            },
-          },
-        },
-        {
           $addFields: {
-            keywordObjectArray: {
-              $objectToArray: '$keyword',
-            },
-            keywordSum: {
-              $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment'],
-            },
             menus: {
               $map: {
                 input: '$menus',
@@ -362,6 +534,7 @@ export class ShopController {
             },
           },
         },
+        ...keywordToArrayQuery,
         {
           $match: menuQuery,
         },
@@ -373,123 +546,23 @@ export class ShopController {
             },
           },
         },
-        {
-          $unwind: {
-            path: '$keywordObjectArray',
-          },
-        },
-        {
-          $sort: {
-            'keywordObjectArray.v': -1,
-          },
-        },
+        ...sortKeyword,
         {
           $group: {
-            _id: '$_id',
-            sortedKeywordObjectArray: {
-              $push: '$keywordObjectArray',
-            },
-            name: {
-              $first: '$name',
-            },
-            mainImage: {
-              $first: '$mainImage',
-            },
-            contact: {
-              $first: '$contact',
-            },
-            category: {
-              $first: '$category',
-            },
-            keyword: {
-              $first: '$keyword',
-            },
-            open: {
-              $first: '$open',
-            },
-            closed: {
-              $first: '$closed',
-            },
-            location: {
-              $first: '$location',
-            },
-            foodCategory: {
-              $first: '$foodCategory',
-            },
-            detailFoodCategory: {
-              $first: '$detailFoodCategory',
-            },
-            registerDate: {
-              $first: '$registerDate',
-            },
+            ...groupStage,
             menus: {
               $first: '$menus',
             },
           },
         },
-        {
-          $addFields: {
-            sortedKeywordObjectArray: {
-              $filter: {
-                input: '$sortedKeywordObjectArray',
-                as: 'object',
-                cond: { $gt: ['$$object.v', 0] },
-              },
-            },
-          },
-        },
-        {
-          $addFields: {
-            topKeyword: {
-              $map: {
-                input: '$sortedKeywordObjectArray',
-                as: 'object',
-                in: {
-                  $concat: ['$$object.k', ''],
-                },
-              },
-            },
-          },
-        },
-        {
-          $addFields: {
-            topKeyword: {
-              $slice: ['$topKeyword', 3],
-            },
-          },
-        },
+        ...topKeywordSlice,
         { $match: keywordWhere },
-        {
-          $lookup: {
-            from: 'images',
-            let: { shopId: '$_id' },
-            pipeline: [
-              {
-                $match: {
-                  $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
-                },
-              },
-            ],
-            as: 'shopImage',
-          },
-        },
-        {
-          $addFields: {
-            shopImage: {
-              $cond: {
-                if: { $gte: [{ $size: '$shopImage' }, 1] },
-                then: { $slice: ['$shopImage', 1] },
-                else: '',
-              },
-            },
-          },
-        },
+        ...getShopMainImage,
+        // reviews에 Review Join
+        ...getLikerQuery,
+        // Review 가리도록
         {
           $project: {
-            keywords: {
-              __v: 0,
-              registerDate: 0,
-            },
             menus: {
               __v: 0,
               _id: 0,
@@ -497,56 +570,10 @@ export class ShopController {
               registerDate: 0,
               shopId: 0,
             },
-          },
-        },
-        // reviews에 Review Join
-        {
-          $lookup: {
-            from: 'reviews',
-            localField: '_id',
-            foreignField: 'shop',
-            as: 'reviews',
-          },
-        },
-        {
-          $lookup: {
-            from: 'scores',
-            localField: '_id',
-            foreignField: 'shop',
-            as: 'scores',
-          },
-        },
-        // 해당 가게 Like 한사람 Join
-        {
-          $lookup: {
-            from: 'users',
-            let: { shopId: '$_id' },
-            pipeline: [
-              {
-                $match: {
-                  $expr: {
-                    $in: ['$$shopId', '$likeShop'],
-                  },
-                },
-              },
-            ],
-            as: 'liker',
-          },
-        },
-        // Review 평균 구해서 scoreAverage 추가
-        {
-          $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
-        },
-        // Review 가리도록
-        {
-          $project: {
-            reviews: 0,
-            __v: 0,
-            liker: 0,
-            scores: 0,
             sortedKeywordObjectArray: 0,
           },
         },
+        projectQuery,
         orderQuery,
       ]);
       return shops || [];
@@ -578,186 +605,17 @@ export class ShopController {
             },
           },
         },
+        ...keywordToArrayQuery,
+        ...sortKeyword,
         {
-          $lookup: {
-            from: 'keywords',
-            localField: 'keyword',
-            foreignField: '_id',
-            as: 'keyword',
-          },
+          $group: groupStage,
         },
-        {
-          $unwind: {
-            path: '$keyword',
-          },
-        },
-        {
-          $project: {
-            keyword: {
-              _id: 0,
-              registerDate: 0,
-              __v: 0,
-            },
-          },
-        },
-        {
-          $addFields: {
-            keywordObjectArray: {
-              $objectToArray: '$keyword',
-            },
-            keywordSum: {
-              $add: ['$keyword.atmosphere', '$keyword.costRatio', '$keyword.group', '$keyword.individual', '$keyword.riceAppointment', '$keyword.spicy'],
-            },
-          },
-        },
-        {
-          $unwind: {
-            path: '$keywordObjectArray',
-          },
-        },
-        {
-          $sort: {
-            'keywordObjectArray.v': -1,
-          },
-        },
-        {
-          $group: {
-            _id: '$_id',
-            sortedKeywordObjectArray: {
-              $push: '$keywordObjectArray',
-            },
-            name: {
-              $first: '$name',
-            },
-            contact: {
-              $first: '$contact',
-            },
-            category: {
-              $first: '$category',
-            },
-            foodCategory: {
-              $first: '$foodCategory',
-            },
-            detailFoodCategory: {
-              $first: '$detailFoodCategory',
-            },
-            keyword: {
-              $first: '$keyword',
-            },
-            open: {
-              $first: '$open',
-            },
-            closed: {
-              $first: '$closed',
-            },
-            location: {
-              $first: '$location',
-            },
-            registerDate: {
-              $first: '$registerDate',
-            },
-          },
-        },
-        {
-          $addFields: {
-            topKeyword: {
-              $map: {
-                input: '$sortedKeywordObjectArray',
-                as: 'object',
-                in: {
-                  $concat: ['$$object.k', ''],
-                },
-              },
-            },
-          },
-        },
-        {
-          $addFields: {
-            topKeyword: {
-              $slice: ['$topKeyword', 2],
-            },
-          },
-        },
-        {
-          $lookup: {
-            from: 'images',
-            let: { shopId: '$_id' },
-            pipeline: [
-              {
-                $match: {
-                  $expr: { $and: [{ $eq: ['$shopId', '$$shopId'] }, { $eq: ['shop', '$type'] }] },
-                },
-              },
-            ],
-            as: 'shopImage',
-          },
-        },
-        {
-          $addFields: {
-            shopImage: {
-              $cond: {
-                if: { $gte: [{ $size: '$shopImage' }, 1] },
-                then: { $slice: ['$shopImage', 1] },
-                else: '',
-              },
-            },
-          },
-        },
-        {
-          $project: {
-            keywords: {
-              __v: 0,
-              registerDate: 0,
-            },
-          },
-        },
+        ...topKeywordSlice,
+        ...getShopMainImage,
         // reviews에 Review Join
-        {
-          $lookup: {
-            from: 'reviews',
-            localField: '_id',
-            foreignField: 'shop',
-            as: 'reviews',
-          },
-        },
-        {
-          $lookup: {
-            from: 'scores',
-            localField: '_id',
-            foreignField: 'shop',
-            as: 'scores',
-          },
-        },
-        // 해당 가게 Like 한사람 Join
-        {
-          $lookup: {
-            from: 'users',
-            let: { shopId: '$_id' },
-            pipeline: [
-              {
-                $match: {
-                  $expr: {
-                    $in: ['$$shopId', '$likeShop'],
-                  },
-                },
-              },
-            ],
-            as: 'liker',
-          },
-        },
-        // Review 평균 구해서 scoreAverage 추가
-        {
-          $addFields: { scoreAverage: { $avg: '$scores.score' }, reviewCount: { $size: '$reviews' }, likerCount: { $size: '$liker' } },
-        },
+        ...getLikerQuery,
         // Review 가리도록
-        {
-          $project: {
-            reviews: 0,
-            __v: 0,
-            liker: 0,
-            scores: 0,
-          },
-        },
+        projectQuery,
         orderQuery,
       ]);
       return shops || [];
