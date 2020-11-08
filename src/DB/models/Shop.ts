@@ -38,6 +38,7 @@ export enum FoodCategory {
 
 export enum DetailFoodCategory {
   Chicken = 'chicken',
+  Meat = 'meat',
   Empty = '',
   Fastfood = 'fastfood',
   Korean = 'korean',

@@ -9,7 +9,7 @@
     "category": "korean",
     "price": 7000,
     "detailCategory1": "korean",
-    "detailCategory2": "stew",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -47,7 +47,7 @@
     "category": "korean",
     "price": 8000,
     "detailCategory1": "stew",
-    "detailCategory2": "korean",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -59,8 +59,8 @@
     "name": "거구장",
     "category": "korean",
     "price": 12000,
-    "detailCategory1": "korean",
-    "detailCategory2": "stew",
+    "detailCategory1": "meat",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -71,7 +71,7 @@
     "name": "고기먹으러",
     "category": "korean",
     "price": 6000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -83,7 +83,7 @@
     "name": "고기스토리",
     "category": "korean",
     "price": 7000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -95,7 +95,7 @@
     "name": "고깃집",
     "category": "korean",
     "price": 12000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -109,7 +109,7 @@
     "category": "korean",
     "price": 15000,
     "detailCategory1": "stew",
-    "detailCategory2": "korean",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -142,7 +142,7 @@
     "name": "곰팔이생고기",
     "category": "korean",
     "price": 12000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -154,7 +154,7 @@
     "name": "곱창고",
     "category": "korean",
     "price": 12000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -166,7 +166,7 @@
     "name": "곱창스토브",
     "category": "korean",
     "price": 10000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -178,7 +178,7 @@
     "name": "곱창의전설",
     "category": "korean",
     "price": 9000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -205,7 +205,7 @@
     "category": "korean",
     "price": 19000,
     "detailCategory1": "chicken",
-    "detailCategory2": "steamed",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -257,7 +257,7 @@
     "name": "더돼지",
     "category": "korean",
     "price": 13000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -285,7 +285,7 @@
     "price": 19000,
     "detailCategory1": "chicken",
     "detailCategory2": "korean",
-    "detailCategory3": "stew"
+    "detailCategory3": ""
   },
   {
     "_id": "5f5dc63be2abb10f6ec900cd",
@@ -310,7 +310,7 @@
     "category": "korean",
     "price": 8000,
     "detailCategory1": "korean",
-    "detailCategory2": "",
+    "detailCategory2": "meat",
     "detailCategory3": ""
   },
   {
@@ -348,7 +348,7 @@
     "category": "chinese",
     "price": 8000,
     "detailCategory1": "chinese",
-    "detailCategory2": "stew",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -371,7 +371,7 @@
     "name": "마포최대포숯불갈매기돼지갈비",
     "category": "korean",
     "price": 12000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -383,7 +383,7 @@
     "name": "맛있으면돼지",
     "category": "korean",
     "price": 7000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -509,7 +509,7 @@
     "category": "korean",
     "price": 22000,
     "detailCategory1": "korean",
-    "detailCategory2": "steamed",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -533,7 +533,7 @@
     "name": "박군하누",
     "category": "korean",
     "price": 30000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -559,7 +559,7 @@
     "category": "chinese",
     "price": 6000,
     "detailCategory1": "chinese",
-    "detailCategory2": "stew",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -633,8 +633,8 @@
     "name": "삼목등심",
     "category": "korean",
     "price": 22000,
-    "detailCategory1": "korean",
-    "detailCategory2": "",
+    "detailCategory1": "meat",
+    "detailCategory2": "japanese",
     "detailCategory3": ""
   },
   {
@@ -653,14 +653,15 @@
   {
     "_id": "5f5dc63ce2abb10f6ec9015e",
     "foodCategory": [
-      "meat"
+      "meat",
+      "etc"
     ],
-    "name": "상도정",
+    "name": "은희네 온집닭떡볶이",
     "category": "korean",
-    "price": 20000,
+    "price": 15000,
     "detailCategory1": "korean",
-    "detailCategory2": "",
-    "detailCategory3": ""
+    "detailCategory2": "school",
+    "detailCategory3": "chicken"
   },
   {
     "_id": "5f5dc63ce2abb10f6ec90163",
@@ -706,7 +707,7 @@
     "name": "소문난만천곱창",
     "category": "korean",
     "price": 9000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -757,7 +758,7 @@
     "category": "japanese",
     "price": 7000,
     "detailCategory1": "japanese",
-    "detailCategory2": "stew",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -835,7 +836,7 @@
     "name": "엉터리생고기 흑석점",
     "category": "korean",
     "price": 15000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -847,7 +848,7 @@
     "name": "엉터리생고기 중앙대점",
     "category": "korean",
     "price": 14000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -859,7 +860,7 @@
     "name": "국가대패",
     "category": "korean",
     "price": 3900,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -885,7 +886,7 @@
     "category": "korean",
     "price": 5000,
     "detailCategory1": "korean",
-    "detailCategory2": "steamed",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -898,7 +899,7 @@
     "category": "korean",
     "price": 8000,
     "detailCategory1": "pig",
-    "detailCategory2": "stew",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -921,7 +922,7 @@
     "name": "올바른식당",
     "category": "korean",
     "price": 7000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -1195,7 +1196,7 @@
     "name": "중대양곱창",
     "category": "korean",
     "price": 19000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -1221,7 +1222,7 @@
     "name": "중앙돼지마을",
     "category": "korean",
     "price": 5000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -1283,7 +1284,7 @@
     "name": "초반식당",
     "category": "korean",
     "price": 13000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -1335,7 +1336,7 @@
     "category": "chinese",
     "price": 6000,
     "detailCategory1": "chinese",
-    "detailCategory2": "stew",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -1375,7 +1376,7 @@
     "category": "chinese",
     "price": 7000,
     "detailCategory1": "chinese",
-    "detailCategory2": "stew",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -1423,8 +1424,8 @@
     "name": "태능솔밭갈비",
     "category": "korean",
     "price": 6000,
-    "detailCategory1": "korean",
-    "detailCategory2": "stew",
+    "detailCategory1": "meat",
+    "detailCategory2": "",
     "detailCategory3": ""
   },
   {
@@ -1574,7 +1575,7 @@
     "name": "해오름갈비",
     "category": "korean",
     "price": 7000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -1663,7 +1664,7 @@
     "name": "황토정",
     "category": "korean",
     "price": 6000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -1675,7 +1676,7 @@
     "name": "흑석드럼통소금구이",
     "category": "korean",
     "price": 10000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -1815,7 +1816,7 @@
     "name": "우리도한번잘구워보세",
     "category": "korean",
     "price": 8000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -1840,7 +1841,7 @@
     "name": "다락",
     "category": "korean",
     "price": 6500,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -1853,7 +1854,7 @@
     "name": "고고차돌",
     "category": "korean",
     "price": 7000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -2133,7 +2134,7 @@
     "name": "조선화로집",
     "category": "korean",
     "price": 9900,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
@@ -2181,7 +2182,7 @@
     "name": "상도정",
     "category": "korean",
     "price": 20000,
-    "detailCategory1": "korean",
+    "detailCategory1": "meat",
     "detailCategory2": "",
     "detailCategory3": ""
   },
