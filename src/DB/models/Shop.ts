@@ -88,7 +88,7 @@ export let ShopSchema = new Schema({
   category: { type: String, enum: Object.values(ShopCategory), required: true },
   foodCategory: { type: [String], enum: Object.values(FoodCategory), required: true },
   detailFoodCategory: { type: [String], enum: Object.values(DetailFoodCategory), required: true },
-  price: Number,
+  price: { type: Number },
   keyword: { type: Schema.Types.ObjectId, ref: 'Keyword' },
   registerDate: {
     type: Date,

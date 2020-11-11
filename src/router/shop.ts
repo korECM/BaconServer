@@ -9,6 +9,8 @@ import { UserService } from '../service/UserService';
 import { isLogin, isAdmin } from '../lib/userMiddleware';
 import { reqValidate } from '../lib/JoiValidate';
 import apiCache from 'apicache';
+import { DetailFoodCategory, FoodCategory, Location, ShopCategory } from '../DB/models/Shop';
+import { KeywordInterface } from '../DB/models/Keyword';
 
 const router = express.Router();
 
@@ -116,6 +118,70 @@ router.put('/:shopId', isAdmin, async (req, res, next) => {
   let shopController = new ShopController();
 
   let shops = await shopController.editShop(shopId, req.body);
+
+  res.status(201).json(shops);
+});
+
+router.delete('/:shopId', isAdmin, async (req, res, next) => {
+  const shopId = req.params.shopId as string;
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+  let shopController = new ShopController();
+
+  let shops = await shopController.deleteShop(shopId);
+
+  res.status(201).json(shops);
+});
+
+router.post('/', isAdmin, async (req, res, next) => {
+  const shopId = req.params.shopId as string;
+  if (isValidObjectId(shopId) === false) return res.status(400).send();
+
+  let shopController = new ShopController();
+
+  interface ShopCreateData {
+    name: string;
+    address: string;
+    location: Location;
+    latitude: number;
+    longitude: number;
+    price: number;
+    category: ShopCategory;
+    foodCategory: FoodCategory[];
+    detailFoodCategory: DetailFoodCategory[];
+    contact: string;
+    open: string;
+    closed: string;
+  }
+
+  const { name, address, location, longitude, category, closed, contact, detailFoodCategory, foodCategory, latitude, open, price } = req.body as ShopCreateData;
+
+  let keyword: KeywordInterface = {
+    _id: 0,
+    registerDate: new Date(),
+    atmosphere: 0,
+    costRatio: 0,
+    group: 0,
+    individual: 0,
+    riceAppointment: 0,
+  };
+
+  let shops = await shopController.createShop(
+    name,
+    contact,
+    address,
+    open,
+    closed,
+    price,
+    latitude,
+    longitude,
+    location,
+    foodCategory,
+    detailFoodCategory,
+    category,
+    keyword,
+    [],
+  );
 
   res.status(201).json(shops);
 });

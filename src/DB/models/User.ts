@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import { ShopInterface } from './Shop';
 
 export interface UserInterface {
   name: string;
@@ -8,7 +9,7 @@ export interface UserInterface {
   snsId: string;
   isAdmin: boolean;
   gender: string;
-  likeShop: UserSchemaInterface[] | mongoose.Types.ObjectId[];
+  likeShop: mongoose.Types.ObjectId[];
   kakaoNameSet: boolean;
   registerDate: Date;
   _id: any;

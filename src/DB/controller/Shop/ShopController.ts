@@ -4,12 +4,14 @@ import mongoose from 'mongoose';
 import Menu from '../../models/Menu';
 import Image, { ImageType } from '../../models/Image';
 import ShopReport, { ShopReportState } from '../../models/ShopReport';
-import User from '../../models/User';
+import User, { UserSchemaInterface } from '../../models/User';
 import { deleteImage } from '../../../lib/image';
 import ImageReport, { ImageReportState } from '../../models/ImageReport';
 import ReviewReport, { ReviewReportState } from '../../models/ReviewReport';
 import { s3ToCf } from '../../../lib/imageUrlConverting';
 import { Client } from '@elastic/elasticsearch';
+import Review from '../../models/Review';
+import Score from '../../models/Score';
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -912,6 +914,50 @@ export class ShopController {
     }
   }
 
+  async deleteShop(shopId: string) {
+    try {
+      let shop = await Shop.findById(shopId);
+      if (!shop) return false;
+      let images = await Image.find({ shopId: new ObjectId(shopId) });
+      for (let image of images) {
+        let imageNameArray = image.imageLink.split('/');
+        let imageName = imageNameArray[imageNameArray.length - 1];
+        if (!imageName) return false;
+
+        await deleteImage(imageName);
+
+        await image.remove();
+      }
+      let reviews = await Review.find({ shop: shopId });
+      for (let review of reviews) {
+        await review.remove();
+      }
+
+      let scores = await Score.find({ shop: shopId });
+      for (let score of scores) {
+        await score.remove();
+      }
+
+      let menus = await Menu.find({ shopId: shopId });
+      for (let menu of menus) {
+        await menu.remove();
+      }
+
+      let keyword = await Keyword.findById(shop.keyword);
+      await keyword?.remove();
+
+      let users = await User.find().where('likeShop').in([shopId]);
+      for (let user of users) {
+        user.likeShop = user.likeShop.filter((shop) => `${shop}` !== shopId);
+        await user.save();
+      }
+
+      await shop.remove();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async setShopReportMode(reportId: string, mode: string) {
     try {
       let report = await ShopReport.findById(reportId);
@@ -1082,7 +1128,7 @@ export class ShopController {
       let shop = await this.findById(shopId);
       if (shop === null) return false;
 
-      const { name, address, latitude, location, longitude, category, closed, contact, open } = shopData;
+      const { name, address, latitude, location, longitude, category, closed, contact, open, price, foodCategory, detailFoodCategory } = shopData;
 
       shop.name = name;
       shop.address = address;
@@ -1090,9 +1136,12 @@ export class ShopController {
       shop.location = location;
       shop.longitude = longitude;
       shop.category = category;
-      shop.closed = closed;
+      shop.foodCategory = foodCategory;
+      shop.detailFoodCategory = detailFoodCategory;
       shop.contact = contact;
       shop.open = open;
+      shop.closed = closed;
+      shop.price = price;
 
       await shop.save();
 
@@ -1110,7 +1159,10 @@ interface ShopEditData {
   location: Location;
   latitude: number;
   longitude: number;
+  price: number;
   category: ShopCategory;
+  foodCategory: FoodCategory[];
+  detailFoodCategory: DetailFoodCategory[];
   contact: string;
   open: string;
   closed: string;

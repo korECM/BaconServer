@@ -1,9 +1,9 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Types } from 'mongoose';
 
 export interface ImageSchemaInterface extends mongoose.Document {
   imageLink: string;
   type: ImageType;
-  shopId: Schema.Types.ObjectId;
+  shopId: Types.ObjectId;
 }
 
 export enum ImageType {
