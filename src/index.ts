@@ -1,6 +1,7 @@
 import { app, appContainer } from './app';
 import DB from './DB';
 import { createServer } from 'http';
+import "reflect-metadata";
 
 (async () => {
   if (process.env.NODE_ENV !== 'test') {

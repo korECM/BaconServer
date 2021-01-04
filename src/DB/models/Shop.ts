@@ -64,6 +64,7 @@ export interface ShopInterface {
   location: Location;
   latitude: number;
   longitude: number;
+  viewCount: number;
   category: ShopCategory;
   foodCategory: FoodCategory[];
   detailFoodCategory: DetailFoodCategory[];
@@ -88,6 +89,7 @@ export let ShopSchema = new Schema({
   category: { type: String, enum: Object.values(ShopCategory), required: true },
   foodCategory: { type: [String], enum: Object.values(FoodCategory), required: true },
   detailFoodCategory: { type: [String], enum: Object.values(DetailFoodCategory), required: true },
+  viewCount: { type: Number, required: true },
   price: { type: Number },
   keyword: { type: Schema.Types.ObjectId, ref: 'Keyword' },
   registerDate: {

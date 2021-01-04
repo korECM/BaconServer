@@ -14,6 +14,7 @@ import redis from 'redis';
 import connectRedis from 'connect-redis';
 import { updateESData } from './lib/updateESData';
 import schedule from 'node-schedule';
+import env from "./newSrc/env";
 const RedisStore = connectRedis(session);
 
 class App {
@@ -22,13 +23,11 @@ class App {
   public redisClient: redis.RedisClient;
 
   constructor() {
-    dotenv.config();
-
     this.app = express();
-    if (process.env.NODE_ENV === 'production') {
-      this.redisClient = redis.createClient(6379, process.env.REDIS);
+    if (env.isProduction) {
+      this.redisClient = redis.createClient(6379, env.db.redis);
     } else {
-      if (process.env.NODEMON_ENV === 'true') {
+      if (env.isExecutedByNodeMon) {
         this.redisClient = redis.createClient(6379, 'localhost');
       } else {
         this.redisClient = redis.createClient(6379, 'host.docker.internal');
@@ -50,8 +49,8 @@ class App {
   private config() {
     this.app.set('port', process.env.PORT || 8001);
 
-    if (process.env.NODE_ENV !== 'test') {
-      if (process.env.NODE_ENV === 'production') {
+    if (!env.isTest) {
+      if (env.isProduction) {
         this.app.use(morgan('combined'));
         this.app.use(helmet());
         this.app.use(hpp());
@@ -81,14 +80,14 @@ class App {
     const sessionOption: session.SessionOptions = {
       resave: false,
       saveUninitialized: false,
-      secret: process.env.COOKIE_SECRET!,
+      secret: env.secret.cookie,
       cookie: {
         httpOnly: true,
         secure: false,
       },
       store: new RedisStore({ client: this.redisClient }),
     };
-    if (process.env.NODE_ENV === 'production') {
+    if (env.isProduction) {
       // sessionOption.proxy = true;
       // sessionOption.cookie!.secure = true;
     }

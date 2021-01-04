@@ -41,6 +41,7 @@ export interface DetailFoodCategoryAddInterface {
         continue;
       }
       shopModel.detailFoodCategory = detailFoodCategory;
+      shopModel.price = shop.price;
       await shopModel.save();
     } catch (error) {
       console.error(error);

@@ -10,6 +10,7 @@ import ImageReport, { ImageReportState } from '../../models/ImageReport';
 import ReviewReport, { ReviewReportState } from '../../models/ReviewReport';
 import { s3ToCf } from '../../../lib/imageUrlConverting';
 import { Client } from '@elastic/elasticsearch';
+import { appContainer } from '../../../index';
 import Review from '../../models/Review';
 import Score from '../../models/Score';
 
@@ -892,6 +893,7 @@ export class ShopController {
         open,
         closed,
         location,
+        viewCount: 0,
         keyword: keyword._id,
         latitude,
         longitude,
