@@ -10,10 +10,13 @@ try {
     // const app = new App();
     app = Container.get(App);
 
-    if (!env.isTest) {
-        app.createExpressServer(env.port);
+    (async () => {
+        await app.setDatabase();
+        if (!env.isTest) {
+            app.createExpressServer(env.port);
+        }
+    })()
 
-    }
 } catch (error) {
     logger.error("createExpressServer Error ", error);
     throw error;
