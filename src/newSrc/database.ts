@@ -1,4 +1,4 @@
-import {ConnectionOptions, createConnection, useContainer} from "typeorm";
+import {Connection, ConnectionOptions, createConnection, useContainer} from "typeorm";
 import env from "./env";
 import {Container} from "typedi";
 
@@ -11,13 +11,16 @@ export async function createDatabaseConnection() {
             username: env.db.mainDb.username,
             password: env.db.mainDb.password,
             database: env.db.mainDb.databaseName,
-            entities: [__dirname + "/entity/*.ts"],
+            entities: [
+                __dirname + "/domains/**/*.{ts,js}",
+            ],
             synchronize: env.db.mainDb.synchronize,
         }
 
         useContainer(Container);
-        await createConnection(connectionOptions);
+        let connection: Connection = await createConnection(connectionOptions);
         console.log("DB Connected");
+        return connection;
     } catch (error) {
         throw error;
     }

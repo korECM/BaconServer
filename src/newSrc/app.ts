@@ -8,26 +8,27 @@ import {createDatabaseConnection} from "./database";
 import {logger} from "./utils/logger";
 import {NotificationService} from "./Services/NotificationService";
 import {useMiddleware} from "./config/middlewareConfig";
+import {Connection} from "typeorm";
 
 @Service()
 export class App {
 
     public app: express.Application;
     public redisClient: redis.RedisClient;
+    public connection: Connection;
 
     constructor(private notificationService: NotificationService) {
         this.app = express();
-        App.setDatabase();
         this.redisClient = createRedisClient();
         useMiddleware(this.app, this.redisClient);
         this.errorHandling();
         this.schedule();
     }
 
-    private static async setDatabase() {
+    public async setDatabase() {
         try {
             logger.info("데이터베이스 연결 시도");
-            await createDatabaseConnection();
+            this.connection = await createDatabaseConnection();
         } catch (e) {
             logger.error("데이터베이스 연결 실패 ", e);
         }
