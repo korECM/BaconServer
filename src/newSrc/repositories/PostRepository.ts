@@ -1,5 +1,6 @@
 import {EntityRepository, Repository} from "typeorm";
 import {Post} from "../domains/Post/Post";
+import env from "../env";
 
 @EntityRepository(Post)
 export class PostRepository extends Repository<Post> {
@@ -17,7 +18,7 @@ export class PostRepository extends Repository<Post> {
         return this
             .createQueryBuilder("post")
             .select()
-            .orderBy("random()")
+            .orderBy(env.isTest ? "random()" : "RAND()")
             .limit(num)
             .getMany();
     }
