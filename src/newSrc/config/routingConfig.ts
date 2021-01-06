@@ -1,15 +1,14 @@
 import {RoutingControllersOptions} from "routing-controllers";
 import env from "../env";
-import {logger} from "../utils/logger";
 import path from "path";
+import {apiURL} from "../app";
 
-
-const routingControllersOptions : RoutingControllersOptions = {
-    cors : {
+const routingControllersOptions: RoutingControllersOptions = {
+    cors: {
         origin: true,
         credentials: true,
     },
-    routePrefix : "/api/v1",
+    routePrefix: apiURL,
     controllers: [path.join(__dirname, "..", '/controllers/*.' + (env.isExecutedByNodeMon ? 'ts' : 'js'))],
 }
 

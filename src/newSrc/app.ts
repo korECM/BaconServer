@@ -10,6 +10,10 @@ import {NotificationService} from "./Services/NotificationService";
 import {useMiddleware} from "./config/middlewareConfig";
 import {Connection} from "typeorm";
 
+const apiURL: string = "/api/v1";
+
+export {apiURL}
+
 @Service()
 export class App {
 
