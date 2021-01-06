@@ -15,6 +15,7 @@ import Container from 'typedi';
 import {useExpressServer} from 'routing-controllers';
 import {routingControllersOptions} from './routingConfig';
 import {useSwagger} from '../utils/Swagger';
+import {useContainer as useValidationContainer} from "class-validator"
 
 export function useMiddleware(app: express.Application, redis: redis.RedisClient) {
     app.set('port', env.port || 8001);
@@ -43,6 +44,7 @@ export function useMiddleware(app: express.Application, redis: redis.RedisClient
 
     useSentry().request(app);
     useRoutingContainer(Container);
+    useValidationContainer(Container);
     useExpressServer(app, routingControllersOptions);
     useSwagger(app);
     useSentry().error(app);
