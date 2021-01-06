@@ -20,6 +20,7 @@ const env = {
             port: Number(process.env.DB_PORT) || 3306,
             databaseName: process.env.DB_NAME!,
             synchronize: process.env.DB_SYNCHRONIZE === "true",
+            logging: (process.env.DB_LOGGING! as boolean | "all" | ("query" | "schema" | "error" | "warn" | "info" | "log" | "migration")[] | undefined),
         },
         redis: process.env.REDIS!
     },
@@ -33,15 +34,15 @@ const env = {
             restApiKey: process.env.KAKAO_REST_API_KEY!
         }
     },
-    swagger : {
-        route : process.env.SWAGGER_ROUTE!
+    swagger: {
+        route: process.env.SWAGGER_ROUTE!
     },
-    sentry : {
-        dsn : process.env.SENTRY_DSN!,
-        issueUrl : process.env.SENTRY_ISSUE_SITE!
+    sentry: {
+        dsn: process.env.SENTRY_DSN!,
+        issueUrl: process.env.SENTRY_ISSUE_SITE!
     },
-    slack : {
-        webhookUrl : process.env.SLACK_WEBHOOK_URL!
+    slack: {
+        webhookUrl: process.env.SLACK_WEBHOOK_URL!
     }
 }
 

@@ -14,6 +14,7 @@ export async function createDatabaseConnection() {
             entities: [
                 __dirname + "/domains/**/*.{ts,js}",
             ],
+            logging: env.db.mainDb.logging,
             synchronize: env.db.mainDb.synchronize,
         }
 
