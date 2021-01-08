@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "dev": "NODE_ENV=development NODEMON_ENV=true nodemon --exec ./node_modules/.bin/ts-node --files ./src/newSrc/index.ts",
-    "test": "NODE_ENV=test jest --coverage --runInBand",
+    "dev": "NODE_ENV=development NODEMON_ENV=true ts-node-dev --respawn --rs --files ./src/newSrc/index.ts",
+    "test": "NODE_ENV=test jest --forceExit --runInBand",
     "docker": "tsc && docker build -t bacon_server . && docker tag bacon_server:latest jeffyoun/bacon_server:latest && docker push jeffyoun/bacon_server:latest",
     "container": "docker stop bacon_server  && docker rm bacon_server && docker create --name bacon_server -p 8001:8001 -p 6379:6379 -e NODE_ENV=development bacon_server:latest && docker start bacon_server",
     "publishAndLocal": "yarn docker && yarn container && git checkout release && git pull && git merge master && git push && git checkout master"
@@ -90,6 +90,7 @@
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.2",
     "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.1.1",
     "typescript": "^3.9.5"
   }
 }
