@@ -1,14 +1,13 @@
 import express from "express";
-import {Service} from "typedi";
+import {Inject, Service} from "typedi";
 import env from "./env";
-import redis from 'redis';
-import {createRedisClient} from "./config/redisConfig";
 import schedule from 'node-schedule';
 import {createDatabaseConnection} from "./database";
 import {logger} from "./utils/logger";
 import {NotificationService} from "./Services/NotificationService";
 import {useMiddleware} from "./config/middlewareConfig";
 import {Connection} from "typeorm";
+import {MemoryDatabaseService, RedisServiceToken} from "./Services/RedisService";
 
 const apiURL: string = "/api/v1";
 
@@ -18,13 +17,13 @@ export {apiURL}
 export class App {
 
     public app: express.Application;
-    public redisClient: redis.RedisClient;
     public connection: Connection;
+    private notificationService: NotificationService
 
-    constructor(private notificationService: NotificationService) {
+    constructor(@Inject(RedisServiceToken) public redisService: MemoryDatabaseService) {
         this.app = express();
-        this.redisClient = createRedisClient();
-        useMiddleware(this.app, this.redisClient);
+        this.redisService.connect();
+        useMiddleware(this.app, this.redisService);
         this.errorHandling();
         this.schedule();
     }
@@ -36,6 +35,11 @@ export class App {
         } catch (e) {
             logger.error("데이터베이스 연결 실패 ", e);
         }
+    }
+
+    public async closeDatabase() {
+        await this.connection.close();
+        this.redisService.close();
     }
 
     public createExpressServer(port: number) {

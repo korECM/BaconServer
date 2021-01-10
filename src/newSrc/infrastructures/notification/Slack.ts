@@ -1,7 +1,11 @@
 import {IncomingWebhook} from "@slack/client";
 import env from "../../env";
 import {Notification, NotificationProvider} from "./NotificationProvider";
+import {Service, Token} from "typedi";
 
+export const SlackToken = new Token<Slack>();
+
+@Service(SlackToken)
 export class Slack implements NotificationProvider {
     private webhook = new IncomingWebhook(env.slack.webhookUrl);
 

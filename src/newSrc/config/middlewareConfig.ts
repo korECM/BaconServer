@@ -3,7 +3,6 @@ import env from '../env';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import hpp from 'hpp';
-import redis from 'redis';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
@@ -16,8 +15,9 @@ import {useExpressServer} from 'routing-controllers';
 import {routingControllersOptions} from './routingConfig';
 import {useSwagger} from '../utils/Swagger';
 import {useContainer as useValidationContainer} from "class-validator"
+import {MemoryDatabaseService} from "../Services/RedisService";
 
-export function useMiddleware(app: express.Application, redis: redis.RedisClient) {
+export function useMiddleware(app: express.Application, redis: MemoryDatabaseService) {
     app.set('port', env.port || 8001);
 
     if (!env.isTest) {

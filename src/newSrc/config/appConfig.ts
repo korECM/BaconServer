@@ -1,12 +1,10 @@
 import session from "express-session";
 import env from "../env";
 import connectRedis from "connect-redis";
-import redis from 'redis';
+import {MemoryDatabaseService} from "../Services/RedisService";
 
-const RedisStore = connectRedis(session);
-
-const sessionOptions = (redis: redis.RedisClient): session.SessionOptions => {
-    return {
+const sessionOptions = (redis: MemoryDatabaseService): session.SessionOptions => {
+    const sessionOptions: session.SessionOptions = {
         resave: false,
         saveUninitialized: false,
         secret: env.secret.cookie,
@@ -15,8 +13,16 @@ const sessionOptions = (redis: redis.RedisClient): session.SessionOptions => {
             secure: env.isProduction,
         },
         proxy: env.isProduction,
-        store: new RedisStore({client: redis}),
-    };
+    }
+    
+    if (redis.isRealRedis()) {
+        const RedisStore = connectRedis(session);
+        return {
+            ...sessionOptions,
+            store: new RedisStore({client: redis.getRedisClient()}),
+        }
+    }
+    return sessionOptions;
 }
 
 export {sessionOptions}

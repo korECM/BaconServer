@@ -1,15 +1,13 @@
-import {Service} from "typedi";
+import {Inject, Service} from "typedi";
 import * as Sentry from "@sentry/node";
 import {NotificationProvider} from "../infrastructures/notification/NotificationProvider";
-import {Slack} from "../infrastructures/notification/Slack";
+import {SlackToken} from "../infrastructures/notification/Slack";
 import env from "../env";
 
 @Service()
 export class NotificationService {
-    private notificationProvider: NotificationProvider;
 
-    constructor(notificationProvider: NotificationProvider = new Slack()) {
-        this.notificationProvider = notificationProvider;
+    constructor(@Inject(SlackToken) private notificationProvider: NotificationProvider) {
     }
 
     async sendErrorMessage(error: Error) {
