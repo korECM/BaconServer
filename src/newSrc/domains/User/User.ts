@@ -41,12 +41,12 @@ export class User extends FoodingBaseEntity {
 
     @ManyToMany(type => Shop, shop => shop.id, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     @JoinTable()
-    likeShop: [Shop]
+    likeShop: Shop[]
 
     @OneToMany(type => Review, review => review.shop)
-    reviews: [Review]
+    reviews: Review[]
 
     @OneToMany(type => Score, score => score.by)
-    scores: [Score]
+    scores: Score[]
 
 }
