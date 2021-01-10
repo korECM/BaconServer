@@ -5,8 +5,8 @@ import {FoodingBaseEntity} from "../FoodingBaseEntity";
 
 @Entity()
 export class Menu extends FoodingBaseEntity {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+    @PrimaryGeneratedColumn("increment")
+    id: number;
     @Column('varchar', {length: 50, nullable: false})
     name: string;
     @Column(type => Money, {prefix: false})

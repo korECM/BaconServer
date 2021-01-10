@@ -22,7 +22,7 @@ export enum Role {
 @Entity()
 export class User extends FoodingBaseEntity {
     @PrimaryGeneratedColumn("increment")
-    id: string;
+    id: number;
     @Column('varchar', {length: 21, nullable: false})
     name: string;
     @Column("varchar", {nullable: false})

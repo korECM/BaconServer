@@ -6,7 +6,7 @@ import {FoodingBaseEntity} from "../FoodingBaseEntity";
 @Entity()
 export class Review extends FoodingBaseEntity {
     @PrimaryGeneratedColumn("increment")
-    id: string;
+    id: number;
 
     @ManyToOne(type => User, user => user.id, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     user: User;

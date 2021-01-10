@@ -10,7 +10,7 @@ export enum ReportState {
 
 export abstract class BaseReport extends FoodingBaseEntity {
     @PrimaryGeneratedColumn("increment")
-    id: string;
+    id: number;
 
     @Column('varchar', {length: 400, nullable: false})
     comment: string;

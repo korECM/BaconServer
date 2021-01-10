@@ -17,7 +17,7 @@ import {IngredientClassification} from "./Classification/IngredientClassificatio
 @Entity()
 export class Shop extends FoodingBaseEntity {
     @PrimaryGeneratedColumn("increment")
-    id: string;
+    id: number;
 
     @Column({length: 50, type: "varchar", nullable: false})
     name: string;

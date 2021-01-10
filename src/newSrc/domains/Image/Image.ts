@@ -10,7 +10,7 @@ export enum ImageType {
 @Entity()
 export class Image extends FoodingBaseEntity {
     @PrimaryGeneratedColumn("increment")
-    id: string;
+    id: number;
     @Column({nullable: false})
     imageLink: string;
     @Column('varchar', {length: 10, nullable: false})
