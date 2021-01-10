@@ -12,6 +12,7 @@ try {
 
     (async () => {
         await app.setDatabase();
+        await app.initDomain();
         if (!env.isTest) {
             app.createExpressServer(env.port);
         }

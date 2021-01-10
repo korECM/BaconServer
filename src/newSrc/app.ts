@@ -1,5 +1,5 @@
 import express from "express";
-import {Inject, Service} from "typedi";
+import {Container, Inject, Service} from "typedi";
 import env from "./env";
 import schedule from 'node-schedule';
 import {createDatabaseConnection} from "./database";
@@ -8,6 +8,7 @@ import {NotificationService} from "./Services/NotificationService";
 import {useMiddleware} from "./config/middlewareConfig";
 import {Connection} from "typeorm";
 import {MemoryDatabaseService, RedisServiceToken} from "./Services/RedisService";
+import {DomainInitializationService} from "./Services/DomainInitializationService";
 
 const apiURL: string = "/api/v1";
 
@@ -19,6 +20,7 @@ export class App {
     public app: express.Application;
     public connection: Connection;
     private notificationService: NotificationService
+    private domainInitializationService: DomainInitializationService;
 
     constructor(@Inject(RedisServiceToken) public redisService: MemoryDatabaseService) {
         this.app = express();
@@ -40,6 +42,11 @@ export class App {
     public async closeDatabase() {
         await this.connection.close();
         this.redisService.close();
+    }
+
+    public async initDomain() {
+        this.domainInitializationService = Container.get(DomainInitializationService);
+        await this.domainInitializationService.initAllDomain();
     }
 
     public createExpressServer(port: number) {
