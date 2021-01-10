@@ -1,9 +1,8 @@
-import {Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {BusinessHours} from "./BusinessHours";
 import {Money} from "./Money";
 import {Keyword} from "./Keyword";
 import {Location} from "./Location";
-import {Category} from "./Category";
 import {Menu} from "./Menu";
 import {Image} from "../Image/Image";
 import {Review} from "../Review/Review";
@@ -11,6 +10,9 @@ import {FoodingBaseEntity} from "../FoodingBaseEntity";
 import {User} from "../User/User";
 import {Score} from "../Score/Score";
 import {ShopReport} from "../Report/ShopReport";
+import {ShopClassification} from "./Classification/ShopClassification";
+import {FoodClassification} from "./Classification/FoodClassification";
+import {IngredientClassification} from "./Classification/IngredientClassification";
 
 @Entity()
 export class Shop extends FoodingBaseEntity {
@@ -33,35 +35,38 @@ export class Shop extends FoodingBaseEntity {
     @Column(type => Money, {prefix: false})
     price: Money;
 
-    @Column(type => Category, {prefix: false})
-    category: Category;
-    //
+    @ManyToMany(type => ShopClassification, {nullable: false})
+    @JoinTable()
+    shopClassification: ShopClassification[];
+    @ManyToMany(type => FoodClassification, {nullable: false})
+    @JoinTable()
+    foodClassification: FoodClassification[];
+    @ManyToMany(type => IngredientClassification, {nullable: false})
+    @JoinTable()
+    ingredientClassification: IngredientClassification[];
+
     @Column(type => Location, {prefix: false})
     location: Location;
-    //
     @Column(type => Keyword, {prefix: false})
     keyword: Keyword;
 
     @OneToMany(type => Menu, Menu => Menu.id)
-    menus: [Menu];
+    menus: Menu[];
 
-//
-//     @OneToMany(type => Image, image => image.shop)
-    shopImages?: [Image];
-//
-//     @OneToMany(type => Image, image => image.shop)
-    menuImages?: [Image];
-//
+    shopImages?: Image[];
+
+    menuImages?: Image[];
+
     @OneToMany(type => Review, review => review.id)
-    reviews: [Review];
+    reviews: Review[];
 
     @ManyToMany(type => User, user => user.likeShop, {onDelete: "CASCADE", onUpdate: "CASCADE"})
-    likers: [User]
+    likers: User[]
 
     @OneToMany(type => Score, score => score.shop)
-    scores: [Score]
+    scores: Score[]
 
     @OneToMany(type => ShopReport, report => report.shop)
-    reports: [ShopReport]
+    reports: ShopReport[]
 
 }
