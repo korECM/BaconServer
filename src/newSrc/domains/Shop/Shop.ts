@@ -50,14 +50,14 @@ export class Shop extends FoodingBaseEntity {
     @Column(type => Keyword, {prefix: false})
     keyword: Keyword;
 
-    @OneToMany(type => Menu, Menu => Menu.id)
+    @OneToMany(type => Menu, Menu => Menu.shop)
     menus: Menu[];
 
     shopImages?: Image[];
 
     menuImages?: Image[];
 
-    @OneToMany(type => Review, review => review.id)
+    @OneToMany(type => Review, review => review.shop)
     reviews: Review[];
 
     @ManyToMany(type => User, user => user.likeShop, {onDelete: "CASCADE", onUpdate: "CASCADE"})

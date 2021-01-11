@@ -30,6 +30,8 @@ export class User extends FoodingBaseEntity {
 
     @Column('varchar', {length: 10, nullable: false})
     provider: AuthProvider;
+    @Column()
+    kakaoNameSet: boolean;
     @Column('varchar', {length: 1, nullable: false})
     gender: Gender;
     @Column()
@@ -39,7 +41,7 @@ export class User extends FoodingBaseEntity {
     @Column('varchar', {length: 10, nullable: false})
     role: Role;
 
-    @ManyToMany(type => Shop, shop => shop.id, {onDelete: "CASCADE", onUpdate: "CASCADE"})
+    @ManyToMany(type => Shop, shop => shop.likers, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     @JoinTable()
     likeShop: Shop[]
 
