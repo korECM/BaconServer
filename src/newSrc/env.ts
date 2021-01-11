@@ -21,6 +21,7 @@ const env = {
             databaseName: process.env.DB_NAME!,
             synchronize: process.env.DB_SYNCHRONIZE === "true",
             logging: (process.env.DB_LOGGING! as boolean | "all" | ("query" | "schema" | "error" | "warn" | "info" | "log" | "migration")[] | undefined),
+            charset: process.env.DB_CHARSET!,
         },
         redis: process.env.REDIS!
     },
