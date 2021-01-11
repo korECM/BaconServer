@@ -43,7 +43,7 @@ export class User extends FoodingBaseEntity {
 
     @ManyToMany(type => Shop, shop => shop.likers, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     @JoinTable()
-    likeShop: Shop[]
+    likeShops: Shop[]
 
     @OneToMany(type => Review, review => review.shop)
     reviews: Review[]
