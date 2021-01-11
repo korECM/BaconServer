@@ -6,7 +6,7 @@ import {User} from "../User/User";
 export class Score {
     @PrimaryGeneratedColumn("increment")
     id: number;
-    @Column()
+    @Column('decimal', {precision: 2, scale: 1, nullable: false})
     score: number;
     @ManyToOne(type => Shop, shop => shop.id, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     shop: Shop;
