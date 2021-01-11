@@ -34,10 +34,10 @@ export class User extends FoodingBaseEntity {
     kakaoNameSet: boolean;
     @Column('varchar', {length: 1, nullable: false})
     gender: Gender;
-    @Column()
-    snsId: string;
-    @Column({nullable: false})
-    password: string;
+    @Column('varchar', {nullable: true, length: 30})
+    snsId: string | null;
+    @Column('varchar', {nullable: true, length: 70})
+    password: string | null;
     @Column('varchar', {length: 10, nullable: false})
     role: Role;
 
