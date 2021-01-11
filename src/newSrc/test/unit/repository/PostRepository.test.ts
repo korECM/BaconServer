@@ -33,7 +33,7 @@ describe("PostRepository", () => {
         // given
         let postNum = 3;
         let randomCount = 10;
-        let actualPostIds: (string[])[] = []
+        let actualPostIds: (number[])[] = []
 
         // when
         for (let i = 0; i < randomCount; i++) {

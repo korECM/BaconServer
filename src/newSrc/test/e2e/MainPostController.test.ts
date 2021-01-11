@@ -39,7 +39,7 @@ describe("GET /mainPost", () => {
         const {body} = response;
         expect(body).toBeArrayOfSize(3);
         for (let post of body) {
-            expect(post).toContainAllKeys(Object.getOwnPropertyNames(new MainPostResponse("", "", "", "")));
+            expect(post).toContainAllKeys(Object.getOwnPropertyNames(new MainPostResponse(0, "", "", "")));
         }
         done();
     })

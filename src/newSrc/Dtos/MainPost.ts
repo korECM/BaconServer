@@ -2,7 +2,7 @@ import {IsNotEmpty, IsString} from "class-validator";
 
 export class MainPostResponse {
     @IsNotEmpty()
-    id: string;
+    id: number;
     @IsNotEmpty()
     @IsString()
     title: string;
@@ -13,7 +13,7 @@ export class MainPostResponse {
     @IsString()
     postLink: string;
 
-    constructor(id: string, title: string, imageLink: string, postLink: string) {
+    constructor(id: number, title: string, imageLink: string, postLink: string) {
         this.id = id;
         this.title = title;
         this.imageLink = imageLink;
