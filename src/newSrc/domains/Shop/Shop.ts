@@ -35,13 +35,13 @@ export class Shop extends FoodingBaseEntity {
     @Column(type => Money, {prefix: false})
     price: Money;
 
-    @ManyToMany(type => ShopClassification, {nullable: false})
+    @ManyToMany(type => ShopClassification, c => c.shopClassification, {nullable: false})
     @JoinTable()
     shopClassification: ShopClassification[];
-    @ManyToMany(type => FoodClassification, {nullable: false})
+    @ManyToMany(type => FoodClassification, c => c.foodClassification, {nullable: false})
     @JoinTable()
     foodClassification: FoodClassification[];
-    @ManyToMany(type => IngredientClassification, {nullable: false})
+    @ManyToMany(type => IngredientClassification, c => c.ingredientClassification, {nullable: false})
     @JoinTable()
     ingredientClassification: IngredientClassification[];
 
