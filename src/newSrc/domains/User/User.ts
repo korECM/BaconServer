@@ -48,6 +48,9 @@ export class User extends FoodingBaseEntity {
     @OneToMany(type => Review, review => review.shop)
     reviews: Review[]
 
+    @ManyToMany(type => Review, review => review.likers, {onDelete: "CASCADE", onUpdate: "CASCADE"})
+    likeReviews: Review[]
+
     @OneToMany(type => Score, score => score.by)
     scores: Score[]
 
