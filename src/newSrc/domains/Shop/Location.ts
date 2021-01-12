@@ -13,4 +13,11 @@ export class Location {
     latitude: string;
     @Column({nullable: false})
     longitude: string;
+
+    constructor(address: string, locationCategory: LocationCategory, latitude: string, longitude: string) {
+        this.address = address;
+        this.locationCategory = locationCategory;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }

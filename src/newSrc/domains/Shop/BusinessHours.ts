@@ -5,4 +5,9 @@ export class BusinessHours {
     open: string;
     @Column()
     closed: string;
+
+    constructor(open: string, closed: string) {
+        this.open = open;
+        this.closed = closed;
+    }
 }

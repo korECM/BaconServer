@@ -19,4 +19,12 @@ export class Keyword {
     individual: number;
     @Column({nullable: false, default: 0})
     riceAppointment: number;
+
+    constructor(costRatio: number, atmosphere: number, group: number, individual: number, riceAppointment: number) {
+        this.costRatio = costRatio;
+        this.atmosphere = atmosphere;
+        this.group = group;
+        this.individual = individual;
+        this.riceAppointment = riceAppointment;
+    }
 }
