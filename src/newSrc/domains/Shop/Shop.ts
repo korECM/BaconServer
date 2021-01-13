@@ -53,6 +53,9 @@ export class Shop extends FoodingBaseEntity {
     @OneToMany(type => Menu, Menu => Menu.shop)
     menus: Menu[];
 
+    @OneToMany(type => Image, image => image.shop)
+    images: Image[];
+
     shopImages?: Image[];
 
     menuImages?: Image[];

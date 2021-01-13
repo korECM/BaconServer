@@ -17,7 +17,7 @@ export class Image extends FoodingBaseEntity {
     @Column('varchar', {length: 10, nullable: false})
     type: ImageType;
 
-    @ManyToOne(type => Shop, {onDelete: "CASCADE", onUpdate: "CASCADE"})
+    @ManyToOne(type => Shop, shop => shop.images, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     shop: Shop;
 
     @ManyToOne(type => User, user => user.images, {onUpdate: "CASCADE"})
