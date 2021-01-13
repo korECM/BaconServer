@@ -3,6 +3,7 @@ import {FoodingBaseEntity} from "../FoodingBaseEntity";
 import {Shop} from "../Shop/Shop";
 import {Review} from "../Review/Review";
 import {Score} from "../Score/Score";
+import {Image} from "../Image/Image";
 
 export enum AuthProvider {
     local = "local",
@@ -47,6 +48,9 @@ export class User extends FoodingBaseEntity {
 
     @OneToMany(type => Review, review => review.shop)
     reviews: Review[]
+
+    @OneToMany(type => Image, image => image.by)
+    images: Image[]
 
     @ManyToMany(type => Review, review => review.likers, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     likeReviews: Review[]

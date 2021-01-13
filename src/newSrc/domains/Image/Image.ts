@@ -1,6 +1,7 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Shop} from "../Shop/Shop";
 import {FoodingBaseEntity} from "../FoodingBaseEntity";
+import {User} from "../User/User";
 
 export enum ImageType {
     shop = "shop",
@@ -18,4 +19,7 @@ export class Image extends FoodingBaseEntity {
 
     @ManyToOne(type => Shop, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     shop: Shop;
+
+    @ManyToOne(type => User, user => user.images, {onUpdate: "CASCADE"})
+    by: User;
 }
