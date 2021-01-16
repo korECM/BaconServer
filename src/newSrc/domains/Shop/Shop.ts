@@ -66,6 +66,8 @@ export class Shop extends FoodingBaseEntity {
     @ManyToMany(type => User, user => user.likeShops, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     likers: User[]
 
+    didLike: boolean
+
     @OneToMany(type => Score, score => score.shop)
     scores: Score[]
 
