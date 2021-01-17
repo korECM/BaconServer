@@ -37,7 +37,7 @@ export class User extends FoodingBaseEntity {
     gender: Gender;
     @Column('varchar', {nullable: true, length: 30})
     snsId: string | null;
-    @Column('varchar', {nullable: true, length: 70})
+    @Column('varchar', {nullable: true, length: 70, select: false})
     password: string | null;
     @Column('varchar', {length: 10, nullable: false})
     role: Role;
