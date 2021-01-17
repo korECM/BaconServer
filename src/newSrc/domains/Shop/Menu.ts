@@ -1,4 +1,3 @@
-import {Money} from "./Money";
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Shop} from "./Shop";
 import {FoodingBaseEntity} from "../FoodingBaseEntity";
@@ -9,8 +8,8 @@ export class Menu extends FoodingBaseEntity {
     id: number;
     @Column('varchar', {length: 50, nullable: false})
     name: string;
-    @Column(type => Money, {prefix: false})
-    price: Money;
+    @Column({nullable: false})
+    price: number;
     @ManyToOne(type => Shop, shop => shop.menus, {onDelete: "CASCADE", onUpdate: "CASCADE"})
     shop: Shop;
 }

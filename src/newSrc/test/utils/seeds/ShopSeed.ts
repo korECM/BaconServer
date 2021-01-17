@@ -1,5 +1,4 @@
 import {BusinessHours} from "../../../domains/Shop/BusinessHours";
-import {Money} from "../../../domains/Shop/Money";
 import {Keyword} from "../../../domains/Shop/Keyword";
 import {Location, LocationCategory} from "../../../domains/Shop/Location";
 import {ShopClassification} from "../../../domains/Shop/Classification/ShopClassification";
@@ -13,7 +12,7 @@ interface ShopSeedInterface {
     mainImage: string,
     businessHours: BusinessHours,
     viewCount: number,
-    price: Money,
+    price: number,
     shopClassification: ShopClassification[],
     foodClassification: FoodClassification[],
     ingredientClassification: IngredientClassification[],
@@ -29,7 +28,7 @@ export const ShopSeed: ShopSeedInterface[] = [
         mainImage: "",
         businessHours: new BusinessHours("11:00 - 22:00", "명절 휴무"),
         viewCount: 15,
-        price: new Money(6000),
+        price: 6000,
         shopClassification: [],
         foodClassification: [],
         ingredientClassification: [],
@@ -43,7 +42,7 @@ export const ShopSeed: ShopSeedInterface[] = [
         mainImage: "",
         businessHours: new BusinessHours("11:00 - 24:00", ""),
         viewCount: 0,
-        price: new Money(8000),
+        price: 8000,
         shopClassification: [],
         foodClassification: [],
         ingredientClassification: [],
@@ -57,7 +56,7 @@ export const ShopSeed: ShopSeedInterface[] = [
         mainImage: "",
         businessHours: new BusinessHours("11:30 - 23:30", ""),
         viewCount: 0,
-        price: new Money(9000),
+        price: 9000,
         shopClassification: [],
         foodClassification: [],
         ingredientClassification: [],
@@ -71,7 +70,7 @@ export const ShopSeed: ShopSeedInterface[] = [
         mainImage: "",
         viewCount: 0,
         businessHours: new BusinessHours("00:00 - 24:00", ""),
-        price: new Money(8000),
+        price: 8000,
         shopClassification: [],
         foodClassification: [],
         ingredientClassification: [],

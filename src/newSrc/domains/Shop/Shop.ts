@@ -1,6 +1,5 @@
 import {Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {BusinessHours} from "./BusinessHours";
-import {Money} from "./Money";
 import {Keyword} from "./Keyword";
 import {Location} from "./Location";
 import {Menu} from "./Menu";
@@ -32,8 +31,8 @@ export class Shop extends FoodingBaseEntity {
     @Column("bigint", {default: 0, nullable: false})
     viewCount: number;
 
-    @Column(type => Money, {prefix: false})
-    price: Money;
+    @Column({nullable: false})
+    price: number;
 
     @ManyToMany(type => ShopClassification, c => c.shopClassification, {nullable: false})
     @JoinTable()
