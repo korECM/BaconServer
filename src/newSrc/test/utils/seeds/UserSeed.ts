@@ -21,8 +21,7 @@ export const UserSeed: UserSeedInterface[] = [
         kakaoNameSet: false,
         gender: Gender.m,
         snsId: null,
-        // 1234
-        password: "$2a$04$fXrZ0Um.fPksPL/Y8woPQeG4OBazIfAhIYNFavU7PkttvGZQj.Ddi",
+        password: "1234",
         role: Role.admin,
     },
     {

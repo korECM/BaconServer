@@ -1,9 +1,19 @@
-import {Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {
+    BeforeInsert,
+    BeforeUpdate,
+    Column,
+    Entity,
+    JoinTable,
+    ManyToMany,
+    OneToMany,
+    PrimaryGeneratedColumn
+} from "typeorm";
 import {FoodingBaseEntity} from "../FoodingBaseEntity";
 import {Shop} from "../Shop/Shop";
 import {Review} from "../Review/Review";
 import {Score} from "../Score/Score";
 import {Image} from "../Image/Image";
+import bcrypt from "bcrypt"
 
 export enum AuthProvider {
     local = "local",
@@ -57,5 +67,18 @@ export class User extends FoodingBaseEntity {
 
     @OneToMany(type => Score, score => score.by)
     scores: Score[]
+
+    @BeforeUpdate()
+    @BeforeInsert()
+    async hashPassword() {
+        if (this.password !== null) {
+            this.password = await bcrypt.hash(this.password, 8);
+        }
+    }
+
+    async equalPassword(unencryptedPassword: string): Promise<boolean> {
+        if (!this.password) return false;
+        return bcrypt.compare(unencryptedPassword, this.password);
+    }
 
 }
