@@ -70,6 +70,8 @@ export class Shop extends FoodingBaseEntity {
     @OneToMany(type => Score, score => score.shop)
     scores: Score[]
 
+    scoreAverage: number
+
     @OneToMany(type => ShopReport, report => report.shop)
     reports: ShopReport[]
 
