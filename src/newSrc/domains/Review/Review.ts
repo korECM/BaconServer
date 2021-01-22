@@ -2,6 +2,7 @@ import {Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn
 import {Shop} from "../Shop/Shop";
 import {User} from "../User/User";
 import {FoodingBaseEntity} from "../FoodingBaseEntity";
+import {MaxLength} from "class-validator";
 
 @Entity()
 export class Review extends FoodingBaseEntity {
@@ -19,5 +20,6 @@ export class Review extends FoodingBaseEntity {
     likers: User[];
 
     @Column('text', {nullable: false})
+    @MaxLength(500)
     comment: string;
 }

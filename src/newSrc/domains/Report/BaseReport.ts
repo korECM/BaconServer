@@ -1,6 +1,7 @@
 import {FoodingBaseEntity} from "../FoodingBaseEntity";
 import {Column, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "../User/User";
+import {MaxLength} from "class-validator";
 
 export enum ReportState {
     issued = 'issued',
@@ -13,6 +14,7 @@ export abstract class BaseReport extends FoodingBaseEntity {
     id: number;
 
     @Column('varchar', {length: 400, nullable: false})
+    @MaxLength(400)
     comment: string;
     @Column('varchar', {length: 15, default: ReportState.issued, nullable: false})
     reportState: ReportState;

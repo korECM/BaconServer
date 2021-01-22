@@ -3,7 +3,7 @@ import {AuthProvider, Gender, Role} from "../../../domains/User/User";
 interface UserSeedInterface {
     id: number,
     name: string,
-    email: string,
+    email: string | null,
     provider: AuthProvider,
     kakaoNameSet: boolean,
     gender: Gender,
@@ -27,7 +27,7 @@ export const UserSeed: UserSeedInterface[] = [
     {
         id: 2,
         name: "리뷰맨",
-        email: "none",
+        email: null,
         provider: AuthProvider.kakao,
         kakaoNameSet: true,
         gender: Gender.f,
@@ -38,7 +38,7 @@ export const UserSeed: UserSeedInterface[] = [
     {
         id: 3,
         name: "맛집을 찾는다",
-        email: "none",
+        email: null,
         provider: AuthProvider.kakao,
         kakaoNameSet: true,
         gender: Gender.m,

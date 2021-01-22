@@ -14,6 +14,7 @@ import {Review} from "../Review/Review";
 import {Score} from "../Score/Score";
 import {Image} from "../Image/Image";
 import bcrypt from "bcrypt"
+import {IsEmail, IsOptional, Length, MaxLength} from "class-validator";
 
 export enum AuthProvider {
     local = "local",
@@ -35,9 +36,13 @@ export class User extends FoodingBaseEntity {
     @PrimaryGeneratedColumn("increment")
     id: number;
     @Column('varchar', {length: 21, nullable: false})
+    @Length(2, 10)
     name: string;
-    @Column("varchar", {nullable: false})
-    email: string;
+    @Column("varchar", {nullable: true})
+    @IsOptional()
+    @IsEmail()
+    @MaxLength(50)
+    email: string | null;
 
     @Column('varchar', {length: 10, nullable: false})
     provider: AuthProvider;
