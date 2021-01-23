@@ -41,7 +41,7 @@ describe("User", () => {
         // 암호화 되어서 저장된다
         expect(userResult!.password).not.toBe(userSeed.password);
         // 복호화가 되어야 한다
-        expect(await userResult!.equalPassword(userSeed.password!)).toBeTrue();
+        expect(await userResult!.hasPassword(userSeed.password!)).toBeTrue();
     })
 
     it("유저의 비밀번호를 변경할 때도 비밀번호는 암호화해서 저장한다", async () => {
@@ -62,8 +62,8 @@ describe("User", () => {
         // 암호화 되어서 저장된다
         expect(userResult!.password).not.toBe("5678");
         // 복호화가 되어야 한다
-        expect(await userResult!.equalPassword("1234")).not.toBeTrue();
-        expect(await userResult!.equalPassword("5678")).toBeTrue();
+        expect(await userResult!.hasPassword("1234")).not.toBeTrue();
+        expect(await userResult!.hasPassword("5678")).toBeTrue();
     })
 
     it("유저의 비밀번호가 null인 경우 암호화를 하지 않는다", async () => {
@@ -80,6 +80,6 @@ describe("User", () => {
         expect(userResult).not.toBeUndefined();
         expect(userResult!.password).toBeNull();
         // 복호화 시도를 하면 false를 반환한다
-        expect(await userResult!.equalPassword("some password")).not.toBeTrue();
+        expect(await userResult!.hasPassword("some password")).not.toBeTrue();
     })
 })

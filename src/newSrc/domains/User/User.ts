@@ -81,7 +81,7 @@ export class User extends FoodingBaseEntity {
         }
     }
 
-    async equalPassword(unencryptedPassword: string): Promise<boolean> {
+    async hasPassword(unencryptedPassword: string): Promise<boolean> {
         if (!this.password) return false;
         return bcrypt.compare(unencryptedPassword, this.password);
     }
