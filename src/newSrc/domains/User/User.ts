@@ -47,7 +47,7 @@ export class User extends FoodingBaseEntity {
     @Column('varchar', {length: 10, nullable: false})
     provider: AuthProvider;
     @Column()
-    kakaoNameSet: boolean;
+    kakaoNameSet: boolean = false;
     @Column('varchar', {length: 1, nullable: false})
     gender: Gender;
     @Column('varchar', {nullable: true, length: 30})
