@@ -1,7 +1,8 @@
 import {IngredientClassification} from "../../../domains/Shop/Classification/IngredientClassification";
-import {EntityRepository, Repository} from "typeorm";
+import {EntityRepository} from "typeorm";
+import {BaseRepository} from "typeorm-transactional-cls-hooked";
 
 @EntityRepository(IngredientClassification)
-export class IngredientClassificationRepository extends Repository<IngredientClassification> {
-    
+export class IngredientClassificationRepository extends BaseRepository<IngredientClassification> {
+
 }

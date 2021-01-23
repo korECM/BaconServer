@@ -1,5 +1,6 @@
-import {EntityRepository, Repository} from "typeorm";
+import {EntityRepository} from "typeorm";
 import {Shop} from "../../domains/Shop/Shop";
+import {BaseRepository} from "typeorm-transactional-cls-hooked";
 
 export enum GetShopsOrder {
     recommended = 'recommended',
@@ -17,7 +18,7 @@ export class ShopDoesNotFoundError extends Error {
 }
 
 @EntityRepository(Shop)
-export class ShopRepository extends Repository<Shop> {
+export class ShopRepository extends BaseRepository<Shop> {
     async getShops() {
         return this.createQueryBuilder('shop')
             .getMany();

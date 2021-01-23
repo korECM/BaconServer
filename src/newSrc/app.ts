@@ -9,6 +9,7 @@ import {useMiddleware} from "./config/middlewareConfig";
 import {Connection} from "typeorm";
 import {MemoryDatabaseService, RedisServiceToken} from "./Services/RedisService";
 import {DomainInitializationService} from "./Services/DomainInitializationService";
+import {initializeTransactionalContext} from "typeorm-transactional-cls-hooked";
 
 const apiURL: string = "/api/v1";
 
@@ -23,6 +24,9 @@ export class App {
     private domainInitializationService: DomainInitializationService;
 
     constructor(@Inject(RedisServiceToken) public redisService: MemoryDatabaseService) {
+
+        initializeTransactionalContext();
+
         this.app = express();
         this.redisService.connect();
         useMiddleware(this.app, this.redisService);
