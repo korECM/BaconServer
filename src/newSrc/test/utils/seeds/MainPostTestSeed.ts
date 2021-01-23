@@ -1,6 +1,13 @@
-import {Post} from "../../../domains/Post/Post";
+interface PostSeedInterface {
+    id: number;
+    title: string;
+    imageLink: string;
+    postLink: string;
+    createdTime: Date;
+    updatedTime: Date;
+}
 
-export const PostSeed: Post[] = [
+export const PostSeed: PostSeedInterface[] = [
     {
         id: 1,
         title: "맛집1",

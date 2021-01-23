@@ -52,8 +52,6 @@ describe("ShopRepository", () => {
                     return true;
                 return shop.menus.some(menu => menu.name.includes(keyword));
             })
-
-            console.log(await shopRepository.getShop(1, 1));
         })
     })
 

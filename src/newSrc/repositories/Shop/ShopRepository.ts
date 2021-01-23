@@ -32,23 +32,6 @@ export class ShopRepository extends Repository<Shop> {
     }
 
     async getShop(shopId: number, userId: number | null): Promise<Shop> {
-        // console.log(
-        //     this.createQueryBuilder("shop")
-        //         .where("shop.id = :shopId", {shopId})
-        //         .leftJoinAndSelect("shop.shopClassification", "shopClassification")
-        //         .leftJoinAndSelect("shop.foodClassification", "foodClassification")
-        //         .leftJoinAndSelect("shop.ingredientClassification", "ingredientClassification")
-        //         .leftJoinAndSelect("shop.menus", "menus")
-        //         .leftJoinAndMapMany("shop.shopImages", "shop.images", "shopImages", "shopImages.type = :type", {type: "shop"})
-        //         .leftJoinAndMapMany("shop.menuImages", "shop.images", "menuImages", "menuImages.type = :type", {type: "menu"})
-        //         .getSql()
-        // )
-
-        const likerAb = await this.createQueryBuilder("shop")
-            .from(Shop, "shop")
-            .innerJoin("shop.likers", "likers")
-            .where("shop.id = :shopId", {shopId})
-
         let {entities, raw} = await this.createQueryBuilder("shop")
             .leftJoinAndSelect("shop.shopClassification", "shopClassification")
             .leftJoinAndSelect("shop.foodClassification", "foodClassification")
@@ -78,11 +61,11 @@ export class ShopRepository extends Repository<Shop> {
             throw new ShopDoesNotFoundError(shopId);
         let [shop, rawData] = [entities[0], raw[0]];
 
-        return {
+        return this.create({
             ...shop,
             didLike: rawData.givenUserLikeCount > 0,
             scoreAverage: rawData.scoreAverageRaw
-        }
+        })
 
     }
 }

@@ -20,7 +20,7 @@ describe("PostRepository", () => {
     it("getRecentPosts는 num 개수만큼의 최신 Post를 가져온다", async () => {
         // given
         let postNum = 3;
-        let expectedPosts: Post[] = PostSeed.reverse().slice(0, postNum);
+        let expectedPosts: Post[] = postRepository.create(PostSeed.reverse().slice(0, postNum));
 
         // when
         let actualPosts: Post[] = await postRepository.getRecentPosts(postNum);

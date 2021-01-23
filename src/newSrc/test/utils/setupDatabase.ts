@@ -4,7 +4,7 @@ import {createConnection, useContainer} from "typeorm";
 export async function createMemoryDatabase() {
     useContainer(Container);
     return createConnection({
-        type: "better-sqlite3",
+        type: "sqlite",
         database: ":memory:",
         entities: [__dirname + "/../../domains/**/*{.ts,.js}"],
         dropSchema: true,
