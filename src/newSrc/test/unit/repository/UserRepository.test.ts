@@ -3,9 +3,10 @@ import {createMemoryDatabase} from "../../utils/setupDatabase";
 import {FoodingSeed} from "../../utils/seeds/FoodingSeed";
 import {Container} from "typedi";
 import {DomainInitializationService} from "../../../Services/DomainInitializationService";
-import {UserNotExists, UserRepository} from "../../../repositories/UserRepository";
+import {UserRepository} from "../../../repositories/UserRepository";
 import {UserSeed} from "../../utils/seeds/UserSeed";
 import {AuthProvider, Gender} from "../../../domains/User/User";
+import {EntityNotExists} from "../../../repositories/Errors/CommonError";
 
 describe("UserRepository", () => {
     let db: Connection;
@@ -151,7 +152,7 @@ describe("UserRepository", () => {
             const userId = 123456;
             // when
             // then
-            await expect(userRepository.setName(userId, "바꿀 이름")).rejects.toThrowError(UserNotExists);
+            await expect(userRepository.setName(userId, "바꿀 이름")).rejects.toThrowError(EntityNotExists);
         })
     })
 

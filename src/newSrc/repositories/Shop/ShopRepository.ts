@@ -1,20 +1,12 @@
 import {EntityRepository} from "typeorm";
 import {Shop} from "../../domains/Shop/Shop";
 import {BaseRepository} from "typeorm-transactional-cls-hooked";
+import {EntityNotExists} from "../Errors/CommonError";
 
 export enum GetShopsOrder {
     recommended = 'recommended',
     rate = 'rate',
     review = 'review',
-}
-
-export class ShopDoesNotFoundError extends Error {
-    public message: string;
-
-    constructor(private shopId: number) {
-        super();
-        this.message = `shopId(${shopId})와 일치하는 가게가 존재하지 않습니다`;
-    }
 }
 
 @EntityRepository(Shop)
@@ -59,7 +51,7 @@ export class ShopRepository extends BaseRepository<Shop> {
             .where("shop.id = :shopId", {shopId})
             .getRawAndEntities();
         if (entities.length === 0)
-            throw new ShopDoesNotFoundError(shopId);
+            throw new EntityNotExists({id: shopId});
         let [shop, rawData] = [entities[0], raw[0]];
 
         return this.create({
