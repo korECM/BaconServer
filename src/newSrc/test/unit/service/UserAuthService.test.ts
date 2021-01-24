@@ -6,7 +6,7 @@ import {FoodingSeed} from "../../utils/seeds/FoodingSeed";
 import {UserAuthService} from "../../../Services/UserAuthService";
 import {UserSeed} from "../../utils/seeds/UserSeed";
 import {AuthProvider, Gender, Role} from "../../../domains/User/User";
-import {UserForLocalSignUp, UserForSignIn, UserForSnsSignUp} from "../../../Dtos/User";
+import {UserForLocalSignUpRequest, UserForSignInResponse, UserForSnsSignUpRequest} from "../../../Dtos/User";
 
 
 describe("UserAuthService", () => {
@@ -92,14 +92,14 @@ describe("UserAuthService", () => {
             const email = "asdfasdf@naver.com";
             const gender = Gender.m;
             const password = "1111";
-            const userDto = new UserForLocalSignUp(name, email, gender, password);
+            const userDto = new UserForLocalSignUpRequest(name, email, gender, password);
             // when
             const signUpResult = await userAuthService.signUpLocal(userDto);
             // then
             const userResult = await userAuthService.signInLocal(email, password);
             expect(userResult).not.toBeUndefined();
             expect(userResult).not.toBeNull();
-            expect(signUpResult).toBeInstanceOf(UserForSignIn);
+            expect(signUpResult).toBeInstanceOf(UserForSignInResponse);
             expect(signUpResult).toEqual(userResult!);
 
             expect(userResult).toMatchObject({
@@ -116,14 +116,14 @@ describe("UserAuthService", () => {
             const snsId = "12341234";
             const gender = Gender.m;
             const provider = AuthProvider.kakao;
-            const userDto = new UserForSnsSignUp(name, email, snsId, gender, provider);
+            const userDto = new UserForSnsSignUpRequest(name, email, snsId, gender, provider);
             // when
             const signUpResult = await userAuthService.signUpSns(userDto);
             // then
             const userResult = await userAuthService.signInSns(snsId, provider);
             expect(userResult).not.toBeUndefined();
             expect(userResult).not.toBeNull();
-            expect(signUpResult).toBeInstanceOf(UserForSignIn);
+            expect(signUpResult).toBeInstanceOf(UserForSignInResponse);
             expect(signUpResult).toEqual(userResult!);
 
             expect(userResult).toMatchObject({

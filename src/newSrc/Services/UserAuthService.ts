@@ -2,7 +2,7 @@ import {Service} from "typedi";
 import {UserRepository} from "../repositories/UserRepository";
 import {InjectRepository} from "typeorm-typedi-extensions";
 import {EntityNotExists, NotDefinedError} from "../repositories/Errors/CommonError";
-import {UserForLocalSignUp, UserForSignIn, UserForSnsSignUp} from "../Dtos/User";
+import {UserForLocalSignUpRequest, UserForSignInResponse, UserForSnsSignUpRequest} from "../Dtos/User";
 import {AuthProvider} from "../domains/User/User";
 
 @Service()
@@ -14,7 +14,7 @@ export class UserAuthService {
         try {
             const user = await this.userRepository.getLocalUser(email);
             if (await user.hasPassword(password)) {
-                return new UserForSignIn(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
+                return new UserForSignInResponse(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
             } else {
                 return null;
             }
@@ -27,15 +27,15 @@ export class UserAuthService {
         }
     }
 
-    async signUpLocal(userDto: UserForLocalSignUp) {
+    async signUpLocal(userDto: UserForLocalSignUpRequest) {
         const user = await this.userRepository.addLocalUser(userDto.name, userDto.email, userDto.password, userDto.gender);
-        return new UserForSignIn(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
+        return new UserForSignInResponse(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
     }
 
     async signInSns(snsId: string, provider: AuthProvider) {
         try {
             const user = await this.userRepository.getSnsUser(snsId, provider);
-            return new UserForSignIn(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
+            return new UserForSignInResponse(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
         } catch (e) {
             if (e instanceof EntityNotExists) {
                 return null;
@@ -45,8 +45,8 @@ export class UserAuthService {
         }
     }
 
-    async signUpSns(userDto: UserForSnsSignUp) {
+    async signUpSns(userDto: UserForSnsSignUpRequest) {
         const user = await this.userRepository.addSnsUser(userDto.name, userDto.email, userDto.snsId, userDto.provider, userDto.gender);
-        return new UserForSignIn(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
+        return new UserForSignInResponse(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
     }
 }
