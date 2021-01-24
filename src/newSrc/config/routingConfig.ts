@@ -2,6 +2,9 @@ import {RoutingControllersOptions} from "routing-controllers";
 import {apiURL} from "../app";
 import {IndexController} from "../controllers/IndexController";
 import {MainPostController} from "../controllers/MainPostController";
+import {ShopController} from "../controllers/ShopController";
+import {UserController} from "../controllers/UserController";
+import {CustomErrorHandler} from "../middlewares/CustomErrorHandler";
 
 const routingControllersOptions: RoutingControllersOptions = {
     cors: {
@@ -10,7 +13,9 @@ const routingControllersOptions: RoutingControllersOptions = {
     },
     routePrefix: apiURL,
     // controllers: [path.join(__dirname, "..", '/controllers/*.' + (env.isExecutedByNodeMon ? 'ts' : 'js'))],
-    controllers: [IndexController, MainPostController]
+    controllers: [IndexController, MainPostController, ShopController, UserController],
+    defaultErrorHandler: false,
+    middlewares: [CustomErrorHandler]
 }
 
 export {routingControllersOptions};
