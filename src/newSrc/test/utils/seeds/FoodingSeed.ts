@@ -1,4 +1,4 @@
-import {Connection, ObjectLiteral, Repository} from "typeorm";
+import {Connection, DeepPartial, Repository} from "typeorm";
 import {User} from "../../../domains/User/User";
 import {Shop} from "../../../domains/Shop/Shop";
 import {Menu} from "../../../domains/Shop/Menu";
@@ -119,12 +119,10 @@ export class FoodingSeed {
 
     }
 
-    public static async save<T>(dataList: ObjectLiteral[], repository: Repository<T>) {
+    public static async save<T>(dataList: DeepPartial<T>[], repository: Repository<T>) {
         let entityList: T[] = [];
         for (let data of dataList) {
-            let entity = repository.create();
-            entity = {...entity, ...data};
-            entityList.push(await repository.save(entity));
+            entityList.push(await repository.save(repository.create(data)));
         }
         return entityList;
     }
