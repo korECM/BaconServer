@@ -19,13 +19,15 @@ import {AuthProvider, Gender, Role, User as UserEntity} from "../newSrc/domains/
 import User from "../DB/models/User";
 import Review from "../DB/models/Review";
 import Score from "../DB/models/Score";
+import {ShopController} from "../DB/controller/Shop/ShopController";
 
 dotenv.config();
 (async () => {
     try {
         await DB.connect();
         let shops = await Shop.find().populate("keyword", "atmosphere costRatio group individual riceAppointment -_id").populate("image");
-
+        // Schema끼리 연결에 필요
+        let shopController = new ShopController();
         let connection = await createDatabaseConnection();
 
         let shopRepository = connection.getRepository(ShopEntity);
@@ -158,9 +160,9 @@ dotenv.config();
                     userE.likeShops.push(findShop);
                 }
             }
-
             userHashTable[`${user._id}`] = userIndex;
-            await userRepository.save(userE);
+            const userForPasswordMaintain = {...userE};
+            await userRepository.save(userForPasswordMaintain);
         }
 
         let reviews = await Review.find();
