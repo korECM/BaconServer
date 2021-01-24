@@ -161,10 +161,13 @@ describe("UserRepository", () => {
         it("해당 Local 유저가 존재하면 해당 User를 반환한다", async () => {
             // given
             const user = UserSeed[0];
+            const {password: temp1, ...userWithoutPassword} = user;
             // when
             const userResult = await userRepository.getLocalUser(user.email);
+            const {password: temp2, ...userResultWithoutPassword} = userResult;
             // then
-            expect(userResult).toMatchObject(user);
+            expect(userResultWithoutPassword).toMatchObject(userWithoutPassword);
+            expect(userResult.password).not.toBe(user.password);
         })
 
         it("만약 email로 null이 전달되면 IllegalArgument를 던진다", async () => {
