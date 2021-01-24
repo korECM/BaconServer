@@ -6,6 +6,7 @@ import {DomainInitializationService} from "../../../Services/DomainInitializatio
 import {UserRepository} from "../../../repositories/UserRepository";
 import {UserSeed} from "../../utils/seeds/UserSeed";
 import {AuthProvider, Gender} from "../../../domains/User/User";
+import {EntityNotExists} from "../../../repositories/Errors/CommonError";
 
 describe("UserRepository", () => {
     let db: Connection;
@@ -130,6 +131,28 @@ describe("UserRepository", () => {
             expect(userResult!.password).toBeNull();
             expect(userResult!.snsId).toBe(snsId);
             expect(userResult!.gender).toBe(gender);
+        })
+    })
+
+    describe("setName", () => {
+        it("해당 유저에 대해서 전달된 이름을 설정한다. 만약 sns유저라면 이름이 설정되었다는 플래그도 설정한다", async () => {
+            // given
+            const user = UserSeed[1];
+            const changedName = "name~~~";
+            // when
+            await userRepository.setName(user.id, changedName);
+            const userResult = (await userRepository.findOne({id: user.id}))!;
+            // then
+            expect(userResult.name).toBe(changedName);
+            expect(userResult.snsNameSet).toBeTrue();
+        })
+
+        it("만약 전달된 User가 존재하지 않는다면 UserNotExists를 던진다", async () => {
+            // given
+            const userId = 123456;
+            // when
+            // then
+            await expect(userRepository.setName(userId, "바꿀 이름")).rejects.toThrowError(EntityNotExists);
         })
     })
 
