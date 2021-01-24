@@ -6,7 +6,7 @@ import {DomainInitializationService} from "../../../Services/DomainInitializatio
 import {UserRepository} from "../../../repositories/UserRepository";
 import {UserSeed} from "../../utils/seeds/UserSeed";
 import {AuthProvider, Gender} from "../../../domains/User/User";
-import {EntityNotExists} from "../../../repositories/Errors/CommonError";
+import {EntityNotExists, IllegalArgument} from "../../../repositories/Errors/CommonError";
 
 describe("UserRepository", () => {
     let db: Connection;
@@ -153,6 +153,43 @@ describe("UserRepository", () => {
             // when
             // then
             await expect(userRepository.setName(userId, "바꿀 이름")).rejects.toThrowError(EntityNotExists);
+        })
+    })
+
+
+    describe("getLocalUser", () => {
+        it("해당 Local 유저가 존재하면 해당 User를 반환한다", async () => {
+            // given
+            const user = UserSeed[0];
+            // when
+            const userResult = await userRepository.getLocalUser(user.email);
+            // then
+            expect(userResult).toMatchObject(user);
+        })
+
+        it("만약 email로 null이 전달되면 IllegalArgument를 던진다", async () => {
+            // given
+            // when
+            // then
+            await expect(userRepository.getLocalUser(null)).rejects.toThrowError(IllegalArgument);
+        })
+    })
+
+    describe("getSnsUser", () => {
+        it("해당 Sns 유저가 존재하면 해당 User를 반환한다", async () => {
+            // given
+            const user = UserSeed[1];
+            // when
+            const userResult = await userRepository.getSnsUser(user.snsId, AuthProvider.kakao);
+            // then
+            expect(userResult).toMatchObject(user);
+        })
+
+        it("만약 snsId로 null이 전달되면 IllegalArgument를 던진다", async () => {
+            // given
+            // when
+            // then
+            await expect(userRepository.getSnsUser(null, AuthProvider.kakao)).rejects.toThrowError(IllegalArgument);
         })
     })
 

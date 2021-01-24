@@ -1,7 +1,7 @@
 import {EntityRepository} from "typeorm";
 import {AuthProvider, Gender, Role, User} from "../domains/User/User";
 import {BaseRepository} from "typeorm-transactional-cls-hooked";
-import {EntityNotExists} from "./Errors/CommonError";
+import {EntityNotExists, IllegalArgument} from "./Errors/CommonError";
 
 
 @EntityRepository(User)
@@ -58,6 +58,23 @@ export class UserRepository extends BaseRepository<User> {
 
         return await this.save(user);
     }
+
+    async getLocalUser(email: string | null) {
+        if (!email) throw new IllegalArgument();
+        const condition = {email, provider: AuthProvider.local};
+        const user = await this.findOne(condition);
+        if (!user) throw new EntityNotExists(condition);
+        return user;
+    }
+
+    async getSnsUser(snsId: string | null, provider: AuthProvider) {
+        if (!snsId) throw new IllegalArgument();
+        const condition = {snsId, provider};
+        const user = await this.findOne(condition);
+        if (!user) throw new EntityNotExists(condition);
+        return user;
+    }
+
 
     async setName(id: number, name: string) {
         const condition = {id};
