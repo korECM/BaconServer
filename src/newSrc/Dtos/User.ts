@@ -10,6 +10,11 @@ export class UserForLocalSignInRequest {
     }
 }
 
+export class UserForSnsSignInRequest {
+    constructor(public snsId: string, public provider: AuthProvider) {
+    }
+}
+
 export class UserForLocalSignUpRequest {
     constructor(public name: string, public email: string, public gender: Gender, public password: string) {
     }

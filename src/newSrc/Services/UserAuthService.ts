@@ -6,9 +6,9 @@ import {
     UserForLocalSignInRequest,
     UserForLocalSignUpRequest,
     UserForSignInResponse,
+    UserForSnsSignInRequest,
     UserForSnsSignUpRequest
 } from "../Dtos/User";
-import {AuthProvider} from "../domains/User/User";
 
 @Service()
 export class UserAuthService {
@@ -37,9 +37,9 @@ export class UserAuthService {
         return new UserForSignInResponse(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
     }
 
-    async signInSns(snsId: string, provider: AuthProvider) {
+    async signInSns(userDto: UserForSnsSignInRequest) {
         try {
-            const user = await this.userRepository.getSnsUser(snsId, provider);
+            const user = await this.userRepository.getSnsUser(userDto.snsId, userDto.provider);
             return new UserForSignInResponse(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
         } catch (e) {
             if (e instanceof EntityNotExists) {

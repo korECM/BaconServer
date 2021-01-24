@@ -10,6 +10,7 @@ import {
     UserForLocalSignInRequest,
     UserForLocalSignUpRequest,
     UserForSignInResponse,
+    UserForSnsSignInRequest,
     UserForSnsSignUpRequest
 } from "../../../Dtos/User";
 
@@ -69,7 +70,7 @@ describe("UserAuthService", () => {
             const snsId = snsUser.snsId!;
             const provider = snsUser.provider!;
             // when
-            const result = await userAuthService.signInSns(snsId, provider);
+            const result = await userAuthService.signInSns(new UserForSnsSignInRequest(snsId, provider));
             // then
             expect(result).not.toBeUndefined();
             expect(result).not.toBeNull();
@@ -82,8 +83,8 @@ describe("UserAuthService", () => {
             const snsId = snsUser.snsId!;
             const provider = snsUser.provider!;
             // when
-            const result1 = await userAuthService.signInSns(snsId + '123', provider);
-            const result2 = await userAuthService.signInSns(snsId, AuthProvider.local);
+            const result1 = await userAuthService.signInSns(new UserForSnsSignInRequest(snsId + '123', provider));
+            const result2 = await userAuthService.signInSns(new UserForSnsSignInRequest(snsId, AuthProvider.local));
             // then
             expect(result1).toBeNull();
             expect(result2).toBeNull();
@@ -125,7 +126,7 @@ describe("UserAuthService", () => {
             // when
             const signUpResult = await userAuthService.signUpSns(userDto);
             // then
-            const userResult = await userAuthService.signInSns(snsId, provider);
+            const userResult = await userAuthService.signInSns(new UserForSnsSignInRequest(snsId, provider));
             expect(userResult).not.toBeUndefined();
             expect(userResult).not.toBeNull();
             expect(signUpResult).toBeInstanceOf(UserForSignInResponse);
