@@ -6,7 +6,12 @@ import {FoodingSeed} from "../../utils/seeds/FoodingSeed";
 import {UserAuthService} from "../../../Services/UserAuthService";
 import {UserSeed} from "../../utils/seeds/UserSeed";
 import {AuthProvider, Gender, Role} from "../../../domains/User/User";
-import {UserForLocalSignUpRequest, UserForSignInResponse, UserForSnsSignUpRequest} from "../../../Dtos/User";
+import {
+    UserForLocalSignInRequest,
+    UserForLocalSignUpRequest,
+    UserForSignInResponse,
+    UserForSnsSignUpRequest
+} from "../../../Dtos/User";
 
 
 describe("UserAuthService", () => {
@@ -36,7 +41,7 @@ describe("UserAuthService", () => {
             const password = localUser.password!;
             const {password: tempForRemove, ...userWithoutPassword} = localUser;
             // when
-            const result = await userAuthService.signInLocal(email, password);
+            const result = await userAuthService.signInLocal(new UserForLocalSignInRequest(email, password));
             // then
             expect(result).not.toBeUndefined();
             expect(result).not.toBeNull();
@@ -49,8 +54,8 @@ describe("UserAuthService", () => {
             const email = localUser.email!;
             const password = localUser.password!;
             // when
-            const result1 = await userAuthService.signInLocal("notExists" + email, password);
-            const result2 = await userAuthService.signInLocal(email, "notExistsPassword");
+            const result1 = await userAuthService.signInLocal(new UserForLocalSignInRequest("notExists" + email, password));
+            const result2 = await userAuthService.signInLocal(new UserForLocalSignInRequest(email, "notExistsPassword"));
             // then
             expect(result1).toBeNull();
             expect(result2).toBeNull();
@@ -96,7 +101,7 @@ describe("UserAuthService", () => {
             // when
             const signUpResult = await userAuthService.signUpLocal(userDto);
             // then
-            const userResult = await userAuthService.signInLocal(email, password);
+            const userResult = await userAuthService.signInLocal(new UserForLocalSignInRequest(email, password));
             expect(userResult).not.toBeUndefined();
             expect(userResult).not.toBeNull();
             expect(signUpResult).toBeInstanceOf(UserForSignInResponse);

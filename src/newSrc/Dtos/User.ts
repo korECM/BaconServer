@@ -5,6 +5,11 @@ export class UserForSignInResponse {
     }
 }
 
+export class UserForLocalSignInRequest {
+    constructor(public email: string, public password: string) {
+    }
+}
+
 export class UserForLocalSignUpRequest {
     constructor(public name: string, public email: string, public gender: Gender, public password: string) {
     }
