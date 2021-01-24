@@ -2,6 +2,12 @@ import {EntityRepository} from "typeorm";
 import {AuthProvider, Gender, Role, User} from "../domains/User/User";
 import {BaseRepository} from "typeorm-transactional-cls-hooked";
 
+export class UserNotExists extends Error {
+    constructor(private userId: number, message?: string) {
+        super(message || `${userId}에 해당하는 User가 존재하지 않습니다`);
+    }
+}
+
 @EntityRepository(User)
 export class UserRepository extends BaseRepository<User> {
 
@@ -55,6 +61,14 @@ export class UserRepository extends BaseRepository<User> {
         });
 
         return await this.save(user);
+    }
+
+    async setName(id: number, name: string) {
+        const user = await this.findOne({id});
+        if (!user) throw new UserNotExists(id);
+        user.name = name;
+        user.snsNameSet = true;
+        await this.save(user);
     }
 
 }

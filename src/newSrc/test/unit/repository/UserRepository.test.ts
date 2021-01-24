@@ -1,14 +1,13 @@
 import {Connection} from "typeorm";
 import {createMemoryDatabase} from "../../utils/setupDatabase";
-import {ShopRepository} from "../../../repositories/Shop/ShopRepository";
 import {FoodingSeed} from "../../utils/seeds/FoodingSeed";
 import {Container} from "typedi";
 import {DomainInitializationService} from "../../../Services/DomainInitializationService";
-import {UserRepository} from "../../../repositories/UserRepository";
+import {UserNotExists, UserRepository} from "../../../repositories/UserRepository";
 import {UserSeed} from "../../utils/seeds/UserSeed";
 import {AuthProvider, Gender} from "../../../domains/User/User";
 
-describe("ShopRepository", () => {
+describe("UserRepository", () => {
     let db: Connection;
     let userRepository: UserRepository;
 
@@ -26,11 +25,6 @@ describe("ShopRepository", () => {
     });
 
     afterAll(() => db.close());
-
-    const getUser = async (option: any) => {
-        return userRepository
-            .findOne(option, {select: Object.getOwnPropertyNames(userRepository.create(UserSeed[0])) as any})
-    }
 
     describe("emailExists", () => {
         it("이미 존재하는 이메일이면 true를 반환한다", async () => {
@@ -106,7 +100,7 @@ describe("ShopRepository", () => {
 
             // when
             await userRepository.addLocalUser(name, email, password, gender);
-            const userResult = await getUser({email});
+            const userResult = await userRepository.findOne({email});
 
             // then
             expect(userResult).not.toBeNull();
@@ -126,16 +120,38 @@ describe("ShopRepository", () => {
 
             // when
             await userRepository.addSnsUser(name, email, snsId, provider, gender);
-            const userResult = await getUser({snsId});
+            const userResult = await userRepository.findOne({snsId});
 
             // then
             expect(userResult).not.toBeNull();
             expect(userResult).not.toBeUndefined();
-            expect(userResult!.name).toEqual(name);
-            expect(userResult!.email).toEqual(email);
+            expect(userResult!.name).toBe(name);
+            expect(userResult!.email).toBe(email);
             expect(userResult!.password).toBeNull();
-            expect(userResult!.snsId).toEqual(snsId);
-            expect(userResult!.gender).toEqual(gender);
+            expect(userResult!.snsId).toBe(snsId);
+            expect(userResult!.gender).toBe(gender);
+        })
+    })
+
+    describe("setName", () => {
+        it("해당 유저에 대해서 전달된 이름을 설정한다. 만약 sns유저라면 이름이 설정되었다는 플래그도 설정한다", async () => {
+            // given
+            const user = UserSeed[1];
+            const changedName = "name~~~";
+            // when
+            await userRepository.setName(user.id, changedName);
+            const userResult = (await userRepository.findOne({id: user.id}))!;
+            // then
+            expect(userResult.name).toBe(changedName);
+            expect(userResult.snsNameSet).toBeTrue();
+        })
+
+        it("만약 전달된 User가 존재하지 않는다면 UserNotExists를 던진다", async () => {
+            // given
+            const userId = 123456;
+            // when
+            // then
+            await expect(userRepository.setName(userId, "바꿀 이름")).rejects.toThrowError(UserNotExists);
         })
     })
 
