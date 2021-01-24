@@ -8,11 +8,6 @@ describe("User", () => {
     let db: Connection;
     let userRepository: Repository<User>;
 
-    const getUser = async (option: any) => {
-        return userRepository
-            .findOne(option, {select: Object.getOwnPropertyNames(userRepository.create(UserSeed[0])) as any})
-    }
-
     beforeAll(async () => {
         db = await createMemoryDatabase();
     })
@@ -32,7 +27,7 @@ describe("User", () => {
         await userRepository.save(userRepository.create(userSeed));
 
         // then
-        const userResult = await getUser(userSeed.id);
+        const userResult = await userRepository.findOne({id: userSeed.id});
 
         expect(userResult).not.toBeNull();
         expect(userResult).not.toBeUndefined();
@@ -50,7 +45,7 @@ describe("User", () => {
 
         // when
         await userRepository.save(userRepository.create(userSeed));
-        const userResult = await getUser(userSeed.id);
+        const userResult = await userRepository.findOne({id: userSeed.id});
         userResult!.password = "5678";
         await userRepository.save(userResult!);
 
@@ -74,7 +69,7 @@ describe("User", () => {
         await userRepository.save(userRepository.create(userSeed));
 
         // then
-        const userResult = await getUser({id: userSeed.id});
+        const userResult = await userRepository.findOne({id: userSeed.id});
 
         expect(userResult).not.toBeNull();
         expect(userResult).not.toBeUndefined();
