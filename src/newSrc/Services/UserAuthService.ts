@@ -13,7 +13,7 @@ export class UserAuthService {
         try {
             const user = await this.userRepository.getLocalUser(email);
             if (await user.hasPassword(password)) {
-                return new UserForSignIn(user.id, user.name, user.email, user.gender, user.role);
+                return new UserForSignIn(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
             } else {
                 return null;
             }
