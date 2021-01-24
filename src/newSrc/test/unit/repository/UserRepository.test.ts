@@ -6,7 +6,7 @@ import {Container} from "typedi";
 import {DomainInitializationService} from "../../../Services/DomainInitializationService";
 import {UserRepository} from "../../../repositories/UserRepository";
 import {UserSeed} from "../../utils/seeds/UserSeed";
-import {Gender} from "../../../domains/User/User";
+import {AuthProvider, Gender} from "../../../domains/User/User";
 
 describe("ShopRepository", () => {
     let db: Connection;
@@ -111,11 +111,31 @@ describe("ShopRepository", () => {
             // then
             expect(userResult).not.toBeNull();
             expect(userResult).not.toBeUndefined();
-            expect(name).toEqual(userResult!.name);
-            expect(email).toEqual(userResult!.email);
-            expect(password).not.toEqual(userResult!.password);
+            expect(userResult!.name).toEqual(name);
+            expect(userResult!.email).toEqual(email);
+            expect(userResult!.password).not.toEqual(password);
             expect(await userResult!.hasPassword(password)).toBeTrue();
-            expect(gender).toEqual(userResult!.gender);
+            expect(userResult!.gender).toEqual(gender);
+        })
+    })
+
+    describe("addLocalUser", () => {
+        it("전달받은 값을 가지고 유저를 생성해서 저장한다", async () => {
+            // given
+            const [name, email, snsId, provider, gender] = ["이름", "asdf@naver.com", "123456", AuthProvider.kakao, Gender.m];
+
+            // when
+            await userRepository.addSnsUser(name, email, snsId, provider, gender);
+            const userResult = await getUser({snsId});
+
+            // then
+            expect(userResult).not.toBeNull();
+            expect(userResult).not.toBeUndefined();
+            expect(userResult!.name).toEqual(name);
+            expect(userResult!.email).toEqual(email);
+            expect(userResult!.password).toBeNull();
+            expect(userResult!.snsId).toEqual(snsId);
+            expect(userResult!.gender).toEqual(gender);
         })
     })
 

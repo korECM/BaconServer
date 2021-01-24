@@ -42,4 +42,18 @@ export class UserRepository extends BaseRepository<User> {
         return await this.save(user);
     }
 
+    async addSnsUser(name: string, email: string | null, snsId: string, provider: AuthProvider, gender: Gender) {
+        const user = this.create({
+            name,
+            email,
+            password: null,
+            snsId,
+            gender,
+            provider,
+            role: Role.user
+        });
+
+        return await this.save(user);
+    }
+
 }
