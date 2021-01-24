@@ -32,8 +32,8 @@ export class ShopRepository extends BaseRepository<Shop> {
             .leftJoinAndSelect("shop.menus", "menus")
             .leftJoinAndSelect("shop.likers", "likers")
             .leftJoinAndSelect("shop.scores", "scores")
-            .leftJoinAndMapMany("shop.shopImages", "shop.images", "shopImages", "shopImages.type = :type", {type: "shop"})
-            .leftJoinAndMapMany("shop.menuImages", "shop.images", "menuImages", "menuImages.type = :type", {type: "menu"})
+            .leftJoinAndMapMany("shop.shopImages", "shop.images", "shopImages", "shopImages.type = 'shop'")
+            .leftJoinAndMapMany("shop.menuImages", "shop.images", "menuImages", "menuImages.type = 'menu'")
             .addSelect(subQuery => {
                 return subQuery
                     .select("COUNT(*)")
@@ -53,12 +53,8 @@ export class ShopRepository extends BaseRepository<Shop> {
         if (entities.length === 0)
             throw new EntityNotExists({id: shopId});
         let [shop, rawData] = [entities[0], raw[0]];
-
-        return this.create({
-            ...shop,
-            didLike: rawData.givenUserLikeCount > 0,
-            scoreAverage: rawData.scoreAverageRaw
-        })
-
+        shop.didLike = rawData.givenUserLikeCount > 0
+        shop.scoreAverage = rawData.scoreAverageRaw
+        return shop;
     }
 }
