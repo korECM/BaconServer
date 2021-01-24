@@ -8,9 +8,9 @@ describe("User", () => {
     let db: Connection;
     let userRepository: Repository<User>;
 
-    const getUser = async (userId: number) => {
+    const getUser = async (option: any) => {
         return userRepository
-            .findOne({id: userId}, {select: ["id", "name", "password", "email", "createdTime", "gender", "provider", "role", "updatedTime", "snsId"]})
+            .findOne(option, {select: Object.getOwnPropertyNames(userRepository.create(UserSeed[0])) as any})
     }
 
     beforeAll(async () => {
@@ -74,7 +74,7 @@ describe("User", () => {
         await userRepository.save(userRepository.create(userSeed));
 
         // then
-        const userResult = await getUser(userSeed.id);
+        const userResult = await getUser({id: userSeed.id});
 
         expect(userResult).not.toBeNull();
         expect(userResult).not.toBeUndefined();
