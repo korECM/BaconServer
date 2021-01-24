@@ -5,7 +5,8 @@ import {Container} from "typedi";
 import {FoodingSeed} from "../../utils/seeds/FoodingSeed";
 import {UserAuthService} from "../../../Services/UserAuthService";
 import {UserSeed} from "../../utils/seeds/UserSeed";
-import {AuthProvider} from "../../../domains/User/User";
+import {AuthProvider, Gender, Role} from "../../../domains/User/User";
+import {UserForLocalSignUp, UserForSignIn} from "../../../Dtos/User";
 
 
 describe("UserAuthService", () => {
@@ -82,5 +83,28 @@ describe("UserAuthService", () => {
             expect(result1).toBeNull();
             expect(result2).toBeNull();
         })
+    })
+
+    describe("signUpLocal", () => {
+        it("전달된 인자를 가지고 사용자를 생성한 뒤에, UserForSignIn을 반환한다", async () => {
+            // given
+            const name = "이름";
+            const email = "asdfasdf@naver.com";
+            const gender = Gender.m;
+            const password = "1111";
+            const userDto = new UserForLocalSignUp(name, email, gender, password);
+            // when
+            const signUpResult = await userAuthService.signUpLocal(userDto);
+            // then
+            const userResult = await userAuthService.signInLocal(email, password);
+            expect(userResult).not.toBeUndefined();
+            expect(userResult).not.toBeNull();
+            expect(signUpResult).toBeInstanceOf(UserForSignIn);
+            expect(signUpResult).toEqual(userResult!);
+
+            expect(userResult).toMatchObject({
+                name, email, gender, role: Role.user
+            })
+        });
     })
 })

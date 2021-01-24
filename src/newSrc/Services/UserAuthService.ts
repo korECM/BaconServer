@@ -2,7 +2,7 @@ import {Service} from "typedi";
 import {UserRepository} from "../repositories/UserRepository";
 import {InjectRepository} from "typeorm-typedi-extensions";
 import {EntityNotExists, NotDefinedError} from "../repositories/Errors/CommonError";
-import {UserForSignIn} from "../Dtos/User";
+import {UserForLocalSignUp, UserForSignIn} from "../Dtos/User";
 import {AuthProvider} from "../domains/User/User";
 
 @Service()
@@ -25,6 +25,11 @@ export class UserAuthService {
                 throw new NotDefinedError(e);
             }
         }
+    }
+
+    async signUpLocal(userDto: UserForLocalSignUp) {
+        const user = await this.userRepository.addLocalUser(userDto.name, userDto.email, userDto.password, userDto.gender);
+        return new UserForSignIn(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
     }
 
     async signInSns(snsId: string, provider: AuthProvider) {
