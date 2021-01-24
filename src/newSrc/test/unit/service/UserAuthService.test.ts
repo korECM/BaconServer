@@ -6,7 +6,7 @@ import {FoodingSeed} from "../../utils/seeds/FoodingSeed";
 import {UserAuthService} from "../../../Services/UserAuthService";
 import {UserSeed} from "../../utils/seeds/UserSeed";
 import {AuthProvider, Gender, Role} from "../../../domains/User/User";
-import {UserForLocalSignUp, UserForSignIn} from "../../../Dtos/User";
+import {UserForLocalSignUp, UserForSignIn, UserForSnsSignUp} from "../../../Dtos/User";
 
 
 describe("UserAuthService", () => {
@@ -97,6 +97,30 @@ describe("UserAuthService", () => {
             const signUpResult = await userAuthService.signUpLocal(userDto);
             // then
             const userResult = await userAuthService.signInLocal(email, password);
+            expect(userResult).not.toBeUndefined();
+            expect(userResult).not.toBeNull();
+            expect(signUpResult).toBeInstanceOf(UserForSignIn);
+            expect(signUpResult).toEqual(userResult!);
+
+            expect(userResult).toMatchObject({
+                name, email, gender, role: Role.user
+            })
+        });
+    })
+
+    describe("signUpSns", () => {
+        it("전달된 인자를 가지고 사용자를 생성한 뒤에, UserForSignIn을 반환한다", async () => {
+            // given
+            const name = "이름";
+            const email = null;
+            const snsId = "12341234";
+            const gender = Gender.m;
+            const provider = AuthProvider.kakao;
+            const userDto = new UserForSnsSignUp(name, email, snsId, gender, provider);
+            // when
+            const signUpResult = await userAuthService.signUpSns(userDto);
+            // then
+            const userResult = await userAuthService.signInSns(snsId, provider);
             expect(userResult).not.toBeUndefined();
             expect(userResult).not.toBeNull();
             expect(signUpResult).toBeInstanceOf(UserForSignIn);
