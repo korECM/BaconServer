@@ -146,7 +146,7 @@ dotenv.config();
             userE.name = user.name;
             userE.email = user.email === "none" ? null : user.email;
             userE.provider = user.provider === "local" ? AuthProvider.local : AuthProvider.kakao;
-            userE.kakaoNameSet = user.kakaoNameSet ? user.kakaoNameSet : true;
+            userE.snsNameSet = user.kakaoNameSet ? user.kakaoNameSet : true;
             userE.gender = user.gender === "m" ? Gender.m : Gender.f;
             userE.snsId = user.snsId === "none" ? null : user.snsId;
             userE.password = user.password === "none" ? null : user.password;
