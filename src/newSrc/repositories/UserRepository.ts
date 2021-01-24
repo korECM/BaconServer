@@ -50,7 +50,8 @@ export class UserRepository extends BaseRepository<User> {
             snsId,
             gender,
             provider,
-            role: Role.user
+            role: Role.user,
+            snsNameSet: false
         });
 
         return await this.save(user);
