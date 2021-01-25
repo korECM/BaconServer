@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "dev": "NODE_ENV=development NODEMON_ENV=true ts-node-dev --respawn --rs --files ./src/newSrc/index.ts",
+    "dev": "NODE_ENV=development NODEMON_ENV=true nodemon --exec ./node_modules/.bin/ts-node --files ./src/newSrc/index.ts",
     "test": "NODE_ENV=test jest --forceExit --runInBand --logHeapUsage",
     "testWithCoverage": "NODE_ENV=test jest --forceExit --runInBand --logHeapUsage --coverage",
     "docker": "tsc && docker build -t bacon_server . && docker tag bacon_server:latest jeffyoun/bacon_server:latest && docker push jeffyoun/bacon_server:latest",
