@@ -1,6 +1,9 @@
 import dotenv from "dotenv";
 
-dotenv.config();
+// TODO: 코드 옮길 때 수정 필요
+dotenv.config({
+    path: `src/newSrc/config/.env.${process.env.NODE_ENV || "development"}`
+});
 
 const env = {
     isDevelopment: process.env.NODE_ENV === "development",

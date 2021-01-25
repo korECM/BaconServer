@@ -1,36 +1,28 @@
-import {Connection} from "typeorm";
-import {createMemoryDatabase} from "../utils/setupDatabase";
 import request from "supertest";
 import express from "express";
 import {App} from "../../app";
 import {getTestServer, tearDownTestServer} from "../utils/MockServer";
-import {FoodingSeed} from "../utils/seeds/FoodingSeed";
-import {Container} from "typedi";
-import {DomainInitializationService} from "../../Services/DomainInitializationService";
 import {UserSeed} from "../utils/seeds/UserSeed";
 import {UserForSignInResponse} from "../../Dtos/User";
 import {Gender, Role} from "../../domains/User/User";
+import {FoodingSeed} from "../utils/seeds/FoodingSeed";
 
 describe("/auth", () => {
-    let db: Connection;
     let app: App;
-    let domainInitializationService: DomainInitializationService;
     let expressApp: express.Application;
 
     beforeAll(async () => {
-        db = await createMemoryDatabase();
-        domainInitializationService = Container.get(DomainInitializationService);
         app = getTestServer();
+        await app.setDatabase();
+        await app.initDomain();
         expressApp = app.app;
     });
 
     beforeEach(async () => {
-        await domainInitializationService.initAllDomain();
-        await FoodingSeed.setUp(db);
+        await FoodingSeed.setUp(app.connection);
     })
 
     afterAll(() => {
-        db.close();
         tearDownTestServer();
     });
 

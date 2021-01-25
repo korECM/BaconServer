@@ -41,11 +41,14 @@ export function useMiddleware(app: express.Application, redis: MemoryDatabaseSer
     app.use(session(sessionOptions(redis)));
 
     app.use(jwtMiddleware);
-
-    useSentry().request(app);
+    if (env.isProduction) {
+        useSentry().request(app);
+    }
     useRoutingContainer(Container);
     useValidationContainer(Container);
     useExpressServer(app, routingControllersOptions);
-    useSwagger(app);
-    useSentry().error(app);
+    if (env.isProduction) {
+        useSwagger(app);
+        useSentry().error(app);
+    }
 }

@@ -1,29 +1,31 @@
-import {Connection} from "typeorm";
 import {PostRepository} from "../../repositories/PostRepository";
-import {createMemoryDatabase} from "../utils/setupDatabase";
 import {PostSeed} from "../utils/seeds/MainPostTestSeed";
 import request from "supertest";
 import express from "express";
 import {App} from "../../app";
 import {MainPostResponse} from "../../Dtos/MainPost";
 import {getTestServer, tearDownTestServer} from "../utils/MockServer";
+import {FoodingSeed} from "../utils/seeds/FoodingSeed";
 
 describe("GET /mainPost", () => {
-    let db: Connection;
-    let postRepository: PostRepository;
     let app: App;
     let expressApp: express.Application;
+    let postRepository: PostRepository;
 
     beforeAll(async () => {
-        db = await createMemoryDatabase();
-        postRepository = db.getCustomRepository(PostRepository);
-        await postRepository.save(PostSeed);
         app = getTestServer();
+        await app.setDatabase();
+        await app.initDomain();
         expressApp = app.app;
+        postRepository = app.connection.getCustomRepository(PostRepository);
+        await postRepository.save(PostSeed);
     });
 
+    beforeEach(async () => {
+        await FoodingSeed.setUp(app.connection);
+    })
+
     afterAll(() => {
-        db.close();
         tearDownTestServer();
     });
 

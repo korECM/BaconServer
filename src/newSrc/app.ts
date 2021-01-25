@@ -10,6 +10,7 @@ import {Connection} from "typeorm";
 import {MemoryDatabaseService, RedisServiceToken} from "./Services/RedisService";
 import {DomainInitializationService} from "./Services/DomainInitializationService";
 import {initializeTransactionalContext} from "typeorm-transactional-cls-hooked";
+import {createMemoryDatabase} from "./test/utils/setupDatabase";
 
 const apiURL: string = "/api/v1";
 
@@ -37,7 +38,12 @@ export class App {
     public async setDatabase() {
         try {
             logger.info("데이터베이스 연결 시도");
-            this.connection = await createDatabaseConnection();
+            // TODO: 나중에 env 설정으로 아예 분리
+            if (env.isTest) {
+                this.connection = await createMemoryDatabase();
+            } else {
+                this.connection = await createDatabaseConnection();
+            }
         } catch (e) {
             logger.error("데이터베이스 연결 실패 ", e);
         }

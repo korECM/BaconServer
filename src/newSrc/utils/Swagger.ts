@@ -28,5 +28,7 @@ export function useSwagger(app: express.Application) {
             version: "1.0.0",
         },
     });
-    app.use(env.swagger.route, swaggerUi.serve, swaggerUi.setup(spec));
+    if (!env.isTest) {
+        app.use(env.swagger.route, swaggerUi.serve, swaggerUi.setup(spec));
+    }
 }
