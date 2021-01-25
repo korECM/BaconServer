@@ -33,6 +33,12 @@ export class UserAuthService {
     }
 
     async signUpLocal(userDto: UserForLocalSignUpRequest) {
+        if (await this.userRepository.nameExists(userDto.name)) {
+            return null;
+        }
+        if (await this.userRepository.emailExists(userDto.email)) {
+            return null;
+        }
         const user = await this.userRepository.addLocalUser(userDto.name, userDto.email, userDto.password, userDto.gender);
         return new UserForSignInResponse(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
     }
@@ -51,6 +57,9 @@ export class UserAuthService {
     }
 
     async signUpSns(userDto: UserForSnsSignUpRequest) {
+        if (await this.userRepository.snsUserExists(userDto.snsId, userDto.provider)) {
+            return null;
+        }
         const user = await this.userRepository.addSnsUser(userDto.name, userDto.email, userDto.snsId, userDto.provider, userDto.gender);
         return new UserForSignInResponse(user.id, user.name, user.email, user.gender, user.role, user.snsNameSet);
     }

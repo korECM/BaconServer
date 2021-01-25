@@ -112,6 +112,32 @@ describe("UserAuthService", () => {
                 name, email, gender, role: Role.user, snsNameSet: true
             })
         });
+
+        it("이미 이름이 존재한다면 null을 반환한다", async () => {
+            // given
+            const name = UserSeed[0].name;
+            const email = "asdfasdf@naver.com";
+            const gender = Gender.m;
+            const password = "1111";
+            const userDto = new UserForLocalSignUpRequest(name, email, gender, password);
+            // when
+            const signUpResult = await userAuthService.signUpLocal(userDto);
+            // then
+            expect(signUpResult).toBeNull();
+        });
+
+        it("이미 이메일이 존재한다면 null을 반환한다", async () => {
+            // given
+            const name = "이름";
+            const email = UserSeed[0].email!;
+            const gender = Gender.m;
+            const password = "1111";
+            const userDto = new UserForLocalSignUpRequest(name, email, gender, password);
+            // when
+            const signUpResult = await userAuthService.signUpLocal(userDto);
+            // then
+            expect(signUpResult).toBeNull();
+        });
     })
 
     describe("signUpSns", () => {
@@ -135,6 +161,20 @@ describe("UserAuthService", () => {
             expect(userResult).toMatchObject({
                 name, email, gender, role: Role.user
             })
+        });
+
+        it("이미 존재하는 사용자라면 null을 반환한다", async () => {
+            // given
+            const name = "이름";
+            const email = null;
+            const snsId = UserSeed[1].snsId!;
+            const gender = Gender.m;
+            const provider = AuthProvider.kakao;
+            const userDto = new UserForSnsSignUpRequest(name, email, snsId, gender, provider);
+            // when
+            const signUpResult = await userAuthService.signUpSns(userDto);
+            // then
+            expect(signUpResult).toBeNull();
         });
     })
 })
