@@ -38,7 +38,8 @@ export class UserRepository extends BaseRepository<User> {
             password,
             gender,
             provider: AuthProvider.local,
-            role: Role.user
+            role: Role.user,
+            snsNameSet: true
         });
 
         return await this.save(user);

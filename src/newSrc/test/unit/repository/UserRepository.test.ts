@@ -111,6 +111,7 @@ describe("UserRepository", () => {
             expect(userResult!.password).not.toEqual(password);
             expect(await userResult!.hasPassword(password)).toBeTrue();
             expect(userResult!.gender).toEqual(gender);
+            expect(userResult!.snsNameSet).toBeTrue();
         })
     })
 

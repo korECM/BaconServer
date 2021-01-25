@@ -109,7 +109,7 @@ describe("UserAuthService", () => {
             expect(signUpResult).toEqual(userResult!);
 
             expect(userResult).toMatchObject({
-                name, email, gender, role: Role.user
+                name, email, gender, role: Role.user, snsNameSet: true
             })
         });
     })
