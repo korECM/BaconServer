@@ -1319,11 +1319,6 @@ anymatch@^3.0.3, anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-apicache@^1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/apicache/-/apicache-1.5.3.tgz#8977b358bf7d579d55fe3d183c907ae5dbcfb357"
-  integrity sha512-n1h39Bt7tMiJMV0u0tFlhigig8Uo/wJmKoj6WE/OwvZ+WbFchn7jnXleotZOzZTUBtr0Tg9iJshHnJDAGQbAEQ==
-
 app-root-path@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-3.0.0.tgz#210b6f43873227e18a4b810a032283311555d5ad"
