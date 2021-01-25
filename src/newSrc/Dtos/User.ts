@@ -1,5 +1,15 @@
 import {AuthProvider, Gender, Role} from "../domains/User/User";
-import {IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsString, ValidateIf} from "class-validator";
+import {
+    IsBoolean,
+    IsEmail,
+    IsEnum,
+    IsNotEmpty,
+    IsNumber,
+    IsString,
+    MaxLength,
+    MinLength,
+    ValidateIf
+} from "class-validator";
 
 export class UserForSignInResponse {
     @IsNumber()
@@ -49,7 +59,27 @@ export class UserForSnsSignInRequest {
 }
 
 export class UserForLocalSignUpRequest {
-    constructor(public name: string, public email: string, public gender: Gender, public password: string) {
+    @IsString()
+    @IsNotEmpty()
+    @MinLength(2)
+    @MaxLength(10)
+    name: string;
+    @IsEmail()
+    @IsNotEmpty()
+    @MaxLength(50)
+    email: string;
+    @IsEnum(Gender)
+    gender: Gender;
+    @IsString()
+    @IsNotEmpty()
+    @MaxLength(20)
+    password: string;
+
+    constructor(name: string, email: string, gender: Gender, password: string) {
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+        this.password = password;
     }
 }
 

@@ -3,7 +3,7 @@ import {apiURL} from "../app";
 import {IndexController} from "../controllers/IndexController";
 import {MainPostController} from "../controllers/MainPostController";
 import {ShopController} from "../controllers/ShopController";
-import {UserController} from "../controllers/UserController";
+import {AuthController} from "../controllers/AuthController";
 import {CustomErrorHandler} from "../middlewares/CustomErrorHandler";
 
 const routingControllersOptions: RoutingControllersOptions = {
@@ -13,7 +13,7 @@ const routingControllersOptions: RoutingControllersOptions = {
     },
     routePrefix: apiURL,
     // controllers: [path.join(__dirname, "..", '/controllers/*.' + (env.isExecutedByNodeMon ? 'ts' : 'js'))],
-    controllers: [IndexController, MainPostController, ShopController, UserController],
+    controllers: [IndexController, MainPostController, ShopController, AuthController],
     defaultErrorHandler: false,
     middlewares: [CustomErrorHandler]
 }
