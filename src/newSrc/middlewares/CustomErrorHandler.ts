@@ -1,6 +1,7 @@
 import {ExpressErrorMiddlewareInterface, HttpError, Middleware} from "routing-controllers";
 import {ValidationError} from "class-validator";
 import express from "express";
+import env from "../env";
 
 /**
  * Express middleware to catch all errors throwed in controlers.
@@ -29,7 +30,10 @@ export class CustomErrorHandler implements ExpressErrorMiddlewareInterface {
         if (error.errors && Array.isArray(error.errors) && error.errors.every((element: any) => element instanceof ValidationError)) {
             res.status(400);
             responseObject.message = "Invalid Request";
-            // responseObject.errors = error;
+            if (env.isDevelopment || env.isTest) {
+                console.log(error)
+                responseObject.errors = error;
+            }
         } else {
             // set http status
             if (error instanceof HttpError && error.httpCode) {
@@ -39,16 +43,14 @@ export class CustomErrorHandler implements ExpressErrorMiddlewareInterface {
             }
 
             if (error instanceof Error) {
-                const developmentMode: boolean = process.env.NODE_ENV === "development";
-
                 // set response error fields
-                if (error.name && (developmentMode || error.message)) { // show name only if in development mode and if error message exist too
+                if (error.name && (env.isDevelopment || error.message)) { // show name only if in development mode and if error message exist too
                     responseObject.name = error.name;
                 }
                 if (error.message) {
                     responseObject.message = error.message;
                 }
-                if (error.stack && developmentMode) {
+                if (error.stack && env.isDevelopment) {
                     responseObject.stack = error.stack;
                 }
             } else if (typeof error === "string") {
