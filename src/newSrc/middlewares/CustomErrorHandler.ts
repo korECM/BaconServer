@@ -31,7 +31,6 @@ export class CustomErrorHandler implements ExpressErrorMiddlewareInterface {
             res.status(400);
             responseObject.message = "Invalid Request";
             if (env.isDevelopment || env.isTest) {
-                console.log(error)
                 responseObject.errors = error;
             }
         } else {
