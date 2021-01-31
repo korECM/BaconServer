@@ -7,6 +7,9 @@ import {Gender, Role} from "../../domains/User/User";
 import {FoodingSeed} from "../utils/seeds/FoodingSeed";
 import jwt from "jsonwebtoken"
 import env from "../../env";
+import sinon, {SinonSandbox, SinonStub} from "sinon"
+import axios from "axios";
+import {AuthController} from "../../controllers/AuthController";
 
 describe("/auth", () => {
     let app: App;
@@ -27,7 +30,13 @@ describe("/auth", () => {
         tearDownTestServer();
     });
 
-    function checkToken(accessToken: string, user: any) {
+    function checkToken(header: Record<string, any>, user: any) {
+        const cookies: string = header['set-cookie'].filter((c: string) => c.startsWith('access_token'))
+        expect(cookies.length).toBeGreaterThan(0)
+        const accessToken: string = cookies[0].split('=')[1].split(';')[0]
+
+        expect(accessToken).not.toBeUndefined()
+        expect(accessToken).not.toBeNull()
         try {
             const decoded = jwt.verify(accessToken, env.secret.jwt) as Record<string, any>;
             if (user.id)
@@ -55,13 +64,7 @@ describe("/auth", () => {
                 .expect(200);
 
             // then
-            const cookies: string = header['set-cookie'].filter((c: string) => c.startsWith('access_token'))
-            expect(cookies.length).toBeGreaterThan(0)
-            const accessToken: string = cookies[0].split('=')[1].split(';')[0]
-
-            expect(accessToken).not.toBeUndefined()
-            expect(accessToken).not.toBeNull()
-            checkToken(accessToken, user)
+            checkToken(header, user)
         })
 
         it("409: 로그인에 실패하면 null을 반환한다", async () => {
@@ -132,13 +135,7 @@ describe("/auth", () => {
                 .expect(201);
 
             // then
-            const cookies: string = header['set-cookie'].filter((c: string) => c.startsWith('access_token'))
-            expect(cookies.length).toBeGreaterThan(0)
-            const accessToken: string = cookies[0].split('=')[1].split(';')[0]
-
-            expect(accessToken).not.toBeUndefined()
-            expect(accessToken).not.toBeNull()
-            checkToken(accessToken, {name, email, role: Role.user})
+            checkToken(header, {name, email, role: Role.user})
         })
 
         it("409: 회원가입에 실패하면 null을 반환한다", async () => {
@@ -205,5 +202,77 @@ describe("/auth", () => {
         })
     })
 
+    describe('/signIn/kakao/callback', () => {
+        let sb: SinonSandbox = sinon.createSandbox()
+        let get: SinonStub
+        const code = 1
+        const accessToken = 1234
+        const tokenRequestURL = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${env.api.kakao.restApiKey}&redirect_uri=${AuthController.kakaoCallbackLink}&code=${code}`;
+
+        beforeEach(() => {
+            get = sb.stub(axios, 'get')
+        })
+
+        afterEach(() => {
+            sb.restore()
+        })
+
+        it('500: code로부터 카카오 토큰을 얻어오는데 실패한 경우', async () => {
+            // given
+            get.withArgs(tokenRequestURL).resolves({data: {access_token: null, error: {}}})
+            // when
+            await request(expressApp)
+                .get("/auth/signIn/kakao/callback")
+                .query({code})
+                .expect(504);
+            // then
+        })
+        it('206: 가입한 계정이 존재하지 않는 경우', async () => {
+            // given
+            get.withArgs(tokenRequestURL).resolves({data: {access_token: accessToken, error: null}})
+            get.withArgs('https://kapi.kakao.com/v2/user/me').resolves({data: {id: 1234}})
+            // when
+            const {body} = await request(expressApp)
+                .get("/auth/signIn/kakao/callback")
+                .query({code})
+                .expect(206);
+            // then
+            expect(body).not.toBeUndefined()
+            expect(body).not.toBeNull()
+            expect(body.id).toBeDefined()
+            expect(body.status).toBe(303)
+        })
+
+        it('206: 가입한 계정이 존재하지만 아직 이름을 설정하지 않은 경우', async () => {
+            // given
+            const user = UserSeed[2]
+            get.withArgs(tokenRequestURL).resolves({data: {access_token: accessToken, error: null}})
+            get.withArgs('https://kapi.kakao.com/v2/user/me').resolves({data: {id: user.snsId}})
+            // when
+            const {body} = await request(expressApp)
+                .get("/auth/signIn/kakao/callback")
+                .query({code})
+                .expect(206);
+            // then
+            expect(body).not.toBeUndefined()
+            expect(body).not.toBeNull()
+            expect(body.id).toBeDefined()
+            expect(body.status).toBe(303)
+        })
+
+        it('200: 가입한 계정이 존재하고 닉네임도 설정한 경우', async () => {
+            // given
+            const user = UserSeed[1]
+            get.withArgs(tokenRequestURL).resolves({data: {access_token: accessToken, error: null}})
+            get.withArgs('https://kapi.kakao.com/v2/user/me').resolves({data: {id: user.snsId}})
+            // when
+            const {header} = await request(expressApp)
+                .get("/auth/signIn/kakao/callback")
+                .query({code})
+                .expect(200);
+            // then
+            checkToken(header, user)
+        })
+    })
 
 })

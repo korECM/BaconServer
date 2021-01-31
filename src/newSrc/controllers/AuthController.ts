@@ -3,6 +3,7 @@ import {
     Body,
     Get,
     HttpCode,
+    HttpError,
     JsonController,
     OnNull,
     OnUndefined,
@@ -96,7 +97,8 @@ export class AuthController {
     async kakaoRedirect() {
     }
 
-    @Get('signIn/kakao/callback')
+    @Get('/signIn/kakao/callback')
+    @HttpCode(200)
     @OpenAPI({
         description: "카카오 회원가입 처리하는 라우터",
         responses: {
@@ -105,6 +107,9 @@ export class AuthController {
             },
             '200': {
                 description: "로그인에 성공한 경우"
+            },
+            '504': {
+                description: "카카오 로그인 서버에 오류가 발생한 경우"
             }
         }
     })
@@ -112,7 +117,10 @@ export class AuthController {
         const tokenRequestURL = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${env.api.kakao.restApiKey}&redirect_uri=${AuthController.kakaoCallbackLink}&code=${code}`;
         const {data: {access_token, error}} = await axios.get(tokenRequestURL)
         if (error) {
-            throw error
+            if (!env.isTest) {
+                console.error(error)
+            }
+            throw new HttpError(504)
         }
 
         const {data: {id}} = await axios.get('https://kapi.kakao.com/v2/user/me', {headers: {Authorization: `Bearer ${access_token}`}});
@@ -135,6 +143,6 @@ export class AuthController {
         // 닉네임 설정이 된 카카오 유저
 
         AuthMiddleware.userToToken(res, user)
-        return res.status(200).send({message: "success"})
+        return {message: "success"}
     }
 }
