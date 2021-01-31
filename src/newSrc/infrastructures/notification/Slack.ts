@@ -6,14 +6,15 @@ import {Service, Token} from "typedi";
 export const SlackToken = new Token<Slack>();
 
 @Service(SlackToken)
-export class Slack implements NotificationProvider {
+export class Slack implements NotificationProvider<Slack.Channel> {
     private webhook = new IncomingWebhook(env.slack.webhookUrl);
 
-    async send(message: string | Notification) {
+    async send(message: string | Notification, channel: Slack.Channel) {
         if (typeof message === "string") {
             await this.webhook.send(message);
         } else {
             await this.webhook.send({
+                channel: channel || undefined,
                 attachments: [
                     {
                         color: message.color || "default",
@@ -30,5 +31,14 @@ export class Slack implements NotificationProvider {
                 ]
             });
         }
+    }
+}
+
+export namespace Slack {
+    export enum Channel {
+        FOODING_SERVER_ERROR = '#alert_fooding_server_error',
+        FOODING_SIGNUP = '#alert_fooding_signup',
+        FOODING_REVIEW = '#alert_fooding_review',
+        FOODING_REPORT = '#alert_fooding_report'
     }
 }

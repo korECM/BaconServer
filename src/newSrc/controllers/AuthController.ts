@@ -3,11 +3,15 @@ import {Body, HttpCode, JsonController, OnNull, OnUndefined, Post, Res} from "ro
 import {OpenAPI, ResponseSchema} from "routing-controllers-openapi";
 import {UserAuthService} from "../Services/UserAuthService";
 import {UserForLocalSignInRequest, UserForLocalSignUpRequest, UserForSignInResponse} from "../Dtos/User";
+import {NotificationService} from "../Services/NotificationService";
+import {Slack} from "../infrastructures/notification/Slack";
+import env from "../env";
+import Channel = Slack.Channel;
 
 
 @JsonController("/auth")
 export class AuthController {
-    constructor(private userAuthService: UserAuthService) {
+    constructor(private userAuthService: UserAuthService, private notificationService: NotificationService) {
     }
 
     @Post("/signIn")
@@ -30,7 +34,8 @@ export class AuthController {
     @OnNull(409)
     @OnUndefined(409)
     async signInLocal(@Body() signInDto: UserForLocalSignInRequest, @Res() res: Response) {
-        return await this.userAuthService.signInLocal(signInDto);
+        const user = await this.userAuthService.signInLocal(signInDto);
+        return user
     }
 
     @Post("/signUp")
@@ -53,6 +58,10 @@ export class AuthController {
     @OnNull(409)
     @OnUndefined(409)
     async signUpLocal(@Body() signUpDto: UserForLocalSignUpRequest, @Res() res: Response) {
-        return await this.userAuthService.signUpLocal(signUpDto);
+        const user = await this.userAuthService.signUpLocal(signUpDto);
+        if (user && env.isProduction) {
+            this.notificationService.sendMessage(`${user.name}님이 새로 가입했어요! by Local`, Channel.FOODING_SIGNUP)
+        }
+        return user
     }
 }
