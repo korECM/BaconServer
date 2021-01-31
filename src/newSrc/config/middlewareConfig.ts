@@ -47,8 +47,8 @@ export function useMiddleware(app: express.Application, redis: MemoryDatabaseSer
     useRoutingContainer(Container);
     useValidationContainer(Container);
     useExpressServer(app, routingControllersOptions);
+    useSwagger(app);
     if (env.isProduction) {
-        useSwagger(app);
         useSentry().error(app);
     }
 }
