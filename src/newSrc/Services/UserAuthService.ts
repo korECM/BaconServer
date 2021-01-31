@@ -9,10 +9,19 @@ import {
     UserForSnsSignInRequest,
     UserForSnsSignUpRequest
 } from "../Dtos/User";
+import {User} from "../domains/User/User";
 
 @Service()
 export class UserAuthService {
     constructor(@InjectRepository() private userRepository: UserRepository) {
+    }
+
+    async userExistById(id: number): Promise<boolean> {
+        return !!(await this.findUserById(id))
+    }
+
+    async findUserById(id: number): Promise<User | undefined> {
+        return await this.userRepository.findOne({id})
     }
 
     async signInLocal(userDto: UserForLocalSignInRequest) {

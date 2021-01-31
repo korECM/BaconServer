@@ -5,7 +5,7 @@ import {Container} from "typedi";
 import {FoodingSeed} from "../../utils/seeds/FoodingSeed";
 import {UserAuthService} from "../../../Services/UserAuthService";
 import {UserSeed} from "../../utils/seeds/UserSeed";
-import {AuthProvider, Gender, Role} from "../../../domains/User/User";
+import {AuthProvider, Gender, Role, User} from "../../../domains/User/User";
 import {
     UserForLocalSignInRequest,
     UserForLocalSignUpRequest,
@@ -176,5 +176,46 @@ describe("UserAuthService", () => {
             // then
             expect(signUpResult).toBeNull();
         });
+    })
+
+    describe('findUserById', () => {
+        it('만약 해당 id와 일치하는 사용자가 존재하면 User를 반환한다', async () => {
+            // given
+            const user = UserSeed[0];
+            // when
+            const result = await userAuthService.findUserById(user.id)
+            // then
+            expect(result).not.toBeNull()
+            expect(result).not.toBeUndefined()
+            expect(result).toBeInstanceOf(User)
+            expect(result!.id).toBe(user.id)
+        })
+        it('만약 해당 id와 일치하는 사용자가 없다면 undefined를 반환한다', async () => {
+            // given
+            const id = 1234;
+            // when
+            const result = await userAuthService.findUserById(id)
+            // then
+            expect(result).toBeUndefined()
+        })
+    })
+
+    describe('userExistById', () => {
+        it('만약 해당 id와 일치하는 사용자가 존재하면 true를 반환한다', async () => {
+            // given
+            const user = UserSeed[0];
+            // when
+            const result = await userAuthService.userExistById(user.id)
+            // then
+            expect(result).toBeTrue()
+        })
+        it('만약 해당 id와 일치하는 사용자가 없다면 false를 반환한다', async () => {
+            // given
+            const id = 1234;
+            // when
+            const result = await userAuthService.userExistById(id)
+            // then
+            expect(result).toBeFalse()
+        })
     })
 })
