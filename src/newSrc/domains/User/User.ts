@@ -23,7 +23,8 @@ export enum AuthProvider {
 
 export enum Gender {
     m = 'm',
-    f = 'f'
+    f = 'f',
+    none = 'n'
 }
 
 export enum Role {
