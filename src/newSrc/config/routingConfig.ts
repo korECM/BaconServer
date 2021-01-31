@@ -5,6 +5,7 @@ import {MainPostController} from "../controllers/MainPostController";
 import {ShopController} from "../controllers/ShopController";
 import {AuthController} from "../controllers/AuthController";
 import {CustomErrorHandler} from "../middlewares/CustomErrorHandler";
+import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 
 const routingControllersOptions: RoutingControllersOptions = {
     cors: {
@@ -15,7 +16,9 @@ const routingControllersOptions: RoutingControllersOptions = {
     // controllers: [path.join(__dirname, "..", '/controllers/*.' + (env.isExecutedByNodeMon ? 'ts' : 'js'))],
     controllers: [IndexController, MainPostController, ShopController, AuthController],
     defaultErrorHandler: false,
-    middlewares: [CustomErrorHandler]
+    middlewares: [CustomErrorHandler],
+    authorizationChecker: AuthMiddleware.authorization,
+    currentUserChecker: AuthMiddleware.currentUser
 }
 
 export {routingControllersOptions};

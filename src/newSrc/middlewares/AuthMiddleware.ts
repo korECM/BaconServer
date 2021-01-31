@@ -11,7 +11,7 @@ export class AuthMiddleware {
 
     static ONE_DAY = 70 * 60 * 24;
 
-    static async authorization(action: Action, roles: string[]) {
+    static async authorization(action: Action, roles: Role[]) {
         const token = action.request.cookies.access_token;
         if (!token) return false
 
@@ -30,7 +30,8 @@ export class AuthMiddleware {
                 });
             }
 
-            return true
+            if (!roles.length) return true;
+            return roles.indexOf(decoded.role) != -1;
         } catch (e) {
             return false;
         }
