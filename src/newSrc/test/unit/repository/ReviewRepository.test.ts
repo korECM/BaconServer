@@ -1,5 +1,4 @@
 import {Connection} from "typeorm";
-import {createMemoryDatabase} from "../../utils/setupDatabase";
 import {FoodingSeed} from "../../utils/seeds/FoodingSeed";
 import {Container} from "typedi";
 import {DomainInitializationService} from "../../../Services/DomainInitializationService";
@@ -7,6 +6,7 @@ import {UserRepository} from "../../../repositories/UserRepository";
 import {UserSeed} from "../../utils/seeds/UserSeed";
 import {ReviewRepository} from "../../../repositories/ReviewRepository";
 import {ShopSeed} from "../../utils/seeds/ShopSeed";
+import {createMemoryDatabase} from "../../utils/setupDatabase";
 
 describe("UserRepository", () => {
     let db: Connection;
@@ -31,9 +31,7 @@ describe("UserRepository", () => {
         const now = new Date(2010, 2, 20, 15, 0, 0);
         beforeEach(async () => {
             const review = (await reviewRepository.find({}))[0]
-            review.createdTime = now;
-            await reviewRepository.save(review);
-            console.log("review : ", review.createdTime.toISOString())
+            await reviewRepository.update(review.id, {createdTime: now});
         })
         it("오늘 작성한 리뷰가 존재하면 true 반환", async () => {
             // given
