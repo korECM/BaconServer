@@ -17,6 +17,7 @@ export async function createDatabaseConnection() {
             logging: env.db.mainDb.logging,
             synchronize: env.db.mainDb.synchronize,
             charset: env.db.mainDb.charset,
+            timezone: "+09:00"
         }
 
         useContainer(Container);
