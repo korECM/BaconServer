@@ -10,7 +10,7 @@ export class ReviewRepository extends BaseRepository<Review> {
         from.setHours(0, 0, 0, 0)
         const to = new Date(day)
         to.setHours(24, 0, 0, 0)
-        console.log(from, to)
+        console.log("DB", from.toISOString(), to.toISOString())
         return (await this.createQueryBuilder('review')
             .where('review.user.id = :userId', {userId})
             .andWhere('review.createdTime >= :from', {from: from.toISOString()})

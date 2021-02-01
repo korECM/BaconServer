@@ -33,6 +33,7 @@ describe("UserRepository", () => {
             const review = (await reviewRepository.find({}))[0]
             review.createdTime = now;
             await reviewRepository.save(review);
+            console.log("review : ", review.createdTime.toISOString())
         })
         it("오늘 작성한 리뷰가 존재하면 true 반환", async () => {
             // given
