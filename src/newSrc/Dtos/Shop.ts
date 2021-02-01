@@ -10,7 +10,7 @@ import {
     IsString
 } from "class-validator";
 import {Location, LocationCategory} from "../domains/Shop/Location";
-import {KeywordList} from "../domains/Shop/Keyword";
+import {Keyword} from "../domains/Shop/Keyword";
 import {ShopClassification, ShopClassificationEnum} from "../domains/Shop/Classification/ShopClassification";
 import {FoodClassification, FoodClassificationEnum} from "../domains/Shop/Classification/FoodClassification";
 import {
@@ -37,7 +37,7 @@ export class GetShopsDto {
     ingredientClassification: IngredientClassification;
 
     @IsArray()
-    keyword: KeywordList[];
+    keyword: { [key in keyof Keyword]: boolean };
 }
 
 export class ShopResponse {
