@@ -28,5 +28,5 @@ export class EntityNotExists extends CustomError {
     }
 }
 
-export class NotDefinedError extends CustomError {
+export class UndefinedError extends CustomError {
 }

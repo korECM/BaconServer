@@ -1,7 +1,7 @@
 import {Service} from "typedi";
 import {UserRepository} from "../repositories/UserRepository";
 import {InjectRepository} from "typeorm-typedi-extensions";
-import {EntityNotExists, NotDefinedError} from "../repositories/Errors/CommonError";
+import {EntityNotExists, UndefinedError} from "../repositories/Errors/CommonError";
 import {
     UserForLocalSignInRequest,
     UserForLocalSignUpRequest,
@@ -36,7 +36,7 @@ export class UserAuthService {
             if (e instanceof EntityNotExists) {
                 return null;
             } else {
-                throw new NotDefinedError(e);
+                throw new UndefinedError(e);
             }
         }
     }
@@ -60,7 +60,7 @@ export class UserAuthService {
             if (e instanceof EntityNotExists) {
                 return null;
             } else {
-                throw new NotDefinedError(e);
+                throw new UndefinedError(e);
             }
         }
     }
