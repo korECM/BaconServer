@@ -28,27 +28,34 @@ describe("UserRepository", () => {
     afterAll(() => db.close());
 
     describe("isExceedReviewLimit", () => {
+        const now = new Date(2010, 2, 20, 15, 0, 0);
+        beforeEach(async () => {
+            const review = (await reviewRepository.find({}))[0]
+            review.createdTime = now;
+            await reviewRepository.save(review);
+        })
         it("오늘 작성한 리뷰가 존재하면 true 반환", async () => {
             // given
-            const review = (await reviewRepository.find({}))[0]
             const user = UserSeed[0]
+            const date = new Date(2010, 2, 20, 13, 0, 0);
             // when
-            const result = await reviewRepository.isExceedReviewLimit(user.id, review.createdTime)
+            const result = await reviewRepository.isExceedReviewLimit(user.id, date)
 
             // then
             expect(result).toBeTrue();
         })
         it("오늘 작성한 리뷰가 존재하지 않으면 false 반환", async () => {
             // given
-            const review = (await reviewRepository.find({}))[0]
             const user = UserSeed[0]
-            const newDate = new Date(review.createdTime)
-            newDate.setDate(newDate.getDate() + 2)
+            const date1 = new Date(2010, 2, 21, 0, 0, 0);
+            const date2 = new Date(2010, 2, 19, 23, 59, 59);
             // when
-            const result = await reviewRepository.isExceedReviewLimit(user.id, newDate)
+            const result1 = await reviewRepository.isExceedReviewLimit(user.id, date1)
+            const result2 = await reviewRepository.isExceedReviewLimit(user.id, date2)
 
             // then
-            expect(result).toBeFalse();
+            expect(result1).toBeFalse();
+            expect(result2).toBeFalse();
         })
     })
 
@@ -68,7 +75,6 @@ describe("UserRepository", () => {
             // when
             const result = await reviewRepository.getReviewByUser(user.id)
             // then
-            console.log(result)
             expect(result).toBeArray()
         })
     })
