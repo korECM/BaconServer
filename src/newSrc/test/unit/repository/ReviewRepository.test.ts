@@ -29,8 +29,10 @@ describe("UserRepository", () => {
 
     describe("isExceedReviewLimit", () => {
         const now = new Date(2010, 2, 20, 15, 0, 0);
+        let shopId: number
         beforeEach(async () => {
-            const review = (await reviewRepository.find({}))[0]
+            const review = (await reviewRepository.find({relations: ["shop"]}))[0]
+            shopId = review.shop.id
             await reviewRepository.update(review.id, {createdTime: now});
         })
         it("오늘 작성한 리뷰가 존재하면 true 반환", async () => {
@@ -38,7 +40,7 @@ describe("UserRepository", () => {
             const user = UserSeed[0]
             const date = new Date(2010, 2, 20, 13, 0, 0);
             // when
-            const result = await reviewRepository.isExceedReviewLimit(user.id, date)
+            const result = await reviewRepository.isExceedReviewLimit(user.id, shopId, date)
 
             // then
             expect(result).toBeTrue();
@@ -49,12 +51,22 @@ describe("UserRepository", () => {
             const date1 = new Date(2010, 2, 21, 0, 0, 0);
             const date2 = new Date(2010, 2, 19, 23, 59, 59);
             // when
-            const result1 = await reviewRepository.isExceedReviewLimit(user.id, date1)
-            const result2 = await reviewRepository.isExceedReviewLimit(user.id, date2)
+            const result1 = await reviewRepository.isExceedReviewLimit(user.id, shopId, date1)
+            const result2 = await reviewRepository.isExceedReviewLimit(user.id, shopId, date2)
 
             // then
             expect(result1).toBeFalse();
             expect(result2).toBeFalse();
+        })
+        it("가게가 다르면 오늘 작성한 리뷰가 있어도 false 반환", async () => {
+            // given
+            const user = UserSeed[0]
+            const date = new Date(2010, 2, 20, 13, 0, 0);
+            // when
+            const result = await reviewRepository.isExceedReviewLimit(user.id, shopId + 100, date);
+
+            // then
+            expect(result).toBeFalse();
         })
     })
 

@@ -6,13 +6,14 @@ import {DateUtil} from "../utils/Date";
 @EntityRepository(Review)
 export class ReviewRepository extends BaseRepository<Review> {
 
-    async isExceedReviewLimit(userId: number, day: Date) {
+    async isExceedReviewLimit(userId: number, shopId: number, day: Date) {
         const from = new Date(day)
         from.setHours(0, 0, 0, 0)
         const to = new Date(day)
         to.setHours(23, 59, 59, 0)
         return (await this.createQueryBuilder('review')
             .where('review.user.id = :userId', {userId})
+            .andWhere('review.shop.id = :shopId', {shopId})
             .andWhere('review.createdTime >= :from', {from: DateUtil.dateForStringForDatabase(from)})
             .andWhere('review.createdTime < :to', {to: DateUtil.dateForStringForDatabase(to)})
             .getMany()).length > 0
