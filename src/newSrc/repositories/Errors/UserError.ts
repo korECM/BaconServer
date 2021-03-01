@@ -1,2 +1,2 @@
-export class UserNotExists extends Error {
+export class UserNotFoundError extends Error {
 }

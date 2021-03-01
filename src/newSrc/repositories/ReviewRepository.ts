@@ -2,6 +2,8 @@ import {EntityRepository} from "typeorm";
 import {BaseRepository} from "typeorm-transactional-cls-hooked";
 import {Review} from "../domains/Review/Review";
 import {DateUtil} from "../utils/Date";
+import {ReviewNotFoundError} from "./Errors/ReviewError";
+import {User} from "../domains/User/User";
 
 @EntityRepository(Review)
 export class ReviewRepository extends BaseRepository<Review> {
@@ -29,6 +31,30 @@ export class ReviewRepository extends BaseRepository<Review> {
         return this.createQueryBuilder('review')
             .where('review.shop.id = :shopId', {shopId})
             .getMany();
+    }
+
+    async like(fromUser: User, targetReviewId: number) {
+        const review = await this.findOne({where: {id: targetReviewId}, relations: ["likers"]});
+        if (!review) {
+            throw new ReviewNotFoundError();
+        }
+        const userId = review.likers.findIndex(liker => liker.id === fromUser.id);
+        if (userId === -1) {
+            review.likers.push(fromUser);
+            await this.save(review);
+        }
+    }
+
+    async disLike(fromUser: User, targetReviewId: number) {
+        const review = await this.findOne({where: {id: targetReviewId}, relations: ["likers"]});
+        if (!review) {
+            throw new ReviewNotFoundError();
+        }
+        const userId = review.likers.findIndex(liker => liker.id === fromUser.id);
+        if (userId !== -1) {
+            review.likers.splice(userId, 1);
+            await this.save(review);
+        }
     }
 
 }
