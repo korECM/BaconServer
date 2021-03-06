@@ -23,4 +23,19 @@ export class ReviewController {
     postReview(@Param('shopId') shopId: number, @Body() dto: PostReviewRequest, @CurrentUser() user: User) {
         return this.userReviewService.postReview(new CreatePostDto(shopId, user, dto.score, dto.comment, dto.keywords));
     }
+
+    @Post("/like/:reviewId")
+    @Authorized()
+    @HttpCode(201)
+    @OpenAPI({
+        description: "리뷰 좋아요를 누른다",
+        responses: {
+            '200': {
+                description: "성공 메시지 전달",
+            }
+        },
+    })
+    likeReview(@Param('reviewId') reviewId: number, @CurrentUser() user: User) {
+        // TODO: 연결하기
+    }
 }
